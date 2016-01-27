@@ -1,0 +1,4 @@
+server:
+  extends:
+    file: ./docker-compose.base.yml
+    service: server
