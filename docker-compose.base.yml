@@ -28,4 +28,4 @@ build:
   extends:
     file: ./docker-compose.base.yml
     service: node
-  command: node node_modules/webpack/bin/webpack.js --config webpack.config.prod.js -p
+  command: node node_modules/webpack/bin/webpack.js -p
