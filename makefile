@@ -1,4 +1,4 @@
-.PHONY: default install run-dev run-prod test npm
+.PHONY: default install run-dev run-prod test npm build
 
 # If the first argument is one of the supported commands...
 SUPPORTED_COMMANDS := npm
@@ -10,7 +10,6 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     $(eval $(COMMAND_ARGS):;@:)
 endif
 
-
 bump:
 	git rev-parse HEAD > .currentCommit
 
@@ -20,22 +19,16 @@ npm-install:
 install: npm-install bump
 
 run-dev:
-	NODE_ENV=development docker-compose up --force-recreate
+	NODE_ENV=development docker-compose -f docker-compose.dev.yml up --force-recreate
 
 run-prod:
 	NODE_ENV=production docker-compose up -d --force-recreate
 
-test:
-	NODE_ENV=test docker-compose -f docker-compose.test.yml run node
-
 stop:
-	docker stop bibapi_server_1
+	docker stop bibadmin_server_1
+
+build:
+	docker-compose -f docker-compose.base.yml run build
 
 npm:
 	docker-compose -f docker-compose.base.yml run --rm npm $(COMMAND_ARGS)
-
-connect-mongo:
-	docker exec -it bibapi_mongo_1 mongo
-
-add-user:
-	NODE_ENV=production docker-compose run server node bin/addUser.js

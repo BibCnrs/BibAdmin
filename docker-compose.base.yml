@@ -1,14 +1,19 @@
-
-npm:
+node:
   image: node:4.1.2
   volumes:
     - .:/app
   environment:
     NODE_ENV: ${NODE_ENV}
+  working_dir: /app
+
+npm:
+  extends:
+    file: ./docker-compose.base.yml
+    service: node
+  environment:
     http_proxy: ${http_proxy}
     https_proxy: ${https_proxy}
     no_proxy: "localhost,127.0.0.1,"
-  working_dir: /app
   entrypoint: ['npm']
 
 server:
@@ -18,3 +23,9 @@ server:
   working_dir: /public
   ports:
     - 3001:8080
+
+build:
+  extends:
+    file: ./docker-compose.base.yml
+    service: node
+  command: node node_modules/webpack/bin/webpack.js --config webpack.config.prod.js -p
