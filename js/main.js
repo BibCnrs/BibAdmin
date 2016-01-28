@@ -1,4 +1,5 @@
 import users from './config/users';
+import adminUsers from './config/adminUsers';
 import domains from './config/domains';
 
 const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
@@ -10,10 +11,12 @@ bibAdmin.config(['NgAdminConfigurationProvider', function (nga) {
 
     // add entities
     admin.addEntity(nga.entity('users'));
+    admin.addEntity(nga.entity('adminUsers'));
     admin.addEntity(nga.entity('domains'));
 
     // configure entities
     users(nga, admin);
+    adminUsers(nga, admin);
     domains(nga, admin);
 
     // admin.dashboard(require('./dashboard/config')(nga, admin));
