@@ -8,8 +8,6 @@ export default function (nga, admin) {
         .fields([
             nga.field('username'),
         ])
-        .filters([
-        ])
         .sortField('username')
         .sortDir('DESC')
         .listActions(['edit']);
