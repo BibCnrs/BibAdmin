@@ -1,4 +1,3 @@
-
 export default function (nga, admin) {
 
     const user = admin.getEntity('users').identifier(nga.field('username'));

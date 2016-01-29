@@ -17,5 +17,11 @@ export default function (nga, admin) {
         .icon('<span class="fa fa-cog fa-fw"></span>')
         .link('/domains/list')
         .active(path => path.indexOf('/domains') === 0)
+    )
+    .addChild(nga.menu()
+        .title('Attributs Renater')
+        .icon('<span class="fa fa-file-code-o fa-fw"></span>')
+        .link('/renaterHeaders/list')
+        .active(path => path.indexOf('/renaterHeaders') === 0)
     );
 }
