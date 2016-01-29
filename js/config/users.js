@@ -1,7 +1,9 @@
 
 export default function (nga, admin) {
 
-    const user = admin.getEntity('users').identifier(nga.field('username'));;
+    const user = admin.getEntity('users').identifier(nga.field('username'));
+    const domain = admin.getEntity('domains');
+
     user.listView()
         .actions(['create'])
         .title('Utilisateurs')
@@ -19,14 +21,14 @@ export default function (nga, admin) {
     .fields([
         nga.field('username'),
         nga.field('password', 'password'),
-        nga.field('domains', 'choices').choices(['vie', 'shs'].map(d => ({ label: d, value: d })))
+        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name'))
     ]);
     user.creationView()
     .title('Nouvel utilisateur')
     .fields([
         nga.field('username'),
-        nga.field('password', 'password'),
-        nga.field('domains', 'choices').choices(['vie', 'shs'].map(d => ({ label: d, value: d })))
+        nga.field('password', 'password'),,
+        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name'))
     ])
 
     return user;

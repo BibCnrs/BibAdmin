@@ -1,7 +1,7 @@
 
 export default function (nga, admin) {
 
-    const domain = admin.getEntity('domains').identifier(nga.field('name'));;
+    const domain = admin.getEntity('domains').identifier(nga.field('name'));
     domain.listView()
         .actions(['create'])
         .title('Domaines')
