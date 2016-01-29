@@ -1,6 +1,7 @@
 import users from './config/users';
 import adminUsers from './config/adminUsers';
 import domains from './config/domains';
+import menu from './config/menu';
 
 const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
 
@@ -19,19 +20,6 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     const admin = nga.application('BibAdmin')
         .baseApiUrl('http://localhost:3000/admin/');
 
-    admin.header(`<div class="navbar-header">
-        <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#" ng-click="appController.displayHome()">BibAdmin</a>
-    </div>
-    <ul class="nav navbar-top-links navbar-right hidden-xs">
-        <li>
-            <li><a href="#" onclick="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-        </li>
-    </ul>`);
 
     // add entities
     admin.addEntity(nga.entity('users'));
@@ -42,10 +30,21 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     users(nga, admin);
     adminUsers(nga, admin);
     domains(nga, admin);
+    window.logout = function logout() {
 
-    // admin.dashboard(require('./dashboard/config')(nga, admin));
-    // admin.header(require('./header.html'));
-    // admin.menu(require('./menu')(nga, admin));
+        window.sessionStorage.clear();
+        window.location.href = "./login.html";
+    }
+    admin.header(`<div class="navbar-header">
+        <a class="navbar-brand" href="#" ng-click="appController.displayHome()">BibAdmin</a>
+    </div>
+    <ul class="nav navbar-top-links navbar-right hidden-xs">
+        <li>
+            <li><a href="#" onclick="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        </li>
+    </ul>
+    `);
+    admin.menu(menu(nga, admin));
 
     // attach the admin application to the DOM and execute it
     nga.configure(admin);

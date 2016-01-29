@@ -6,7 +6,7 @@ export default function (nga, admin) {
         .actions(['create'])
         .title('Utilisateurs')
         .fields([
-            nga.field('username'),
+            nga.field('username').isDetailLink(true),
             nga.field('domains', 'choices')
         ])
         .filters([
@@ -15,13 +15,14 @@ export default function (nga, admin) {
         .sortDir('DESC')
         .listActions(['edit']);
     user.editionView()
-    .title('Utilisateurs')
+    .title('Utilisateur {{ entry.values.username }}')
     .fields([
         nga.field('username'),
+        nga.field('password', 'password'),
         nga.field('domains', 'choices').choices(['vie', 'shs'].map(d => ({ label: d, value: d })))
     ]);
     user.creationView()
-    .title('Utilisateurs')
+    .title('Nouvel utilisateur')
     .fields([
         nga.field('username'),
         nga.field('password', 'password'),

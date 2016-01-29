@@ -6,7 +6,7 @@ export default function (nga, admin) {
         .actions(['create'])
         .title('Domaines')
         .fields([
-            nga.field('name'),
+            nga.field('name').isDetailLink(true),
             nga.field('userId'),
             nga.field('profile')
         ])
@@ -16,7 +16,7 @@ export default function (nga, admin) {
         .sortDir('DESC')
         .listActions(['edit']);
     domain.editionView()
-    .title('Domaines')
+    .title('Domaine {{ entry.values.name }}')
     .fields([
         nga.field('name'),
         nga.field('userId'),
@@ -24,7 +24,7 @@ export default function (nga, admin) {
         nga.field('profile')
     ]);
     domain.creationView()
-    .title('Domaines')
+    .title('Nouveau domaine')
     .fields([
         nga.field('name'),
         nga.field('userId'),

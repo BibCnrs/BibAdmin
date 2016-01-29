@@ -1,0 +1,21 @@
+export default function (nga, admin) {
+    return nga.menu()
+    .addChild(nga.menu()
+        .title('Administrateurs')
+        .icon('<span class="fa fa-user-plus fa-fw"></span>')
+        .link('/adminUsers/list')
+        .active(path => path.indexOf('/adminUsers') === 0)
+    )
+    .addChild(nga.menu()
+        .title('Utilisateurs')
+        .icon('<span class="fa fa-user fa-fw"></span>')
+        .link('/users/list')
+        .active(path => path.indexOf('/users') === 0)
+    )
+    .addChild(nga.menu()
+        .title('Domaines')
+        .icon('<span class="fa fa-cog fa-fw"></span>')
+        .link('/domains/list')
+        .active(path => path.indexOf('/domains') === 0)
+    );
+}
