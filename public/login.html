@@ -9,8 +9,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
         <meta charset="utf-8">
     <title>BibAdmin Login</title>
-        <link rel="stylesheet" type="text/css" href="vendor/ng-admin.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/ng-admin.min.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="build/login.js"></script>
 </head>
 <body>
     <h1>BibAdmin Login</h1>
@@ -29,36 +30,5 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
         </form>
     </div>
-    <script src="vendor/fetch.js"></script>
-    <script>
-    function login(e) {
-        if (e) {
-            e.prevenDefault();
-        }
-
-        fetch('http://localhost:3000/admin/login', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: document.getElementById('username').value,
-                password: document.getElementById('password').value,
-            })
-        }).then(function(response) {
-            if (response.status === 401) {
-                window.location.href = "./unauthorized.html";
-            }
-            return response.json();
-        })
-        .then(function (response) {
-            window.sessionStorage.setItem('token', response.token);
-            window.location.href = "./index.html";
-        });
-
-        return false;
-    }
-    </script>
 </body>
 </html>

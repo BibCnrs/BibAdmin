@@ -2,11 +2,14 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: ["./js/main.js"],
+    entry: {
+        main: './js/main.js',
+        login: './js/login.js'
+    },
     output: {
-        path: __dirname + "/public/build",
-        filename: "main.js",
-        publicPath: "/public/build"
+        path: __dirname + '/public/build',
+        filename: '[name].js',
+        publicPath: '/public/build'
     },
     module: {
         loaders: [
@@ -19,7 +22,7 @@ module.exports = {
                 },
                 exclude: /node_modules/
             },
-            { test: /\.css$/, loader: "style!css" },
+            { test: /\.css$/, loader: 'style!css' },
             { test: /\.html$/, loader: 'html' },
             { test: /\.css$/, loader: ExtractTextPlugin.extract('css') },
             { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }

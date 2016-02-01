@@ -1,3 +1,4 @@
+import 'ng-admin';
 import users from './config/users';
 import adminUsers from './config/adminUsers';
 import domains from './config/domains';
