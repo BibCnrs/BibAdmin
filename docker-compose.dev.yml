@@ -2,8 +2,10 @@ devserver:
   extends:
     file: ./docker-compose.base.yml
     service: node
+  environment:
+    BIBADMIN_HOST: ${BIBADMIN_HOST}
   volumes:
     - ./public:/public
   ports:
-    - 3002:3002
+    - 3010:3010
   command: ./node_modules/.bin/webpack-dev-server --progress --colors --devtool cheap-module-inline-source-map --hot --inline --port 3002 --host 0.0.0.0

@@ -2,8 +2,6 @@ node:
   image: node:4.1.2
   volumes:
     - .:/app
-  environment:
-    NODE_ENV: ${NODE_ENV}
   working_dir: /app
 
 npm:
@@ -16,16 +14,10 @@ npm:
     no_proxy: "localhost,127.0.0.1,"
   entrypoint: ['npm']
 
-server:
-  image: cannin/nodejs-http-server
-  volumes:
-    - ./public:/public
-  working_dir: /public
-  ports:
-    - 3001:8080
-
 build:
   extends:
     file: ./docker-compose.base.yml
     service: node
+  environment:
+    BIBADMIN_HOST: ${BIBADMIN_HOST}
   command: node node_modules/webpack/bin/webpack.js -p
