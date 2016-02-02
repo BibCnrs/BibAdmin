@@ -5,7 +5,7 @@ window.login = function login(e) {
         e.prevenDefault();
     }
 
-    fetch(`${__HOST__}/login`, {
+    fetch(`${__HOST__}login`, {
         method: 'post',
         headers: {
             'Accept': 'application/json',
