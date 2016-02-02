@@ -8,9 +8,6 @@ const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
 
 bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function (nga, RestangularProvider) {
     const token = window.sessionStorage.getItem('token');
-    if (!token) {
-        window.location.href = "./login.html";
-    }
 
     RestangularProvider.setDefaultHeaders({
         'Content-Type': 'application/json; charset=utf-8',
