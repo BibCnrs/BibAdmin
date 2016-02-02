@@ -6,6 +6,7 @@ window.login = function login(e) {
     }
 
     fetch(`${__HOST__}login`, {
+        mode: 'cors',
         method: 'post',
         headers: {
             'Accept': 'application/json',
