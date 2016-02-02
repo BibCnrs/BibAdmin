@@ -28,7 +28,8 @@ stop:
 	docker stop bibadmin_server_1
 
 build:
-	cp -f node_modules/ng-admin/build/ng-admin.min.css ./public/css/ng-admin.min.css
+	cp -f node_modules/ng-admin/build/ng-admin.min.js ./public/vendor/ng-admin.min.js
+	cp -f node_modules/ng-admin/build/ng-admin.min.css ./public/vendor/ng-admin.min.css
 	docker-compose -f docker-compose.base.yml run build
 
 npm:
