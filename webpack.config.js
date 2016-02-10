@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
     entry: {
         main: './js/main.js',
@@ -30,7 +29,8 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            __HOST__: JSON.stringify(process.env.BIBADMIN_HOST)
+            __BIBADMIN_HOST__: JSON.stringify(process.env.BIBADMIN_HOST),
+            __BIBAPI_HOST__: JSON.stringify(process.env.BIBAPI_HOST)
         }),
         new ExtractTextPlugin('[name].css', {
             allChunks: true

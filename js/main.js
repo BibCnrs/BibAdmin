@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import users from './config/users';
 import adminUsers from './config/adminUsers';
 import domains from './config/domains';
@@ -16,7 +17,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
 
     // create the admin application
     const admin = nga.application('BibAdmin')
-        .baseApiUrl(__HOST__);
+        .baseApiUrl(__BIBAPI_HOST__);
 
 
     // add entities
