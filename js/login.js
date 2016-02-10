@@ -1,11 +1,12 @@
+import 'babel-polyfill';
 import 'whatwg-fetch';
 
-window.login = function login(e) {
-    if (e) {
-        e.prevenDefault();
+window.login = function login(event) {
+    if (event) {
+        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     }
 
-    fetch(`${__HOST__}login`, {
+    fetch(`${__BIBAPI_HOST__}login`, {
         mode: 'cors',
         method: 'post',
         headers: {
@@ -18,14 +19,14 @@ window.login = function login(e) {
         })
     }).then(function(response) {
         if (response.status === 401) {
-            window.location.href = "./unauthorized.html";
+            window.location.href = `${__BIBADMIN_HOST__}/unauthorized.html`;
         }
         return response.json();
     })
     .then(function (response) {
         window.sessionStorage.setItem('token', response.token);
-        window.location.href = "./index.html";
+        window.location.href = `${__BIBADMIN_HOST__}/index.html`;
     });
 
     return false;
-}
+};

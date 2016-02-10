@@ -4,6 +4,7 @@ devserver:
     service: node
   environment:
     BIBADMIN_HOST: ${BIBADMIN_HOST}
+    BIBAPI_HOST: ${BIBAPI_HOST}
   volumes:
     - ./public:/public
   ports:
