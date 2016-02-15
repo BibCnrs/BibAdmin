@@ -18,14 +18,27 @@ window.login = function login(event) {
             password: document.getElementById('password').value,
         })
     }).then(function(response) {
-        if (response.status === 401) {
-            window.location.href = `${__BIBADMIN_HOST__}/unauthorized.html`;
+        if (response.status !== 200) {
+            new Error(response.statusText)
+            throw new Error(`${response.status} - ${response.statusText}`);
         }
         return response.json();
     })
     .then(function (response) {
         window.sessionStorage.setItem('token', response.token);
         window.location.href = `${__BIBADMIN_HOST__}/index.html`;
+    })
+    .catch(e => {
+            const error = document.getElementById('error');
+            while (error.firstChild) {
+                error.removeChild(error.firstChild);
+            }
+
+            const p = document.createElement('p');
+            p.textContent = e.message;
+            p.classList.add('alert');
+            p.classList.add('alert-danger');
+            error.appendChild(p);
     });
 
     return false;
