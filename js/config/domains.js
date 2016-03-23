@@ -7,6 +7,7 @@ export default function (nga, admin) {
         .title('Domaines')
         .fields([
             nga.field('name').isDetailLink(true),
+            nga.field('gate'),
             nga.field('userId'),
             nga.field('profile')
         ])
@@ -19,6 +20,7 @@ export default function (nga, admin) {
     .title('Domaine {{ entry.values.name }}')
     .fields([
         nga.field('name'),
+        nga.field('gate'),
         nga.field('userId'),
         nga.field('password', 'password'),
         nga.field('profile')
@@ -27,6 +29,7 @@ export default function (nga, admin) {
     .title('Nouveau domaine')
     .fields([
         nga.field('name'),
+        nga.field('gate'),
         nga.field('userId'),
         nga.field('password', 'password'),
         nga.field('profile')
