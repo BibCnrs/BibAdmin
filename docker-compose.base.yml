@@ -19,6 +19,7 @@ build:
     file: ./docker-compose.base.yml
     service: node
   environment:
+    NODE_ENV: production
     BIBADMIN_HOST: ${BIBADMIN_HOST}
     BIBAPI_HOST: ${BIBAPI_HOST}
   command: node node_modules/webpack/bin/webpack.js -p

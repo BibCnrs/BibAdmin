@@ -1,5 +1,10 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+if (!process.env.BIBADMIN_HOST || !process.env.BIBAPI_HOST) {
+    throw new Error('environment variable BIBADMIN_HOST and BIBAPI_HOST need to be set');
+}
+
 module.exports = {
     entry: {
         main: './js/main.js',

@@ -3,8 +3,9 @@ devserver:
     file: ./docker-compose.base.yml
     service: node
   environment:
-    BIBADMIN_HOST: ${BIBADMIN_HOST}
-    BIBAPI_HOST: ${BIBAPI_HOST}
+    NODE_ENV: development
+    BIBADMIN_HOST: http://localhost:3011/public
+    BIBAPI_HOST: http://localhost:3000/admin
   volumes:
     - ./public:/public
   ports:

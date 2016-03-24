@@ -17,7 +17,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
 
     // create the admin application
     const admin = nga.application('BibAdmin')
-        .baseApiUrl(__BIBAPI_HOST__);
+        .baseApiUrl(`${__BIBAPI_HOST__}/`);
 
 
     // add entities

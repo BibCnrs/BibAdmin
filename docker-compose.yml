@@ -1,10 +1,11 @@
 server:
-  image: cannin/nodejs-http-server
-  environment:
-    BIBADMIN_HOST: ${BIBADMIN_HOST}
-    BIBAPI_HOST: ${BIBAPI_HOST}
-  volumes:
-    - ./public:/public
-  working_dir: /public
-  ports:
-    - 3010:8080
+    image: cannin/nodejs-http-server
+    environment:
+        NODE_ENV: production
+        BIBADMIN_HOST: ${BIBADMIN_HOST}
+        BIBAPI_HOST: ${BIBAPI_HOST}
+    volumes:
+        - ./public:/public
+    working_dir: /public
+    ports:
+        - 3010:8080
