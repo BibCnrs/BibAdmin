@@ -6,7 +6,7 @@ window.login = function login(event) {
         event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     }
 
-    fetch(`${__BIBAPI_HOST__}login`, {
+    fetch(`${__BIBAPI_HOST__}/login`, {
         mode: 'cors',
         method: 'post',
         headers: {
