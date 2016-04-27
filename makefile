@@ -6,7 +6,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm
+SUPPORTED_COMMANDS := npm build-docker build
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -19,7 +19,7 @@ bump: ## create currentCommit file
 	git rev-parse HEAD > .currentCommit
 
 npm-install: ## ## install npm dependencies
-	docker-compose -f docker-compose.base.yml run npm install
+	docker-compose run npm install
 
 install: npm-install bump ## install npm dependencies and bump currentCommit file
 
@@ -27,20 +27,33 @@ run-dev: ## run BibAdmin for development
 	docker-compose -f docker-compose.dev.yml up --force-recreate
 
 run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
-	docker-compose up -d --force-recreate
+	docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
-docker-stop: ## stop all bibadmin container
-	test -z "$$(docker ps | grep bibadmin)" || \
-            docker stop $$(docker ps -a | grep bibadmin | awk '{ print $$1 }')
+build-docker: ## args: <version> build bibcnrs/bibadmin:<version> docker image default <version> to latest
+ifdef COMMAND_ARGS
+	docker build -t bibcnrs/bibadmin:$(COMMAND_ARGS) .
+else
+	docker build -t bibcnrs/bibadmin:latest .
+endif
 
-build: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
+build-script: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
 	cp -f node_modules/ng-admin/build/ng-admin.min.js ./public/vendor/ng-admin.min.js
 	cp -f node_modules/ng-admin/build/ng-admin.min.css ./public/vendor/ng-admin.min.css
-	docker-compose -f docker-compose.base.yml run build
+	docker-compose run build
 
-npm: ## dockerized npm command exampne: make npm 'install some_dependency --save'
-	docker-compose -f docker-compose.base.yml run --rm npm $(COMMAND_ARGS)
+build: install build-script build-docker ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
+
+npm: ## dockerized npm command example: make npm 'install some_dependency --save'
+	docker-compose run --rm npm $(COMMAND_ARGS)
 
 docker-rm: ## remove all bibadmin container
 	test -z "$$(docker ps -a | grep bibadmin)" || \
             docker rm --force $$(docker ps -a | grep bibadmin | awk '{ print $$1 }')
+
+stop: ## stop all bibcnrs docker image
+	test -z "$$(docker ps | grep bibadmin)" || \
+            docker stop $$(docker ps | grep bibadmin | awk '{ print $$1 }')
+
+cleanup-docker: ## stop all bibcnrs docker image
+	test -z "$$(docker ps -a | grep bibadmin)" || \
+            docker rm $$(docker ps -a | grep bibadmin | awk '{ print $$1 }')
