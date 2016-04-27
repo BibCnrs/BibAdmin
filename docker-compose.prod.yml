@@ -1,0 +1,8 @@
+server:
+    image: bibcnrs/bibadmin:${bibadmin_version}
+    environment:
+        NODE_ENV: production
+    working_dir: /public
+    restart: always
+    ports:
+        - 3010:8080

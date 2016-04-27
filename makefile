@@ -19,7 +19,7 @@ bump: ## create currentCommit file
 	git rev-parse HEAD > .currentCommit
 
 npm-install: ## ## install npm dependencies
-	docker-compose -f docker-compose.base.yml run npm install
+	docker-compose run npm install
 
 install: npm-install bump ## install npm dependencies and bump currentCommit file
 
@@ -27,7 +27,7 @@ run-dev: ## run BibAdmin for development
 	docker-compose -f docker-compose.dev.yml up --force-recreate
 
 run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
-	docker-compose up -d --force-recreate
+	docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
 build-docker: ## args: <version> build bibcnrs/bibadmin:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
@@ -39,12 +39,12 @@ endif
 build-script: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
 	cp -f node_modules/ng-admin/build/ng-admin.min.js ./public/vendor/ng-admin.min.js
 	cp -f node_modules/ng-admin/build/ng-admin.min.css ./public/vendor/ng-admin.min.css
-	docker-compose -f docker-compose.base.yml run build
+	docker-compose run build
 
 build: install build-script build-docker ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
 
 npm: ## dockerized npm command example: make npm 'install some_dependency --save'
-	docker-compose -f docker-compose.base.yml run --rm npm $(COMMAND_ARGS)
+	docker-compose run --rm npm $(COMMAND_ARGS)
 
 docker-rm: ## remove all bibadmin container
 	test -z "$$(docker ps -a | grep bibadmin)" || \
