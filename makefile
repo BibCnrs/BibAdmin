@@ -31,9 +31,9 @@ run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_
 
 build-docker: ## args: <version> build bibcnrs/bibadmin:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build -t bibcnrs/bibadmin:$(COMMAND_ARGS) .
+	docker build -t vsregistry.intra.inist.fr:5000/bibadmin:$(COMMAND_ARGS) .
 else
-	docker build -t bibcnrs/bibadmin:latest .
+	docker build -t vsregistry.intra.inist.fr:5000/bibadmin:latest .
 endif
 
 build-script: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
