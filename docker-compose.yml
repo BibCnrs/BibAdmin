@@ -6,7 +6,7 @@ node:
 
 npm:
   extends:
-    file: ./docker-compose.base.yml
+    file: ./docker-compose.yml
     service: node
   environment:
     http_proxy: ${http_proxy}
@@ -16,7 +16,7 @@ npm:
 
 build:
   extends:
-    file: ./docker-compose.base.yml
+    file: ./docker-compose.yml
     service: node
   environment:
     NODE_ENV: production

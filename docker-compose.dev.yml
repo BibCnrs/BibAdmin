@@ -1,6 +1,6 @@
 devserver:
   extends:
-    file: ./docker-compose.base.yml
+    file: ./docker-compose.yml
     service: node
   environment:
     NODE_ENV: development
