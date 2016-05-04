@@ -23,5 +23,11 @@ export default function (nga, admin) {
         .icon('<span class="fa fa-file-code-o fa-fw"></span>')
         .link('/renaterHeaders/list')
         .active(path => path.indexOf('/renaterHeaders') === 0)
+    )
+    .addChild(nga.menu()
+        .title('Instituts')
+        .icon('<span class="fa fa-user-plus fa-fw"></span>')
+        .link('/institutes/list')
+        .active(path => path.indexOf('/institutes') === 0)
     );
 }
