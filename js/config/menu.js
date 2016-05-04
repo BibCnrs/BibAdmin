@@ -29,5 +29,11 @@ export default function (nga, admin) {
         .icon('<span class="fa fa-user-plus fa-fw"></span>')
         .link('/institutes/list')
         .active(path => path.indexOf('/institutes') === 0)
+    )
+    .addChild(nga.menu()
+        .title('unités')
+        .icon('<span class="fa fa-user-plus fa-fw"></span>')
+        .link('/units/list')
+        .active(path => path.indexOf('/units') === 0)
     );
 }
