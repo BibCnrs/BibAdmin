@@ -3,6 +3,8 @@ import users from './config/users';
 import adminUsers from './config/adminUsers';
 import domains from './config/domains';
 import renaterHeaders from './config/renaterHeaders';
+import institutes from './config/institutes';
+import units from './config/units';
 import menu from './config/menu';
 
 const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
@@ -25,12 +27,16 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     admin.addEntity(nga.entity('adminUsers'));
     admin.addEntity(nga.entity('domains'));
     admin.addEntity(nga.entity('renaterHeaders'));
+    admin.addEntity(nga.entity('institutes'));
+    admin.addEntity(nga.entity('units'));
 
     // configure entities
     users(nga, admin);
     adminUsers(nga, admin);
     domains(nga, admin);
     renaterHeaders(nga, admin);
+    institutes(nga, admin);
+    units(nga, admin);
     window.logout = function logout() {
 
         window.sessionStorage.clear();
