@@ -12,8 +12,8 @@ export default function (nga, admin) {
             nga.field('username').isDetailLink(true),
             nga.field('domains', 'choices'),
             nga.field('allDomains', 'choices'),
-            nga.field('institute'),
-            nga.field('unit')
+            nga.field('institutes', 'choices'),
+            nga.field('units', 'choices')
         ])
         .filters([
         ])
@@ -26,8 +26,10 @@ export default function (nga, admin) {
         nga.field('username'),
         nga.field('password', 'password'),
         nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')),
-        nga.field('institute', 'reference').targetEntity(institute).targetField(nga.field('code')),
-        nga.field('unit', 'reference').targetEntity(unit).targetField(nga.field('name'))
+        nga.field('primaryInstitute').editable(false),
+        nga.field('additionalInstitutes', 'reference_many').targetEntity(institute).targetField(nga.field('code')),
+        nga.field('primaryUnit').editable(false),
+        nga.field('additionalUnits', 'reference_many').targetEntity(unit).targetField(nga.field('name'))
     ]);
     user.creationView()
     .title('Nouvel utilisateur')
@@ -35,8 +37,8 @@ export default function (nga, admin) {
         nga.field('username'),
         nga.field('password', 'password'),,
         nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')),
-        nga.field('institute', 'reference').targetEntity(institute).targetField(nga.field('code')),
-        nga.field('unit', 'reference').targetEntity(unit).targetField(nga.field('name'))
+        nga.field('additionalInstitutes', 'reference_many').targetEntity(institute).targetField(nga.field('code')),
+        nga.field('additionalUnits', 'reference_many').targetEntity(unit).targetField(nga.field('name'))
     ])
 
     return user;
