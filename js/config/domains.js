@@ -8,7 +8,7 @@ export default function (nga, admin) {
         .fields([
             nga.field('name').isDetailLink(true),
             nga.field('gate'),
-            nga.field('userId'),
+            nga.field('user_id'),
             nga.field('profile')
         ])
         .filters([
@@ -21,7 +21,7 @@ export default function (nga, admin) {
     .fields([
         nga.field('name'),
         nga.field('gate'),
-        nga.field('userId'),
+        nga.field('user_id'),
         nga.field('password', 'password'),
         nga.field('profile')
     ]);
@@ -30,7 +30,7 @@ export default function (nga, admin) {
     .fields([
         nga.field('name'),
         nga.field('gate'),
-        nga.field('userId'),
+        nga.field('user_id'),
         nga.field('password', 'password'),
         nga.field('profile')
     ])

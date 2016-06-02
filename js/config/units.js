@@ -1,6 +1,6 @@
 export default function (nga, admin) {
 
-    const unit = admin.getEntity('units').identifier(nga.field('name'));
+    const unit = admin.getEntity('units').identifier(nga.field('id'));
     const domain = admin.getEntity('domains');
 
     unit.listView()

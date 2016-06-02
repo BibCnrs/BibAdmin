@@ -1,6 +1,6 @@
 export default function (nga, admin) {
 
-    const institute = admin.getEntity('institutes').identifier(nga.field('code'));
+    const institute = admin.getEntity('institutes').identifier(nga.field('id'));
     const domain = admin.getEntity('domains');
 
     institute.listView()
