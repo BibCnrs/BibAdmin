@@ -5,6 +5,7 @@ export default function (nga, admin) {
     domain.listView()
         .actions(['create'])
         .title('Domaines')
+        .perPage(20)
         .fields([
             nga.field('name').isDetailLink(true),
             nga.field('gate'),

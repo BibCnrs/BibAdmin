@@ -6,6 +6,7 @@ export default function (nga, admin) {
     institute.listView()
         .actions(['create'])
         .title('Intituts')
+        .perPage(20)
         .fields([
             nga.field('code').isDetailLink(true),
             nga.field('name'),

@@ -8,6 +8,7 @@ export default function (nga, admin) {
     user.listView()
         .actions(['create'])
         .title('Utilisateurs')
+        .perPage(20)
         .fields([
             nga.field('username').isDetailLink(true),
             nga.field('domains', 'choices'),

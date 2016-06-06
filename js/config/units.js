@@ -6,6 +6,7 @@ export default function (nga, admin) {
     unit.listView()
         .actions(['create'])
         .title('Unités')
+        .perPage(20)
         .fields([
             nga.field('name').isDetailLink(true),
             nga.field('domains', 'choices')

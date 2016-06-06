@@ -5,6 +5,7 @@ export default function (nga, admin) {
     renaterHeader.listView()
         .actions([])
         .title('Attributs Renater')
+        .perPage(20)
         .fields([
             nga.field('_id').isDetailLink(true),
             nga.field('displayname'),

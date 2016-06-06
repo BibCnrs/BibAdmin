@@ -7,6 +7,7 @@ export default function (nga, admin) {
     adminUser.listView()
         .actions(['create'])
         .title('Administrateurs')
+        .perPage(20)
         .fields([
             nga.field('username').isDetailLink(true),
         ])
