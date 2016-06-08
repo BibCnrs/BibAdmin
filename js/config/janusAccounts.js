@@ -1,11 +1,11 @@
 export default function (nga, admin) {
 
-    const user = admin.getEntity('users').identifier(nga.field('id'));
+    const janusAccount = admin.getEntity('janusAccounts').identifier(nga.field('id'));
     const domain = admin.getEntity('domains');
     const unit = admin.getEntity('units');
     const institute = admin.getEntity('institutes');
 
-    user.listView()
+    janusAccount.listView()
         .actions(['create'])
         .title('Utilisateurs')
         .perPage(20)
@@ -23,7 +23,7 @@ export default function (nga, admin) {
         .sortField('username')
         .sortDir('DESC')
         .listActions(['edit']);
-    user.editionView()
+    janusAccount.editionView()
     .title('Utilisateur {{ entry.values.username }}')
     .fields([
         nga.field('username').label('Username'),
@@ -34,7 +34,7 @@ export default function (nga, admin) {
         nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).editable(false).label('Unité principale'),
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
     ]);
-    user.creationView()
+    janusAccount.creationView()
     .title('Nouvel utilisateur')
     .fields([
         nga.field('username').label('Username'),
@@ -44,5 +44,5 @@ export default function (nga, admin) {
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
     ])
 
-    return user;
+    return janusAccount;
 }

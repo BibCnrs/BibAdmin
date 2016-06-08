@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import users from './config/users';
+import janusAccounts from './config/janusAccounts';
 import inistAccounts from './config/inistAccounts';
 import adminUsers from './config/adminUsers';
 import domains from './config/domains';
@@ -23,7 +23,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
         .baseApiUrl(`${__BIBAPI_HOST__}/`);
 
     // add entities
-    admin.addEntity(nga.entity('users'));
+    admin.addEntity(nga.entity('janusAccounts'));
     admin.addEntity(nga.entity('inistAccounts'));
     admin.addEntity(nga.entity('adminUsers'));
     admin.addEntity(nga.entity('domains'));
@@ -32,7 +32,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     admin.addEntity(nga.entity('units'));
 
     // configure entities
-    users(nga, admin);
+    janusAccounts(nga, admin);
     inistAccounts(nga, admin);
     adminUsers(nga, admin);
     domains(nga, admin);
