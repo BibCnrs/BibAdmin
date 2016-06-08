@@ -2,7 +2,7 @@
 export default function (nga, admin) {
 
     const adminUser = admin.getEntity('adminUsers')
-    .identifier(nga.field('username'));
+    .identifier(nga.field('id'));
 
     adminUser.listView()
         .actions(['create'])
