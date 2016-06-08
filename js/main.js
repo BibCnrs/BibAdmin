@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import users from './config/users';
+import inistAccounts from './config/inistAccounts';
 import adminUsers from './config/adminUsers';
 import domains from './config/domains';
 import renaterHeaders from './config/renaterHeaders';
@@ -21,9 +22,9 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     const admin = nga.application('BibAdmin')
         .baseApiUrl(`${__BIBAPI_HOST__}/`);
 
-
     // add entities
     admin.addEntity(nga.entity('users'));
+    admin.addEntity(nga.entity('inistAccounts'));
     admin.addEntity(nga.entity('adminUsers'));
     admin.addEntity(nga.entity('domains'));
     admin.addEntity(nga.entity('renaterHeaders'));
@@ -32,6 +33,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
 
     // configure entities
     users(nga, admin);
+    inistAccounts(nga, admin);
     adminUsers(nga, admin);
     domains(nga, admin);
     renaterHeaders(nga, admin);

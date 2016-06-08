@@ -10,7 +10,7 @@ export default function (nga, admin) {
         .title('Utilisateurs')
         .perPage(20)
         .fields([
-            nga.field('username').isDetailLink(true).label('Login'),
+            nga.field('username').isDetailLink(true).label('Username'),
             nga.field('domains', 'choices').label('Domaines'),
             nga.field('all_domains', 'choices').label('Tous les domaines'),
             nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
@@ -26,7 +26,7 @@ export default function (nga, admin) {
     user.editionView()
     .title('Utilisateur {{ entry.values.username }}')
     .fields([
-        nga.field('username').label('Login'),
+        nga.field('username').label('Username'),
         nga.field('password', 'password'),
         nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut principal'),
@@ -37,7 +37,7 @@ export default function (nga, admin) {
     user.creationView()
     .title('Nouvel utilisateur')
     .fields([
-        nga.field('username').label('Login'),
+        nga.field('username').label('Username'),
         nga.field('password', 'password'),,
         nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Domaines'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
