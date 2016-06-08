@@ -2,13 +2,14 @@
 export default function (nga, admin) {
 
     const adminUser = admin.getEntity('adminUsers')
-    .identifier(nga.field('username'));
+    .identifier(nga.field('id'));
 
     adminUser.listView()
         .actions(['create'])
         .title('Administrateurs')
+        .perPage(20)
         .fields([
-            nga.field('username').isDetailLink(true),
+            nga.field('username').isDetailLink(true).label('Login'),
         ])
         .sortField('username')
         .sortDir('DESC')
@@ -16,14 +17,14 @@ export default function (nga, admin) {
     adminUser.editionView()
     .title('Administrateur {{ entry.values.username }}')
     .fields([
-        nga.field('username'),
-        nga.field('password', 'password')
+        nga.field('username').label('Login'),
+        nga.field('password', 'password').label('Mot de passe')
     ]);
     adminUser.creationView()
     .title('Nouvel Administrateur')
     .fields([
-        nga.field('username'),
-        nga.field('password', 'password')
+        nga.field('username').label('Login'),
+        nga.field('password', 'password').label('Mot de passe')
     ])
 
     return adminUser;

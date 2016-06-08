@@ -6,10 +6,11 @@ export default function (nga, admin) {
     institute.listView()
         .actions(['create'])
         .title('Intituts')
+        .perPage(20)
         .fields([
             nga.field('code').isDetailLink(true),
-            nga.field('name'),
-            nga.field('domains', 'choices')
+            nga.field('name').label('Code'),
+            nga.field('domains', 'choices').label('Domaines')
         ])
         .filters([
         ])
@@ -21,16 +22,16 @@ export default function (nga, admin) {
     .title('Institut {{ entry.values.name }}')
     .fields([
         nga.field('code'),
-        nga.field('name'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name'))
+        nga.field('name').label('Nom'),
+        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines')
     ]);
 
     institute.creationView()
     .title('Nouvel institut')
     .fields([
         nga.field('code'),
-        nga.field('name'),
-        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name'))
+        nga.field('name').label('Nom'),
+        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Domaines')
     ])
 
     return institute;

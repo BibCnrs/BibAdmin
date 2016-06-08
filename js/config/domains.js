@@ -5,9 +5,10 @@ export default function (nga, admin) {
     domain.listView()
         .actions(['create'])
         .title('Domaines')
+        .perPage(20)
         .fields([
-            nga.field('name').isDetailLink(true),
-            nga.field('gate'),
+            nga.field('name').isDetailLink(true).label('Nom'),
+            nga.field('gate').label('Portail ezproxy'),
             nga.field('user_id'),
             nga.field('profile')
         ])
@@ -19,8 +20,8 @@ export default function (nga, admin) {
     domain.editionView()
     .title('Domaine {{ entry.values.name }}')
     .fields([
-        nga.field('name'),
-        nga.field('gate'),
+        nga.field('name').label('Nom'),
+        nga.field('gate').label('Portail ezproxy'),
         nga.field('user_id'),
         nga.field('password', 'password'),
         nga.field('profile')
@@ -28,8 +29,8 @@ export default function (nga, admin) {
     domain.creationView()
     .title('Nouveau domaine')
     .fields([
-        nga.field('name'),
-        nga.field('gate'),
+        nga.field('name').label('Nom'),
+        nga.field('gate').label('Portail ezproxy'),
         nga.field('user_id'),
         nga.field('password', 'password'),
         nga.field('profile')
