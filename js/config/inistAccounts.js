@@ -26,7 +26,7 @@ export default function (nga, admin) {
     .title('Compte INIST {{ entry.values.username }}')
     .fields([
         nga.field('username').label('Login'),
-        nga.field('password', 'password'),
+        nga.field('password'),
         nga.field('name'),
         nga.field('firstname'),
         nga.field('mail'),
@@ -43,7 +43,14 @@ export default function (nga, admin) {
     .title('Nouveau compte INIST')
     .fields([
         nga.field('username').label('Login'),
-        nga.field('password', 'password'),,
+        nga.field('password'),
+        nga.field('name'),
+        nga.field('firstname'),
+        nga.field('mail'),
+        nga.field('phone'),
+        nga.field('dr'),
+        nga.field('subscription_date', 'date').label('Date d\'inscription'),
+        nga.field('expiration_date', 'date').label('Date d\'expiration'),
         nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Domaines'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')

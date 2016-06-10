@@ -7,7 +7,7 @@ export default function (nga, admin) {
 
     janusAccount.listView()
         .actions(['create'])
-        .title('Utilisateurs')
+        .title('Comptes JANUS')
         .perPage(20)
         .fields([
             nga.field('username').isDetailLink(true).label('Username'),
@@ -24,7 +24,7 @@ export default function (nga, admin) {
         .sortDir('DESC')
         .listActions(['edit']);
     janusAccount.editionView()
-    .title('Utilisateur {{ entry.values.username }}')
+    .title('Compte JANUS {{ entry.values.username }}')
     .fields([
         nga.field('username').label('Username'),
         nga.field('password', 'password'),
@@ -35,7 +35,7 @@ export default function (nga, admin) {
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
     ]);
     janusAccount.creationView()
-    .title('Nouvel utilisateur')
+    .title('Compte JANUS')
     .fields([
         nga.field('username').label('Username'),
         nga.field('password', 'password'),,
