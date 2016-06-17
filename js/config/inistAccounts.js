@@ -16,8 +16,8 @@ export default function (nga, admin) {
             nga.field('mail').isDetailLink(true).label('courriel'),
             nga.field('subscription_date', 'date').label('Date d\'inscription'),
             nga.field('expiration_date', 'date').label('Date d\'expiration'),
-            nga.field('domains', 'choices').label('Domaines'),
-            nga.field('all_domains', 'choices').label('Tous les domaines'),
+            nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
+            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Tous les domaines'),
             nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
             nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
         ])

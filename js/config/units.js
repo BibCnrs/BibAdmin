@@ -12,7 +12,7 @@ export default function (nga, admin) {
             nga.field('code').isDetailLink(true),
             nga.field('name').label('Nom'),
             nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Intituts'),
-            nga.field('domains', 'choices').label('Domaines')
+            nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines')
         ])
         .filters([
             nga.field('match').label('Recherche global').pinned(true),
