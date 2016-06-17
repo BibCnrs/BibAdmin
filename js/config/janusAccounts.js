@@ -6,7 +6,7 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     janusAccount.listView()
-        .actions(['filter', 'create'])
+        .actions(['export', 'filter', 'create'])
         .title('Comptes JANUS')
         .perPage(20)
         .fields([
@@ -26,6 +26,9 @@ export default function (nga, admin) {
         ])
         .sortField('username')
         .sortDir('DESC')
+        .exportFields([
+            janusAccount.listView().fields()
+        ])
         .listActions(['edit']);
     janusAccount.editionView()
     .title('Compte JANUS {{ entry.values.username }}')

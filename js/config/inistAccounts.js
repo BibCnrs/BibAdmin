@@ -6,7 +6,7 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     inistAccount.listView()
-        .actions(['filter', 'create'])
+        .actions(['export', 'filter', 'create'])
         .title('Compte INIST')
         .perPage(20)
         .fields([
@@ -31,6 +31,22 @@ export default function (nga, admin) {
             nga.field('to_subscription_date', 'date').label('Date d\'inscription avant'),
             nga.field('from_expiration_date', 'date').label('Date d\'expiration aprés'),
             nga.field('to_expiration_date', 'date').label('Date d\'expiration avant')
+        ])
+        .exportFields([
+            nga.field('username').label('Login'),
+            nga.field('password'),
+            nga.field('name'),
+            nga.field('firstname'),
+            nga.field('mail'),
+            nga.field('phone'),
+            nga.field('dr'),
+            nga.field('comment').label('Commentaire'),
+            nga.field('subscription_date', 'date').label('Date d\'inscription'),
+            nga.field('expiration_date', 'date').label('Date d\'expiration'),
+            nga.field('domains').label('Domaines'),
+            nga.field('all_domains').label('Tous les domaines'),
+            nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
+            nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
         ])
         .sortField('username')
         .sortDir('DESC')

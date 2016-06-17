@@ -4,7 +4,7 @@ export default function (nga, admin) {
     const domain = admin.getEntity('domains');
 
     institute.listView()
-        .actions(['filter', 'create'])
+        .actions(['export', 'filter', 'create'])
         .title('Intituts')
         .perPage(20)
         .fields([
@@ -19,6 +19,9 @@ export default function (nga, admin) {
         ])
         .sortField('name')
         .sortDir('DESC')
+        .exportFields([
+            institute.listView().fields()
+        ])
         .listActions(['edit']);
 
     institute.editionView()
