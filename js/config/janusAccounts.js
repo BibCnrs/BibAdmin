@@ -20,7 +20,9 @@ export default function (nga, admin) {
         ])
         .filters([
             nga.field('match').label('Recherche global').pinned(true),
-            nga.field('like_username').label('Login')
+            nga.field('like_username').label('Login'),
+            nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+            nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unité principale')
         ])
         .sortField('username')
         .sortDir('DESC')
