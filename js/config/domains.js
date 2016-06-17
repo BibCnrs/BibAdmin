@@ -3,7 +3,7 @@ export default function (nga, admin) {
 
     const domain = admin.getEntity('domains').identifier(nga.field('name'));
     domain.listView()
-        .actions(['create'])
+        .actions(['filter', 'create'])
         .title('Domaines')
         .perPage(20)
         .fields([
@@ -13,6 +13,7 @@ export default function (nga, admin) {
             nga.field('profile')
         ])
         .filters([
+            nga.field('match').label('Recherche global').pinned(true)
         ])
         .sortField('username')
         .sortDir('DESC')

@@ -6,7 +6,7 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     janusAccount.listView()
-        .actions(['create'])
+        .actions(['filter', 'create'])
         .title('Comptes JANUS')
         .perPage(20)
         .fields([
@@ -19,6 +19,8 @@ export default function (nga, admin) {
             nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
         ])
         .filters([
+            nga.field('match').label('Recherche global').pinned(true),
+            nga.field('like_username').label('Login')
         ])
         .sortField('username')
         .sortDir('DESC')
@@ -27,7 +29,6 @@ export default function (nga, admin) {
     .title('Compte JANUS {{ entry.values.username }}')
     .fields([
         nga.field('username').label('Username'),
-        nga.field('password', 'password'),
         nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut principal'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
@@ -38,7 +39,6 @@ export default function (nga, admin) {
     .title('Compte JANUS')
     .fields([
         nga.field('username').label('Username'),
-        nga.field('password', 'password'),,
         nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Domaines'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')

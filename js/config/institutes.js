@@ -4,15 +4,18 @@ export default function (nga, admin) {
     const domain = admin.getEntity('domains');
 
     institute.listView()
-        .actions(['create'])
+        .actions(['filter', 'create'])
         .title('Intituts')
         .perPage(20)
         .fields([
             nga.field('code').isDetailLink(true),
-            nga.field('name').label('Code'),
+            nga.field('name').label('Nom'),
             nga.field('domains', 'choices').label('Domaines')
         ])
         .filters([
+            nga.field('match').label('Recherche global').pinned(true),
+            nga.field('like_name').label('Nom'),
+            nga.field('like_code').label('Code')
         ])
         .sortField('name')
         .sortDir('DESC')

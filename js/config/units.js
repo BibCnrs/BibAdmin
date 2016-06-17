@@ -5,7 +5,7 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     unit.listView()
-        .actions(['create'])
+        .actions(['filter', 'create'])
         .title('Unités')
         .perPage(20)
         .fields([
@@ -15,6 +15,9 @@ export default function (nga, admin) {
             nga.field('domains', 'choices').label('Domaines')
         ])
         .filters([
+            nga.field('match').label('Recherche global').pinned(true),
+            nga.field('like_name').label('Nom'),
+            nga.field('like_code').label('Code')
         ])
         .sortField('name')
         .sortDir('DESC')

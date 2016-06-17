@@ -30,8 +30,7 @@ export default function (nga, admin) {
             nga.field('from_subscription_date', 'date').label('Date d\'inscription aprés'),
             nga.field('to_subscription_date', 'date').label('Date d\'inscription avant'),
             nga.field('from_expiration_date', 'date').label('Date d\'expiration aprés'),
-            nga.field('to_expiration_date', 'date').label('Date d\'expiration avant'),
-            nga.field('units', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unités')
+            nga.field('to_expiration_date', 'date').label('Date d\'expiration avant')
         ])
         .sortField('username')
         .sortDir('DESC')
