@@ -17,7 +17,7 @@ export default function (nga, admin) {
             nga.field('inist_account.subscription_date', 'date').map((_, entry) => entry.subscription_date).label('Date d\'inscription'),
             nga.field('inist_account.expiration_date', 'date').map((_, entry) => entry.expiration_date).label('Date d\'expiration'),
             nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
-            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Tous les domaines'),
+            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines hérités'),
             nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
             nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
         ])

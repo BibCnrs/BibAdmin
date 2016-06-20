@@ -22,11 +22,13 @@ export default function (nga, admin) {
             nga.field('domain.name', 'reference').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
             nga.field('institute.id', 'reference')
             .targetEntity(institute)
-            .targetField(nga.field('like_name').map((_, entry) => entry.name))
+            .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
+            .remoteComplete(true)
             .label('Instituts(Nom)'),
             nga.field('institute.id', 'reference')
             .targetEntity(institute)
-            .targetField(nga.field('like_code').map((_, entry) => entry.code))
+            .targetField(nga.field('like_institute.code').map((_, entry) => entry.code))
+            .remoteComplete(true)
             .label('Instituts(Code)')
         ])
         .sortField('name')

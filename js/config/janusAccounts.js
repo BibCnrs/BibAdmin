@@ -12,7 +12,7 @@ export default function (nga, admin) {
         .fields([
             nga.field('janus_account.username').map((_, entry) => entry.username).isDetailLink(true).label('Username'),
             nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
-            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Tous les domaines'),
+            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines hérités'),
             nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
             nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
             nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unité principale'),
