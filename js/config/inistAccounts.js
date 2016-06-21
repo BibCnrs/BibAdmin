@@ -23,7 +23,7 @@ export default function (nga, admin) {
         ])
         .filters([
             nga.field('match').label('Recherche global').pinned(true),
-            nga.field('inist_account.id', 'reference').targetEntity(inistAccount).targetField(nga.field('username')).remoteComplete(true).label('Login'),
+            nga.field('like_inist_account.username').label('Login'),
             nga.field('like_inist_account.name').label('Nom'),
             nga.field('like_inist_account.firstname').label('Prénom'),
             nga.field('like_inist_account.mail').label('courriel'),
