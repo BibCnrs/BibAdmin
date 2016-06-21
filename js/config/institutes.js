@@ -4,18 +4,29 @@ export default function (nga, admin) {
     const domain = admin.getEntity('domains');
 
     institute.listView()
-        .actions(['create'])
+        .actions(['export', 'filter', 'create'])
         .title('Intituts')
         .perPage(20)
         .fields([
-            nga.field('code').isDetailLink(true),
-            nga.field('name').label('Code'),
-            nga.field('domains', 'choices').label('Domaines')
+            nga.field('institute.code').map((_, entry) => entry.code).isDetailLink(true).label('Code'),
+            nga.field('institute.name').map((_, entry) => entry.name).label('Nom'),
+            nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines')
         ])
         .filters([
+            nga.field('match').label('Recherche global').pinned(true),
+            nga.field('like_institute.name').label('Nom'),
+            nga.field('like_institute.code').label('Code'),
+            nga.field('domain.name', 'reference')
+            .targetEntity(domain)
+            .targetField(nga.field('name'))
+            .remoteComplete(true)
+            .label('Domaines')
         ])
         .sortField('name')
         .sortDir('DESC')
+        .exportFields([
+            institute.listView().fields()
+        ])
         .listActions(['edit']);
 
     institute.editionView()
