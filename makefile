@@ -21,7 +21,7 @@ bump: ## create currentCommit file
 npm-install: ## ## install npm dependencies
 	docker-compose run npm install
 
-install: npm-install bump ## install npm dependencies and bump currentCommit file
+install: npm-install copy-script bump ## install npm dependencies and bump currentCommit file
 
 run-dev: ## run BibAdmin for development
 	docker-compose -f docker-compose.dev.yml up --force-recreate
@@ -36,9 +36,11 @@ else
 	docker build --no-cache -t vsregistry.intra.inist.fr:5000/bibadmin:latest .
 endif
 
-build-script: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
+copy-script: # copy dependency in ./public/vendor
 	cp -f node_modules/ng-admin/build/ng-admin.min.js ./public/vendor/ng-admin.min.js
 	cp -f node_modules/ng-admin/build/ng-admin.min.css ./public/vendor/ng-admin.min.css
+
+build-script: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
 	docker-compose run build
 
 build: install build-script build-docker ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
