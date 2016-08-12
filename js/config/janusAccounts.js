@@ -6,16 +6,16 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     janusAccount.listView()
-        .actions(['export', 'filter', 'create'])
+        .actions(['export', 'filter', 'batch'])
         .title('Comptes JANUS')
         .perPage(20)
         .fields([
             nga.field('janus_account.username').map((_, entry) => entry.username).isDetailLink(true).label('Username'),
-            nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
-            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines hérités'),
-            nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+            nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
+            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés hérités'),
+            nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Janus'),
             nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
-            nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unité principale'),
+            nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unité Janus'),
             nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
         ])
         .filters([
@@ -25,17 +25,17 @@ export default function (nga, admin) {
             .targetEntity(domain)
             .targetField(nga.field('name'))
             .remoteComplete(true)
-            .label('Domaines'),
+            .label('Communautés'),
             nga.field('janus_account.primary_institute', 'reference')
             .targetEntity(institute)
             .targetField(nga.field('like_name').map((_, entry) => entry.name))
             .remoteComplete(true)
-            .label('Institut principal'),
+            .label('Institut Janus'),
             nga.field('janus_account.primary_unit', 'reference')
             .targetEntity(unit)
             .targetField(nga.field('like_name').map((_, entry) => entry.name))
             .remoteComplete(true)
-            .label('Unité principale'),
+            .label('Unité Janus'),
             nga.field('unit.id', 'reference')
             .targetEntity(unit)
             .targetField(nga.field('like_name').map((_, entry) => entry.name))
@@ -62,22 +62,22 @@ export default function (nga, admin) {
         .exportFields([
             janusAccount.listView().fields()
         ])
-        .listActions(['edit']);
+        .listActions(['edit', 'delete']);
     janusAccount.editionView()
     .title('Compte JANUS {{ entry.values.username }}')
     .fields([
         nga.field('username').label('Username'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
-        nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut principal'),
+        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
+        nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
-        nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).editable(false).label('Unité principale'),
+        nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).editable(false).label('Unité Janus'),
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
     ]);
     janusAccount.creationView()
     .title('Compte JANUS')
     .fields([
         nga.field('username').label('Username'),
-        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Domaines'),
+        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Communautés'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
     ])

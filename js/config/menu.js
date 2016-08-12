@@ -37,7 +37,7 @@ export default function (nga, admin) {
         .active(path => path.indexOf('/units') === 0)
     )
     .addChild(nga.menu()
-        .title('Domaines')
+        .title('Communautés')
         .icon('<span class="fa fa-folder fa-fw"></span>')
         .link('/domains/list')
         .active(path => path.indexOf('/domains') === 0)

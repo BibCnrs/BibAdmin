@@ -5,21 +5,20 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     unit.listView()
-        .actions(['export', 'filter', 'create'])
+        .actions(['export', 'filter', 'create', 'batch'])
         .title('Unités')
         .perPage(20)
         .fields([
             nga.field('unit.code').map((_, entry) => entry.code).isDetailLink(true),
             nga.field('unit.name').map((_, entry) => entry.name).label('Nom'),
-            nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Intituts'),
-            nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
-            nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines Hérités')
+            nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
+            nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communauté')
         ])
         .filters([
             nga.field('match').label('Recherche global').pinned(true),
             nga.field('like_unit.name').label('Nom'),
             nga.field('like_unit.code').label('Code'),
-            nga.field('domain.name', 'reference').targetEntity(domain).targetField(nga.field('name')).label('Domaines'),
+            nga.field('domain.name', 'reference').targetEntity(domain).targetField(nga.field('name')).label('Communauté'),
             nga.field('institute.id', 'reference')
             .targetEntity(institute)
             .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
@@ -59,10 +58,10 @@ export default function (nga, admin) {
             nga.field('ci_mail').label('Courriel correspondant informatique'),
             nga.field('comment').label('Commentaire'),
             nga.field('nb_unit_account').label('Nb compte unités'),
-            nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('code')).label('Instituts'),
-            nga.field('domains').label('Domaines')
+            nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
+            nga.field('domains').label('Communauté')
         ])
-        .listActions(['edit']);
+        .listActions(['edit', 'delete']);
 
     unit.editionView()
     .title('Unité {{ entry.values.name }}')
@@ -93,7 +92,7 @@ export default function (nga, admin) {
         nga.field('comment').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('code')).label('Instituts'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Domaines')
+        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communauté')
     ]);
 
     unit.creationView()

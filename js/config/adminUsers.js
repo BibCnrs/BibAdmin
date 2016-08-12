@@ -5,7 +5,7 @@ export default function (nga, admin) {
     .identifier(nga.field('id'));
 
     adminUser.listView()
-        .actions(['create'])
+        .actions(['create', 'batch'])
         .title('Administrateurs')
         .perPage(20)
         .fields([

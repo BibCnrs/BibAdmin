@@ -3,8 +3,8 @@ export default function (nga, admin) {
 
     const domain = admin.getEntity('domains').identifier(nga.field('name'));
     domain.listView()
-        .actions(['filter', 'create'])
-        .title('Domaines')
+        .actions(['filter', 'create', 'batch'])
+        .title('Communautés de droit')
         .perPage(20)
         .fields([
             nga.field('name').isDetailLink(true).label('Nom'),
@@ -19,7 +19,7 @@ export default function (nga, admin) {
         .sortDir('DESC')
         .listActions(['edit']);
     domain.editionView()
-    .title('Domaine {{ entry.values.name }}')
+    .title('Communauté de droit {{ entry.values.name }}')
     .fields([
         nga.field('name').label('Nom'),
         nga.field('gate').label('Portail ezproxy'),
@@ -28,7 +28,7 @@ export default function (nga, admin) {
         nga.field('profile')
     ]);
     domain.creationView()
-    .title('Nouveau domaine')
+    .title('Nouvelle communauté de droit')
     .fields([
         nga.field('name').label('Nom'),
         nga.field('gate').label('Portail ezproxy'),
