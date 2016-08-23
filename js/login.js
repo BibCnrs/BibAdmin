@@ -3,7 +3,11 @@ import 'whatwg-fetch';
 
 window.login = function login(event) {
     if (event) {
-        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        if(event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
     }
 
     fetch(`${__BIBAPI_HOST__}/login`, {
@@ -19,7 +23,7 @@ window.login = function login(event) {
         })
     }).then(function(response) {
         if (response.status !== 200) {
-            new Error(response.statusText)
+            new Error(response.statusText);
             throw new Error(`${response.status} - ${response.statusText}`);
         }
         return response.json();
