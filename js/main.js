@@ -39,11 +39,13 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     renaterHeaders(nga, admin);
     institutes(nga, admin);
     units(nga, admin);
+
     window.logout = function logout() {
 
         window.sessionStorage.clear();
         window.location.href = "./login.html";
-    }
+    };
+
     admin.header(`<div class="navbar-header">
         <a class="navbar-brand" href="#" ng-click="appController.displayHome()">BibAdmin</a>
     </div>
@@ -53,6 +55,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
         </li>
     </ul>
     `);
+
     admin.menu(menu(nga, admin));
 
     // attach the admin application to the DOM and execute it
