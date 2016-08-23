@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+
 import janusAccounts from './config/janusAccounts';
 import inistAccounts from './config/inistAccounts';
 import adminUsers from './config/adminUsers';
@@ -9,6 +10,12 @@ import units from './config/units';
 import menu from './config/menu';
 
 const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
+
+bibAdmin.factory('crypto', [function () {
+    return require('crypto');
+}]);
+
+require('./services');
 
 bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function (nga, RestangularProvider) {
     const token = window.sessionStorage.getItem('token');
