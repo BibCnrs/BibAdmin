@@ -8,7 +8,7 @@ const bibPassword = (generatePassword) => {
                 const input = $element.find('input');
                 input.val(generatePassword(10));
                 input[0].select();
-            }
+            };
         }
     };
 };
