@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import crypto from 'crypto';
 
 import janusAccounts from './config/janusAccounts';
 import inistAccounts from './config/inistAccounts';
@@ -14,7 +15,7 @@ import directives from './directives';
 const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
 
 bibAdmin.factory('crypto', [function () {
-    return require('crypto');
+    return crypto;
 }]);
 
 services(bibAdmin);
@@ -30,7 +31,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
 
     // create the admin application
     const admin = nga.application('BibAdmin')
-        .baseApiUrl(`${__BIBAPI_HOST__}/`);
+    .baseApiUrl(`${__BIBAPI_HOST__}/`);
 
     // add entities
     admin.addEntity(nga.entity('janusAccounts'));
@@ -53,18 +54,19 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     window.logout = function logout() {
 
         window.sessionStorage.clear();
-        window.location.href = "./login.html";
+        window.location.href = './login.html';
     };
 
-    admin.header(`<div class="navbar-header">
-        <a class="navbar-brand" href="#" ng-click="appController.displayHome()">BibAdmin</a>
-    </div>
-    <ul class="nav navbar-top-links navbar-right hidden-xs">
-        <li>
-            <li><a href="#" onclick="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-        </li>
-    </ul>
-    `);
+    admin.header(
+`<div class="navbar-header">
+    <a class="navbar-brand" href="#" ng-click="appController.displayHome()">BibAdmin</a>
+</div>
+<ul class="nav navbar-top-links navbar-right hidden-xs">
+    <li>
+        <li><a href="#" onclick="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+    </li>
+</ul>`
+    );
 
     admin.menu(menu(nga, admin));
 

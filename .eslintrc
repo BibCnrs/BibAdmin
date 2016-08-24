@@ -26,10 +26,12 @@
     },
     "env": {
         "es6": true,
+        "node": true,
         "browser": true
     },
     "extends": "eslint:recommended",
     "globals": {
+        "angular": true,
         "__BIBAPI_HOST__": true,
         "__BIBADMIN_HOST__": true
     }
