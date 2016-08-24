@@ -8,6 +8,8 @@ import renaterHeaders from './config/renaterHeaders';
 import institutes from './config/institutes';
 import units from './config/units';
 import menu from './config/menu';
+import services from './services';
+import directives from './directives';
 
 const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
 
@@ -15,8 +17,8 @@ bibAdmin.factory('crypto', [function () {
     return require('crypto');
 }]);
 
-require('./services');
-require('./directives');
+services(bibAdmin);
+directives(bibAdmin);
 
 bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function (nga, RestangularProvider) {
     const token = window.sessionStorage.getItem('token');

@@ -1,4 +1,5 @@
 import generatePassword from './generatePassword';
-const app = angular.module('bibAdmin');
 
-app.service('generatePassword', generatePassword);
+export default function (app) {
+    app.service('generatePassword', generatePassword);
+}
