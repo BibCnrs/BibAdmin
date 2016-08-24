@@ -16,6 +16,7 @@ bibAdmin.factory('crypto', [function () {
 }]);
 
 require('./services');
+require('./directives');
 
 bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function (nga, RestangularProvider) {
     const token = window.sessionStorage.getItem('token');

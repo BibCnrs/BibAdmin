@@ -75,7 +75,7 @@ export default function (nga, admin) {
     .title('Compte INIST {{ entry.values.username }}')
     .fields([
         nga.field('username').label('Login'),
-        nga.field('password'),
+        nga.field('password', 'template').template('<bib-password></bib-password>'),
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités'),
         nga.field('name'),
         nga.field('firstname'),
@@ -93,7 +93,7 @@ export default function (nga, admin) {
     .title('Nouveau compte INIST')
     .fields([
         nga.field('username').label('Login'),
-        nga.field('password'),
+        nga.field('password', 'template').template('<bib-password></bib-password>'),
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités'),
         nga.field('name'),
         nga.field('firstname'),
