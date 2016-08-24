@@ -1,5 +1,5 @@
-const generatePassword = (crypto) => () => {
-    return crypto.randomBytes(10).toString('base64').slice(0,10).toUpperCase();
+const generatePassword = (crypto) => (length) => {
+    return crypto.randomBytes(length).toString('base64').slice(0, length).toUpperCase();
 };
 
 generatePassword.$inject = ['crypto'];

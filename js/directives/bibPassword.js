@@ -6,7 +6,7 @@ const bibPassword = (generatePassword) => {
             $scope.generatePassword = function ($event) {
                 $event.preventDefault();
                 const input = $element.find('input');
-                input.val(generatePassword());
+                input.val(generatePassword(10));
                 input[0].select();
             }
         }
