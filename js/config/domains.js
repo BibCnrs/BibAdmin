@@ -1,4 +1,3 @@
-
 export default function (nga, admin) {
 
     const domain = admin.getEntity('domains').identifier(nga.field('name'));

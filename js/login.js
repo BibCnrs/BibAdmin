@@ -33,16 +33,16 @@ window.login = function login(event) {
         window.location.href = `${__BIBADMIN_HOST__}/index.html`;
     })
     .catch(e => {
-            const error = document.getElementById('error');
-            while (error.firstChild) {
-                error.removeChild(error.firstChild);
-            }
+        const error = document.getElementById('error');
+        while (error.firstChild) {
+            error.removeChild(error.firstChild);
+        }
 
-            const p = document.createElement('p');
-            p.textContent = e.message;
-            p.classList.add('alert');
-            p.classList.add('alert-danger');
-            error.appendChild(p);
+        const p = document.createElement('p');
+        p.textContent = e.message;
+        p.classList.add('alert');
+        p.classList.add('alert-danger');
+        error.appendChild(p);
     });
 
     return false;

@@ -1,4 +1,4 @@
-export default function (nga, admin) {
+export default function (nga) {
     return nga.menu()
     .addChild(nga.menu()
         .title('Administrateurs')
