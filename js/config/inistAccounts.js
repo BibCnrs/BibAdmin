@@ -26,7 +26,7 @@ export default function (nga, admin) {
         nga.field('like_inist_account.username').label('Login'),
         nga.field('like_inist_account.name').label('Nom'),
         nga.field('like_inist_account.firstname').label('Prénom'),
-        nga.field('like_inist_account.mail').label('courriel'),
+        nga.field('like_inist_account.mail').label('Courriel'),
         nga.field('from_inist_account.subscription_date', 'date').label('Date d\'inscription aprés'),
         nga.field('to_inist_account.subscription_date', 'date').label('Date d\'inscription avant'),
         nga.field('from_inist_account.expiration_date', 'date').label('Date d\'expiration aprés'),
