@@ -12,7 +12,7 @@ export default function (nga, admin) {
         nga.field('profile')
     ])
     .filters([
-        nga.field('match').label('Recherche global').pinned(true)
+        nga.field('match').label('Recherche globale').pinned(true)
     ])
     .sortField('username')
     .sortDir('DESC')

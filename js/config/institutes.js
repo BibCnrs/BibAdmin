@@ -13,7 +13,7 @@ export default function (nga, admin) {
         nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés')
     ])
     .filters([
-        nga.field('match').label('Recherche global').pinned(true),
+        nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_institute.name').label('Nom'),
         nga.field('like_institute.code').label('Code'),
         nga.field('domain.name', 'reference')
@@ -24,6 +24,11 @@ export default function (nga, admin) {
     ])
     .sortField('name')
     .sortDir('DESC')
+    .exportOptions({
+        quotes: false,
+        delimiter: ';',
+        newline: '\r\n'
+    })
     .exportFields([
         institute.listView().fields()
     ])

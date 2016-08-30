@@ -10,11 +10,11 @@ export default function (nga, admin) {
     .title('Compte INIST')
     .perPage(20)
     .fields([
+        nga.field('inist_account.name').map((_, entry) => entry.name).isDetailLink(true).label('Nom'),
+        nga.field('inist_account.firstname').map((_, entry) => entry.firstname).isDetailLink(true).label('Prénom'),
         nga.field('inist_account.username').map((_, entry) => entry.username).isDetailLink(true).label('Login'),
         nga.field('inist_account.password').map((_, entry) => entry.password).isDetailLink(true).label('Password'),
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités'),
-        nga.field('inist_account.name').map((_, entry) => entry.name).isDetailLink(true).label('Nom'),
-        nga.field('inist_account.firstname').map((_, entry) => entry.firstname).isDetailLink(true).label('Prénom'),
         nga.field('inist_account.mail').map((_, entry) => entry.mail).isDetailLink(true).label('courriel'),
         nga.field('inist_account.subscription_date', 'date').map((_, entry) => entry.subscription_date).label('Date d\'inscription'),
         nga.field('inist_account.expiration_date', 'date').map((_, entry) => entry.expiration_date).label('Date d\'expiration'),
@@ -22,10 +22,10 @@ export default function (nga, admin) {
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts')
     ])
     .filters([
-        nga.field('match').label('Recherche global').pinned(true),
-        nga.field('like_inist_account.username').label('Login'),
+        nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_inist_account.name').label('Nom'),
         nga.field('like_inist_account.firstname').label('Prénom'),
+        nga.field('like_inist_account.username').label('Login'),
         nga.field('like_inist_account.mail').label('Courriel'),
         nga.field('from_inist_account.subscription_date', 'date').label('Date d\'inscription aprés'),
         nga.field('to_inist_account.subscription_date', 'date').label('Date d\'inscription avant'),
@@ -51,15 +51,20 @@ export default function (nga, admin) {
         .remoteComplete(true)
         .label('Unités(Code)')
     ])
+    .exportOptions({
+        quotes: false,
+        delimiter: ';',
+        newline: '\r\n'
+    })
     .exportFields([
-        nga.field('username').label('Login'),
-        nga.field('password'),
         nga.field('name'),
         nga.field('firstname'),
         nga.field('mail'),
+        nga.field('username').label('Login'),
+        nga.field('password'),
+        nga.field('comment').label('Commentaire'),
         nga.field('phone'),
         nga.field('dr'),
-        nga.field('comment').label('Commentaire'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
         nga.field('domains').label('Communautés'),
@@ -71,18 +76,19 @@ export default function (nga, admin) {
     .sortDir('DESC')
     .listActions(['edit', 'delete']);
 
+
     inistAccount.editionView()
     .title('Compte INIST {{ entry.values.username }}')
     .fields([
-        nga.field('username').label('Login'),
-        nga.field('password', 'template').template('<bib-password></bib-password>'),
-        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités'),
         nga.field('name'),
         nga.field('firstname'),
         nga.field('mail'),
+        nga.field('username').label('Login'),
+        nga.field('password', 'template').template('<bib-password></bib-password>'),
+        nga.field('comment').label('Commentaire'),
+        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités'),
         nga.field('phone'),
         nga.field('dr'),
-        nga.field('comment').label('Commentaire'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
         nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),

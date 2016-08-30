@@ -15,7 +15,7 @@ export default function (nga, admin) {
         nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communauté')
     ])
     .filters([
-        nga.field('match').label('Recherche global').pinned(true),
+        nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_unit.name').label('Nom'),
         nga.field('like_unit.code').label('Code'),
         nga.field('domain.name', 'reference').targetEntity(domain).targetField(nga.field('name')).label('Communauté'),
@@ -32,6 +32,11 @@ export default function (nga, admin) {
     ])
     .sortField('name')
     .sortDir('DESC')
+    .exportOptions({
+        quotes: false,
+        delimiter: ';',
+        newline: '\r\n'
+    })
     .exportFields([
         nga.field('code'),
         nga.field('name').label('Nom'),
