@@ -12,7 +12,7 @@ export default function (nga, admin) {
     ])
     .sortField('username')
     .sortDir('DESC')
-    .listActions(['edit']);
+    .listActions(['edit', 'delete']);
 
     adminUser.editionView()
     .title('Administrateur {{ entry.values.username }}')
