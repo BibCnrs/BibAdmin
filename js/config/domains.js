@@ -16,7 +16,7 @@ export default function (nga, admin) {
     ])
     .sortField('username')
     .sortDir('DESC')
-    .listActions(['edit']);
+    .listActions(['edit', 'delete']);
 
     domain.editionView()
     .title('Communauté de droit {{ entry.values.name }}')
