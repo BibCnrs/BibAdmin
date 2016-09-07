@@ -26,7 +26,7 @@ export default function (nga, admin) {
     .sortField('name')
     .sortDir('DESC')
     .exportOptions({
-        quotes: false,
+        quotes: true,
         delimiter: ';',
         newline: '\r\n'
     })

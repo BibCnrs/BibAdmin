@@ -70,7 +70,7 @@ export default function (nga, admin) {
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
         nga.field('domains').label('Communautés'),
-        nga.field('all_domains').label('Tous les domaines'),
+        nga.field('all_domains').label('Toutes les communautés'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
     ])
