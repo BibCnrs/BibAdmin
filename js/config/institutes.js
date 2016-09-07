@@ -8,6 +8,7 @@ export default function (nga, admin) {
     .title('Instituts')
     .perPage(20)
     .fields([
+        nga.field('institute.id'),
         nga.field('institute.code').map((_, entry) => entry.code).isDetailLink(true).label('Code'),
         nga.field('institute.name').map((_, entry) => entry.name).label('Nom'),
         nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés')

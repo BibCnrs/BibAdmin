@@ -35,10 +35,12 @@ export default function (nga, admin) {
         nga.field('institute.id', 'reference')
         .targetEntity(institute)
         .targetField(nga.field('like_name').map((_, entry) => entry.name))
+        .remoteComplete(true)
         .label('Instituts(Nom)'),
         nga.field('institute.id', 'reference')
         .targetEntity(institute)
         .targetField(nga.field('like_code').map((_, entry) => entry.code))
+        .remoteComplete(true)
         .label('Instituts(Code)'),
         nga.field('unit.id', 'reference')
         .targetEntity(unit)
