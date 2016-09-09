@@ -1,7 +1,7 @@
 export default function (nga, admin) {
 
     const unit = admin.getEntity('units').identifier(nga.field('id'));
-    const domain = admin.getEntity('domains');
+    const community = admin.getEntity('communities');
     const institute = admin.getEntity('institutes');
 
     unit.listView()
@@ -12,13 +12,13 @@ export default function (nga, admin) {
         nga.field('unit.code').map((_, entry) => entry.code).isDetailLink(true),
         nga.field('unit.name').map((_, entry) => entry.name).label('Nom'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communauté')
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communauté')
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_unit.name').label('Nom'),
         nga.field('like_unit.code').label('Code'),
-        nga.field('domain.name', 'reference').targetEntity(domain).targetField(nga.field('name')).label('Communauté'),
+        nga.field('community.name', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communauté'),
         nga.field('institute.id', 'reference')
         .targetEntity(institute)
         .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
@@ -64,7 +64,7 @@ export default function (nga, admin) {
         nga.field('comment').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
-        nga.field('domains').label('Communauté')
+        nga.field('communities').label('Communauté')
     ])
     .listActions(['edit', 'delete']);
 
@@ -97,7 +97,7 @@ export default function (nga, admin) {
         nga.field('comment').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('code')).label('Instituts'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communauté')
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communauté')
     ]);
 
     unit.creationView()
@@ -129,7 +129,7 @@ export default function (nga, admin) {
         nga.field('comment').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name'))
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name'))
     ]);
 
     return unit;

@@ -1,7 +1,7 @@
 export default function (nga, admin) {
 
     const janusAccount = admin.getEntity('janusAccounts').identifier(nga.field('id'));
-    const domain = admin.getEntity('domains');
+    const community = admin.getEntity('communities');
     const unit = admin.getEntity('units');
     const institute = admin.getEntity('institutes');
 
@@ -15,7 +15,7 @@ export default function (nga, admin) {
         nga.field('janus_account.comment', 'text').label('Comment'),
         nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Last Connexion'),
         nga.field('cnrs', 'boolean').editable(false).label('CNRS'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
         nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).editable(false).label('Unité Janus'),
@@ -29,8 +29,8 @@ export default function (nga, admin) {
     .fields([
         nga.field('uid').isDetailLink(true).label('Uid'),
         nga.field('mail').isDetailLink(true).label('Mail'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
-        nga.field('all_domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés hérités'),
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés hérités'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
         nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unité Janus'),
@@ -41,8 +41,8 @@ export default function (nga, admin) {
         nga.field('like_janus_account.uid').label('Uid'),
         nga.field('like_janus_account.mail').label('Mail'),
         nga.field('janus_account.cnrs', 'boolean').label('Cnrs'),
-        nga.field('domain.name', 'reference')
-        .targetEntity(domain)
+        nga.field('community.name', 'reference')
+        .targetEntity(community)
         .targetField(nga.field('name'))
         .remoteComplete(true)
         .label('Communautés'),

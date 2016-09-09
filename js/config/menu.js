@@ -39,7 +39,7 @@ export default function (nga) {
     .addChild(nga.menu()
         .title('Communautés')
         .icon('<span class="fa fa-folder fa-fw"></span>')
-        .link('/domains/list')
-        .active(path => path.indexOf('/domains') === 0)
+        .link('/communities/list')
+        .active(path => path.indexOf('/communities') === 0)
     );
 }

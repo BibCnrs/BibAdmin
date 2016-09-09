@@ -1,7 +1,7 @@
 export default function (nga, admin) {
 
     const inistAccount = admin.getEntity('inistAccounts').identifier(nga.field('id'));
-    const domain = admin.getEntity('domains');
+    const community = admin.getEntity('communities');
     const unit = admin.getEntity('units');
     const institute = admin.getEntity('institutes');
 
@@ -18,7 +18,7 @@ export default function (nga, admin) {
         nga.field('inist_account.mail').map((_, entry) => entry.mail).isDetailLink(true).label('courriel'),
         nga.field('inist_account.subscription_date', 'date').map((_, entry) => entry.subscription_date).label('Date d\'inscription'),
         nga.field('inist_account.expiration_date', 'date').map((_, entry) => entry.expiration_date).label('Date d\'expiration'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts')
     ])
     .filters([
@@ -31,7 +31,7 @@ export default function (nga, admin) {
         nga.field('to_inist_account.subscription_date', 'date').label('Date d\'inscription avant'),
         nga.field('from_inist_account.expiration_date', 'date').label('Date d\'expiration aprés'),
         nga.field('to_inist_account.expiration_date', 'date').label('Date d\'expiration avant'),
-        nga.field('domain.name', 'reference').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
+        nga.field('community.name', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('institute.id', 'reference')
         .targetEntity(institute)
         .targetField(nga.field('like_name').map((_, entry) => entry.name))
@@ -69,8 +69,8 @@ export default function (nga, admin) {
         nga.field('dr'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('domains').label('Communautés'),
-        nga.field('all_domains').label('Toutes les communautés'),
+        nga.field('communities').label('Communautés'),
+        nga.field('all_communities').label('Toutes les communautés'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
     ])
@@ -92,8 +92,8 @@ export default function (nga, admin) {
         nga.field('dr'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
-        nga.field('all_domains').editable(false).label('Tous les domaines'),
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('all_communities').editable(false).label('Toutes les communautés'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
     ]);
@@ -112,7 +112,7 @@ export default function (nga, admin) {
         nga.field('dr'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Communautés'),
+        nga.field('communities', 'reference_many').targetEntity(admin.getEntity('communities')).targetField(nga.field('name')).label('Communautés'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts')
     ]);
 

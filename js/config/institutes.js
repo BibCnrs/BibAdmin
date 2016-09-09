@@ -1,7 +1,7 @@
 export default function (nga, admin) {
 
     const institute = admin.getEntity('institutes').identifier(nga.field('id'));
-    const domain = admin.getEntity('domains');
+    const domain = admin.getEntity('communities');
 
     institute.listView()
     .actions(['export', 'filter', 'create', 'batch'])
@@ -11,7 +11,7 @@ export default function (nga, admin) {
         nga.field('institute.id'),
         nga.field('institute.code').map((_, entry) => entry.code).isDetailLink(true).label('Code'),
         nga.field('institute.name').map((_, entry) => entry.name).label('Nom'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés')
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
@@ -40,7 +40,7 @@ export default function (nga, admin) {
     .fields([
         nga.field('code'),
         nga.field('name').label('Nom'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés')
     ]);
 
     institute.creationView()
@@ -48,7 +48,7 @@ export default function (nga, admin) {
     .fields([
         nga.field('code'),
         nga.field('name').label('Nom'),
-        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(admin.getEntity('communities')).targetField(nga.field('name')).label('Communautés')
     ]);
 
     return institute;
