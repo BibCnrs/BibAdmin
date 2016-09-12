@@ -33,7 +33,7 @@ export default function (nga, admin) {
         nga.field('to_inist_account.subscription_date', 'date').label('Date d\'inscription avant'),
         nga.field('from_inist_account.expiration_date', 'date').label('Date d\'expiration aprés'),
         nga.field('to_inist_account.expiration_date', 'date').label('Date d\'expiration avant'),
-        nga.field('communities', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('community.id', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('main_institute.id', 'reference')
         .label('Institut principal')
         .targetEntity(institute)

@@ -1,6 +1,6 @@
 export default function (nga, admin) {
 
-    const domain = admin.getEntity('communities').identifier(nga.field('name'));
+    const domain = admin.getEntity('communities').identifier(nga.field('id'));
     domain.listView()
     .actions(['filter', 'create', 'batch'])
     .title('Communautés de droit')

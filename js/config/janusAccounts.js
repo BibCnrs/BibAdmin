@@ -41,7 +41,7 @@ export default function (nga, admin) {
         nga.field('like_janus_account.uid').label('Uid'),
         nga.field('like_janus_account.mail').label('Mail'),
         nga.field('janus_account.cnrs', 'boolean').label('Cnrs'),
-        nga.field('community.name', 'reference')
+        nga.field('community.id', 'reference')
         .label('Communautés')
         .targetEntity(community)
         .targetField(nga.field('name'))

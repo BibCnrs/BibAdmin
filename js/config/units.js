@@ -18,7 +18,7 @@ export default function (nga, admin) {
         nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_unit.name').label('Nom'),
         nga.field('like_unit.code').label('Code'),
-        nga.field('community.name', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communauté'),
+        nga.field('community.id', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communauté'),
         nga.field('institute.id', 'reference')
         .targetEntity(institute)
         .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
