@@ -1,7 +1,7 @@
 export default function (nga, admin) {
 
-    const domain = admin.getEntity('communities').identifier(nga.field('id'));
-    domain.listView()
+    const community = admin.getEntity('communities').identifier(nga.field('id'));
+    community.listView()
     .actions(['filter', 'create', 'batch'])
     .title('Communautés de droit')
     .perPage(20)
@@ -18,7 +18,7 @@ export default function (nga, admin) {
     .sortDir('DESC')
     .listActions(['edit', 'delete']);
 
-    domain.editionView()
+    community.editionView()
     .title('Communauté de droit {{ entry.values.name }}')
     .fields([
         nga.field('name').label('Nom'),
@@ -28,7 +28,7 @@ export default function (nga, admin) {
         nga.field('profile')
     ]);
 
-    domain.creationView()
+    community.creationView()
     .title('Nouvelle communauté de droit')
     .fields([
         nga.field('name').label('Nom'),
@@ -38,5 +38,5 @@ export default function (nga, admin) {
         nga.field('profile')
     ]);
 
-    return domain;
+    return community;
 }
