@@ -1,7 +1,7 @@
 export default function (nga, admin) {
 
     const inistAccount = admin.getEntity('inistAccounts').identifier(nga.field('id'));
-    const domain = admin.getEntity('domains');
+    const community = admin.getEntity('communities');
     const unit = admin.getEntity('units');
     const institute = admin.getEntity('institutes');
 
@@ -14,12 +14,14 @@ export default function (nga, admin) {
         nga.field('inist_account.firstname').map((_, entry) => entry.firstname).isDetailLink(true).label('Prénom'),
         nga.field('inist_account.username').map((_, entry) => entry.username).isDetailLink(true).label('Login'),
         nga.field('inist_account.password').map((_, entry) => entry.password).isDetailLink(true).label('Password'),
-        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités'),
         nga.field('inist_account.mail').map((_, entry) => entry.mail).isDetailLink(true).label('courriel'),
         nga.field('inist_account.subscription_date', 'date').map((_, entry) => entry.subscription_date).label('Date d\'inscription'),
         nga.field('inist_account.expiration_date', 'date').map((_, entry) => entry.expiration_date).label('Date d\'expiration'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
-        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts')
+        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Principal'),
+        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
+        nga.field('main_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).label('Unité Principale'),
+        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaire'),
+        nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
@@ -31,27 +33,27 @@ export default function (nga, admin) {
         nga.field('to_inist_account.subscription_date', 'date').label('Date d\'inscription avant'),
         nga.field('from_inist_account.expiration_date', 'date').label('Date d\'expiration aprés'),
         nga.field('to_inist_account.expiration_date', 'date').label('Date d\'expiration avant'),
-        nga.field('domain.name', 'reference').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
-        nga.field('institute.id', 'reference')
+        nga.field('community.id', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('main_institute.id', 'reference')
+        .label('Institut principal')
         .targetEntity(institute)
-        .targetField(nga.field('like_name').map((_, entry) => entry.name))
-        .remoteComplete(true)
-        .label('Instituts(Nom)'),
-        nga.field('institute.id', 'reference')
+        .targetField(nga.field('like_institute.name').map((_, entry) => `${entry.name} (${entry.code})`))
+        .remoteComplete(true),
+        nga.field('institutes.id', 'reference')
+        .label('Instituts Secondaires')
         .targetEntity(institute)
-        .targetField(nga.field('like_code').map((_, entry) => entry.code))
-        .remoteComplete(true)
-        .label('Instituts(Code)'),
-        nga.field('unit.id', 'reference')
+        .targetField(nga.field('like_institute.name').map((_, entry) => `${entry.name} (${entry.code})`))
+        .remoteComplete(true),
+        nga.field('main_unit.id', 'reference')
+        .label('Unité principale')
         .targetEntity(unit)
-        .targetField(nga.field('like_name').map((_, entry) => entry.name))
-        .remoteComplete(true)
-        .label('Unités(Nom)'),
-        nga.field('unit.id', 'reference')
+        .targetField(nga.field('like_unit.name').map((_, entry) => `${entry.name} (${entry.code})`))
+        .remoteComplete(true),
+        nga.field('units.id', 'reference')
+        .label('Unités secondaires')
         .targetEntity(unit)
-        .targetField(nga.field('like_code').map((_, entry) => entry.code))
+        .targetField(nga.field('like_unit.name').map((_, entry) => `${entry.name} (${entry.code})`))
         .remoteComplete(true)
-        .label('Unités(Code)')
     ])
     .exportOptions({
         quotes: false,
@@ -59,20 +61,22 @@ export default function (nga, admin) {
         newline: '\r\n'
     })
     .exportFields([
-        nga.field('name'),
-        nga.field('firstname'),
+        nga.field('name').label('Nom'),
+        nga.field('firstname').label('Prénom'),
         nga.field('mail'),
         nga.field('username').label('Login'),
-        nga.field('password'),
+        nga.field('password').label('Mot de passe'),
         nga.field('comment').label('Commentaire'),
-        nga.field('phone'),
+        nga.field('phone').label('Tél'),
         nga.field('dr'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('domains').label('Communautés'),
-        nga.field('all_domains').label('Toutes les communautés'),
-        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
-        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
+        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Principal'),
+        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
+        nga.field('main_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).label('Unité Principale'),
+        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaire'),
+        nga.field('communities').label('Communautés propres'),
+        nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ])
     .sortField('username')
     .sortDir('DESC')
@@ -92,10 +96,12 @@ export default function (nga, admin) {
         nga.field('dr'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('domains', 'reference_many').targetEntity(domain).targetField(nga.field('name')).label('Communautés'),
-        nga.field('all_domains').editable(false).label('Tous les domaines'),
-        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
-        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités')
+        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
+        nga.field('main_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unité principale'),
+        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires'),
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés propres'),
+        nga.field('all_communities', 'choices').editable(false).label('Toutes les communautés')
     ]);
 
     inistAccount.creationView()
@@ -107,13 +113,15 @@ export default function (nga, admin) {
         nga.field('username').label('Login'),
         nga.field('password', 'template').template('<bib-password></bib-password>'),
         nga.field('comment', 'text').label('Commentaire'),
-        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités'),
         nga.field('phone'),
         nga.field('dr'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('domains', 'reference_many').targetEntity(admin.getEntity('domains')).targetField(nga.field('name')).label('Communautés'),
-        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts')
+        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
+        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
+        nga.field('main_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unités'),
+        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités'),
+        nga.field('communities', 'reference_many').targetEntity(admin.getEntity('communities')).targetField(nga.field('name')).label('Communautés'),
     ]);
 
     return inistAccount;
