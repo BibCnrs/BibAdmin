@@ -108,7 +108,11 @@ export default function (nga, admin) {
         .remoteComplete(true)
         .label('Unités secondaires'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés propres'),
-        nga.field('all_communities', 'choices').editable(false).label('Toutes les communautés')
+        nga.field('all_communities', 'reference_many')
+        .targetEntity(community)
+        .targetField(nga.field('name'))
+        .editable(false)
+        .label('Toutes les communautés')
     ]);
 
     inistAccount.creationView()
