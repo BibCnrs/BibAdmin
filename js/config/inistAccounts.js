@@ -20,7 +20,7 @@ export default function (nga, admin) {
         nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
         nga.field('main_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).label('Unité Principale'),
-        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaire'),
+        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaires'),
         nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ])
     .filters([
@@ -74,14 +74,13 @@ export default function (nga, admin) {
         nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
         nga.field('main_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).label('Unité Principale'),
-        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaire'),
+        nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaires'),
         nga.field('communities').label('Communautés propres'),
         nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ])
     .sortField('username')
     .sortDir('DESC')
     .listActions(['edit', 'delete']);
-
 
     inistAccount.editionView()
     .title('Compte INIST {{ entry.values.username }}')
