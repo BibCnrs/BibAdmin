@@ -96,7 +96,7 @@ export default function (nga, admin) {
         nga.field('ci_mail').label('Courriel correspondant informatique'),
         nga.field('comment').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
-        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('code')).label('Instituts'),
+        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communauté')
     ]);
 
