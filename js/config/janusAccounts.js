@@ -8,10 +8,10 @@ export default function (nga, admin) {
     janusAccount.editionView()
     .title('Compte JANUS {{ entry.values.uid }}')
     .fields([
+        nga.field('mail').editable(false).label('Mail'),
         nga.field('uid').editable(false).label('Uid'),
         nga.field('name').editable(false).label('Name'),
         nga.field('firstname').editable(false).label('First Name'),
-        nga.field('mail').editable(false).label('Mail'),
         nga.field('janus_account.comment', 'text').label('Comment'),
         nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Last Connexion'),
         nga.field('cnrs', 'boolean').editable(false).label('CNRS'),
@@ -28,8 +28,8 @@ export default function (nga, admin) {
     .title('Comptes JANUS')
     .perPage(20)
     .fields([
-        nga.field('uid').isDetailLink(true).label('Uid'),
         nga.field('mail').isDetailLink(true).label('Mail'),
+        nga.field('uid').isDetailLink(true).label('Uid'),
         nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),

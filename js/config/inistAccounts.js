@@ -10,10 +10,10 @@ export default function (nga, admin) {
     .title('Compte INIST')
     .perPage(20)
     .fields([
-        nga.field('inist_account.name').map((_, entry) => entry.name).isDetailLink(true).label('Nom'),
-        nga.field('inist_account.firstname').map((_, entry) => entry.firstname).isDetailLink(true).label('Prénom'),
         nga.field('inist_account.username').map((_, entry) => entry.username).isDetailLink(true).label('Login'),
         nga.field('inist_account.password').map((_, entry) => entry.password).isDetailLink(true).label('Password'),
+        nga.field('inist_account.name').map((_, entry) => entry.name).isDetailLink(true).label('Nom'),
+        nga.field('inist_account.firstname').map((_, entry) => entry.firstname).isDetailLink(true).label('Prénom'),
         nga.field('inist_account.mail').map((_, entry) => entry.mail).isDetailLink(true).label('courriel'),
         nga.field('inist_account.subscription_date', 'date').map((_, entry) => entry.subscription_date).label('Date d\'inscription'),
         nga.field('inist_account.expiration_date', 'date').map((_, entry) => entry.expiration_date).label('Date d\'expiration'),
@@ -61,11 +61,11 @@ export default function (nga, admin) {
         newline: '\r\n'
     })
     .exportFields([
+        nga.field('username').label('Login'),
+        nga.field('password').label('Mot de passe'),
         nga.field('name').label('Nom'),
         nga.field('firstname').label('Prénom'),
         nga.field('mail'),
-        nga.field('username').label('Login'),
-        nga.field('password').label('Mot de passe'),
         nga.field('comment').label('Commentaire'),
         nga.field('phone').label('Tél'),
         nga.field('dr'),
@@ -86,11 +86,11 @@ export default function (nga, admin) {
     inistAccount.editionView()
     .title('Compte INIST {{ entry.values.username }}')
     .fields([
+        nga.field('username').label('Login'),
+        nga.field('password', 'template').template('<bib-password></bib-password>'),
         nga.field('name'),
         nga.field('firstname'),
         nga.field('mail'),
-        nga.field('username').label('Login'),
-        nga.field('password', 'template').template('<bib-password></bib-password>'),
         nga.field('comment', 'text').label('Commentaire'),
         nga.field('phone'),
         nga.field('dr'),
@@ -107,11 +107,11 @@ export default function (nga, admin) {
     inistAccount.creationView()
     .title('Nouveau compte INIST')
     .fields([
+        nga.field('username').label('Login'),
+        nga.field('password', 'template').template('<bib-password></bib-password>'),
         nga.field('name'),
         nga.field('firstname'),
         nga.field('mail'),
-        nga.field('username').label('Login'),
-        nga.field('password', 'template').template('<bib-password></bib-password>'),
         nga.field('comment', 'text').label('Commentaire'),
         nga.field('phone'),
         nga.field('dr'),
