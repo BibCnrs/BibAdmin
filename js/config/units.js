@@ -13,6 +13,8 @@ export default function (nga, admin) {
         nga.field('unit.name').map((_, entry) => entry.name).label('Nom'),
         nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
+        nga.field('nb_inist_account').label('Nb de comptes Inist'),
+        nga.field('nb_janus_account').label('Nb de comptes Janus'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ])
     .filters([
