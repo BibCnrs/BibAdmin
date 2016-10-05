@@ -32,19 +32,22 @@ export default function (nga, admin) {
     .title('Comptes JANUS')
     .perPage(20)
     .fields([
-        nga.field('uid').isDetailLink(true).label('Uid'),
-        nga.field('mail').isDetailLink(true).label('Mail'),
+        nga.field('janus_account.uid').map((_, entry) => entry.uid).isDetailLink(true).label('Uid'),
+        nga.field('janus_account.mail').map((_, entry) => entry.mail).isDetailLink(true).label('Mail'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
         nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).label('Unité Janus'),
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaires'),
-        nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés')
+        nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés'),
+        nga.field('janus_account.last_connexion', 'date').map((_, entry) => entry.last_connexion).format('dd/MM/yyyy').label('Last Connexion'),
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_janus_account.uid').label('Uid'),
         nga.field('like_janus_account.mail').label('Mail'),
         nga.field('janus_account.cnrs', 'boolean').label('Cnrs'),
+        nga.field('from_janus_account.last_connexion', 'date').label('Derniére connection aprés'),
+        nga.field('to_janus_account.last_connexion', 'date').label('Derniére connection avant'),
         nga.field('community.id', 'reference')
         .label('Communautés')
         .targetEntity(community)
