@@ -4,7 +4,7 @@ export default function (nga, admin) {
     const community = admin.getEntity('communities');
 
     institute.listView()
-    .actions(['export', 'filter', 'create', 'batch'])
+    .actions(['filter', 'export', 'create', 'batch'])
     .title('Instituts')
     .perPage(20)
     .fields([
