@@ -33,6 +33,8 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     const admin = nga.application('BibAdmin')
     .baseApiUrl(`${__BIBAPI_HOST__}/`);
 
+    admin.dashboard(nga.dashboard());
+
     // add entities
     admin.addEntity(nga.entity('janusAccounts'));
     admin.addEntity(nga.entity('inistAccounts'));
