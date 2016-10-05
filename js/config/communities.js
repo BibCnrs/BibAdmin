@@ -9,7 +9,8 @@ export default function (nga, admin) {
         nga.field('name').isDetailLink(true).label('Nom'),
         nga.field('gate').label('Portail ezproxy'),
         nga.field('user_id'),
-        nga.field('profile')
+        nga.field('profile'),
+        nga.field('ebsco', 'boolean')
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true)
@@ -25,7 +26,8 @@ export default function (nga, admin) {
         nga.field('gate').label('Portail ezproxy'),
         nga.field('user_id'),
         nga.field('password', 'password'),
-        nga.field('profile')
+        nga.field('profile'),
+        nga.field('ebsco', 'boolean')
     ]);
 
     community.creationView()
@@ -35,7 +37,8 @@ export default function (nga, admin) {
         nga.field('gate').label('Portail ezproxy'),
         nga.field('user_id'),
         nga.field('password', 'password'),
-        nga.field('profile')
+        nga.field('profile'),
+        nga.field('ebsco', 'boolean')
     ]);
 
     return community;
