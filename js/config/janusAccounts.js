@@ -28,7 +28,7 @@ export default function (nga, admin) {
     ]);
 
     janusAccount.listView()
-    .actions(['export', 'filter', 'batch'])
+    .actions(['filter', 'export' , 'batch'])
     .title('Comptes JANUS')
     .perPage(20)
     .fields([

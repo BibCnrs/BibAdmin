@@ -6,7 +6,7 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     inistAccount.listView()
-    .actions(['export', 'filter', 'create', 'batch'])
+    .actions(['filter', 'export', 'create', 'batch'])
     .title('Compte INIST')
     .perPage(20)
     .fields([

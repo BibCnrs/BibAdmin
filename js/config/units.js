@@ -5,7 +5,7 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
 
     unit.listView()
-    .actions(['export', 'filter', 'create', 'batch'])
+    .actions(['filter', 'export', 'create', 'batch'])
     .title('Unités')
     .perPage(20)
     .fields([
