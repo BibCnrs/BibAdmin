@@ -12,15 +12,19 @@ export default function (nga, admin) {
         nga.field('name').editable(false).label('Name'),
         nga.field('firstname').editable(false).label('First Name'),
         nga.field('mail').editable(false).label('Mail'),
-        nga.field('janus_account.comment', 'text').label('Comment'),
-        nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Last Connexion'),
         nga.field('cnrs', 'boolean').editable(false).label('CNRS'),
-        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés propres'),
-        nga.field('all_communities', 'reference_many').editable(false).targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
-        nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).editable(false).label('Unité Janus'),
-        nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
+        nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).editable(false).label('Unité Janus'),
+        nga.field('additional_units', 'reference_many')
+        .targetEntity(unit)
+        .targetField(nga.field('like_unit.code').map((_, entry) => entry.code))
+        .remoteComplete(true)
+        .label('Unités secondaires'),
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés propres'),
+        nga.field('all_communities', 'reference_many').editable(false).targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés'),
+        nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Last Connexion'),
+        nga.field('janus_account.comment', 'text').label('Comment')
     ]);
 
     janusAccount.listView()
@@ -30,11 +34,11 @@ export default function (nga, admin) {
     .fields([
         nga.field('uid').isDetailLink(true).label('Uid'),
         nga.field('mail').isDetailLink(true).label('Mail'),
-        nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
-        nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('name')).label('Unité Janus'),
-        nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('name')).label('Unités secondaires')
+        nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).label('Unité Janus'),
+        nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaires'),
+        nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés')
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
@@ -59,12 +63,12 @@ export default function (nga, admin) {
         nga.field('janus_account.primary_unit', 'reference')
         .label('Unité Janus')
         .targetEntity(unit)
-        .targetField(nga.field('like_unit.name').map((_, entry) => entry.name))
+        .targetField(nga.field('like_unit.code').map((_, entry) => entry.code))
         .remoteComplete(true),
         nga.field('units.id', 'reference')
         .label('Unités secondaires')
         .targetEntity(unit)
-        .targetField(nga.field('like_unit.name').map((_, entry) => entry.name))
+        .targetField(nga.field('like_unit.code').map((_, entry) => entry.code))
         .remoteComplete(true),
     ])
     .sortField('uid')
