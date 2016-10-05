@@ -18,14 +18,16 @@ export default function (nga, admin) {
     .title('Administrateur {{ entry.values.username }}')
     .fields([
         nga.field('username').label('Login'),
-        nga.field('password', 'password').label('Mot de passe')
+        nga.field('password', 'password').label('Mot de passe'),
+        nga.field('comment', 'text').label('Commentaire')
     ]);
 
     adminUser.creationView()
     .title('Nouvel Administrateur')
     .fields([
         nga.field('username').label('Login'),
-        nga.field('password', 'password').label('Mot de passe')
+        nga.field('password', 'password').label('Mot de passe'),
+        nga.field('comment', 'text').label('Commentaire')
     ]);
 
     return adminUser;
