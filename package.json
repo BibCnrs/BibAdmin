@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/BibCnrs/BibAdmin",
   "dependencies": {
-    "ng-admin": "https://github.com/marmelab/ng-admin.git#1dc0cacf8b0c5136117d4d74456a8803fadb919b",
+    "ng-admin": "1.0.0-beta1",
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
