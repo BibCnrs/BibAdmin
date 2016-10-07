@@ -5,7 +5,6 @@ import janusAccounts from './config/janusAccounts';
 import inistAccounts from './config/inistAccounts';
 import adminUsers from './config/adminUsers';
 import communities from './config/communities';
-import renaterHeaders from './config/renaterHeaders';
 import institutes from './config/institutes';
 import units from './config/units';
 import menu from './config/menu';
@@ -95,7 +94,6 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     inistAccounts(nga, admin);
     adminUsers(nga, admin);
     communities(nga, admin);
-    renaterHeaders(nga, admin);
     institutes(nga, admin);
     units(nga, admin);
 
