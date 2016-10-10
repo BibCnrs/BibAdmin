@@ -19,7 +19,7 @@ bump: ## create currentCommit file
 	git rev-parse HEAD > .currentCommit
 
 npm-install: ## ## install npm dependencies
-	docker-compose run npm install
+	docker-compose run --rm npm install
 
 install: npm-install copy-script bump ## install npm dependencies and bump currentCommit file
 
@@ -41,7 +41,7 @@ copy-script: # copy dependency in ./public/vendor
 	cp -f node_modules/ng-admin/build/ng-admin.min.css ./public/vendor/ng-admin.min.css
 
 build-script: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
-	docker-compose run build
+	docker-compose run --rm build
 
 build: install build-script build-docker ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
 
