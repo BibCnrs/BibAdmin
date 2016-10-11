@@ -11,7 +11,10 @@ export default function (nga, admin) {
     .fields([
         nga.field('unit.code').map((_, entry) => entry.code).isDetailLink(true),
         nga.field('unit.name').map((_, entry) => entry.name).label('Nom'),
-        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+        nga.field('main_institute', 'reference')
+        .targetEntity(institute)
+        .targetField(nga.field('name'))
+        .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
         nga.field('nb_inist_account').label('Nb de comptes Inist'),
         nga.field('nb_janus_account').label('Nb de comptes Janus'),
@@ -21,7 +24,11 @@ export default function (nga, admin) {
         nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_unit.name').label('Nom'),
         nga.field('like_unit.code').label('Code'),
-        nga.field('community.id', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('community.id', 'reference')
+        .targetEntity(community)
+        .targetField(nga.field('name'))
+        .remoteComplete(true)
+        .label('Communautés'),
         nga.field('unit.main_institute', 'reference')
         .targetEntity(institute)
         .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
@@ -100,7 +107,11 @@ export default function (nga, admin) {
         nga.field('ci_mail').label('Courriel autre correspondant'),
         nga.field('comment').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
-        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+        nga.field('main_institute', 'reference')
+        .targetEntity(institute)
+        .targetField(nga.field('name'))
+        .remoteComplete(true)
+        .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ]);
@@ -133,7 +144,11 @@ export default function (nga, admin) {
         nga.field('ci_mail').label('Courriel autre correspondant'),
         nga.field('comment').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
-        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+        nga.field('main_institute', 'reference')
+        .targetEntity(institute)
+        .targetField(nga.field('name'))
+        .remoteComplete(true)
+        .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts socondaires'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ]);

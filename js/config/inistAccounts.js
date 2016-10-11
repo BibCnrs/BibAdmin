@@ -33,7 +33,11 @@ export default function (nga, admin) {
         nga.field('to_inist_account.subscription_date', 'date').label('Date d\'inscription avant'),
         nga.field('from_inist_account.expiration_date', 'date').label('Date d\'expiration aprés'),
         nga.field('to_inist_account.expiration_date', 'date').label('Date d\'expiration avant'),
-        nga.field('community.id', 'reference').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('community.id', 'reference')
+        .targetEntity(community)
+        .targetField(nga.field('name'))
+        .remoteComplete(true)
+        .label('Communautés'),
         nga.field('main_institute.id', 'reference')
         .label('Institut principal')
         .targetEntity(institute)
@@ -93,6 +97,7 @@ export default function (nga, admin) {
         nga.field('phone'),
         nga.field('dr'),
         nga.field('main_institute', 'reference')
+        .remoteComplete(true)
         .targetEntity(institute)
         .targetField(nga.field('name'))
         .label('Institut principal'),
@@ -134,7 +139,11 @@ export default function (nga, admin) {
         nga.field('mail'),
         nga.field('phone'),
         nga.field('dr'),
-        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+        nga.field('main_institute', 'reference')
+        .targetEntity(institute)
+        .targetField(nga.field('name'))
+        .remoteComplete(true)
+        .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
         nga.field('main_unit', 'reference')
         .targetEntity(unit)

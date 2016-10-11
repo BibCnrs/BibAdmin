@@ -90,12 +90,12 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     admin.addEntity(nga.entity('units'));
 
     // configure entities
-    janusAccounts(nga, admin);
-    inistAccounts(nga, admin);
-    adminUsers(nga, admin);
     communities(nga, admin);
     institutes(nga, admin);
     units(nga, admin);
+    janusAccounts(nga, admin);
+    inistAccounts(nga, admin);
+    adminUsers(nga, admin);
 
     window.logout = function logout() {
 
