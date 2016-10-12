@@ -9,9 +9,9 @@ export default function (nga, admin) {
     .title('Compte JANUS {{ entry.values.uid }}')
     .fields([
         nga.field('uid').editable(false).label('Uid'),
-        nga.field('name').editable(false).label('Name'),
-        nga.field('firstname').editable(false).label('First Name'),
-        nga.field('mail').editable(false).label('Mail'),
+        nga.field('name').label('Name'),
+        nga.field('firstname').label('First Name'),
+        nga.field('mail').label('Mail'),
         nga.field('cnrs', 'boolean').editable(false).label('CNRS'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut Janus'),
         nga.field('additional_institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaire'),
