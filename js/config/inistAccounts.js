@@ -41,22 +41,22 @@ export default function (nga, admin) {
         nga.field('main_institute.id', 'reference')
         .label('Institut principal')
         .targetEntity(institute)
-        .targetField(nga.field('like_institute.name').map((_, entry) => `${entry.name} (${entry.code})`))
+        .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
         .remoteComplete(true),
         nga.field('institutes.id', 'reference')
         .label('Instituts Secondaires')
         .targetEntity(institute)
-        .targetField(nga.field('like_institute.name').map((_, entry) => `${entry.name} (${entry.code})`))
+        .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
         .remoteComplete(true),
         nga.field('main_unit.id', 'reference')
         .label('Unité principale')
         .targetEntity(unit)
-        .targetField(nga.field('like_unit.name').map((_, entry) => `${entry.name} (${entry.code})`))
+        .targetField(nga.field('like_unit.code').map((_, entry) => entry.code))
         .remoteComplete(true),
         nga.field('units.id', 'reference')
         .label('Unités secondaires')
         .targetEntity(unit)
-        .targetField(nga.field('like_unit.name').map((_, entry) => `${entry.name} (${entry.code})`))
+        .targetField(nga.field('like_unit.code').map((_, entry) => entry.code))
         .remoteComplete(true)
     ])
     .exportOptions({
