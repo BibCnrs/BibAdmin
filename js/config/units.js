@@ -75,7 +75,7 @@ export default function (nga, admin) {
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
-        nga.field('communities').label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ])
     .listActions(['edit', 'delete']);
 
