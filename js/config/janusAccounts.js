@@ -24,7 +24,7 @@ export default function (nga, admin) {
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés propres'),
         nga.field('all_communities', 'reference_many').editable(false).targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés'),
         nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Last Connexion'),
-        nga.field('janus_account.comment', 'text').label('Comment')
+        nga.field('comment', 'text').label('Comment')
     ]);
 
     janusAccount.listView()
