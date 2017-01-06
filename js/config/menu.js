@@ -35,5 +35,11 @@ export default function (nga) {
         .icon('<span class="fa fa-folder fa-fw"></span>')
         .link('/communities/list')
         .active(path => path.indexOf('/communities') === 0)
+    )
+    .addChild(nga.menu()
+        .title('Base de données')
+        .icon('<span class="fa fa-folder fa-fw"></span>')
+        .link('/databases/list')
+        .active(path => path.indexOf('/databases') === 0)
     );
 }

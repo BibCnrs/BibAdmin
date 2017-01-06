@@ -7,6 +7,7 @@ import adminUsers from './config/adminUsers';
 import communities from './config/communities';
 import institutes from './config/institutes';
 import units from './config/units';
+import database from './config/database';
 import menu from './config/menu';
 import services from './services';
 import directives from './directives';
@@ -88,6 +89,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     admin.addEntity(nga.entity('renaterHeaders'));
     admin.addEntity(nga.entity('institutes'));
     admin.addEntity(nga.entity('units'));
+    admin.addEntity(nga.entity('databases'));
 
     // configure entities
     communities(nga, admin);
@@ -96,6 +98,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     janusAccounts(nga, admin);
     inistAccounts(nga, admin);
     adminUsers(nga, admin);
+    database(nga, admin);
 
     window.logout = function logout() {
 
