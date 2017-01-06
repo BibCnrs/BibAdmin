@@ -66,6 +66,26 @@ bibAdmin.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.preferredLanguage('fr');
 }]);
 
+bibAdmin.factory('noCacheInterceptor', function () {
+    return {
+        request: function (config) {
+            if(config.method=='GET'){
+                // HACK: detect IE to disable its ajax caching
+                if (document.documentMode) {
+                    const separator = config.url.indexOf('?') === -1 ? '?' : '&';
+                    config.url = config.url+separator + 'noCache=' + new Date().getTime();
+                }
+            }
+
+            return config;
+        },
+    };
+});
+
+bibAdmin.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('noCacheInterceptor');
+}]);
+
 bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function (nga, RestangularProvider) {
     const token = window.sessionStorage.getItem('token');
 
