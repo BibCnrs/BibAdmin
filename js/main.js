@@ -11,11 +11,15 @@ import database from './config/database';
 import menu from './config/menu';
 import services from './services';
 import directives from './directives';
+import loadImage from 'blueimp-load-image';
 
 const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
 
 bibAdmin.factory('crypto', [function () {
     return crypto;
+}]);
+bibAdmin.factory('blueimp-load-image', [function () {
+    return loadImage;
 }]);
 
 services(bibAdmin);
