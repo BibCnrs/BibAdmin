@@ -105,7 +105,7 @@ export default function (nga, admin) {
         nga.field('correspondant_informatique').label('Autre correspondant'),
         nga.field('ci_phone').label('Tél autre correspondant'),
         nga.field('ci_mail').label('Courriel autre correspondant'),
-        nga.field('comment').label('Commentaire'),
+        nga.field('comment', 'text').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('main_institute', 'reference')
         .targetEntity(institute)
@@ -142,7 +142,7 @@ export default function (nga, admin) {
         nga.field('correspondant_informatique').label('Autre correspondant'),
         nga.field('ci_phone').label('Tél autre correspondant'),
         nga.field('ci_mail').label('Courriel autre correspondant'),
-        nga.field('comment').label('Commentaire'),
+        nga.field('comment', 'text').label('Commentaire'),
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('main_institute', 'reference')
         .targetEntity(institute)
