@@ -94,6 +94,17 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
         'Authorization': 'Bearer ' + token
     });
 
+    RestangularProvider.addFullRequestInterceptor((element, operation, what, url, headers, params, httpConfig) => {
+        if (operation === 'getList') {
+            return {
+                httpConfig: {
+                    ...httpConfig,
+                    timeout: 60000,
+                },
+            };
+        }
+    });
+
     // create the admin application
     const admin = nga.application('BibAdmin')
     .baseApiUrl(`${__BIBAPI_HOST__}/`);
