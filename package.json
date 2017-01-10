@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/BibCnrs/BibAdmin",
   "dependencies": {
-    "ng-admin": "1.0.0-beta1",
+    "ng-admin": "1.0.0-RC2",
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
