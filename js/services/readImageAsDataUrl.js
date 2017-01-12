@@ -11,7 +11,7 @@ const readImageAsDataUrl = loadImage => (file) => {
                     reject(canvas.error);
                 }
                 try {
-                    resolve(canvas.toDataURL('image/jpeg'));
+                    resolve(canvas.toDataURL(file.type));
                 } catch (error) {
                     reject(error);
                 }
