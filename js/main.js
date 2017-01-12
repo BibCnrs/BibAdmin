@@ -8,6 +8,7 @@ import communities from './config/communities';
 import institutes from './config/institutes';
 import units from './config/units';
 import database from './config/database';
+import sectionCN from './config/sectionCN';
 import menu from './config/menu';
 import services from './services';
 import directives from './directives';
@@ -125,6 +126,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     admin.addEntity(nga.entity('institutes'));
     admin.addEntity(nga.entity('units'));
     admin.addEntity(nga.entity('databases'));
+    admin.addEntity(nga.entity('section_cn'));
 
     // configure entities
     communities(nga, admin);
@@ -134,6 +136,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     inistAccounts(nga, admin);
     adminUsers(nga, admin);
     database(nga, admin);
+    sectionCN(nga, admin);
 
     window.logout = function logout() {
 
