@@ -3,6 +3,7 @@ export default function (nga, admin) {
     const unit = admin.getEntity('units').identifier(nga.field('id'));
     const community = admin.getEntity('communities');
     const institute = admin.getEntity('institutes');
+    const sectionCN = admin.getEntity('section_cn');
 
     unit.listView()
     .actions(['filter', 'export', 'create', 'batch'])
@@ -18,7 +19,8 @@ export default function (nga, admin) {
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
         nga.field('nb_inist_account').label('Nb de comptes Inist'),
         nga.field('nb_janus_account').label('Nb de comptes Janus'),
-        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('name')).label('Sections'),
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
@@ -38,7 +40,12 @@ export default function (nga, admin) {
         .targetEntity(institute)
         .targetField(nga.field('like_institute.name').map((_, entry) => entry.name))
         .remoteComplete(true)
-        .label('Instituts secondaires')
+        .label('Instituts secondaires'),
+        nga.field('section_cn.id', 'reference')
+        .targetEntity(sectionCN)
+        .targetField(nga.field('like_section_cn.name').map((_, entry) => entry.name))
+        .remoteComplete(true)
+        .label('Section du comité national'),
     ])
     .sortField('name')
     .sortDir('DESC')
@@ -75,7 +82,7 @@ export default function (nga, admin) {
         nga.field('nb_unit_account').label('Nb compte unités'),
         nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
-        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
     ])
     .listActions(['edit', 'delete']);
 
@@ -113,7 +120,8 @@ export default function (nga, admin) {
         .remoteComplete(true)
         .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
-        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('name')).label('Sections du comité national'),
     ]);
 
     unit.creationView()
@@ -150,7 +158,8 @@ export default function (nga, admin) {
         .remoteComplete(true)
         .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts socondaires'),
-        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
+        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+        nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('name')).label('Sections du comité national'),
     ]);
 
     return unit;
