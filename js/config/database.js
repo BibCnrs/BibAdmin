@@ -9,7 +9,8 @@ export default function (nga, admin) {
     .title('Databases')
     .perPage(20)
     .fields([
-        nga.field('name').isDetailLink(true).label('Nom')
+        nga.field('database.name_fr').map((_, entry) => entry.name_fr).isDetailLink(true).label('Nom (fr)'),
+        nga.field('database.name_en').map((_, entry) => entry.name_en).isDetailLink(true).label('Nom (en)'),
     ])
     .sortField('name')
     .sortDir('DESC')
@@ -18,7 +19,8 @@ export default function (nga, admin) {
     database.editionView()
     .title('Base de données {{ entry.values.username }}')
     .fields([
-        nga.field('name').label('Nom'),
+        nga.field('name_fr').label('Nom (fr)'),
+        nga.field('name_en').label('Nom (en)'),
         nga.field('url_fr', 'string').label('URL FR'),
         nga.field('url_en', 'string').label('URL EN'),
         nga.field('text_fr', 'text').label('Description FR'),
@@ -30,7 +32,8 @@ export default function (nga, admin) {
     database.creationView()
     .title('Nouvel Base de données')
     .fields([
-        nga.field('name').label('Nom'),
+        nga.field('name_fr').label('Nom (fr)'),
+        nga.field('name_en').label('Nom (en)'),
         nga.field('url_fr', 'string').label('URL FR'),
         nga.field('url_en', 'string').label('URL EN'),
         nga.field('text_fr', 'text').label('Description FR'),
