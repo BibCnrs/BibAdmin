@@ -20,7 +20,7 @@ export default function (nga, admin) {
         nga.field('nb_inist_account').label('Nb de comptes Inist'),
         nga.field('nb_janus_account').label('Nb de comptes Janus'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
-        nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('name')).label('Sections'),
+        nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('code')).label('Sections'),
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
