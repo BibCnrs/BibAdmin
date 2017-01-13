@@ -100,8 +100,12 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     });
 
     RestangularProvider.addFullRequestInterceptor((element, operation, what, url, headers, params, httpConfig) => {
-        if (operation === 'getList') {
+        if (operation === 'getList' && !params._page && !params._perPage) {
             return {
+                params: {
+                    ...params,
+                    export: true,
+                },
                 httpConfig: {
                     ...httpConfig,
                     timeout: 60000,

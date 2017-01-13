@@ -28,7 +28,11 @@ export default function (nga, admin) {
     ]);
 
     janusAccount.listView()
-    .actions(['filter', 'export' , 'batch'])
+    .actions(`
+        <ma-filter-button filters="filters()" enabled-filters="enabledFilters" enable-filter="enableFilter()"></ma-filter-button>
+        <bib-export-to-csv entry="::entry" entity="::entity" size="sm"></bib-export-to-csv>
+        <ma-view-batch-actions buttons="::batchButtons()" selection="selection" entity="::entity"></ma-view-batch-actions>
+    `)
     .title('Comptes JANUS')
     .perPage(20)
     .fields([
