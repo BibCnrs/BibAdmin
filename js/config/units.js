@@ -5,6 +5,18 @@ export default function (nga, admin) {
     const institute = admin.getEntity('institutes');
     const sectionCN = admin.getEntity('section_cn');
 
+    const templateInistAccountLink = `
+        <a ui-sref="list({ entity: 'inistAccounts', page: 1, search: { 'main_unit.id': entry.values.id } })">
+            {{entry.values[field.name()]}}
+        </a>
+    `;
+
+    const templateJanusAccountLink = `
+        <a ui-sref="list({ entity: 'janusAccounts', page: 1, search: { 'janus_account.primary_unit': entry.values.id } })">
+            {{entry.values[field.name()]}}
+        </a>
+    `;
+
     unit.listView()
     .actions(['filter', 'export', 'create', 'batch'])
     .title('Unités')
@@ -17,8 +29,8 @@ export default function (nga, admin) {
         .targetField(nga.field('name'))
         .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
-        nga.field('nb_inist_account').label('Nb de comptes Inist'),
-        nga.field('nb_janus_account').label('Nb de comptes Janus'),
+        nga.field('nb_inist_account').label('Nb de comptes Inist').template(templateInistAccountLink),
+        nga.field('nb_janus_account').label('Nb de comptes Janus').template(templateJanusAccountLink),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('code')).label('Sections'),
     ])
