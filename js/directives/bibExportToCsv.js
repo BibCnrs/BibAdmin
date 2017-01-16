@@ -8,14 +8,14 @@ export default function maExportToCsvButton ($stateParams, Papa, notification, A
             label: '@',
             datastore: '&'
         },
-        link: function(scope) {
+        link: (scope) => {
             scope.label = scope.label || 'EXPORT';
             scope.datastore = scope.datastore();
             scope.entity = scope.entity();
-            var exportView = scope.entity.exportView();
-            var listView = scope.entity.listView();
+            const exportView = scope.entity.exportView();
+            const listView = scope.entity.listView();
             if (exportView.fields().length === 0) {
-                var exportFields = listView.exportFields();
+                let exportFields = listView.exportFields();
                 if (exportFields === null) {
                     exportFields = listView.fields();
                 }
@@ -26,7 +26,7 @@ export default function maExportToCsvButton ($stateParams, Papa, notification, A
             scope.has_export = exportView.fields().length > 0;
 
             scope.exportToCsv = function () {
-                var rawEntries;
+                let rawEntries;
 
                 ReadQueries.getAll(exportView, -1, $stateParams.search, $stateParams.sortField, $stateParams.sortDir)
                     .then(response => {
@@ -34,24 +34,36 @@ export default function maExportToCsvButton ($stateParams, Papa, notification, A
                         return rawEntries;
                     })
                     .then(function (entries) {
-                        var results = [];
+                        const results = [];
                         for (var i = entries.length - 1; i >= 0; i--) {
                             results[i] = omit(entries[i].plain(), 'totalcount');
                         }
-                        var csv = Papa.unparse(results, listView.exportOptions());
-                        var fakeLink = document.createElement('a');
-                        document.body.appendChild(fakeLink);
+                        const csv = Papa.unparse(results, listView.exportOptions());
 
                         const blobName = `${scope.entity.name()}.csv`;
 
                         if (window.navigator && window.navigator.msSaveOrOpenBlob) { // Manage IE11+ & Edge
-                            var blob = new Blob([csv], { type: 'text/csv' });
-                            window.navigator.msSaveOrOpenBlob(blob, blobName);
-                        } else {
-                            fakeLink.setAttribute('href', 'data:application/octet-stream;charset=utf-8,' + encodeURIComponent(csv));
+                            const blob = new Blob([csv], { type: 'text/csv' });
+                            return window.navigator.msSaveOrOpenBlob(blob, blobName);
+                        }
+
+                        const fakeLink = document.createElement('a');
+                        document.body.appendChild(fakeLink);
+
+                        const windowUrl = window.URL || window.webkitURL;
+                        if (windowUrl && typeof windowUrl.createObjectURL === 'function') {
+                            const blob = new Blob([csv], { type: 'text/csv' });
+                            const url = windowUrl.createObjectURL(blob);
+                            fakeLink.setAttribute('href', url);
                             fakeLink.setAttribute('download', blobName);
                             fakeLink.click();
+                            windowUrl.revokeObjectURL(url);
+                            return;
                         }
+
+                        fakeLink.setAttribute('href', 'data:application/octet-stream;charset=utf-8,' + encodeURIComponent(csv));
+                        fakeLink.setAttribute('download', blobName);
+                        fakeLink.click();
                     }, function (error) {
                         notification.log(error.message, {addnCls: 'humane-flatty-error'});
                     });
