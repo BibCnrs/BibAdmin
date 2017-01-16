@@ -1,3 +1,5 @@
+import omit from 'lodash.omit';
+
 export default function maExportToCsvButton ($stateParams, Papa, notification, AdminDescription, entryFormatter, ReadQueries) {
     return {
         restrict: 'E',
@@ -22,7 +24,6 @@ export default function maExportToCsvButton ($stateParams, Papa, notification, A
                 exportView.name(listView.name()); // to enable reuse of sortField
             }
             scope.has_export = exportView.fields().length > 0;
-            var formatEntry = entryFormatter.getFormatter(exportView.fields());
 
             scope.exportToCsv = function () {
                 var rawEntries;
@@ -35,7 +36,7 @@ export default function maExportToCsvButton ($stateParams, Papa, notification, A
                     .then(function (entries) {
                         var results = [];
                         for (var i = entries.length - 1; i >= 0; i--) {
-                            results[i] = formatEntry(entries[i]);
+                            results[i] = omit(entries[i].plain(), 'totalcount');
                         }
                         var csv = Papa.unparse(results, listView.exportOptions());
                         var fakeLink = document.createElement('a');

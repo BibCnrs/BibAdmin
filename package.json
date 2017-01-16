@@ -17,6 +17,7 @@
   "homepage": "https://github.com/BibCnrs/BibAdmin",
   "dependencies": {
     "blueimp-load-image": "^2.10.0",
+    "lodash.omit": "4.5.0",
     "ng-admin": "1.0.0-RC2",
     "whatwg-fetch": "1.0.0"
   },
