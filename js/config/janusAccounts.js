@@ -9,8 +9,8 @@ export default function (nga, admin) {
     .title('Compte JANUS {{ entry.values.uid }}')
     .fields([
         nga.field('uid').editable(false).label('Uid'),
-        nga.field('name').label('Name'),
-        nga.field('firstname').label('First Name'),
+        nga.field('name').label('Nom'),
+        nga.field('firstname').label('Prénom'),
         nga.field('mail').label('Mail'),
         nga.field('cnrs', 'boolean').editable(false).label('CNRS'),
         nga.field('primary_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).editable(false).label('Institut Janus'),
@@ -23,8 +23,25 @@ export default function (nga, admin) {
         .label('Unités secondaires'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés propres'),
         nga.field('all_communities', 'reference_many').editable(false).targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés'),
-        nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Last Connexion'),
-        nga.field('comment', 'text').label('Comment')
+        nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Dernière connexion'),
+        nga.field('comment', 'text').label('Commentaire')
+    ]);
+
+    janusAccount.exportView()
+    .fields([
+        nga.field('uid').label('Uid'),
+        nga.field('name').label('Nom'),
+        nga.field('firstname').label('Prénom'),
+        nga.field('mail').label('Mail'),
+        nga.field('cnrs', 'boolean').label('CNRS'),
+        nga.field('primary_institute').label('Institut Janus'),
+        nga.field('additional_institutes').label('Instituts secondaire'),
+        nga.field('primary_unit').label('Unité Janus'),
+        nga.field('additional_units').label('Unités secondaires'),
+        nga.field('communities').label('Communautés propres'),
+        nga.field('all_communities').label('Toutes les communautés'),
+        nga.field('last_connexion', 'date').format('dd/MM/yyyy').label('Dernière connexion'),
+        nga.field('comment', 'text').label('Commentaire')
     ]);
 
     janusAccount.listView()
@@ -43,15 +60,15 @@ export default function (nga, admin) {
         nga.field('primary_unit', 'reference').targetEntity(unit).targetField(nga.field('code')).label('Unité Janus'),
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaires'),
         nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés'),
-        nga.field('janus_account.last_connexion', 'date').map((_, entry) => entry.last_connexion).format('dd/MM/yyyy').label('Last Connexion'),
+        nga.field('janus_account.last_connexion', 'date').map((_, entry) => entry.last_connexion).format('dd/MM/yyyy').label('Dernière connexion'),
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_janus_account.uid').label('Uid'),
         nga.field('like_janus_account.mail').label('Mail'),
         nga.field('janus_account.cnrs', 'boolean').label('Cnrs'),
-        nga.field('from_janus_account.last_connexion', 'date').label('Derniére connection aprés'),
-        nga.field('to_janus_account.last_connexion', 'date').label('Derniére connection avant'),
+        nga.field('from_janus_account.last_connexion', 'date').label('Dernière connexion aprés'),
+        nga.field('to_janus_account.last_connexion', 'date').label('Dernière connexion avant'),
         nga.field('community.id', 'reference')
         .label('Communautés')
         .targetEntity(community)

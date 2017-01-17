@@ -1,5 +1,3 @@
-import omit from 'lodash.omit';
-
 export default function maExportToCsvButton ($stateParams, Papa, notification, AdminDescription, entryFormatter, ReadQueries) {
     return {
         restrict: 'E',
@@ -25,21 +23,18 @@ export default function maExportToCsvButton ($stateParams, Papa, notification, A
                 exportView.name(listView.name()); // to enable reuse of sortField
             }
             scope.has_export = exportView.fields().length > 0;
+            const formatEntry = entryFormatter.getFormatter(exportView.fields());
 
             scope.exportToCsv = function () {
-                let rawEntries;
                 scope.downloading = true;
 
                 ReadQueries.getAll(exportView, -1, $stateParams.search, $stateParams.sortField, $stateParams.sortDir)
-                    .then(response => {
-                        rawEntries = response.data;
-                        return rawEntries;
+                    .then(response => response.data)
+                    .then(function (rawEntries) { // Can't arrow functions here or mapEntries won't work
+                        return exportView.mapEntries(rawEntries);
                     })
-                    .then(function (entries) {
-                        const results = [];
-                        for (var i = entries.length - 1; i >= 0; i--) {
-                            results[i] = omit(entries[i].plain(), 'totalcount');
-                        }
+                    .then(rawEntries => rawEntries.map(formatEntry))
+                    .then((results) => {
                         const csv = Papa.unparse(results, listView.exportOptions());
 
                         const blobName = `${scope.entity.name()}.csv`;
