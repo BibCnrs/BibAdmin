@@ -59,8 +59,8 @@ export default function (nga, admin) {
         .remoteComplete(true)
         .label('Section du comité national'),
     ])
-    .sortField('name')
-    .sortDir('DESC')
+    .sortField('unit.code')
+    .sortDir('ASC')
     .exportOptions({
         quotes: true,
         delimiter: ';',
