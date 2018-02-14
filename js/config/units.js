@@ -61,42 +61,47 @@ export default function (nga, admin) {
     ])
     .sortField('unit.code')
     .sortDir('ASC')
-    .exportOptions({
-        quotes: true,
-        delimiter: ';',
-        newline: '\r\n'
-    })
-    .exportFields([
-        nga.field('code'),
-        nga.field('name').label('Nom'),
-        nga.field('body').label('Corps de rattachement'),
-        nga.field('building').label('Bâtiment'),
-        nga.field('street').label('rue'),
-        nga.field('post_office_box').label('Boîte postal'),
-        nga.field('postal_code').label('Code postal'),
-        nga.field('town').label('Ville'),
-        nga.field('country').label('Pays'),
-        nga.field('unit_dr').label('Délégation regionale d\'appartenance'),
-        nga.field('nb_researcher_cnrs').label('Nb chercheurs CNRS'),
-        nga.field('nb_researcher_nocnrs').label('Nb chercheurs NON CNRS'),
-        nga.field('nb_doctorant').label('Nb doctorant'),
-        nga.field('nb_post_doctorant').label('Nb post-doctorant'),
-        nga.field('director_name').label('Nom directeur'),
-        nga.field('director_firstname').label('Prénom directeur'),
-        nga.field('director_mail').label('Courriel directeur'),
-        nga.field('correspondant_documentaire').label('Correspondant documentaire'),
-        nga.field('cd_phone').label('Tél correspondant documentaire'),
-        nga.field('cd_mail').label('Courriel correspondant documentaire'),
-        nga.field('correspondant_informatique').label('Autre correspondant'),
-        nga.field('ci_phone').label('Tél autre correspondant'),
-        nga.field('ci_mail').label('Courriel autre correspondant'),
-        nga.field('comment').label('Commentaire'),
-        nga.field('nb_unit_account').label('Nb compte unités'),
-        nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
-        nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
-        nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
-    ])
     .listActions(['edit', 'delete']);
+
+    unit.exportView()
+        .fields([
+            nga.field('code'),
+            nga.field('name').label('Nom'),
+            nga.field('body').label('Corps de rattachement'),
+            nga.field('building').label('Bâtiment'),
+            nga.field('street').label('rue'),
+            nga.field('post_office_box').label('Boîte postal'),
+            nga.field('postal_code').label('Code postal'),
+            nga.field('town').label('Ville'),
+            nga.field('country').label('Pays'),
+            nga.field('unit_dr').label('Délégation regionale d\'appartenance'),
+            nga.field('nb_researcher_cnrs').label('Nb chercheurs CNRS'),
+            nga.field('nb_researcher_nocnrs').label('Nb chercheurs NON CNRS'),
+            nga.field('nb_doctorant').label('Nb doctorant'),
+            nga.field('nb_post_doctorant').label('Nb post-doctorant'),
+            nga.field('director_name').label('Nom directeur'),
+            nga.field('director_firstname').label('Prénom directeur'),
+            nga.field('director_mail').label('Courriel directeur'),
+            nga.field('correspondant_documentaire').label('Correspondant documentaire'),
+            nga.field('cd_phone').label('Tél correspondant documentaire'),
+            nga.field('cd_mail').label('Courriel correspondant documentaire'),
+            nga.field('correspondant_informatique').label('Autre correspondant'),
+            nga.field('ci_phone').label('Tél autre correspondant'),
+            nga.field('ci_mail').label('Courriel autre correspondant'),
+            nga.field('comment').label('Commentaire'),
+            nga.field('nb_unit_account').label('Nb compte unités'),
+            nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
+            nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
+            nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
+
+        ])
+        .exportOptions({
+            quotes: true,
+            delimiter: ';',
+            newline: '\r\n'
+        })
+        .sortField('unit.code')
+        .sortDir('ASC');
 
     unit.editionView()
     .title('Unité {{ entry.values.name }}')
