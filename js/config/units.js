@@ -34,6 +34,11 @@ export default function (nga, admin) {
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('code')).label('Sections'),
     ])
+    .exportOptions({
+        quotes: true,
+        delimiter: ';',
+        newline: '\r\n'
+    })
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_unit.name').label('Nom'),
@@ -95,11 +100,6 @@ export default function (nga, admin) {
             nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
 
         ])
-        .exportOptions({
-            quotes: true,
-            delimiter: ';',
-            newline: '\r\n'
-        })
         .sortField('unit.code')
         .sortDir('ASC');
 
