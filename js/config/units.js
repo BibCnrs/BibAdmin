@@ -81,7 +81,7 @@ export default function (nga, admin) {
             nga.field('country').label('Pays'),
             nga.field('unit_dr').label('Délégation regionale d\'appartenance'),
             nga.field('nb_researcher_cnrs').label('Nb chercheurs CNRS'),
-            nga.field('nb_researcher_nocnrs').label('Nb chercheurs NON CNRS'),
+            nga.field('nb_researcher_nocnrs', 'number').label('Nb chercheurs NON CNRS'),
             nga.field('nb_doctorant').label('Nb doctorant'),
             nga.field('nb_post_doctorant').label('Nb post-doctorant'),
             nga.field('director_name').label('Nom directeur'),
@@ -116,7 +116,7 @@ export default function (nga, admin) {
         nga.field('town').label('Ville'),
         nga.field('country').label('Pays'),
         nga.field('unit_dr').label('Délégation regionale d\'appartenance'),
-        nga.field('nb_researcher_cnrs').label('Nb chercheurs CNRS'),
+        nga.field('nb_researcher_cnrs', 'number').label('Nb chercheurs CNRS'),
         nga.field('nb_researcher_nocnrs').label('Nb chercheurs NON CNRS'),
         nga.field('nb_doctorant').label('Nb doctorant'),
         nga.field('nb_post_doctorant').label('Nb post-doctorant'),
@@ -138,7 +138,15 @@ export default function (nga, admin) {
         .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
-        nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('name')).label('Sections du comité national'),
+        nga.field('sections_cn', 'reference_many')
+            .targetEntity(sectionCN)
+            .targetField(nga.field('name'))
+            .label('Sections du comité national')
+            .remoteComplete(true, {
+                refreshDelay: 300,
+                searchQuery: function(search) { return { match: search }; },
+            })
+            .perPage(100),
     ]);
 
     unit.creationView()
@@ -154,7 +162,7 @@ export default function (nga, admin) {
         nga.field('town').label('Ville'),
         nga.field('country').label('Pays'),
         nga.field('unit_dr').label('Délégation regionale d\'appartenance'),
-        nga.field('nb_researcher_cnrs').label('Nb chercheurs CNRS'),
+        nga.field('nb_researcher_cnrs', 'number').label('Nb chercheurs CNRS'),
         nga.field('nb_researcher_nocnrs').label('Nb chercheurs NON CNRS'),
         nga.field('nb_doctorant').label('Nb doctorant'),
         nga.field('nb_post_doctorant').label('Nb post-doctorant'),
@@ -175,7 +183,15 @@ export default function (nga, admin) {
         .label('Institut principal'),
         nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts socondaires'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
-        nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('name')).label('Sections du comité national'),
+        nga.field('sections_cn', 'reference_many')
+            .targetEntity(sectionCN)
+            .targetField(nga.field('name'))
+            .label('Sections du comité national')
+            .remoteComplete(true, {
+                refreshDelay: 300,
+                searchQuery: function(search) { return { match: search }; },
+            })
+            .perPage(100),
     ]);
 
     return unit;
