@@ -24,6 +24,7 @@ export default function (nga, admin) {
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés propres'),
         nga.field('all_communities', 'reference_many').editable(false).targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés'),
         nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Dernière connexion'),
+        nga.field('first_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Première connexion'),
         nga.field('comment', 'text').label('Commentaire')
     ]);
 
@@ -41,6 +42,7 @@ export default function (nga, admin) {
         nga.field('communities').label('Communautés propres'),
         nga.field('all_communities').label('Toutes les communautés'),
         nga.field('last_connexion', 'date').format('dd/MM/yyyy').label('Dernière connexion'),
+        nga.field('first_connexion', 'date').format('dd/MM/yyyy').label('Première connexion'),
         nga.field('comment', 'text').label('Commentaire')
     ]);
 
@@ -61,6 +63,7 @@ export default function (nga, admin) {
         nga.field('additional_units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaires'),
         nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Toutes les communautés'),
         nga.field('janus_account.last_connexion', 'date').map((_, entry) => entry.last_connexion).format('dd/MM/yyyy').label('Dernière connexion'),
+        nga.field('janus_account.first_connexion', 'date').map((_, entry) => entry.first_connexion).format('dd/MM/yyyy').label('Première connexion'),
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
@@ -69,6 +72,8 @@ export default function (nga, admin) {
         nga.field('janus_account.cnrs', 'boolean').label('Cnrs'),
         nga.field('from_janus_account.last_connexion', 'date').label('Dernière connexion aprés'),
         nga.field('to_janus_account.last_connexion', 'date').label('Dernière connexion avant'),
+        nga.field('from_janus_account.first_connexion', 'date').label('Première connexion aprés'),
+        nga.field('to_janus_account.first_connexion', 'date').label('Première connexion avant'),
         nga.field('community.id', 'reference')
         .label('Communautés')
         .targetEntity(community)
