@@ -94,7 +94,8 @@ export default function (nga, admin) {
             nga.field('ci_phone').label('Tél autre correspondant'),
             nga.field('ci_mail').label('Courriel autre correspondant'),
             nga.field('comment').label('Commentaire'),
-            nga.field('nb_unit_account').label('Nb compte unités'),
+            nga.field('nb_inist_account').label('Nb de comptes Inist'),
+            nga.field('nb_janus_account').label('Nb de comptes Janus'),
             nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
             nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
             nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
@@ -130,7 +131,8 @@ export default function (nga, admin) {
         nga.field('ci_phone').label('Tél autre correspondant'),
         nga.field('ci_mail').label('Courriel autre correspondant'),
         nga.field('comment', 'text').label('Commentaire'),
-        nga.field('nb_unit_account').label('Nb compte unités'),
+        nga.field('nb_inist_account').label('Nb de comptes Inist').template(templateInistAccountLink),
+        nga.field('nb_janus_account').label('Nb de comptes Janus').template(templateJanusAccountLink),
         nga.field('main_institute', 'reference')
         .targetEntity(institute)
         .targetField(nga.field('name'))
