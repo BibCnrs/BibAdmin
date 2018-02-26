@@ -12,8 +12,8 @@ export default function (nga, admin) {
         nga.field('database.name_fr').map((_, entry) => entry.name_fr).isDetailLink(true).label('Nom (fr)'),
         nga.field('database.name_en').map((_, entry) => entry.name_en).isDetailLink(true).label('Nom (en)'),
     ])
-    .sortField('name')
-    .sortDir('DESC')
+    .sortField('database.name_fr')
+    .sortDir('ASC')
     .listActions(['edit', 'delete']);
 
     database.editionView()
