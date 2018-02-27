@@ -11,6 +11,7 @@ export default function (nga, admin) {
     .fields([
         nga.field('database.name_fr').map((_, entry) => entry.name_fr).isDetailLink(true).label('Nom (fr)'),
         nga.field('database.name_en').map((_, entry) => entry.name_en).isDetailLink(true).label('Nom (en)'),
+        nga.field('active', 'boolean').label('Active'),
     ])
     .sortField('database.name_fr')
     .sortDir('ASC')
@@ -26,6 +27,7 @@ export default function (nga, admin) {
         nga.field('text_fr', 'text').label('Description FR'),
         nga.field('text_en', 'text').label('Description EN'),
         nga.field('image', 'template').template('<bib-image/>').label('Image'),
+        nga.field('active', 'boolean').label('Active'),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ]);
 
