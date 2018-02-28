@@ -33,6 +33,7 @@ export default function (nga, admin) {
         nga.field('nb_janus_account').label('Nb de comptes Janus').template(templateJanusAccountLink),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('sections_cn', 'reference_many').targetEntity(sectionCN).targetField(nga.field('code')).label('Sections'),
+        nga.field('active', 'boolean').label('Active'),
     ])
     .exportOptions({
         quotes: true,
@@ -63,6 +64,7 @@ export default function (nga, admin) {
         .targetField(nga.field('like_section_cn.name').map((_, entry) => entry.name))
         .remoteComplete(true)
         .label('Section du comité national'),
+        nga.field('active', 'boolean').label('Active'),
     ])
     .sortField('unit.code')
     .sortDir('ASC')
@@ -100,7 +102,7 @@ export default function (nga, admin) {
             nga.field('main_institute', 'reference').targetEntity(institute).targetField(nga.field('name')).label('Institut principal'),
             nga.field('institutes', 'reference_many').targetEntity(institute).targetField(nga.field('name')).label('Instituts secondaires'),
             nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
-
+            nga.field('active', 'boolean').label('Active'),
         ])
         .sortField('unit.code')
         .sortDir('ASC');
@@ -151,6 +153,7 @@ export default function (nga, admin) {
                 searchQuery: function(search) { return { match: search }; },
             })
             .perPage(100),
+        nga.field('active', 'boolean').label('Active'),
     ]);
 
     unit.creationView()
