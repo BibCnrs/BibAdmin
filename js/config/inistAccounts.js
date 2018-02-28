@@ -21,7 +21,8 @@ export default function (nga, admin) {
         nga.field('units', 'reference_many').targetEntity(unit).targetField(nga.field('code')).label('Unités secondaires'),
         nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('inist_account.subscription_date', 'date').map((_, entry) => entry.subscription_date).label('Date d\'inscription'),
-        nga.field('inist_account.expiration_date', 'date').map((_, entry) => entry.expiration_date).label('Date d\'expiration')
+        nga.field('inist_account.expiration_date', 'date').map((_, entry) => entry.expiration_date).label('Date d\'expiration'),
+        nga.field('active', 'boolean').label('Active'),
     ])
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
@@ -57,7 +58,8 @@ export default function (nga, admin) {
         .label('Unités secondaires')
         .targetEntity(unit)
         .targetField(nga.field('like_unit.code').map((_, entry) => entry.code))
-        .remoteComplete(true)
+        .remoteComplete(true),
+        nga.field('active', 'boolean').label('Active'),
     ])
     .exportOptions({
         quotes: false,
@@ -80,7 +82,8 @@ export default function (nga, admin) {
         nga.field('all_communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('comment').label('Commentaire')
+        nga.field('comment').label('Commentaire'),
+        nga.field('active', 'boolean').label('Active'),
     ])
     .sortField('username')
     .sortDir('DESC')
@@ -126,7 +129,8 @@ export default function (nga, admin) {
         .label('Toutes les communautés'),
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
-        nga.field('comment', 'text').label('Commentaire')
+        nga.field('comment', 'text').label('Commentaire'),
+        nga.field('active', 'boolean').label('Active'),
     ]);
 
     inistAccount.creationView()
