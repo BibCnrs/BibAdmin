@@ -74,7 +74,6 @@ export default function (nga, admin) {
         .fields([
             nga.field('code'),
             nga.field('name').label('Nom'),
-            nga.field('implantation').label('Implantation'),
             nga.field('body').label('Corps de rattachement'),
             nga.field('building').label('Bâtiment'),
             nga.field('street').label('rue'),
@@ -112,7 +111,6 @@ export default function (nga, admin) {
     .fields([
         nga.field('code'),
         nga.field('name').label('Nom'),
-        nga.field('implantation').label('Implantation'),
         nga.field('body').label('Corps de rattachement'),
         nga.field('building').label('Bâtiment'),
         nga.field('street').label('rue'),
@@ -161,7 +159,6 @@ export default function (nga, admin) {
     .fields([
         nga.field('code'),
         nga.field('name').label('Nom'),
-        nga.field('implantation').label('Implantation'),
         nga.field('body').label('Corps de rattachement'),
         nga.field('building').label('Bâtiment'),
         nga.field('street').label('rue'),
