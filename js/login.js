@@ -30,7 +30,8 @@ window.login = function login(event) {
     })
     .then(function (response) {
         window.sessionStorage.setItem('token', response.token);
-        window.location.href = `${__BIBADMIN_HOST__}/index.html`;
+        const url = window.sessionStorage.getItem('url');
+        window.location.href = url || `${__BIBADMIN_HOST__}/`;
     })
     .catch(e => {
         const error = document.getElementById('error');
