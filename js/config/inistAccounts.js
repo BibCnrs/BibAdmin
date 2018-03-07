@@ -130,7 +130,9 @@ export default function (nga, admin) {
         nga.field('subscription_date', 'date').label('Date d\'inscription'),
         nga.field('expiration_date', 'date').label('Date d\'expiration'),
         nga.field('comment', 'text').label('Commentaire'),
-        nga.field('active', 'boolean').label('Active'),
+        nga.field('active', 'boolean').validation({
+            required: true,
+        }).label('Active'),
     ]);
 
     inistAccount.creationView()

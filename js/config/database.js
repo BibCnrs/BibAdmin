@@ -27,7 +27,9 @@ export default function (nga, admin) {
         nga.field('text_fr', 'text').label('Description FR'),
         nga.field('text_en', 'text').label('Description EN'),
         nga.field('image', 'template').template('<bib-image/>').label('Image'),
-        nga.field('active', 'boolean').label('Active'),
+        nga.field('active', 'boolean').label('Active').validation({
+            required: true,
+        }),
         nga.field('communities', 'reference_many').targetEntity(community).targetField(nga.field('name')).label('Communautés')
     ]);
 

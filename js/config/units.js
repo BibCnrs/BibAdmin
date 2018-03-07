@@ -153,7 +153,9 @@ export default function (nga, admin) {
                 searchQuery: function(search) { return { match: search }; },
             })
             .perPage(100),
-        nga.field('active', 'boolean').label('Active'),
+        nga.field('active', 'boolean').validation({
+            required: true,
+        }).label('Active'),
     ]);
 
     unit.creationView()

@@ -26,7 +26,9 @@ export default function (nga, admin) {
         nga.field('last_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Dernière connexion'),
         nga.field('first_connexion', 'date').format('dd/MM/yyyy').editable(false).label('Première connexion'),
         nga.field('comment', 'text').label('Commentaire'),
-        nga.field('active', 'boolean').label('Active'),
+        nga.field('active', 'boolean').validation({
+            required: true,
+        }).label('Active'),
     ]);
 
     janusAccount.exportView()
