@@ -27,7 +27,9 @@ export default function (nga, admin) {
         nga.field('user_id'),
         nga.field('password', 'password'),
         nga.field('profile'),
-        nga.field('ebsco', 'boolean')
+        nga.field('ebsco', 'boolean').validation({
+            required: true,
+        })
     ]);
 
     community.creationView()
@@ -38,7 +40,9 @@ export default function (nga, admin) {
         nga.field('user_id'),
         nga.field('password', 'password'),
         nga.field('profile'),
-        nga.field('ebsco', 'boolean')
+        nga.field('ebsco', 'boolean').validation({
+            required: true,
+        })
     ]);
 
     return community;
