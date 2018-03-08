@@ -8,6 +8,7 @@
         <script>
             var token = window.sessionStorage.getItem('token');
             if (!token) {
+                window.sessionStorage.setItem('url', window.location.href);
                 window.location.href = "./login.html";
             }
         </script>
