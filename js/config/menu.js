@@ -47,11 +47,5 @@ export default function (nga) {
         .icon('<span class="fa fa-folder fa-fw"></span>')
         .link('/section_cn/list')
         .active(path => path.indexOf('/section_cn') === 0)
-    )
-    .addChild(nga.menu()
-        .title('Revues')
-        .icon('<span class="fa fa-folder fa-fw"></span>')
-        .link('/revues/list')
-        .active(path => path.indexOf('/revues') === 0)
     );
 }
