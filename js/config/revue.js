@@ -5,7 +5,7 @@ export default function (nga, admin) {
 
     revue.listView()
     .actions(['filter', 'export', 'create', 'batch'])
-    .title('Revues')
+    .title('Ressources favorites')
     .perPage(20)
     .fields([
         nga.field('revue.title')
@@ -42,7 +42,7 @@ export default function (nga, admin) {
     .listActions(['edit', 'delete']);
 
     revue.editionView()
-    .title('Revue : {{ entry.values.title }}')
+    .title('Ressource favorite : {{ entry.values.title }}')
     .fields([
         nga.field('title').label('Title'),
         nga.field('url', 'string').label('URL'),
@@ -53,7 +53,7 @@ export default function (nga, admin) {
     ]);
 
     revue.creationView()
-    .title('Nouvelle Revue')
+    .title('Nouvelle Ressource favorite')
     .fields([
         nga.field('title').label('Title'),
         nga.field('url', 'string').label('URL'),

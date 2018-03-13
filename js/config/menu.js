@@ -49,7 +49,7 @@ export default function (nga) {
         .active(path => path.indexOf('/section_cn') === 0)
     )
     .addChild(nga.menu()
-        .title('Revues')
+        .title('Ressources Favorites')
         .icon('<span class="fa fa-folder fa-fw"></span>')
         .link('/revues/list')
         .active(path => path.indexOf('/revues') === 0)

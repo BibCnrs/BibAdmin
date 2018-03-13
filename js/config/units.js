@@ -64,7 +64,7 @@ export default function (nga, admin) {
         .targetField(nga.field('like_section_cn.name').map((_, entry) => entry.name))
         .remoteComplete(true)
         .label('Section du comité national'),
-        nga.field('active', 'boolean').label('Active'),
+        nga.field('unit.active', 'boolean').label('Active'),
     ])
     .sortField('unit.code')
     .sortDir('ASC')
