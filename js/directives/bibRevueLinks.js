@@ -1,4 +1,4 @@
-const bibRevueLinks = () => {
+const bibRevueLinks = (proxifyUrl) => {
     return {
         restrict: 'E',
         template: (
@@ -12,7 +12,7 @@ const bibRevueLinks = () => {
     <p>Liens </p>
     <ul>
         <li ng-repeat="id in value">
-            <a href="http://{{gateById[id]}}.bib.cnrs.fr/login?url={{entry.values.url}}" target="_blank">
+            <a href="{{proxifyUrl(gateById[id], entry.values.url)}}" target="_blank">
                 Lien via ezproxy : {{gateById[id]}}
             </a>
         </li>
@@ -20,6 +20,7 @@ const bibRevueLinks = () => {
 </div>`
         ),
         link: (scope) => {
+            scope.proxifyUrl = proxifyUrl;
             scope.gateById = scope.datastore
                 .getEntries(scope.field.targetEntity().uniqueId + '_choices')
                 .reduce(
@@ -30,6 +31,6 @@ const bibRevueLinks = () => {
     };
 };
 
-bibRevueLinks.$inject = [];
+bibRevueLinks.$inject = ['proxifyUrl'];
 
 export default bibRevueLinks;
