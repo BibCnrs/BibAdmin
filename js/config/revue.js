@@ -59,9 +59,10 @@ export default function (nga, admin) {
         nga.field('title').label('Title'),
         nga.field('url', 'string').label('URL'),
         nga.field('communities', 'reference_many')
+            .template('<bib-revue-links></bib-revue-links>')
             .targetEntity(community)
             .targetField(nga.field('name'))
-            .label('Communautés')
+            .label('Communautés'),
     ]);
 
     return revue;
