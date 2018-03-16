@@ -31,7 +31,7 @@ export default function (nga, admin) {
     .exportOptions({
         quotes: true,
         delimiter: ';',
-        newline: '\r\n'
+        newline: /\r?\n/
     })
     .exportFields([
         nga.field('title').label('Title'),
