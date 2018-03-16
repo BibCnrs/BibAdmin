@@ -64,7 +64,7 @@ export default function (nga, admin) {
     .exportOptions({
         quotes: false,
         delimiter: ';',
-        newline: '\r\n'
+        newline: /\r?\n/
     })
     .exportFields([
         nga.field('username').label('Login'),
