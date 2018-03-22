@@ -50,6 +50,9 @@ export default function (nga, admin) {
             .template('<bib-revue-links></bib-revue-links>')
             .targetEntity(community)
             .targetField(nga.field('name'))
+            .validation({
+                required: true,
+            })
             .label('Communautés'),
     ]);
 
@@ -61,6 +64,9 @@ export default function (nga, admin) {
         nga.field('communities', 'reference_many')
             .targetEntity(community)
             .targetField(nga.field('name'))
+            .validation({
+                required: true,
+            })
             .label('Communautés')
     ]);
 
