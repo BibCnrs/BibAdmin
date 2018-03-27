@@ -20,7 +20,7 @@ export default function (nga, admin) {
     .filters([
         nga.field('match').label('Recherche globale').pinned(true),
         nga.field('like_revue.title').label('Titre'),
-        nga.field('community.id', 'reference')
+        nga.field('community_id', 'reference')
             .label('Communautés')
             .targetEntity(community)
             .targetField(nga.field('name'))
