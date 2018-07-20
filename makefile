@@ -31,9 +31,9 @@ run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_
 
 build-docker: ## args: <version> build bibcnrs/bibadmin:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --no-cache -t vsregistry.intra.inist.fr:5000/bibadmin:$(COMMAND_ARGS) .
+	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:$(COMMAND_ARGS) .
 else
-	docker build --no-cache -t vsregistry.intra.inist.fr:5000/bibadmin:latest .
+	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:latest .
 endif
 
 copy-script: # copy dependency in ./public/vendor
