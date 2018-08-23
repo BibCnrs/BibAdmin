@@ -1,5 +1,5 @@
 server:
-    image: vsnexus.intra.inist.fr:5000/bibcnrs/bibadmin:${bibadmin_version}
+    image: vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:${bibadmin_version}
     environment:
         NODE_ENV: production
     working_dir: /public
