@@ -40,16 +40,18 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     const options = {};
     switch (type) {
       case GET_LIST: {
+        // il faut définir l'objet pour lequel le filtre va être appliqué
+        /*const baseFilter = resource
+          .replace(/(.*)([A-Z])(.*)/g, "$1_$2$3")
+          .toLowerCase();*/
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const filters = fetchUtils.flattenObject(params.filter);
         const query = {
-          _perPage: perPage,
-          _sort: field,
-          _order: order,
           _page: page,
-          _start: (page - 1) * perPage,
-          _end: page * perPage,
+          _perPage: perPage,
+          _sortField: field,
+          _sortDir: order || "ASC",
           _filters: JSON.stringify(filters)
         };
         url = `${apiUrl}/${resource}?${stringify(query)}`;

@@ -9,96 +9,88 @@ import {
   Filter,
   SimpleForm,
   TextField,
-  EmailField,
-  DateField,
+  ReferenceArrayField,
+  SingleFieldList,
   BooleanField,
+  ChipField,
   TextInput,
   DateInput,
   BooleanInput
 } from "react-admin";
 
-const TagsField = ({ record }) => (
-  <div>
-    {record.communities.map(item => (
-      <span key={item} className="chip">
-        {item}
-      </span>
-    ))}
-  </div>
-);
-
-const InistFilter = props => (
+const UnitsFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="match" alwaysOn />
   </Filter>
 );
 
-export const InistList = ({ ...props }) => (
+export const UnitsList = ({ ...props }) => (
   <List
     {...props}
-    filters={<InistFilter />}
-    sort={{ field: "username", order: "ASC" }}
+    filters={<UnitsFilter />}
+    sort={{ field: "code" }}
     perPage={10}
   >
     <Datagrid>
-      <TextField
-        source="username"
-        label="resources.inistAccounts.fields.username"
-      />
-      <TextField
-        source="password"
-        label="resources.inistAccounts.fields.password"
-      />
-      <TextField source="name" label="resources.inistAccounts.fields.name" />
-      <TextField
-        source="firstname"
-        label="resources.inistAccounts.fields.firstname"
-      />
-      <EmailField source="mail" label="resources.inistAccounts.fields.email" />
+      <TextField source="code" label="resources.units.fields.code" />
+      <TextField source="name" label="resources.units.fields.name" />
       <TextField
         source="main_institute"
-        label="resources.inistAccounts.fields.main_institute"
+        label="resources.units.fields.main_institute"
+      />
+
+      <ReferenceArrayField
+        label="resources.units.fields.institutes"
+        reference="institutes"
+        source="institutes"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <TextField
+        source="nb_inist_account"
+        label="resources.units.fields.nb_inist_account"
       />
       <TextField
-        source="secondary_institute"
-        label="resources.inistAccounts.fields.secondary_institute"
+        source="nb_janus_account"
+        label="resources.units.fields.nb_janus_account"
       />
-      <TextField
-        source="main_unit"
-        label="resources.inistAccounts.fields.main_unit"
-      />
-      <TextField
-        source="secondary_unit"
-        label="resources.inistAccounts.fields.secondary_unit"
-      />
-      <TagsField
+
+      <ReferenceArrayField
+        label="resources.units.fields.communities"
+        reference="communities"
         source="communities"
-        label="resources.inistAccounts.fields.communities"
-      />
-      <DateField
-        source="subscription_date"
-        label="resources.inistAccounts.fields.subscription_date"
-      />
-      <DateField
-        source="expiration_date"
-        label="resources.inistAccounts.fields.expiration_date"
-      />
-      <BooleanField
-        source="active"
-        label="resources.inistAccounts.fields.enable"
-      />
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <ReferenceArrayField
+        label="resources.units.fields.section_cn"
+        reference="section_cn"
+        source="sections_cn"
+      >
+        <SingleFieldList>
+          <ChipField source="code" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <BooleanField source="active" label="resources.units.fields.enable" />
       <EditButton label="" />
       <DeleteButton label="" />
     </Datagrid>
   </List>
 );
 
-const InistTitle = ({ record }) => {
+const UnitsTitle = ({ record }) => {
   return record.username;
 };
 
-export const InistEdit = ({ ...props }) => (
-  <Edit title={<InistTitle />} {...props}>
+export const UnitsEdit = ({ ...props }) => (
+  <Edit title={<UnitsTitle />} {...props}>
     <SimpleForm>
       <TextInput
         source="username"
@@ -154,7 +146,7 @@ export const InistEdit = ({ ...props }) => (
   </Edit>
 );
 
-export const InistCreate = ({ ...props }) => (
+export const UnitsCreate = ({ ...props }) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput

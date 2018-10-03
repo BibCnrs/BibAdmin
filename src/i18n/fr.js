@@ -36,7 +36,7 @@ export default {
         secondary_institute: "Institut secondaire",
         main_unit: "Unité principale",
         secondary_unit: "Unités secondaires",
-        communities: "Communautés",
+        communities: "Toutes les communautés",
         subscription_date: "Date d'inscription",
         expiration_date: "Date d'expiration",
         enable: "active"
@@ -45,46 +45,71 @@ export default {
     janusAccounts: {
       name: "Comptes Janus",
       fields: {
-        login: "login",
+        uid: "Uid",
         email: "courriel",
-        main_institute: "Institut principal",
+        main_institute: "Institut Janus",
         secondary_institute: "Institut secondaire",
-        janus_unit: "Unité Janus",
-        main_unit: "Unités secondaires",
-        communities: "Communautés",
-        subscription_date: "Date d'inscription",
-        expiration_date: "Date d'expiration",
+        main_unit: "Unité Janus",
+        secondary_unit: "Unités secondaires",
+        all_communities: "Toutes les communautés",
+        last_connexion: "Dernière connexion",
+        first_connexion: "Première connexion",
         enable: "active"
       }
     },
     institutes: {
-      name: "Instituts thématiques",
+      name: "Instituts",
       fields: {
+        id: "id",
+        code: "Code",
         name: "Nom",
-        products: "Produits"
+        communities: "Communautés"
       }
     },
     units: {
-      name: "Structures",
-      fields: {},
-      action: {
-        accept: "Accepter",
-        reject: "Rejeter"
-      },
-      notification: {
-        approved_success: "Commentaire approuvé",
-        approved_error: "Erreur: Commentaire non approuvé",
-        rejected_success: "Commentaire rejeté",
-        rejected_error: "Erreur: Commentaire non rejeté"
+      name: "Unités",
+      fields: {
+        code: "Code",
+        name: "Nom",
+        main_institute: "Institut principal",
+        institutes: "Institut secondaire",
+        nb_inist_account: "Nombre de compte Inist",
+        nb_janus_account: "Nombre de compte Janus",
+        communities: "Communautés",
+        section_cn: "Sections",
+        enable: "active"
       }
     },
-    section_cn: {
-      name: "Commission scientifiques spécialisées",
+    communities: {
+      name: "Communautés",
+      fields: {
+        name: "Nom",
+        gate: "Portail ezproxy",
+        user_id: "User Id",
+        profile: "Profil",
+        ebsco: "Ebsco"
+      }
+    },
+    database: {
+      name: "Base de données",
       fields: {}
+    },
+    section_cn: {
+      name: "Sections du comité national",
+      fields: {
+        name: "Nom",
+        code: "Code"
+      }
     },
     equipe: {
       name: "Equipe",
       fields: {}
+    },
+    notification: {
+      approved_success: "Commentaire approuvé",
+      approved_error: "Erreur: Commentaire non approuvé",
+      rejected_success: "Commentaire rejeté",
+      rejected_error: "Erreur: Commentaire non rejeté"
     }
   }
 };

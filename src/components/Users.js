@@ -13,7 +13,7 @@ import {
 } from "react-admin";
 
 export const UserList = ({ ...props }) => (
-  <List {...props} sort={{ field: "id", order: "DESC" }} perPage={25}>
+  <List {...props} sort={{ field: "id" }} perPage={25}>
     <Datagrid>
       <NumberField source="id" type="number" />
       <TextField source="username" label="resources.adminUsers.fields.login" />
