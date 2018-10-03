@@ -1,5 +1,5 @@
 node:
-  image: node:6.9.2
+  image: node:8.12.0-alpine
   volumes:
     - .:/app
   working_dir: /app
@@ -12,7 +12,7 @@ npm:
     http_proxy: ${http_proxy}
     https_proxy: ${https_proxy}
     no_proxy: "localhost,127.0.0.1,"
-  entrypoint: ['npm']
+  entrypoint: ["npm"]
 
 build:
   extends:
@@ -20,6 +20,6 @@ build:
     service: node
   environment:
     NODE_ENV: production
-    BIBADMIN_HOST: ${BIBADMIN_HOST}
-    BIBAPI_HOST: ${BIBAPI_HOST}
-  command: node node_modules/webpack/bin/webpack.js -p
+    REACT_APP_BIBADMIN_HOST: ${REACT_APP_BIBADMIN_HOST}
+    REACT_APP_BIBAPI_HOST: ${REACT_APP_BIBAPI_HOST}
+  command: npm run build --production

@@ -4,10 +4,11 @@ devserver:
     service: node
   environment:
     NODE_ENV: development
-    BIBADMIN_HOST: http://localhost:3011/public
-    BIBAPI_HOST: http://localhost:3000/admin
+    REACT_APP_BIBADMIN_HOST: http://localhost:3011/public
+    REACT_APP_BIBAPI_HOST: http://localhost:3000/admin
+    PORT: 3011
   volumes:
     - ./public:/public
   ports:
     - 3011:3011
-  command: ./node_modules/.bin/webpack-dev-server --progress --colors --devtool cheap-module-inline-source-map --hot --inline --port 3011 --host 0.0.0.0
+  command: npm start
