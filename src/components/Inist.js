@@ -8,6 +8,10 @@ import {
   List,
   Filter,
   SimpleForm,
+  ReferenceField,
+  ReferenceArrayField,
+  SingleFieldList,
+  ChipField,
   TextField,
   EmailField,
   DateField,
@@ -16,16 +20,6 @@ import {
   DateInput,
   BooleanInput
 } from "react-admin";
-
-const TagsField = ({ record }) => (
-  <div>
-    {record.communities.map(item => (
-      <span key={item} className="chip">
-        {item}
-      </span>
-    ))}
-  </div>
-);
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -55,26 +49,55 @@ export const InistList = ({ ...props }) => (
         label="resources.inistAccounts.fields.firstname"
       />
       <EmailField source="mail" label="resources.inistAccounts.fields.email" />
-      <TextField
-        source="main_institute"
+
+      <ReferenceField
         label="resources.inistAccounts.fields.main_institute"
-      />
-      <TextField
-        source="secondary_institute"
-        label="resources.inistAccounts.fields.secondary_institute"
-      />
-      <TextField
-        source="main_unit"
+        source="main_institute"
+        reference="institutes"
+        linkType="show"
+      >
+        <TextField source="code" />
+      </ReferenceField>
+
+      <ReferenceArrayField
+        label="resources.inistAccounts.fields.institutes"
+        reference="institutes"
+        source="institutes"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <ReferenceField
         label="resources.inistAccounts.fields.main_unit"
-      />
-      <TextField
-        source="secondary_unit"
-        label="resources.inistAccounts.fields.secondary_unit"
-      />
-      <TagsField
-        source="communities"
+        source="main_unit"
+        reference="units"
+        linkType="show"
+      >
+        <TextField source="code" />
+      </ReferenceField>
+
+      <ReferenceArrayField
+        label="resources.inistAccounts.fields.units"
+        reference="units"
+        source="units"
+      >
+        <SingleFieldList>
+          <ChipField source="code" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <ReferenceArrayField
         label="resources.inistAccounts.fields.communities"
-      />
+        reference="communities"
+        source="communities"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
       <DateField
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"

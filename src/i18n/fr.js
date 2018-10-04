@@ -33,9 +33,9 @@ export default {
         firstname: "prénom",
         email: "courriel",
         main_institute: "Institut principal",
-        secondary_institute: "Institut secondaire",
+        institutes: "Institut secondaire",
         main_unit: "Unité principale",
-        secondary_unit: "Unités secondaires",
+        units: "Unités secondaires",
         communities: "Toutes les communautés",
         subscription_date: "Date d'inscription",
         expiration_date: "Date d'expiration",
@@ -48,9 +48,9 @@ export default {
         uid: "Uid",
         email: "courriel",
         main_institute: "Institut Janus",
-        secondary_institute: "Institut secondaire",
-        main_unit: "Unité Janus",
-        secondary_unit: "Unités secondaires",
+        additional_institutes: "Institut secondaire",
+        primary_unit: "Unité Janus",
+        additional_units: "Unités secondaires",
         all_communities: "Toutes les communautés",
         last_connexion: "Dernière connexion",
         first_connexion: "Première connexion",
@@ -90,9 +90,13 @@ export default {
         ebsco: "Ebsco"
       }
     },
-    database: {
+    databases: {
       name: "Base de données",
-      fields: {}
+      fields: {
+        name_fr: "Nom (fr)",
+        name_en: "Nom (en)",
+        active: "Active"
+      }
     },
     section_cn: {
       name: "Sections du comité national",

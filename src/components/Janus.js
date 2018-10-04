@@ -8,6 +8,10 @@ import {
   List,
   Filter,
   SimpleForm,
+  ReferenceField,
+  ReferenceArrayField,
+  SingleFieldList,
+  ChipField,
   TextField,
   EmailField,
   DateField,
@@ -16,16 +20,6 @@ import {
   DateInput,
   BooleanInput
 } from "react-admin";
-
-const TagsField = ({ record }) => (
-  <div>
-    {record.all_communities.map(item => (
-      <span key={item} className="chip">
-        {item}
-      </span>
-    ))}
-  </div>
-);
 
 const JanusFilter = props => (
   <Filter {...props}>
@@ -43,26 +37,55 @@ export const JanusList = props => (
     <Datagrid>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <EmailField source="mail" label="resources.janusAccounts.fields.email" />
-      <TextField
-        source="primary_institute"
+
+      <ReferenceField
         label="resources.janusAccounts.fields.main_institute"
-      />
-      <TextField
-        source="secondary_institute"
-        label="resources.janusAccounts.fields.secondary_institute"
-      />
-      <TextField
+        source="primary_institute"
+        reference="institutes"
+        linkType="show"
+      >
+        <TextField source="name" />
+      </ReferenceField>
+
+      <ReferenceArrayField
+        label="resources.janusAccounts.fields.additional_institutes"
+        reference="institutes"
+        source="additional_institutes"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <ReferenceField
+        label="resources.janusAccounts.fields.primary_unit"
         source="primary_unit"
-        label="resources.janusAccounts.fields.main_unit"
-      />
-      <TextField
-        source="secondary_unit"
-        label="resources.janusAccounts.fields.secondary_unit"
-      />
-      <TagsField
-        source="all_communities"
+        reference="units"
+        linkType="show"
+      >
+        <TextField source="code" />
+      </ReferenceField>
+
+      <ReferenceArrayField
+        label="resources.janusAccounts.fields.additional_units"
+        reference="units"
+        source="additional_units"
+      >
+        <SingleFieldList>
+          <ChipField source="code" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <ReferenceArrayField
         label="resources.janusAccounts.fields.all_communities"
-      />
+        reference="communities"
+        source="all_communities"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
       <DateField
         source="last_connexion"
         label="resources.janusAccounts.fields.last_connexion"

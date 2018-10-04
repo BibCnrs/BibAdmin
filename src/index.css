@@ -4,10 +4,10 @@ body {
   font-family: sans-serif;
 }
 
-.chip {
-  padding: 5px;
-  background-color: #a5a0a0;
-  color: white;
-  margin: 2px;
-  border-radius: 10px;
+a[role="menuitem"] {
+  font-size: 15px;
+}
+
+a[role="menuitem"] span {
+  padding-right: 0.5em;
 }
