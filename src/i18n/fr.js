@@ -49,15 +49,20 @@ export default {
       name: "Comptes Janus",
       fields: {
         uid: "Uid",
-        email: "courriel",
+        cnrs: "CNRS",
+        name: "Nom",
+        firstname: "Prénom",
+        mail: "courriel",
         main_institute: "Institut Janus",
         additional_institutes: "Institut secondaire",
         primary_unit: "Unité Janus",
         additional_units: "Unités secondaires",
+        communities: "Communautés propres",
         all_communities: "Toutes les communautés",
         last_connexion: "Dernière connexion",
         first_connexion: "Première connexion",
-        active: "active"
+        active: "active",
+        comment: "Commentaire"
       }
     },
     institutes: {

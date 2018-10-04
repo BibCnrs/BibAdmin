@@ -18,7 +18,12 @@ import {
   BooleanField,
   TextInput,
   DateInput,
-  BooleanInput
+  BooleanInput,
+  LongTextInput,
+  ReferenceInput,
+  ReferenceArrayInput,
+  SelectInput,
+  SelectArrayInput
 } from "react-admin";
 
 const JanusFilter = props => (
@@ -43,6 +48,7 @@ export const JanusList = props => (
         source="primary_institute"
         reference="institutes"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="name" />
       </ReferenceField>
@@ -62,6 +68,7 @@ export const JanusList = props => (
         source="primary_unit"
         reference="units"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -105,49 +112,95 @@ export const JanusList = props => (
 );
 
 const JanusTitle = ({ record }) => {
-  return record.username;
+  return record.uid;
 };
 
 export const JanusEdit = ({ ...props }) => (
   <Edit title={<JanusTitle />} {...props}>
     <SimpleForm>
-      <TextInput source="uid" label="resources.janusAccounts.fields.uid" />
+      <TextField source="uid" label="resources.janusAccounts.fields.uid" />
+      <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
+
+      <TextInput source="name" label="resources.janusAccounts.fields.name" />
+
       <TextInput
-        type="mail"
+        source="firstname"
+        label="resources.janusAccounts.fields.firstname"
+      />
+
+      <TextInput
+        type="email"
         source="mail"
-        label="resources.janusAccounts.fields.email"
+        label="resources.janusAccounts.fields.mail"
       />
-      <TextInput
-        source="primary_institute"
+
+      <ReferenceField
         label="resources.janusAccounts.fields.main_institute"
-      />
-      <TextInput
-        source="secondary_institute"
-        label="resources.janusAccounts.fields.secondary_institute"
-      />
-      <TextInput
+        source="primary_institute"
+        reference="institutes"
+        linkType="show"
+      >
+        <TextField source="name" />
+      </ReferenceField>
+
+      <ReferenceArrayInput
+        label="resources.janusAccounts.fields.additional_institutes"
+        reference="institutes"
+        source="additional_institutes"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
+      <ReferenceField
+        label="resources.janusAccounts.fields.primary_unit"
         source="primary_unit"
-        label="resources.janusAccounts.fields.main_unit"
-      />
-      <TextInput
-        source="secondary_unit"
-        label="resources.janusAccounts.fields.secondary_unit"
-      />
-      <TextInput
-        source="all_communities"
+        reference="units"
+        linkType="show"
+      >
+        <TextField source="code" />
+      </ReferenceField>
+
+      <ReferenceArrayInput
+        label="resources.janusAccounts.fields.additional_units"
+        reference="units"
+        source="additional_units"
+      >
+        <SelectArrayInput optionText="code" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
+        label="resources.janusAccounts.fields.communities"
+        reference="communities"
+        source="communities"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayField
         label="resources.janusAccounts.fields.all_communities"
-      />
-      <DateInput
+        reference="communities"
+        source="all_communities"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <DateField
         source="last_connexion"
         label="resources.janusAccounts.fields.last_connexion"
       />
-      <DateInput
+      <DateField
         source="first_connexion"
         label="resources.janusAccounts.fields.first_connexion"
       />
       <BooleanInput
         source="active"
         label="resources.janusAccounts.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.janusAccounts.fields.comment"
       />
     </SimpleForm>
   </Edit>
@@ -156,43 +209,89 @@ export const JanusEdit = ({ ...props }) => (
 export const JanusCreate = ({ ...props }) => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput source="uid" label="resources.janusAccounts.fields.uid" />
+      <TextField source="uid" label="resources.janusAccounts.fields.uid" />
+      <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
+
+      <TextInput source="name" label="resources.janusAccounts.fields.name" />
+
       <TextInput
-        type="mail"
+        source="firstname"
+        label="resources.janusAccounts.fields.firstname"
+      />
+
+      <TextInput
+        type="email"
         source="mail"
-        label="resources.janusAccounts.fields.email"
+        label="resources.janusAccounts.fields.mail"
       />
-      <TextInput
-        source="primary_institute"
+
+      <ReferenceField
         label="resources.janusAccounts.fields.main_institute"
-      />
-      <TextInput
-        source="secondary_institute"
-        label="resources.janusAccounts.fields.secondary_institute"
-      />
-      <TextInput
+        source="primary_institute"
+        reference="institutes"
+        linkType="show"
+      >
+        <TextField source="name" />
+      </ReferenceField>
+
+      <ReferenceArrayInput
+        label="resources.janusAccounts.fields.additional_institutes"
+        reference="institutes"
+        source="additional_institutes"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
+      <ReferenceField
+        label="resources.janusAccounts.fields.primary_unit"
         source="primary_unit"
-        label="resources.janusAccounts.fields.main_unit"
-      />
-      <TextInput
-        source="secondary_unit"
-        label="resources.janusAccounts.fields.secondary_unit"
-      />
-      <TextInput
-        source="all_communities"
+        reference="units"
+        linkType="show"
+      >
+        <TextField source="code" />
+      </ReferenceField>
+
+      <ReferenceArrayInput
+        label="resources.janusAccounts.fields.additional_units"
+        reference="units"
+        source="additional_units"
+      >
+        <SelectArrayInput optionText="code" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
+        label="resources.janusAccounts.fields.communities"
+        reference="communities"
+        source="communities"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayField
         label="resources.janusAccounts.fields.all_communities"
-      />
-      <DateInput
+        reference="communities"
+        source="all_communities"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+
+      <DateField
         source="last_connexion"
         label="resources.janusAccounts.fields.last_connexion"
       />
-      <DateInput
+      <DateField
         source="first_connexion"
         label="resources.janusAccounts.fields.first_connexion"
       />
       <BooleanInput
         source="active"
         label="resources.janusAccounts.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.janusAccounts.fields.comment"
       />
     </SimpleForm>
   </Create>

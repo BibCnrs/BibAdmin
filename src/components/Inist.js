@@ -32,14 +32,6 @@ const InistFilter = props => (
   </Filter>
 );
 
-/*const ConditionalReferenceField = ({ record, ...rest }) =>
-  record && record[rest.source] ? (
-    <ReferenceField {...rest}>
-      <TextField source="name" />
-    </ReferenceField>
-  ) : null;
-export default ConditionalReferenceField;*/
-
 export const InistList = ({ ...props }) => (
   <List
     {...props}
@@ -211,7 +203,7 @@ export const InistEdit = ({ ...props }) => (
       />
       <BooleanInput
         source="active"
-        label="resources.inistAccounts.fields.enable"
+        label="resources.inistAccounts.fields.active"
       />
       <LongTextInput
         source="comment"
@@ -297,7 +289,7 @@ export const InistCreate = ({ ...props }) => (
       />
       <BooleanInput
         source="active"
-        label="resources.inistAccounts.fields.enable"
+        label="resources.inistAccounts.fields.active"
       />
       <LongTextInput
         source="comment"
