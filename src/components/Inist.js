@@ -17,8 +17,13 @@ import {
   DateField,
   BooleanField,
   TextInput,
+  LongTextInput,
   DateInput,
-  BooleanInput
+  BooleanInput,
+  ReferenceInput,
+  ReferenceArrayInput,
+  SelectInput,
+  SelectArrayInput
 } from "react-admin";
 
 const InistFilter = props => (
@@ -26,6 +31,14 @@ const InistFilter = props => (
     <TextInput label="Search" source="match" alwaysOn />
   </Filter>
 );
+
+/*const ConditionalReferenceField = ({ record, ...rest }) =>
+  record && record[rest.source] ? (
+    <ReferenceField {...rest}>
+      <TextField source="name" />
+    </ReferenceField>
+  ) : null;
+export default ConditionalReferenceField;*/
 
 export const InistList = ({ ...props }) => (
   <List
@@ -56,7 +69,7 @@ export const InistList = ({ ...props }) => (
         reference="institutes"
         linkType="show"
       >
-        <TextField source="code" />
+        <TextField source="name" />
       </ReferenceField>
 
       <ReferenceArrayField
@@ -141,26 +154,51 @@ export const InistEdit = ({ ...props }) => (
         source="mail"
         label="resources.inistAccounts.fields.email"
       />
-      <TextInput
-        source="main_institute"
+
+      <TextInput source="phone" label="resources.inistAccounts.fields.phone" />
+
+      <TextInput source="dr" label="resources.inistAccounts.fields.dr" />
+
+      <ReferenceInput
         label="resources.inistAccounts.fields.main_institute"
-      />
-      <TextInput
-        source="secondary_institute"
-        label="resources.inistAccounts.fields.secondary_institute"
-      />
-      <TextInput
-        source="main_unit"
+        source="main_institute"
+        reference="institutes"
+      >
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.inistAccounts.fields.institutes"
+        source="institutes"
+        reference="institutes"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
+      <ReferenceInput
         label="resources.inistAccounts.fields.main_unit"
-      />
-      <TextInput
-        source="secondary_unit"
-        label="resources.inistAccounts.fields.secondary_unit"
-      />
-      <TextInput
-        source="communities"
+        source="main_unit"
+        reference="units"
+      >
+        <SelectInput optionText="code" />
+      </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.inistAccounts.fields.units"
+        source="units"
+        reference="units"
+      >
+        <SelectArrayInput optionText="code" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
         label="resources.inistAccounts.fields.communities"
-      />
+        source="communities"
+        reference="communities"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
       <DateInput
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
@@ -172,6 +210,10 @@ export const InistEdit = ({ ...props }) => (
       <BooleanInput
         source="active"
         label="resources.inistAccounts.fields.enable"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.inistAccounts.fields.comment"
       />
     </SimpleForm>
   </Edit>
@@ -198,26 +240,51 @@ export const InistCreate = ({ ...props }) => (
         source="mail"
         label="resources.inistAccounts.fields.email"
       />
-      <TextInput
-        source="main_institute"
+
+      <TextInput source="phone" label="resources.inistAccounts.fields.phone" />
+
+      <TextInput source="dr" label="resources.inistAccounts.fields.dr" />
+
+      <ReferenceInput
         label="resources.inistAccounts.fields.main_institute"
-      />
-      <TextInput
-        source="secondary_institute"
-        label="resources.inistAccounts.fields.secondary_institute"
-      />
-      <TextInput
-        source="main_unit"
+        source="main_institute"
+        reference="institutes"
+      >
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.inistAccounts.fields.institutes"
+        source="institutes"
+        reference="institutes"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
+      <ReferenceInput
         label="resources.inistAccounts.fields.main_unit"
-      />
-      <TextInput
-        source="secondary_unit"
-        label="resources.inistAccounts.fields.secondary_unit"
-      />
-      <TextInput
-        source="communities"
+        source="main_unit"
+        reference="units"
+      >
+        <SelectInput optionText="code" />
+      </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.inistAccounts.fields.units"
+        source="units"
+        reference="units"
+      >
+        <SelectArrayInput optionText="code" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
         label="resources.inistAccounts.fields.communities"
-      />
+        source="communities"
+        reference="communities"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+
       <DateInput
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
@@ -229,6 +296,10 @@ export const InistCreate = ({ ...props }) => (
       <BooleanInput
         source="active"
         label="resources.inistAccounts.fields.enable"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.inistAccounts.fields.comment"
       />
     </SimpleForm>
   </Create>

@@ -27,11 +27,13 @@ export default {
     inistAccounts: {
       name: "Comptes INIST",
       fields: {
-        username: "login",
-        password: "password",
-        name: "nom",
-        firstname: "prénom",
-        email: "courriel",
+        username: "Login",
+        password: "Password",
+        name: "Nom",
+        firstname: "Prénom",
+        phone: "Téléphone",
+        email: "Email",
+        dr: "dr",
         main_institute: "Institut principal",
         institutes: "Institut secondaire",
         main_unit: "Unité principale",
@@ -39,7 +41,8 @@ export default {
         communities: "Toutes les communautés",
         subscription_date: "Date d'inscription",
         expiration_date: "Date d'expiration",
-        enable: "active"
+        enable: "active",
+        comment: "Commentaire"
       }
     },
     janusAccounts: {
