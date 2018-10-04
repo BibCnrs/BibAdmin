@@ -95,8 +95,8 @@ export const JanusList = props => (
         label="resources.janusAccounts.fields.first_connexion"
       />
       <BooleanField
-        source="enable"
-        label="resources.janusAccounts.fields.enable"
+        source="active"
+        label="resources.janusAccounts.fields.active"
       />
       <EditButton label="" />
       <DeleteButton label="" />
@@ -146,8 +146,8 @@ export const JanusEdit = ({ ...props }) => (
         label="resources.janusAccounts.fields.first_connexion"
       />
       <BooleanInput
-        source="enable"
-        label="resources.janusAccounts.fields.enable"
+        source="active"
+        label="resources.janusAccounts.fields.active"
       />
     </SimpleForm>
   </Edit>
@@ -191,8 +191,8 @@ export const JanusCreate = ({ ...props }) => (
         label="resources.janusAccounts.fields.first_connexion"
       />
       <BooleanInput
-        source="enable"
-        label="resources.janusAccounts.fields.enable"
+        source="active"
+        label="resources.janusAccounts.fields.active"
       />
     </SimpleForm>
   </Create>

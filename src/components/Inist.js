@@ -68,6 +68,7 @@ export const InistList = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="name" />
       </ReferenceField>
@@ -87,6 +88,7 @@ export const InistList = ({ ...props }) => (
         source="main_unit"
         reference="units"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -121,7 +123,7 @@ export const InistList = ({ ...props }) => (
       />
       <BooleanField
         source="active"
-        label="resources.inistAccounts.fields.enable"
+        label="resources.inistAccounts.fields.active"
       />
       <EditButton label="" />
       <DeleteButton label="" />

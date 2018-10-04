@@ -41,7 +41,7 @@ export default {
         communities: "Toutes les communautés",
         subscription_date: "Date d'inscription",
         expiration_date: "Date d'expiration",
-        enable: "active",
+        active: "active",
         comment: "Commentaire"
       }
     },
@@ -57,7 +57,7 @@ export default {
         all_communities: "Toutes les communautés",
         last_connexion: "Dernière connexion",
         first_connexion: "Première connexion",
-        enable: "active"
+        active: "active"
       }
     },
     institutes: {
@@ -74,13 +74,36 @@ export default {
       fields: {
         code: "Code",
         name: "Nom",
+        implantation: "Implantation",
+        body: "Corps de rattachement",
+        building: "Bâtiment",
+        street: "Rue",
+        post_office_box: "Boîte postal",
+        postal_code: "Code postal",
+        town: "Ville",
+        country: "Pays",
+        unit_dr: "Délégation régionale d'appartenance",
+        nb_researcher_cnrs: "Nombre de chercheur CNRS",
+        nb_researcher_nocnrs: "Nombre de chercheur CNRS",
+        nb_doctorant: "Nombre de doctorant",
+        nb_post_doctorant: "Nombre de post-doctorant",
+        director_name: "Nom du directeur",
+        director_firstname: "Prénom du directeur",
+        director_mail: "Email du directeur",
+        correspondant_documentaire: "Correspondant documentaire",
+        cd_phone: "Téléphone correspondant documentaire",
+        cd_mail: "Email correspondant documentaire",
+        correspondant_informatique: "Correspondant informatique",
+        ci_phone: "Téléphone correspondant informatique",
+        ci_mail: "Email correspondant informatique",
         main_institute: "Institut principal",
         institutes: "Institut secondaire",
         nb_inist_account: "Nombre de compte Inist",
         nb_janus_account: "Nombre de compte Janus",
         communities: "Communautés",
         section_cn: "Sections",
-        enable: "active"
+        active: "active",
+        comment: "Commentaire"
       }
     },
     communities: {
