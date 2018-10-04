@@ -25,6 +25,11 @@ import {
   CommunitiesCreate
 } from "./components/Communities";
 import {
+  DatabasesList,
+  DatabasesEdit,
+  DatabasesCreate
+} from "./components/Databases";
+import {
   SectionsList,
   SectionsEdit,
   SectionsCreate
@@ -121,6 +126,13 @@ class App extends Component {
           list={CommunitiesList}
           create={CommunitiesCreate}
           edit={CommunitiesEdit}
+          icon={FolderIcon}
+        />
+        <Resource
+          name="databases"
+          list={DatabasesList}
+          create={DatabasesEdit}
+          edit={DatabasesCreate}
           icon={FolderIcon}
         />
         <Resource

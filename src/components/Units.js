@@ -9,6 +9,7 @@ import {
   Filter,
   SimpleForm,
   TextField,
+  ReferenceField,
   ReferenceArrayField,
   SingleFieldList,
   BooleanField,
@@ -38,6 +39,15 @@ export const UnitsList = ({ ...props }) => (
         source="main_institute"
         label="resources.units.fields.main_institute"
       />
+
+      <ReferenceField
+        label="resources.units.fields.institutes"
+        source="main_institute"
+        reference="institutes"
+        linkType="show"
+      >
+        <TextField source="name" />
+      </ReferenceField>
 
       <ReferenceArrayField
         label="resources.units.fields.institutes"
