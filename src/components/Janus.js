@@ -17,12 +17,9 @@ import {
   DateField,
   BooleanField,
   TextInput,
-  DateInput,
   BooleanInput,
   LongTextInput,
-  ReferenceInput,
   ReferenceArrayInput,
-  SelectInput,
   SelectArrayInput
 } from "react-admin";
 
@@ -41,14 +38,13 @@ export const JanusList = props => (
   >
     <Datagrid>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
-      <EmailField source="mail" label="resources.janusAccounts.fields.email" />
+      <EmailField source="mail" label="resources.janusAccounts.fields.mail" />
 
       <ReferenceField
         label="resources.janusAccounts.fields.main_institute"
         source="primary_institute"
         reference="institutes"
         linkType="show"
-        allowEmpty={true}
       >
         <TextField source="name" />
       </ReferenceField>
@@ -68,7 +64,6 @@ export const JanusList = props => (
         source="primary_unit"
         reference="units"
         linkType="show"
-        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>

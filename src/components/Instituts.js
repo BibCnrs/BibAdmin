@@ -12,7 +12,9 @@ import {
   ReferenceArrayField,
   SingleFieldList,
   ChipField,
-  TextInput
+  TextInput,
+  ReferenceArrayInput,
+  SelectArrayInput
 } from "react-admin";
 
 const InstitutsFilter = props => (
@@ -59,10 +61,13 @@ export const InstitutsEdit = ({ ...props }) => (
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
-      <TextInput
-        source="communities"
+      <ReferenceArrayInput
         label="resources.institutes.fields.communities"
-      />
+        reference="communities"
+        source="communities"
+      >
+        <SelectArrayInput source="name" />
+      </ReferenceArrayInput>
     </SimpleForm>
   </Edit>
 );
@@ -73,10 +78,13 @@ export const InstitutsCreate = ({ ...props }) => (
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
-      <TextInput
-        source="communities"
+      <ReferenceArrayInput
         label="resources.institutes.fields.communities"
-      />
+        reference="communities"
+        source="communities"
+      >
+        <SelectArrayInput source="name" />
+      </ReferenceArrayInput>
     </SimpleForm>
   </Create>
 );

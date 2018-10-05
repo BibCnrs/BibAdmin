@@ -59,6 +59,10 @@ export const CommunitiesEdit = ({ ...props }) => (
         label="resources.communities.fields.user_id"
       />
       <TextInput
+        source="password"
+        label="resources.communities.fields.password"
+      />
+      <TextInput
         source="profile"
         label="resources.communities.fields.profile"
       />
@@ -75,6 +79,10 @@ export const CommunitiesCreate = ({ ...props }) => (
       <TextInput
         source="user_id"
         label="resources.communities.fields.user_id"
+      />
+      <TextInput
+        source="password"
+        label="resources.communities.fields.password"
       />
       <TextInput
         source="profile"

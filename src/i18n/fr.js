@@ -32,7 +32,7 @@ export default {
         name: "Nom",
         firstname: "Prénom",
         phone: "Téléphone",
-        email: "Email",
+        mail: "Email",
         dr: "dr",
         main_institute: "Institut principal",
         institutes: "Institut secondaire",
@@ -52,7 +52,7 @@ export default {
         cnrs: "CNRS",
         name: "Nom",
         firstname: "Prénom",
-        mail: "courriel",
+        mail: "Email",
         main_institute: "Institut Janus",
         additional_institutes: "Institut secondaire",
         primary_unit: "Unité Janus",
@@ -117,6 +117,7 @@ export default {
         name: "Nom",
         gate: "Portail ezproxy",
         user_id: "User Id",
+        password: "Password",
         profile: "Profil",
         ebsco: "Ebsco"
       }
@@ -126,6 +127,12 @@ export default {
       fields: {
         name_fr: "Nom (fr)",
         name_en: "Nom (en)",
+        url_fr: "Url (fr)",
+        url_en: "Url (en)",
+        text_fr: "Description (fr)",
+        text_en: "Description (en)",
+        image: "Image",
+        communities: "Communautés",
         active: "Active"
       }
     },
@@ -133,7 +140,10 @@ export default {
       name: "Sections du comité national",
       fields: {
         name: "Nom",
-        code: "Code"
+        code: "Code",
+        comment: "Commentaire",
+        primary_institutes: "Instituts principaux",
+        secondary_institutes: "Instituts secondaires"
       }
     },
     equipe: {

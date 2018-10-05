@@ -96,8 +96,8 @@ class App extends Component {
         <Resource
           name="inistAccounts"
           list={InistList}
-          edit={InistEdit}
           create={InistCreate}
+          edit={InistEdit}
           icon={UserIcon}
         />
         <Resource
@@ -109,8 +109,8 @@ class App extends Component {
         <Resource
           name="institutes"
           list={InstitutsList}
-          edit={InstitutsEdit}
           create={InstitutsCreate}
+          edit={InstitutsEdit}
           icon={InstituteIcon}
         />
         <Resource
@@ -130,15 +130,15 @@ class App extends Component {
         <Resource
           name="databases"
           list={DatabasesList}
-          create={DatabasesEdit}
-          edit={DatabasesCreate}
+          create={DatabasesCreate}
+          edit={DatabasesEdit}
           icon={FolderIcon}
         />
         <Resource
           name="section_cn"
           list={SectionsList}
-          create={SectionsEdit}
-          edit={SectionsCreate}
+          create={SectionsCreate}
+          edit={SectionsEdit}
           icon={FolderIcon}
         />
       </Admin>

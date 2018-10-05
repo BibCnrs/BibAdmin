@@ -53,14 +53,13 @@ export const InistList = ({ ...props }) => (
         source="firstname"
         label="resources.inistAccounts.fields.firstname"
       />
-      <EmailField source="mail" label="resources.inistAccounts.fields.email" />
+      <EmailField source="mail" label="resources.inistAccounts.fields.mail" />
 
       <ReferenceField
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
         linkType="show"
-        allowEmpty={true}
       >
         <TextField source="name" />
       </ReferenceField>
@@ -80,7 +79,6 @@ export const InistList = ({ ...props }) => (
         source="main_unit"
         reference="units"
         linkType="show"
-        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -146,7 +144,7 @@ export const InistEdit = ({ ...props }) => (
       <TextInput
         type="email"
         source="mail"
-        label="resources.inistAccounts.fields.email"
+        label="resources.inistAccounts.fields.mail"
       />
 
       <TextInput source="phone" label="resources.inistAccounts.fields.phone" />
@@ -232,7 +230,7 @@ export const InistCreate = ({ ...props }) => (
       <TextInput
         type="email"
         source="mail"
-        label="resources.inistAccounts.fields.email"
+        label="resources.inistAccounts.fields.mail"
       />
 
       <TextInput source="phone" label="resources.inistAccounts.fields.phone" />

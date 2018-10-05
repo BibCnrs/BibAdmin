@@ -11,7 +11,12 @@ import {
   TextField,
   BooleanField,
   TextInput,
-  BooleanInput
+  LongTextInput,
+  BooleanInput,
+  FileInput,
+  ImageField,
+  ReferenceArrayInput,
+  SelectArrayInput
 } from "react-admin";
 
 const DatabasesFilter = props => (
@@ -24,7 +29,7 @@ export const DatabasesList = ({ ...props }) => (
   <List
     {...props}
     filters={<DatabasesFilter />}
-    sort={{ field: "name" }}
+    sort={{ field: "name_fr" }}
     perPage={10}
   >
     <Datagrid>
@@ -46,6 +51,29 @@ export const DatabasesEdit = ({ ...props }) => (
     <SimpleForm>
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
+      <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
+      <TextInput source="url_en" label="resources.databases.fields.url_en" />
+      <LongTextInput
+        source="text_fr"
+        label="resources.databases.fields.text_fr"
+      />
+      <LongTextInput
+        source="text_en"
+        label="resources.databases.fields.text_en"
+      />
+      <ReferenceArrayInput
+        label="resources.databases.fields.communities"
+        source="communities"
+        reference="communities"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+      <FileInput
+        source="image"
+        label="Image"
+        placeholder={<p>Glisser déposer l'image</p>}
+      />
+      <ImageField source="image" title="title" />
       <BooleanInput source="active" label="resources.databases.fields.active" />
     </SimpleForm>
   </Edit>
@@ -56,6 +84,29 @@ export const DatabasesCreate = ({ ...props }) => (
     <SimpleForm>
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
+      <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
+      <TextInput source="url_en" label="resources.databases.fields.url_en" />
+      <LongTextInput
+        source="text_fr"
+        label="resources.databases.fields.text_fr"
+      />
+      <LongTextInput
+        source="text_en"
+        label="resources.databases.fields.text_en"
+      />
+      <ReferenceArrayInput
+        label="resources.databases.fields.communities"
+        source="communities"
+        reference="communities"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
+      <FileInput
+        source="image"
+        label="Image"
+        placeholder={<p>Glisser déposer l'image</p>}
+      />
+      <ImageField source="image" title="title" />
       <BooleanInput source="active" label="resources.databases.fields.active" />
     </SimpleForm>
   </Create>
