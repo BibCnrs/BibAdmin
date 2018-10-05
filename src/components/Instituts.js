@@ -34,12 +34,7 @@ const InstitutsFilter = props => (
 );
 
 export const InstitutsList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<InstitutsFilter />}
-    sort={{ field: "code" }}
-    perPage={10}
-  >
+  <List {...props} filters={<InstitutsFilter />} perPage={10}>
     <Datagrid>
       <TextField source="id" label="resources.institutes.fields.id" />
       <TextField source="code" label="resources.institutes.fields.code" />
@@ -73,6 +68,7 @@ export const InstitutsEdit = ({ ...props }) => (
         label="resources.institutes.fields.communities"
         reference="communities"
         source="communities"
+        className="tags"
       >
         <SelectArrayInput source="name" />
       </ReferenceArrayInput>
@@ -90,6 +86,7 @@ export const InstitutsCreate = ({ ...props }) => (
         label="resources.institutes.fields.communities"
         reference="communities"
         source="communities"
+        className="tags"
       >
         <SelectArrayInput source="name" />
       </ReferenceArrayInput>

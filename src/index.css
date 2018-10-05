@@ -4,10 +4,27 @@ body {
   font-family: sans-serif;
 }
 
+/* change size */
 a[role="menuitem"] {
   font-size: 15px;
 }
 
 a[role="menuitem"] span {
   padding-right: 0.5em;
+}
+
+/* determine size of input in form */
+form > div > div > div {
+  width: 100% !important;
+}
+
+/* determine size of chips */
+.tags > a {
+  width: initial;
+}
+
+/* reduce margin size */
+table th,
+table td {
+  padding: 0 6px !important;
 }

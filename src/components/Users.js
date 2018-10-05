@@ -21,12 +21,7 @@ const UsersFilter = props => (
 );
 
 export const UsersList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<UsersFilter />}
-    sort={{ field: "id" }}
-    perPage={25}
-  >
+  <List {...props} filters={<UsersFilter />} perPage={25}>
     <Datagrid>
       <NumberField type="number" source="id" />
       <TextField source="username" label="resources.adminUsers.fields.login" />

@@ -82,12 +82,7 @@ const JanusFilter = props => (
 );
 
 export const JanusList = props => (
-  <List
-    {...props}
-    filters={<JanusFilter />}
-    sort={{ field: "mail" }}
-    perPage={10}
-  >
+  <List {...props} filters={<JanusFilter />} perPage={10}>
     <Datagrid>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <EmailField source="mail" label="resources.janusAccounts.fields.mail" />
@@ -227,6 +222,7 @@ export const JanusEdit = ({ ...props }) => (
         label="resources.janusAccounts.fields.all_communities"
         reference="communities"
         source="all_communities"
+        className="tags"
       >
         <SingleFieldList>
           <ChipField source="name" />
@@ -310,6 +306,7 @@ export const JanusCreate = ({ ...props }) => (
         label="resources.janusAccounts.fields.communities"
         reference="communities"
         source="communities"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>

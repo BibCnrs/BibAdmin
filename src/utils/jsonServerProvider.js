@@ -45,15 +45,47 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           .replace(/(.*)([A-Z])(.*)/g, "$1_$2$3")
           .toLowerCase();*/
         const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
+        let { field, order } = params.sort;
         const filters = fetchUtils.flattenObject(params.filter);
+
+        /**
+         * permet d'effectuer un tri (améliorer l'api pour supprimer cette portion de code)
+         */
+        switch (resource) {
+          case "inistAccounts":
+            field = `inist_account.${field}`;
+            break;
+          case "janusAccounts":
+            field = `janus_account.${field}`;
+            break;
+          case "institutes":
+            field = `institute.${field}`;
+            break;
+          case "units":
+            field = `unit.${field}`;
+            break;
+          case "databases":
+            field = `database.${field}`;
+            break;
+          case "section_cn":
+            field = `section_cn.${field}`;
+            break;
+          case "revues":
+            field = `revue.${field}`;
+            break;
+          default:
+            break;
+        }
+
         const query = {
           _page: page,
           _perPage: perPage,
           _sortField: field,
-          _sortDir: order || "ASC",
-          _filters: JSON.stringify(filters)
+          _sortDir: order || "ASC"
         };
+        if (Object.keys(filters).length > 0) {
+          query._filters = JSON.stringify(filters);
+        }
         url = `${apiUrl}/${resource}?${stringify(query)}`;
         break;
       }

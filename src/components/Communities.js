@@ -30,12 +30,7 @@ const CommunitiesFilter = props => (
 );
 
 export const CommunitiesList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<CommunitiesFilter />}
-    sort={{ field: "name", order: "ASC" }}
-    perPage={10}
-  >
+  <List {...props} filters={<CommunitiesFilter />} perPage={10}>
     <Datagrid>
       <TextField source="name" label="resources.communities.fields.name" />
       <TextField source="gate" label="resources.communities.fields.gate" />

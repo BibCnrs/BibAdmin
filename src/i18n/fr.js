@@ -148,9 +148,15 @@ export default {
         secondary_institutes: "Instituts secondaires"
       }
     },
-    equipe: {
-      name: "Equipe",
-      fields: {}
+    revues: {
+      name: "Ressources favorites",
+      fields: {
+        title: "Titre",
+        communities: "Communautés",
+        domains: "Domaines",
+        gates: "Portails",
+        url: "Url"
+      }
     },
     notification: {
       approved_success: "Commentaire approuvé",
