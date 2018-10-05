@@ -21,7 +21,7 @@ import {
 
 const DatabasesFilter = props => (
   <Filter {...props}>
-    <TextInput label="Search" source="match" alwaysOn />
+    <TextInput label="Rechercher" source="match" alwaysOn />
   </Filter>
 );
 
@@ -35,6 +35,13 @@ export const DatabasesList = ({ ...props }) => (
     <Datagrid>
       <TextField source="name_fr" label="resources.databases.fields.name_fr" />
       <TextField source="name_en" label="resources.databases.fields.name_en" />
+      <ReferenceArrayInput
+        label="resources.databases.fields.communities"
+        source="communities"
+        reference="communities"
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
       <BooleanField source="active" label="resources.databases.fields.active" />
       <EditButton label="" />
       <DeleteButton label="" />
@@ -47,7 +54,7 @@ const DatabasesTitle = ({ record }) => {
 };
 
 export const DatabasesEdit = ({ ...props }) => (
-  <Edit title={<DatabasesTitle />} {...props}>
+  <Edit title={<DatabasesTitle />} {...props} redirect="list">
     <SimpleForm>
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
@@ -80,7 +87,7 @@ export const DatabasesEdit = ({ ...props }) => (
 );
 
 export const DatabasesCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} redirect="list">
     <SimpleForm>
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />

@@ -25,7 +25,59 @@ import {
 
 const JanusFilter = props => (
   <Filter {...props}>
-    <TextInput label="Search" source="match" alwaysOn />
+    <TextInput label="Rechercher" source="match" alwaysOn />
+    <TextField source="uid" label="resources.janusAccounts.fields.uid" />
+    <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
+
+    <TextInput source="name" label="resources.janusAccounts.fields.name" />
+
+    <TextInput
+      source="firstname"
+      label="resources.janusAccounts.fields.firstname"
+    />
+
+    <TextInput
+      type="email"
+      source="mail"
+      label="resources.janusAccounts.fields.mail"
+    />
+
+    <ReferenceArrayInput
+      label="resources.janusAccounts.fields.additional_institutes"
+      reference="institutes"
+      source="additional_institutes"
+    >
+      <SelectArrayInput optionText="name" />
+    </ReferenceArrayInput>
+
+    <ReferenceArrayInput
+      label="resources.janusAccounts.fields.additional_units"
+      reference="units"
+      source="additional_units"
+    >
+      <SelectArrayInput optionText="code" />
+    </ReferenceArrayInput>
+
+    <ReferenceArrayInput
+      label="resources.janusAccounts.fields.communities"
+      reference="communities"
+      source="communities"
+    >
+      <SelectArrayInput optionText="name" />
+    </ReferenceArrayInput>
+
+    <DateField
+      source="last_connexion"
+      label="resources.janusAccounts.fields.last_connexion"
+    />
+    <DateField
+      source="first_connexion"
+      label="resources.janusAccounts.fields.first_connexion"
+    />
+    <BooleanInput
+      source="active"
+      label="resources.janusAccounts.fields.active"
+    />
   </Filter>
 );
 
@@ -111,7 +163,7 @@ const JanusTitle = ({ record }) => {
 };
 
 export const JanusEdit = ({ ...props }) => (
-  <Edit title={<JanusTitle />} {...props}>
+  <Edit title={<JanusTitle />} {...props} redirect="list">
     <SimpleForm>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
@@ -202,7 +254,7 @@ export const JanusEdit = ({ ...props }) => (
 );
 
 export const JanusCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} redirect="list">
     <SimpleForm>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />

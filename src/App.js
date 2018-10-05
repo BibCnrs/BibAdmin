@@ -10,7 +10,8 @@ import InstituteIcon from "@material-ui/icons/AccountBalance";
 import FolderIcon from "@material-ui/icons/Folder";
 
 // import components
-import { UserList, UserEdit, UserCreate } from "./components/Users";
+import Dashboard from "./components/Dashboard";
+import { UsersList, UsersEdit, UsersCreate } from "./components/Users";
 import { InistList, InistEdit, InistCreate } from "./components/Inist";
 import { JanusList, JanusEdit } from "./components/Janus";
 import {
@@ -81,6 +82,7 @@ class App extends Component {
     return (
       <Admin
         title="BibAdmin"
+        dashboard={Dashboard}
         dataProvider={dataProvider}
         i18nProvider={i18nProvider}
         authProvider={authProvider}
@@ -88,9 +90,9 @@ class App extends Component {
       >
         <Resource
           name="adminUsers"
-          list={UserList}
-          create={UserCreate}
-          edit={UserEdit}
+          list={UsersList}
+          create={UsersCreate}
+          edit={UsersEdit}
           icon={UserAddIcon}
         />
         <Resource

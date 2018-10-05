@@ -28,7 +28,81 @@ import {
 
 const InistFilter = props => (
   <Filter {...props}>
-    <TextInput label="Search" source="match" alwaysOn />
+    <TextInput label="Rechercher" source="match" alwaysOn />
+    <TextInput
+      source="username"
+      label="resources.inistAccounts.fields.username"
+    />
+    <TextInput
+      source="password"
+      label="resources.inistAccounts.fields.password"
+    />
+    <TextInput source="name" label="resources.inistAccounts.fields.name" />
+    <TextInput
+      source="firstname"
+      label="resources.inistAccounts.fields.firstname"
+    />
+    <TextInput
+      type="email"
+      source="mail"
+      label="resources.inistAccounts.fields.mail"
+    />
+
+    <ReferenceInput
+      label="resources.inistAccounts.fields.main_institute"
+      source="main_institute"
+      reference="institutes"
+    >
+      <SelectInput optionText="name" />
+    </ReferenceInput>
+
+    <ReferenceArrayInput
+      perPage={1000}
+      label="resources.inistAccounts.fields.institutes"
+      source="institutes"
+      reference="institutes"
+    >
+      <SelectArrayInput optionText="name" />
+    </ReferenceArrayInput>
+
+    <ReferenceInput
+      label="resources.inistAccounts.fields.main_unit"
+      source="main_unit"
+      reference="units"
+    >
+      <SelectInput optionText="code" />
+    </ReferenceInput>
+
+    <ReferenceArrayInput
+      perPage={10}
+      label="resources.inistAccounts.fields.units"
+      source="units"
+      reference="units"
+    >
+      <SelectArrayInput optionText="code" />
+    </ReferenceArrayInput>
+
+    <ReferenceArrayInput
+      perPage={1000}
+      label="resources.inistAccounts.fields.communities"
+      source="communities"
+      reference="communities"
+    >
+      <SelectArrayInput optionText="name" />
+    </ReferenceArrayInput>
+
+    <DateInput
+      source="subscription_date"
+      label="resources.inistAccounts.fields.subscription_date"
+    />
+    <DateInput
+      source="expiration_date"
+      label="resources.inistAccounts.fields.expiration_date"
+    />
+    <BooleanInput
+      source="active"
+      label="resources.inistAccounts.fields.active"
+    />
   </Filter>
 );
 
@@ -41,8 +115,8 @@ export const InistList = ({ ...props }) => (
   >
     <Datagrid>
       <TextField
-        source="username"
         label="resources.inistAccounts.fields.username"
+        source="username"
       />
       <TextField
         source="password"
@@ -126,7 +200,7 @@ const InistTitle = ({ record }) => {
 };
 
 export const InistEdit = ({ ...props }) => (
-  <Edit title={<InistTitle />} {...props}>
+  <Edit title={<InistTitle />} {...props} redirect="list">
     <SimpleForm>
       <TextInput
         source="username"
@@ -182,6 +256,16 @@ export const InistEdit = ({ ...props }) => (
       >
         <SelectArrayInput optionText="code" />
       </ReferenceArrayInput>
+
+      <ReferenceArrayField
+        label="resources.inistAccounts.fields.all_communities"
+        source="all_communities"
+        reference="communities"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.communities"
@@ -212,7 +296,7 @@ export const InistEdit = ({ ...props }) => (
 );
 
 export const InistCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} redirect="list">
     <SimpleForm>
       <TextInput
         source="username"
@@ -268,6 +352,16 @@ export const InistCreate = ({ ...props }) => (
       >
         <SelectArrayInput optionText="code" />
       </ReferenceArrayInput>
+
+      <ReferenceArrayField
+        label="resources.inistAccounts.fields.all_communities"
+        source="all_communities"
+        reference="communities"
+      >
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.communities"

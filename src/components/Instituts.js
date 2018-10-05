@@ -19,9 +19,17 @@ import {
 
 const InstitutsFilter = props => (
   <Filter {...props}>
-    <TextInput label="Search" source="match" alwaysOn />
-    <TextInput label="Nom" source="name" />
-    <TextInput label="Code" source="code" />
+    <TextInput label="Rechercher" source="match" alwaysOn />
+    <TextInput source="id" label="resources.institutes.fields.id" />
+    <TextInput source="code" label="resources.institutes.fields.code" />
+    <TextInput source="name" label="resources.institutes.fields.name" />
+    <ReferenceArrayInput
+      label="resources.institutes.fields.communities"
+      reference="communities"
+      source="communities"
+    >
+      <SelectArrayInput source="name" />
+    </ReferenceArrayInput>
   </Filter>
 );
 
@@ -56,7 +64,7 @@ const InstitutsTitle = ({ record }) => {
 };
 
 export const InstitutsEdit = ({ ...props }) => (
-  <Edit title={<InstitutsTitle />} {...props}>
+  <Edit title={<InstitutsTitle />} {...props} redirect="list">
     <SimpleForm>
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
@@ -73,7 +81,7 @@ export const InstitutsEdit = ({ ...props }) => (
 );
 
 export const InstitutsCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} redirect="list">
     <SimpleForm>
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
