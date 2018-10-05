@@ -35,6 +35,7 @@ import {
   SectionsEdit,
   SectionsCreate
 } from "./components/Sections";
+import { FavorisList, FavorisEdit, FavorisCreate } from "./components/Favoris";
 
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
@@ -141,6 +142,13 @@ class App extends Component {
           list={SectionsList}
           create={SectionsCreate}
           edit={SectionsEdit}
+          icon={FolderIcon}
+        />
+        <Resource
+          name="revues"
+          list={FavorisList}
+          create={FavorisCreate}
+          edit={FavorisEdit}
           icon={FolderIcon}
         />
       </Admin>

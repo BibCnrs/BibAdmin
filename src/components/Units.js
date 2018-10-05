@@ -120,15 +120,6 @@ const UnitsFilter = props => (
       </SelectArrayInput>
     </ReferenceArrayInput>
 
-    <TextField
-      source="nb_inist_account"
-      label="resources.units.fields.nb_inist_account"
-    />
-    <TextField
-      source="nb_janus_account"
-      label="resources.units.fields.nb_janus_account"
-    />
-
     <ReferenceArrayInput
       label="resources.units.fields.communities"
       reference="communities"
@@ -157,12 +148,7 @@ const UnitsFilter = props => (
 );
 
 export const UnitsList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<UnitsFilter />}
-    sort={{ field: "code" }}
-    perPage={10}
-  >
+  <List {...props} filters={<UnitsFilter />} perPage={10}>
     <Datagrid>
       <TextField source="code" label="resources.units.fields.code" />
       <TextField source="name" label="resources.units.fields.name" />
@@ -317,6 +303,7 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.institutes"
         reference="institutes"
         source="institutes"
+        className="tags"
       >
         <SelectArrayInput>
           <ChipField source="name" />
@@ -336,6 +323,7 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.communities"
         reference="communities"
         source="communities"
+        className="tags"
       >
         <SelectArrayInput>
           <ChipField source="name" />
@@ -346,6 +334,7 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.section_cn"
         reference="section_cn"
         source="sections_cn"
+        className="tags"
       >
         <SelectArrayInput>
           <ChipField source="code" />
@@ -455,6 +444,7 @@ export const UnitsCreate = ({ ...props }) => (
         label="resources.units.fields.institutes"
         reference="institutes"
         source="institutes"
+        className="tags"
       >
         <SelectArrayInput>
           <ChipField source="name" />
@@ -474,6 +464,7 @@ export const UnitsCreate = ({ ...props }) => (
         label="resources.units.fields.communities"
         reference="communities"
         source="communities"
+        className="tags"
       >
         <SelectArrayInput>
           <ChipField source="name" />

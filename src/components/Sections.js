@@ -17,7 +17,7 @@ import {
 
 const SectionsFilter = props => (
   <Filter {...props}>
-    <TextInput label="Search" source="match" alwaysOn />
+    <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput source="name" label="resources.section_cn.fields.name" />
     <TextInput source="code" label="resources.section_cn.fields.code" />
     <LongTextInput
@@ -28,6 +28,7 @@ const SectionsFilter = props => (
       label="resources.section_cn.fields.primary_institutes"
       source="primary_institutes"
       reference="institutes"
+      className="tags"
     >
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
@@ -42,12 +43,7 @@ const SectionsFilter = props => (
 );
 
 export const SectionsList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<SectionsFilter />}
-    sort={{ field: "name" }}
-    perPage={10}
-  >
+  <List {...props} filters={<SectionsFilter />} perPage={10}>
     <Datagrid>
       <TextField source="name" label="resources.section_cn.fields.name" />
       <TextField source="code" label="resources.section_cn.fields.code" />
@@ -74,6 +70,7 @@ export const SectionsEdit = ({ ...props }) => (
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"
         reference="institutes"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -101,6 +98,7 @@ export const SectionsCreate = ({ ...props }) => (
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"
         reference="institutes"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -108,6 +106,7 @@ export const SectionsCreate = ({ ...props }) => (
         label="resources.section_cn.fields.secondary_institutes"
         source="secondary_institutes"
         reference="institutes"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>

@@ -26,22 +26,10 @@ const DatabasesFilter = props => (
 );
 
 export const DatabasesList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<DatabasesFilter />}
-    sort={{ field: "name_fr" }}
-    perPage={10}
-  >
+  <List {...props} filters={<DatabasesFilter />} perPage={10}>
     <Datagrid>
       <TextField source="name_fr" label="resources.databases.fields.name_fr" />
       <TextField source="name_en" label="resources.databases.fields.name_en" />
-      <ReferenceArrayInput
-        label="resources.databases.fields.communities"
-        source="communities"
-        reference="communities"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
       <BooleanField source="active" label="resources.databases.fields.active" />
       <EditButton label="" />
       <DeleteButton label="" />
@@ -72,6 +60,7 @@ export const DatabasesEdit = ({ ...props }) => (
         label="resources.databases.fields.communities"
         source="communities"
         reference="communities"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -105,6 +94,7 @@ export const DatabasesCreate = ({ ...props }) => (
         label="resources.databases.fields.communities"
         source="communities"
         reference="communities"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>

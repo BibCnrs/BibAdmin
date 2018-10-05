@@ -33,10 +33,6 @@ const InistFilter = props => (
       source="username"
       label="resources.inistAccounts.fields.username"
     />
-    <TextInput
-      source="password"
-      label="resources.inistAccounts.fields.password"
-    />
     <TextInput source="name" label="resources.inistAccounts.fields.name" />
     <TextInput
       source="firstname"
@@ -107,12 +103,7 @@ const InistFilter = props => (
 );
 
 export const InistList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<InistFilter />}
-    sort={{ field: "username", order: "ASC" }}
-    perPage={10}
-  >
+  <List {...props} filters={<InistFilter />} perPage={10}>
     <Datagrid>
       <TextField
         label="resources.inistAccounts.fields.username"
@@ -333,6 +324,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.institutes"
         source="institutes"
         reference="institutes"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -349,6 +341,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.units"
         source="units"
         reference="units"
+        className="tags"
       >
         <SelectArrayInput optionText="code" />
       </ReferenceArrayInput>
@@ -367,6 +360,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.communities"
         source="communities"
         reference="communities"
+        className="tags"
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
