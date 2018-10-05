@@ -15,8 +15,12 @@ import {
   BooleanField,
   ChipField,
   TextInput,
-  DateInput,
-  BooleanInput
+  NumberInput,
+  BooleanInput,
+  ReferenceInput,
+  ReferenceArrayInput,
+  SelectInput,
+  SelectArrayInput
 } from "react-admin";
 
 const UnitsFilter = props => (
@@ -35,16 +39,13 @@ export const UnitsList = ({ ...props }) => (
     <Datagrid>
       <TextField source="code" label="resources.units.fields.code" />
       <TextField source="name" label="resources.units.fields.name" />
-      <TextField
-        source="main_institute"
-        label="resources.units.fields.main_institute"
-      />
 
       <ReferenceField
-        label="resources.units.fields.institutes"
+        label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="name" />
       </ReferenceField>
@@ -88,7 +89,7 @@ export const UnitsList = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <BooleanField source="active" label="resources.units.fields.enable" />
+      <BooleanField source="active" label="resources.units.fields.active" />
       <EditButton label="" />
       <DeleteButton label="" />
     </Datagrid>
@@ -96,61 +97,137 @@ export const UnitsList = ({ ...props }) => (
 );
 
 const UnitsTitle = ({ record }) => {
-  return record.username;
+  return record.name;
 };
 
 export const UnitsEdit = ({ ...props }) => (
   <Edit title={<UnitsTitle />} {...props}>
     <SimpleForm>
+      <TextInput source="code" label="resources.units.fields.code" />
+      <TextInput source="name" label="resources.units.fields.name" />
       <TextInput
-        source="username"
-        label="resources.inistAccounts.fields.username"
+        source="implantation"
+        label="resources.units.fields.implantation"
+      />
+      <TextInput source="body" label="resources.units.fields.body" />
+
+      <TextInput source="building" label="resources.units.fields.building" />
+      <TextInput source="street" label="resources.units.fields.street" />
+      <TextInput
+        source="post_office_box"
+        label="resources.units.fields.post_office_box"
       />
       <TextInput
-        source="password"
-        label="resources.inistAccounts.fields.password"
+        source="postal_code"
+        label="resources.units.fields.postal_code"
       />
-      <TextInput source="name" label="resources.inistAccounts.fields.name" />
+      <TextInput source="town" label="resources.units.fields.town" />
+      <TextInput source="country" label="resources.units.fields.country" />
+      <TextInput source="unit_dr" label="resources.units.fields.unit_dr" />
+      <TextInput source="town" label="resources.units.fields.town" />
+
+      <NumberInput
+        source="nb_researcher_cnrs"
+        label="resources.units.fields.nb_researcher_cnrs"
+      />
+      <NumberInput
+        source="nb_researcher_nocnrs"
+        label="resources.units.fields.nb_researcher_nocnrs"
+      />
+      <NumberInput
+        source="nb_doctorant"
+        label="resources.units.fields.nb_doctorant"
+      />
+      <NumberInput
+        source="nb_post_doctorant"
+        label="resources.units.fields.nb_post_doctorant"
+      />
+
       <TextInput
-        source="firstname"
-        label="resources.inistAccounts.fields.firstname"
+        source="director_name"
+        label="resources.units.fields.director_name"
+      />
+      <TextInput
+        source="director_firstname"
+        label="resources.units.fields.director_firstname"
       />
       <TextInput
         type="email"
-        source="mail"
-        label="resources.inistAccounts.fields.email"
+        source="director_mail"
+        label="resources.units.fields.director_mail"
       />
+
       <TextInput
+        source="correspondant_documentaire"
+        label="resources.units.fields.correspondant_documentaire"
+      />
+      <TextInput source="cd_phone" label="resources.units.fields.cd_phone" />
+      <TextInput
+        type="email"
+        source="cd_mail"
+        label="resources.units.fields.cd_mail"
+      />
+
+      <TextInput
+        source="correspondant_documentaire"
+        label="resources.units.fields.correspondant_informatique"
+      />
+      <TextInput source="ci_phone" label="resources.units.fields.ci_phone" />
+      <TextInput
+        type="email"
+        source="ci_mail"
+        label="resources.units.fields.ci_mail"
+      />
+
+      <ReferenceInput
+        label="resources.units.fields.main_institute"
         source="main_institute"
-        label="resources.inistAccounts.fields.main_institute"
+        reference="institutes"
+      >
+        <SelectInput source="name" />
+      </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.units.fields.institutes"
+        reference="institutes"
+        source="institutes"
+      >
+        <SelectArrayInput>
+          <ChipField source="name" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
+
+      <TextInput
+        source="nb_inist_account"
+        label="resources.units.fields.nb_inist_account"
       />
       <TextInput
-        source="secondary_institute"
-        label="resources.inistAccounts.fields.secondary_institute"
+        source="nb_janus_account"
+        label="resources.units.fields.nb_janus_account"
       />
-      <TextInput
-        source="main_unit"
-        label="resources.inistAccounts.fields.main_unit"
-      />
-      <TextInput
-        source="secondary_unit"
-        label="resources.inistAccounts.fields.secondary_unit"
-      />
-      <TextInput
+
+      <ReferenceArrayInput
+        label="resources.units.fields.communities"
+        reference="communities"
         source="communities"
-        label="resources.inistAccounts.fields.communities"
-      />
-      <DateInput
-        source="subscription_date"
-        label="resources.inistAccounts.fields.subscription_date"
-      />
-      <DateInput
-        source="expiration_date"
-        label="resources.inistAccounts.fields.expiration_date"
-      />
+      >
+        <SelectArrayInput>
+          <ChipField source="name" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
+        label="resources.units.fields.section_cn"
+        reference="section_cn"
+        source="sections_cn"
+      >
+        <SelectArrayInput>
+          <ChipField source="code" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
       <BooleanInput
         source="active"
-        label="resources.inistAccounts.fields.enable"
+        label="resources.inistAccounts.fields.active"
       />
     </SimpleForm>
   </Edit>
@@ -159,55 +236,131 @@ export const UnitsEdit = ({ ...props }) => (
 export const UnitsCreate = ({ ...props }) => (
   <Create {...props}>
     <SimpleForm>
+      <TextInput source="code" label="resources.units.fields.code" />
+      <TextInput source="name" label="resources.units.fields.name" />
       <TextInput
-        source="username"
-        label="resources.inistAccounts.fields.username"
+        source="implantation"
+        label="resources.units.fields.implantation"
+      />
+      <TextInput source="body" label="resources.units.fields.body" />
+
+      <TextInput source="building" label="resources.units.fields.building" />
+      <TextInput source="street" label="resources.units.fields.street" />
+      <TextInput
+        source="post_office_box"
+        label="resources.units.fields.post_office_box"
       />
       <TextInput
-        source="password"
-        label="resources.inistAccounts.fields.password"
+        source="postal_code"
+        label="resources.units.fields.postal_code"
       />
-      <TextInput source="name" label="resources.inistAccounts.fields.name" />
+      <TextInput source="town" label="resources.units.fields.town" />
+      <TextInput source="country" label="resources.units.fields.country" />
+      <TextInput source="unit_dr" label="resources.units.fields.unit_dr" />
+      <TextInput source="town" label="resources.units.fields.town" />
+
+      <NumberInput
+        source="nb_researcher_cnrs"
+        label="resources.units.fields.nb_researcher_cnrs"
+      />
+      <NumberInput
+        source="nb_researcher_nocnrs"
+        label="resources.units.fields.nb_researcher_nocnrs"
+      />
+      <NumberInput
+        source="nb_doctorant"
+        label="resources.units.fields.nb_doctorant"
+      />
+      <NumberInput
+        source="nb_post_doctorant"
+        label="resources.units.fields.nb_post_doctorant"
+      />
+
       <TextInput
-        source="firstname"
-        label="resources.inistAccounts.fields.firstname"
+        source="director_name"
+        label="resources.units.fields.director_name"
+      />
+      <TextInput
+        source="director_firstname"
+        label="resources.units.fields.director_firstname"
       />
       <TextInput
         type="email"
-        source="mail"
-        label="resources.inistAccounts.fields.email"
+        source="director_mail"
+        label="resources.units.fields.director_mail"
       />
+
       <TextInput
+        source="correspondant_documentaire"
+        label="resources.units.fields.correspondant_documentaire"
+      />
+      <TextInput source="cd_phone" label="resources.units.fields.cd_phone" />
+      <TextInput
+        type="email"
+        source="cd_mail"
+        label="resources.units.fields.cd_mail"
+      />
+
+      <TextInput
+        source="correspondant_documentaire"
+        label="resources.units.fields.correspondant_informatique"
+      />
+      <TextInput source="ci_phone" label="resources.units.fields.ci_phone" />
+      <TextInput
+        type="email"
+        source="ci_mail"
+        label="resources.units.fields.ci_mail"
+      />
+
+      <ReferenceInput
+        label="resources.units.fields.main_institute"
         source="main_institute"
-        label="resources.inistAccounts.fields.main_institute"
+        reference="institutes"
+      >
+        <SelectInput source="name" />
+      </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.units.fields.institutes"
+        reference="institutes"
+        source="institutes"
+      >
+        <SelectArrayInput>
+          <ChipField source="name" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
+
+      <TextInput
+        source="nb_inist_account"
+        label="resources.units.fields.nb_inist_account"
       />
       <TextInput
-        source="secondary_institute"
-        label="resources.inistAccounts.fields.secondary_institute"
+        source="nb_janus_account"
+        label="resources.units.fields.nb_janus_account"
       />
-      <TextInput
-        source="main_unit"
-        label="resources.inistAccounts.fields.main_unit"
-      />
-      <TextInput
-        source="secondary_unit"
-        label="resources.inistAccounts.fields.secondary_unit"
-      />
-      <TextInput
+
+      <ReferenceArrayInput
+        label="resources.units.fields.communities"
+        reference="communities"
         source="communities"
-        label="resources.inistAccounts.fields.communities"
-      />
-      <DateInput
-        source="subscription_date"
-        label="resources.inistAccounts.fields.subscription_date"
-      />
-      <DateInput
-        source="expiration_date"
-        label="resources.inistAccounts.fields.expiration_date"
-      />
+      >
+        <SelectArrayInput>
+          <ChipField source="name" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
+        label="resources.units.fields.section_cn"
+        reference="section_cn"
+        source="sections_cn"
+      >
+        <SelectArrayInput>
+          <ChipField source="code" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
       <BooleanInput
         source="active"
-        label="resources.inistAccounts.fields.enable"
+        label="resources.inistAccounts.fields.active"
       />
     </SimpleForm>
   </Create>
