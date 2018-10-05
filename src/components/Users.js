@@ -5,17 +5,30 @@ import {
   Edit,
   EditButton,
   DeleteButton,
+  Filter,
   List,
   NumberField,
   SimpleForm,
   TextField,
-  TextInput
+  TextInput,
+  LongTextInput
 } from "react-admin";
 
-export const UserList = ({ ...props }) => (
-  <List {...props} sort={{ field: "id" }} perPage={25}>
+const UsersFilter = props => (
+  <Filter {...props}>
+    <TextInput label="Rechercher" source="match" alwaysOn />
+  </Filter>
+);
+
+export const UsersList = ({ ...props }) => (
+  <List
+    {...props}
+    filters={<UsersFilter />}
+    sort={{ field: "id" }}
+    perPage={25}
+  >
     <Datagrid>
-      <NumberField source="id" type="number" />
+      <NumberField type="number" source="id" />
       <TextField source="username" label="resources.adminUsers.fields.login" />
       <EditButton label="" />
       <DeleteButton label="" />
@@ -23,24 +36,26 @@ export const UserList = ({ ...props }) => (
   </List>
 );
 
-const UserTitle = ({ record }) => {
+const UsersTitle = ({ record }) => {
   return record.username;
 };
 
-export const UserEdit = ({ ...props }) => (
-  <Edit title={<UserTitle />} {...props}>
+export const UsersEdit = ({ ...props }) => (
+  <Edit title={<UsersTitle />} {...props} redirect="list">
     <SimpleForm>
       <TextInput source="username" />
       <TextInput type="password" source="password" />
+      <LongTextInput source="comment" />
     </SimpleForm>
   </Edit>
 );
 
-export const UserCreate = ({ ...props }) => (
-  <Create {...props}>
+export const UsersCreate = ({ ...props }) => (
+  <Create {...props} redirect="list">
     <SimpleForm>
       <TextInput source="username" />
       <TextInput type="password" source="password" />
+      <LongTextInput source="comment" />
     </SimpleForm>
   </Create>
 );

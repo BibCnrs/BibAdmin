@@ -16,7 +16,16 @@ import {
 
 const CommunitiesFilter = props => (
   <Filter {...props}>
-    <TextInput label="Search" source="match" alwaysOn />
+    <TextInput label="Rechercher" source="match" alwaysOn />
+    <TextInput source="name" label="resources.communities.fields.name" />
+    <TextInput source="gate" label="resources.communities.fields.gate" />
+    <TextInput source="user_id" label="resources.communities.fields.user_id" />
+    <TextInput
+      source="password"
+      label="resources.communities.fields.password"
+    />
+    <TextInput source="profile" label="resources.communities.fields.profile" />
+    <BooleanInput source="ebsco" label="resources.communities.fields.ebsco" />
   </Filter>
 );
 
@@ -24,7 +33,7 @@ export const CommunitiesList = ({ ...props }) => (
   <List
     {...props}
     filters={<CommunitiesFilter />}
-    sort={{ field: "username", order: "ASC" }}
+    sort={{ field: "name", order: "ASC" }}
     perPage={10}
   >
     <Datagrid>
@@ -50,7 +59,7 @@ const CommunitiesTitle = ({ record }) => {
 };
 
 export const CommunitiesEdit = ({ ...props }) => (
-  <Edit title={<CommunitiesTitle />} {...props}>
+  <Edit title={<CommunitiesTitle />} {...props} redirect="list">
     <SimpleForm>
       <TextInput source="name" label="resources.communities.fields.name" />
       <TextInput source="gate" label="resources.communities.fields.gate" />
@@ -72,7 +81,7 @@ export const CommunitiesEdit = ({ ...props }) => (
 );
 
 export const CommunitiesCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} redirect="list">
     <SimpleForm>
       <TextInput source="name" label="resources.communities.fields.name" />
       <TextInput source="gate" label="resources.communities.fields.gate" />

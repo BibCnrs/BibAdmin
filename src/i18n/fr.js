@@ -21,7 +21,8 @@ export default {
       name: "Administrateurs",
       fields: {
         id: "id",
-        login: "login"
+        login: "login",
+        comment: "Commentaire"
       }
     },
     inistAccounts: {
@@ -38,7 +39,8 @@ export default {
         institutes: "Institut secondaire",
         main_unit: "Unité principale",
         units: "Unités secondaires",
-        communities: "Toutes les communautés",
+        communities: "Communautés propres",
+        all_communities: "Toutes les communautés",
         subscription_date: "Date d'inscription",
         expiration_date: "Date d'expiration",
         active: "active",
@@ -89,7 +91,7 @@ export default {
         country: "Pays",
         unit_dr: "Délégation régionale d'appartenance",
         nb_researcher_cnrs: "Nombre de chercheur CNRS",
-        nb_researcher_nocnrs: "Nombre de chercheur CNRS",
+        nb_researcher_nocnrs: "Nombre de chercheur non CNRS",
         nb_doctorant: "Nombre de doctorant",
         nb_post_doctorant: "Nombre de post-doctorant",
         director_name: "Nom du directeur",
@@ -98,9 +100,9 @@ export default {
         correspondant_documentaire: "Correspondant documentaire",
         cd_phone: "Téléphone correspondant documentaire",
         cd_mail: "Email correspondant documentaire",
-        correspondant_informatique: "Correspondant informatique",
-        ci_phone: "Téléphone correspondant informatique",
-        ci_mail: "Email correspondant informatique",
+        correspondant_informatique: "Autre correspondant",
+        ci_phone: "Téléphone autre correspondant",
+        ci_mail: "Email autre correspondant",
         main_institute: "Institut principal",
         institutes: "Institut secondaire",
         nb_inist_account: "Nombre de compte Inist",
