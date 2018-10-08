@@ -187,21 +187,39 @@ export const InistList = ({ ...props }) => (
   </List>
 );
 
+const GeneratePassword = () => {
+  document.getElementById("generatePassword").value = Math.random()
+    .toString(36)
+    .slice(-6);
+};
+
+const GeneratePasswordButton = () => {
+  return (
+    <span>
+      <TextInput
+        id="generatePassword"
+        source="password"
+        label="resources.inistAccounts.fields.password"
+      />
+      <Button variant="contained" onClick={GeneratePassword}>
+        Générer
+      </Button>
+    </span>
+  );
+};
+
 const InistTitle = ({ record }) => {
   return record.username;
 };
 
 export const InistEdit = ({ ...props }) => (
-  <Edit title={<InistTitle />} {...props} redirect="list">
+  <Edit title={<InistTitle />} {...props}>
     <SimpleForm>
       <TextInput
         source="username"
         label="resources.inistAccounts.fields.username"
       />
-      <TextInput
-        source="password"
-        label="resources.inistAccounts.fields.password"
-      />
+      <GeneratePasswordButton />
       <TextInput source="name" label="resources.inistAccounts.fields.name" />
       <TextInput
         source="firstname"
@@ -287,30 +305,9 @@ export const InistEdit = ({ ...props }) => (
   </Edit>
 );
 
-const GeneratePassword = () => {
-  document.getElementById("generatePassword").value = Math.random()
-    .toString(36)
-    .slice(-6);
-};
-
-const GeneratePasswordButton = () => {
-  return (
-    <span>
-      <TextInput
-        id="generatePassword"
-        source="password"
-        label="resources.inistAccounts.fields.password"
-      />
-      <Button variant="contained" onClick={GeneratePassword}>
-        Générer
-      </Button>
-    </span>
-  );
-};
-
 export const InistCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
-    <SimpleForm>
+  <Create {...props}>
+    <SimpleForm redirect="list">
       <TextInput
         source="username"
         label="resources.inistAccounts.fields.username"

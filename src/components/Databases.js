@@ -42,7 +42,7 @@ const DatabasesTitle = ({ record }) => {
 };
 
 export const DatabasesEdit = ({ ...props }) => (
-  <Edit title={<DatabasesTitle />} {...props} redirect="list">
+  <Edit title={<DatabasesTitle />} {...props}>
     <SimpleForm>
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
@@ -76,8 +76,8 @@ export const DatabasesEdit = ({ ...props }) => (
 );
 
 export const DatabasesCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
-    <SimpleForm>
+  <Create {...props}>
+    <SimpleForm redirect="list">
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />

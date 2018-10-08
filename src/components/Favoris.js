@@ -65,7 +65,7 @@ const FavorisTitle = ({ record }) => {
 };
 
 export const FavorisEdit = ({ ...props }) => (
-  <Edit title={<FavorisTitle />} {...props} redirect="list">
+  <Edit title={<FavorisTitle />} {...props}>
     <SimpleForm>
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />
@@ -84,8 +84,8 @@ export const FavorisEdit = ({ ...props }) => (
 );
 
 export const FavorisCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
-    <SimpleForm>
+  <Create {...props}>
+    <SimpleForm redirect="list">
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />
 

@@ -54,7 +54,7 @@ const CommunitiesTitle = ({ record }) => {
 };
 
 export const CommunitiesEdit = ({ ...props }) => (
-  <Edit title={<CommunitiesTitle />} {...props} redirect="list">
+  <Edit title={<CommunitiesTitle />} {...props}>
     <SimpleForm>
       <TextInput source="name" label="resources.communities.fields.name" />
       <TextInput source="gate" label="resources.communities.fields.gate" />
@@ -76,8 +76,8 @@ export const CommunitiesEdit = ({ ...props }) => (
 );
 
 export const CommunitiesCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
-    <SimpleForm>
+  <Create {...props}>
+    <SimpleForm redirect="list">
       <TextInput source="name" label="resources.communities.fields.name" />
       <TextInput source="gate" label="resources.communities.fields.gate" />
       <TextInput
