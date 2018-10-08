@@ -36,7 +36,7 @@ const UsersTitle = ({ record }) => {
 };
 
 export const UsersEdit = ({ ...props }) => (
-  <Edit title={<UsersTitle />} {...props} redirect="list">
+  <Edit title={<UsersTitle />} {...props}>
     <SimpleForm>
       <TextInput source="username" />
       <TextInput type="password" source="password" />
@@ -46,8 +46,8 @@ export const UsersEdit = ({ ...props }) => (
 );
 
 export const UsersCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
-    <SimpleForm>
+  <Create {...props}>
+    <SimpleForm redirect="list">
       <TextInput source="username" />
       <TextInput type="password" source="password" />
       <LongTextInput source="comment" />

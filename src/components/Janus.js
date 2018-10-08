@@ -158,7 +158,7 @@ const JanusTitle = ({ record }) => {
 };
 
 export const JanusEdit = ({ ...props }) => (
-  <Edit title={<JanusTitle />} {...props} redirect="list">
+  <Edit title={<JanusTitle />} {...props}>
     <SimpleForm>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
@@ -251,7 +251,7 @@ export const JanusEdit = ({ ...props }) => (
 
 export const JanusCreate = ({ ...props }) => (
   <Create {...props} redirect="list">
-    <SimpleForm>
+    <SimpleForm redirect="list">
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
 

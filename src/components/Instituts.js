@@ -59,7 +59,7 @@ const InstitutsTitle = ({ record }) => {
 };
 
 export const InstitutsEdit = ({ ...props }) => (
-  <Edit title={<InstitutsTitle />} {...props} redirect="list">
+  <Edit title={<InstitutsTitle />} {...props}>
     <SimpleForm>
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
@@ -77,8 +77,8 @@ export const InstitutsEdit = ({ ...props }) => (
 );
 
 export const InstitutsCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
-    <SimpleForm>
+  <Create {...props}>
+    <SimpleForm redirect="list">
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />

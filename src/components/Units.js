@@ -214,7 +214,7 @@ const UnitsTitle = ({ record }) => {
 };
 
 export const UnitsEdit = ({ ...props }) => (
-  <Edit title={<UnitsTitle />} {...props} redirect="list">
+  <Edit title={<UnitsTitle />} {...props}>
     <SimpleForm>
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
@@ -356,7 +356,7 @@ export const UnitsEdit = ({ ...props }) => (
 
 export const UnitsCreate = ({ ...props }) => (
   <Create {...props} redirect="list">
-    <SimpleForm>
+    <SimpleForm redirect="list">
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
       <TextInput

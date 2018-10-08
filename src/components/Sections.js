@@ -58,7 +58,7 @@ const SectionsTitle = ({ record }) => {
 };
 
 export const SectionsEdit = ({ ...props }) => (
-  <Edit title={<SectionsTitle />} {...props} redirect="list">
+  <Edit title={<SectionsTitle />} {...props}>
     <SimpleForm>
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
@@ -86,8 +86,8 @@ export const SectionsEdit = ({ ...props }) => (
 );
 
 export const SectionsCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
-    <SimpleForm>
+  <Create {...props}>
+    <SimpleForm redirect="list">
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
       <LongTextInput
