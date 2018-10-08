@@ -15,7 +15,11 @@ a[role="menuitem"] span {
 
 /* determine size of input in form */
 form > div > div > div {
-  width: 100% !important;
+  width: 90% !important;
+}
+
+form > div > div > span > div {
+  width: 90% !important;
 }
 
 /* determine size of chips */
