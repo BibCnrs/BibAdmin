@@ -25,6 +25,7 @@ import {
   SelectInput,
   SelectArrayInput
 } from "react-admin";
+import Button from "@material-ui/core/Button";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -286,6 +287,27 @@ export const InistEdit = ({ ...props }) => (
   </Edit>
 );
 
+const GeneratePassword = () => {
+  document.getElementById("generatePassword").value = Math.random()
+    .toString(36)
+    .slice(-6);
+};
+
+const GeneratePasswordButton = () => {
+  return (
+    <span>
+      <TextInput
+        id="generatePassword"
+        source="password"
+        label="resources.inistAccounts.fields.password"
+      />
+      <Button variant="contained" onClick={GeneratePassword}>
+        Générer
+      </Button>
+    </span>
+  );
+};
+
 export const InistCreate = ({ ...props }) => (
   <Create {...props} redirect="list">
     <SimpleForm>
@@ -293,11 +315,8 @@ export const InistCreate = ({ ...props }) => (
         source="username"
         label="resources.inistAccounts.fields.username"
       />
-      <TextInput
-        source="password"
-        label="resources.inistAccounts.fields.password"
-      />
-      <TextInput source="name" label="resources.inistAccounts.fields.name" />
+
+      <GeneratePasswordButton />
       <TextInput
         source="firstname"
         label="resources.inistAccounts.fields.firstname"
