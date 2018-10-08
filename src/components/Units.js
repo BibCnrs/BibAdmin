@@ -27,80 +27,18 @@ import {
 const UnitsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="code" label="resources.units.fields.code" />
-    <TextInput source="name" label="resources.units.fields.name" />
-    <TextInput
-      source="implantation"
-      label="resources.units.fields.implantation"
-    />
-    <TextInput source="body" label="resources.units.fields.body" />
+    <TextInput source="like_unit.code" label="resources.units.fields.code" />
+    <TextInput source="like_unit.name" label="resources.units.fields.name" />
 
-    <TextInput source="building" label="resources.units.fields.building" />
-    <TextInput source="street" label="resources.units.fields.street" />
-    <TextInput
-      source="post_office_box"
-      label="resources.units.fields.post_office_box"
-    />
-    <TextInput
-      source="postal_code"
-      label="resources.units.fields.postal_code"
-    />
-    <TextInput source="town" label="resources.units.fields.town" />
-    <TextInput source="country" label="resources.units.fields.country" />
-    <TextInput source="unit_dr" label="resources.units.fields.unit_dr" />
-
-    <NumberInput
-      source="nb_researcher_cnrs"
-      label="resources.units.fields.nb_researcher_cnrs"
-    />
-    <NumberInput
-      source="nb_researcher_nocnrs"
-      label="resources.units.fields.nb_researcher_nocnrs"
-    />
-    <NumberInput
-      source="nb_doctorant"
-      label="resources.units.fields.nb_doctorant"
-    />
-    <NumberInput
-      source="nb_post_doctorant"
-      label="resources.units.fields.nb_post_doctorant"
-    />
-
-    <TextInput
-      source="director_name"
-      label="resources.units.fields.director_name"
-    />
-    <TextInput
-      source="director_firstname"
-      label="resources.units.fields.director_firstname"
-    />
-    <TextInput
-      type="email"
-      source="director_mail"
-      label="resources.units.fields.director_mail"
-    />
-
-    <TextInput
-      source="correspondant_documentaire"
-      label="resources.units.fields.correspondant_documentaire"
-    />
-    <TextInput source="cd_phone" label="resources.units.fields.cd_phone" />
-    <TextInput
-      type="email"
-      source="cd_mail"
-      label="resources.units.fields.cd_mail"
-    />
-
-    <TextInput
-      source="correspondant_documentaire"
-      label="resources.units.fields.correspondant_informatique"
-    />
-    <TextInput source="ci_phone" label="resources.units.fields.ci_phone" />
-    <TextInput
-      type="email"
-      source="ci_mail"
-      label="resources.units.fields.ci_mail"
-    />
+    <ReferenceArrayInput
+      label="resources.units.fields.communities"
+      reference="communities"
+      source="communities"
+    >
+      <SelectArrayInput>
+        <ChipField source="name" />
+      </SelectArrayInput>
+    </ReferenceArrayInput>
 
     <ReferenceInput
       label="resources.units.fields.main_institute"
@@ -114,16 +52,6 @@ const UnitsFilter = props => (
       label="resources.units.fields.institutes"
       reference="institutes"
       source="institutes"
-    >
-      <SelectArrayInput>
-        <ChipField source="name" />
-      </SelectArrayInput>
-    </ReferenceArrayInput>
-
-    <ReferenceArrayInput
-      label="resources.units.fields.communities"
-      reference="communities"
-      source="communities"
     >
       <SelectArrayInput>
         <ChipField source="name" />

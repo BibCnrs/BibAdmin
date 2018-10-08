@@ -26,19 +26,14 @@ import {
 const JanusFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextField source="uid" label="resources.janusAccounts.fields.uid" />
-    <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
-
-    <TextInput source="name" label="resources.janusAccounts.fields.name" />
-
     <TextInput
-      source="firstname"
-      label="resources.janusAccounts.fields.firstname"
+      source="like_janus_account.uid"
+      label="resources.janusAccounts.fields.uid"
     />
 
     <TextInput
       type="email"
-      source="mail"
+      source="like_janus_account.mail"
       label="resources.janusAccounts.fields.mail"
     />
 
@@ -67,15 +62,29 @@ const JanusFilter = props => (
     </ReferenceArrayInput>
 
     <DateField
-      source="last_connexion"
-      label="resources.janusAccounts.fields.last_connexion"
+      source="to_janus_account.last_connexion"
+      label="resources.janusAccounts.fields.last_connexion_before"
+    />
+
+    <DateField
+      source="from_janus_account.last_connexion"
+      label="resources.janusAccounts.fields.last_connexion_after"
     />
     <DateField
-      source="first_connexion"
-      label="resources.janusAccounts.fields.first_connexion"
+      source="to_janus_account.first_connexion"
+      label="resources.janusAccounts.fields.first_connexion_before"
+    />
+    <DateField
+      source="from_janus_account.first_connexion"
+      label="resources.janusAccounts.fields.first_connexion_after"
+    />
+
+    <BooleanInput
+      source="janus_account.cnrs"
+      label="resources.janusAccounts.fields.cnrs"
     />
     <BooleanInput
-      source="active"
+      source="janus_account.active"
       label="resources.janusAccounts.fields.active"
     />
   </Filter>

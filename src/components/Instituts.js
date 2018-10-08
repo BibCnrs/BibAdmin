@@ -21,8 +21,14 @@ const InstitutsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput source="id" label="resources.institutes.fields.id" />
-    <TextInput source="code" label="resources.institutes.fields.code" />
-    <TextInput source="name" label="resources.institutes.fields.name" />
+    <TextInput
+      source="like_institute.code"
+      label="resources.institutes.fields.code"
+    />
+    <TextInput
+      source="like_institute.name"
+      label="resources.institutes.fields.name"
+    />
     <ReferenceArrayInput
       label="resources.institutes.fields.communities"
       reference="communities"
