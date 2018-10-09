@@ -13,6 +13,7 @@ import {
   SingleFieldList,
   ChipField,
   TextInput,
+  ReferenceField,
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
@@ -43,7 +44,13 @@ export const InstitutsList = ({ ...props }) => (
   <List {...props} filters={<InstitutsFilter />} perPage={10}>
     <Datagrid>
       <TextField source="id" label="resources.institutes.fields.id" />
-      <TextField source="code" label="resources.institutes.fields.code" />
+      <ReferenceField
+        label="resources.institutes.fields.code"
+        source="id"
+        reference="institutes"
+      >
+        <TextField source="code" />
+      </ReferenceField>
       <TextField source="name" label="resources.institutes.fields.name" />
       <ReferenceArrayField
         label="resources.institutes.fields.communities"

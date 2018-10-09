@@ -15,6 +15,7 @@ import {
   BooleanInput,
   FileInput,
   ImageField,
+  ReferenceField,
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
@@ -28,8 +29,20 @@ const DatabasesFilter = props => (
 export const DatabasesList = ({ ...props }) => (
   <List {...props} filters={<DatabasesFilter />} perPage={10}>
     <Datagrid>
-      <TextField source="name_fr" label="resources.databases.fields.name_fr" />
-      <TextField source="name_en" label="resources.databases.fields.name_en" />
+      <ReferenceField
+        label="resources.databases.fields.name_fr"
+        source="id"
+        reference="databases"
+      >
+        <TextField source="name_fr" />
+      </ReferenceField>
+      <ReferenceField
+        label="resources.databases.fields.name_en"
+        source="id"
+        reference="databases"
+      >
+        <TextField source="name_en" />
+      </ReferenceField>
       <BooleanField source="active" label="resources.databases.fields.active" />
       <EditButton label="" />
       <DeleteButton label="" />

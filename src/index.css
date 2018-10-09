@@ -13,10 +13,6 @@ a[role="menuitem"] span {
   padding-right: 0.5em;
 }
 
-div[form="filterForm"] > div:not(:first-child) > div {
-  width: 200px;
-}
-
 /* determine size of input in form */
 form.simple-form > div > div > div,
 form.simple-form > div > div > span > div {

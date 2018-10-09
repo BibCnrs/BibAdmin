@@ -11,7 +11,8 @@ import {
   TextField,
   BooleanField,
   TextInput,
-  BooleanInput
+  BooleanInput,
+  ReferenceField
 } from "react-admin";
 
 const CommunitiesFilter = props => (
@@ -32,7 +33,14 @@ const CommunitiesFilter = props => (
 export const CommunitiesList = ({ ...props }) => (
   <List {...props} filters={<CommunitiesFilter />} perPage={10}>
     <Datagrid>
-      <TextField source="name" label="resources.communities.fields.name" />
+      <ReferenceField
+        label="resources.communities.fields.name"
+        source="id"
+        reference="communities"
+      >
+        <TextField source="name" />
+      </ReferenceField>
+
       <TextField source="gate" label="resources.communities.fields.gate" />
       <TextField
         source="user_id"
