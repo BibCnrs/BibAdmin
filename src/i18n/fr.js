@@ -42,7 +42,11 @@ export default {
         communities: "Communautés propres",
         all_communities: "Toutes les communautés",
         subscription_date: "Date d'inscription",
+        subscription_date_before: "Date d'inscription avant",
+        subscription_date_after: "Date d'inscription après",
         expiration_date: "Date d'expiration",
+        expiration_date_before: "Date d'expiration avant",
+        expiration_date_after: "Date d'expiration après",
         active: "active",
         comment: "Commentaire"
       }
@@ -62,7 +66,11 @@ export default {
         communities: "Communautés propres",
         all_communities: "Toutes les communautés",
         last_connexion: "Dernière connexion",
+        last_connexion_before: "Dernière connexion avant",
+        last_connexion_after: "Dernière connexion après",
         first_connexion: "Première connexion",
+        first_connexion_before: "Première connexion avant",
+        first_connexion_after: "Première connexion après",
         active: "active",
         comment: "Commentaire"
       }
