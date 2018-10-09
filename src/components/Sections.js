@@ -11,6 +11,7 @@ import {
   TextField,
   TextInput,
   LongTextInput,
+  ReferenceField,
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
@@ -45,8 +46,22 @@ const SectionsFilter = props => (
 export const SectionsList = ({ ...props }) => (
   <List {...props} filters={<SectionsFilter />} perPage={10}>
     <Datagrid>
-      <TextField source="name" label="resources.section_cn.fields.name" />
-      <TextField source="code" label="resources.section_cn.fields.code" />
+      <ReferenceField
+        label="resources.section_cn.fields.name"
+        source="id"
+        reference="section_cn"
+      >
+        <TextField source="name" />
+      </ReferenceField>
+
+      <ReferenceField
+        label="resources.section_cn.fields.name"
+        source="id"
+        reference="section_cn"
+      >
+        <TextField source="code" label="resources.section_cn.fields.code" />
+      </ReferenceField>
+
       <EditButton label="" />
       <DeleteButton label="" />
     </Datagrid>

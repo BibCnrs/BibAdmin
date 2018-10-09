@@ -79,10 +79,14 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
         const query = {
           _page: page,
-          _perPage: perPage,
-          _sortField: field,
-          _sortDir: order || "ASC"
+          _perPage: perPage
         };
+
+        if (field && field !== "id") {
+          query._sortField = field;
+          query._sortDir = order || "ASC";
+        }
+
         if (Object.keys(filters).length > 0) {
           query._filters = JSON.stringify(filters);
         }

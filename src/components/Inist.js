@@ -25,7 +25,6 @@ import {
   SelectArrayInput,
   AutocompleteInput
 } from "react-admin";
-import Button from "@material-ui/core/Button";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -52,7 +51,7 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.main_institute"
       source="main_institute"
       reference="institutes"
-      perPage={100}
+      perPage={250}
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -61,7 +60,7 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.institutes"
       source="institutes"
       reference="institutes"
-      perPage={100}
+      perPage={250}
     >
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
@@ -70,7 +69,7 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.main_unit"
       source="main_unit"
       reference="units"
-      perPage={100}
+      perPage={250}
     >
       <AutocompleteInput optionText="code" />
     </ReferenceInput>
@@ -79,21 +78,20 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.units"
       source="units"
       reference="units"
-      perPage={100}
+      perPage={250}
     >
       <SelectArrayInput optionText="code" />
     </ReferenceArrayInput>
 
-    {/*
     <ReferenceArrayInput
       label="resources.inistAccounts.fields.communities"
       source="communities"
       reference="communities"
-      perPage={100}
+      perPage={250}
     >
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
-    */}
+
     <DateInput
       source="from_inist_account.subscription_date_before"
       label="resources.inistAccounts.fields.subscription_date_before"
@@ -121,14 +119,22 @@ const InistFilter = props => (
 export const InistList = ({ ...props }) => (
   <List {...props} filters={<InistFilter />} perPage={10}>
     <Datagrid>
-      <TextField
+      <ReferenceField
         label="resources.inistAccounts.fields.username"
-        source="username"
-      />
-      <TextField
-        source="password"
+        source="id"
+        reference="inistAccounts"
+      >
+        <TextField source="username" />
+      </ReferenceField>
+
+      <ReferenceField
         label="resources.inistAccounts.fields.password"
-      />
+        source="id"
+        reference="inistAccounts"
+      >
+        <TextField source="password" />
+      </ReferenceField>
+
       <TextField source="name" label="resources.inistAccounts.fields.name" />
       <TextField
         source="firstname"
@@ -208,10 +214,6 @@ const passwordValue = Math.random()
   .toString(36)
   .slice(-6);
 
-const GeneratePassword = () => {
-  document.getElementById("passwordInput").value = passwordValue;
-};
-
 const GeneratePasswordButton = () => {
   return (
     <span>
@@ -257,7 +259,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        perPage={100}
+        perPage={250}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -266,7 +268,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.institutes"
         source="institutes"
         reference="institutes"
-        perPage={100}
+        perPage={250}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -275,7 +277,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
-        perPage={100}
+        perPage={250}
       >
         <AutocompleteInput optionText="code" />
       </ReferenceInput>
@@ -284,30 +286,30 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.units"
         source="units"
         reference="units"
-        perPage={100}
+        perPage={250}
       >
         <SelectArrayInput optionText="code" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
+        label="resources.inistAccounts.fields.communities"
+        source="communities"
+        reference="communities"
+        perPage={250}
+      >
+        <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
 
       <ReferenceArrayField
         label="resources.inistAccounts.fields.all_communities"
         source="all_communities"
         reference="communities"
-        perPage={100}
+        perPage={250}
       >
         <SingleFieldList>
           <ChipField source="name" />
         </SingleFieldList>
       </ReferenceArrayField>
-
-      <ReferenceArrayInput
-        label="resources.inistAccounts.fields.communities"
-        source="communities"
-        reference="communities"
-        perPage={100}
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
 
       <DateInput
         source="subscription_date"
@@ -356,7 +358,8 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        perPage={100}
+        sort={{ field: "name" }}
+        perPage={250}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -365,7 +368,8 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.institutes"
         source="institutes"
         reference="institutes"
-        perPage={100}
+        sort={{ field: "name" }}
+        perPage={250}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -374,7 +378,8 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
-        perPage={100}
+        sort={{ field: "code" }}
+        perPage={250}
       >
         <AutocompleteInput optionText="code" />
       </ReferenceInput>
@@ -383,30 +388,31 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.units"
         source="units"
         reference="units"
-        perPage={100}
+        sort={{ field: "code" }}
+        perPage={250}
       >
         <SelectArrayInput optionText="code" />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
+        label="resources.inistAccounts.fields.communities"
+        source="communities"
+        reference="communities"
+        perPage={250}
+      >
+        <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
 
       <ReferenceArrayField
         label="resources.inistAccounts.fields.all_communities"
         source="all_communities"
         reference="communities"
-        perPage={100}
+        perPage={250}
       >
         <SingleFieldList>
           <ChipField source="name" />
         </SingleFieldList>
       </ReferenceArrayField>
-
-      <ReferenceArrayInput
-        label="resources.inistAccounts.fields.communities"
-        source="communities"
-        reference="communities"
-        perPage={100}
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
 
       <DateInput
         source="subscription_date"

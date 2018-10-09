@@ -13,6 +13,7 @@ import {
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  ReferenceField,
   ReferenceArrayField,
   ChipField
 } from "react-admin";
@@ -35,14 +36,15 @@ const FavorisFilter = props => (
 );
 
 export const FavorisList = ({ ...props }) => (
-  <List
-    {...props}
-    filters={<FavorisFilter />}
-    sort={{ field: "revue.title" }}
-    perPage={10}
-  >
+  <List {...props} filters={<FavorisFilter />} perPage={10}>
     <Datagrid>
-      <TextField source="title" label="resources.revues.fields.title" />
+      <ReferenceField
+        label="resources.revues.fields.title"
+        source="id"
+        reference="revues"
+      >
+        <TextField source="title" />
+      </ReferenceField>
 
       <ReferenceArrayField
         label="resources.revues.fields.communities"

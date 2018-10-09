@@ -93,7 +93,14 @@ const JanusFilter = props => (
 export const JanusList = props => (
   <List {...props} filters={<JanusFilter />} perPage={10}>
     <Datagrid>
-      <TextField source="uid" label="resources.janusAccounts.fields.uid" />
+      <ReferenceField
+        label="resources.janusAccounts.fields.uid"
+        source="id"
+        reference="janusAccounts"
+      >
+        <TextField source="uid" />
+      </ReferenceField>
+
       <EmailField source="mail" label="resources.janusAccounts.fields.mail" />
 
       <ReferenceField
