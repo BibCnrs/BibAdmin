@@ -31,7 +31,7 @@ const CommunitiesFilter = props => (
 );
 
 export const CommunitiesList = ({ ...props }) => (
-  <List {...props} filters={<CommunitiesFilter />} perPage={50}>
+  <List {...props} filters={<CommunitiesFilter />} perPage={10}>
     <Datagrid>
       <ReferenceField
         label="resources.communities.fields.name"

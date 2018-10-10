@@ -105,7 +105,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           _sort: field,
           _order: order,
           _start: (page - 1) * perPage,
-          _end: page * perPage
+          _end: page * perPage,
+          _page: page,
+          _perPage: perPage
         };
         url = `${apiUrl}/${resource}?${stringify(query)}`;
         break;
@@ -113,12 +115,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       case UPDATE:
         url = `${apiUrl}/${resource}/${params.id}`;
         options.method = "PUT";
-        options.body = JSON.stringify(params.data);
+        options.body = params.data;
         break;
       case CREATE:
         url = `${apiUrl}/${resource}`;
         options.method = "POST";
-        options.body = JSON.stringify(params.data);
+        options.body = params.data;
         break;
       case DELETE:
         url = `${apiUrl}/${resource}/${params.id}`;
@@ -136,6 +138,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     }
     return { url, options };
   };
+
+  const convertFileToBase64 = file =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file.rawFile);
+
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
 
   /**
    * @param {Object} response HTTP response from fetch()
@@ -203,7 +214,26 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         data: responses.map(response => response.json)
       }));
     }
+    /*if (params.data.image) {
+      convertFileToBase64(params.data.image).then(image => {
+        params.data.image = image;
+      });
+    }*/
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
+    if (options.body && options.body.image) {
+      convertFileToBase64(options.body.image).then(image => {
+        options.body.image = image;
+        options.body = JSON.stringify(options.body);
+        return httpClient(url, options)
+          .then(response =>
+            convertHTTPResponse(response, type, resource, params)
+          )
+          .catch(error => console.error(error));
+      });
+    }
+    if (options.body) {
+      JSON.stringify(options.body);
+    }
     return httpClient(url, options).then(response =>
       convertHTTPResponse(response, type, resource, params)
     );

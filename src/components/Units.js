@@ -76,7 +76,7 @@ const UnitsFilter = props => (
 );
 
 export const UnitsList = ({ ...props }) => (
-  <List {...props} filters={<UnitsFilter />} perPage={50}>
+  <List {...props} filters={<UnitsFilter />} pperPage={10}>
     <Datagrid>
       <ReferenceField
         label="resources.units.fields.code"

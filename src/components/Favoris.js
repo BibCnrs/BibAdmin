@@ -36,7 +36,7 @@ const FavorisFilter = props => (
 );
 
 export const FavorisList = ({ ...props }) => (
-  <List {...props} filters={<FavorisFilter />} perPage={50}>
+  <List {...props} filters={<FavorisFilter />} perPage={10}>
     <Datagrid>
       <ReferenceField
         label="resources.revues.fields.title"

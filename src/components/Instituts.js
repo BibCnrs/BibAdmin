@@ -41,7 +41,7 @@ const InstitutsFilter = props => (
 );
 
 export const InstitutsList = ({ ...props }) => (
-  <List {...props} filters={<InstitutsFilter />} perPage={50}>
+  <List {...props} filters={<InstitutsFilter />} perPage={10}>
     <Datagrid>
       <TextField source="id" label="resources.institutes.fields.id" />
       <ReferenceField
