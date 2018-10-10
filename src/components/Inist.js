@@ -51,7 +51,8 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.main_institute"
       source="main_institute"
       reference="institutes"
-      perPage={250}
+      perPage={100}
+      className="scollbar"
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -60,7 +61,7 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.institutes"
       source="institutes"
       reference="institutes"
-      perPage={250}
+      perPage={100}
     >
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
@@ -69,7 +70,8 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.main_unit"
       source="main_unit"
       reference="units"
-      perPage={250}
+      perPage={100}
+      sort={{ field: "code", order: "ASC" }}
     >
       <AutocompleteInput optionText="code" />
     </ReferenceInput>
@@ -78,7 +80,7 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.units"
       source="units"
       reference="units"
-      perPage={250}
+      perPage={100}
     >
       <SelectArrayInput optionText="code" />
     </ReferenceArrayInput>
@@ -87,7 +89,7 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.communities"
       source="communities"
       reference="communities"
-      perPage={250}
+      perPage={100}
     >
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
@@ -259,16 +261,18 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        perPage={250}
+        sort={{ field: "name" }}
+        perPage={100}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput className="scrollbar" optionText="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.institutes"
         source="institutes"
         reference="institutes"
-        perPage={250}
+        sort={{ field: "name" }}
+        perPage={100}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -277,16 +281,18 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
-        perPage={250}
+        sort={{ field: "code" }}
+        perPage={100}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput className="scrollbar" optionText="code" />
       </ReferenceInput>
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.units"
         source="units"
         reference="units"
-        perPage={250}
+        sort={{ field: "code" }}
+        perPage={100}
       >
         <SelectArrayInput optionText="code" />
       </ReferenceArrayInput>
@@ -295,7 +301,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.communities"
         source="communities"
         reference="communities"
-        perPage={250}
+        perPage={100}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -304,7 +310,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.all_communities"
         source="all_communities"
         reference="communities"
-        perPage={250}
+        perPage={100}
       >
         <SingleFieldList>
           <ChipField source="name" />
@@ -359,9 +365,9 @@ export const InistCreate = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
         sort={{ field: "name" }}
-        perPage={250}
+        perPage={100}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput className="scrollbar" optionText="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -369,7 +375,7 @@ export const InistCreate = ({ ...props }) => (
         source="institutes"
         reference="institutes"
         sort={{ field: "name" }}
-        perPage={250}
+        perPage={100}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -379,9 +385,9 @@ export const InistCreate = ({ ...props }) => (
         source="main_unit"
         reference="units"
         sort={{ field: "code" }}
-        perPage={250}
+        perPage={100}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput className="scrollbar" optionText="code" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -389,7 +395,7 @@ export const InistCreate = ({ ...props }) => (
         source="units"
         reference="units"
         sort={{ field: "code" }}
-        perPage={250}
+        perPage={100}
       >
         <SelectArrayInput optionText="code" />
       </ReferenceArrayInput>
@@ -398,7 +404,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.communities"
         source="communities"
         reference="communities"
-        perPage={250}
+        perPage={100}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -407,7 +413,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.all_communities"
         source="all_communities"
         reference="communities"
-        perPage={250}
+        perPage={100}
       >
         <SingleFieldList>
           <ChipField source="name" />

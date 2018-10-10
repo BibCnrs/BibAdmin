@@ -45,7 +45,7 @@ const UnitsFilter = props => (
       source="main_institute"
       reference="institutes"
     >
-      <SelectInput source="name" />
+      <SelectInput source="name" className="scollbar" />
     </ReferenceInput>
 
     <ReferenceArrayInput
@@ -76,7 +76,7 @@ const UnitsFilter = props => (
 );
 
 export const UnitsList = ({ ...props }) => (
-  <List {...props} filters={<UnitsFilter />} perPage={10}>
+  <List {...props} filters={<UnitsFilter />} pperPage={10}>
     <Datagrid>
       <ReferenceField
         label="resources.units.fields.code"
@@ -146,6 +146,24 @@ export const UnitsList = ({ ...props }) => (
 
 const UnitsTitle = ({ record }) => {
   return record.name;
+};
+
+const UrlSearchInist = ({ source, record = {} }) => {
+  const url = `#/inistAccounts/list?search={"main_unit.id":${record.id}}`;
+  return <a href={url}>{record.nb_inist_account}</a>;
+};
+
+UrlSearchInist.defaultProps = {
+  addLabel: true
+};
+
+const UrlSearchJanus = ({ source, record = {} }) => {
+  const url = `#/janusAccounts/list?search={"main_unit.id":${record.id}}`;
+  return <a href={url}>{record.nb_janus_account}</a>;
+};
+
+UrlSearchJanus.defaultProps = {
+  addLabel: true
 };
 
 export const UnitsEdit = ({ ...props }) => (
@@ -231,7 +249,7 @@ export const UnitsEdit = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
       >
-        <SelectInput source="name" />
+        <SelectInput source="name" className="scollbar" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -245,14 +263,8 @@ export const UnitsEdit = ({ ...props }) => (
         </SelectArrayInput>
       </ReferenceArrayInput>
 
-      <TextField
-        source="nb_inist_account"
-        label="resources.units.fields.nb_inist_account"
-      />
-      <TextField
-        source="nb_janus_account"
-        label="resources.units.fields.nb_janus_account"
-      />
+      <UrlSearchInist label="Nombre de compte Inist" />
+      <UrlSearchJanus label="Nombre de compte Janus" />
 
       <ReferenceArrayInput
         label="resources.units.fields.communities"
@@ -372,7 +384,7 @@ export const UnitsCreate = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
       >
-        <SelectInput source="name" />
+        <SelectInput source="name" className="scollbar" />
       </ReferenceInput>
 
       <ReferenceArrayInput

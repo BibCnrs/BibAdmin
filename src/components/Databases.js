@@ -113,10 +113,11 @@ export const DatabasesCreate = ({ ...props }) => (
       </ReferenceArrayInput>
       <FileInput
         source="image"
-        label="Image"
+        label="resources.databases.fields.image"
         placeholder={<p>Glisser déposer l'image</p>}
-      />
-      <ImageField source="image" title="title" />
+      >
+        <ImageField source="image" title="title_database" />
+      </FileInput>
       <BooleanInput source="active" label="resources.databases.fields.active" />
     </SimpleForm>
   </Create>

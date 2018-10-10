@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* change size */
 a[role="menuitem"] {
   font-size: 15px;
@@ -19,6 +23,14 @@ form.simple-form > div > div > span > div {
   width: 90% !important;
 }
 
+div[role="combobox"] > div {
+  width: 100% !important;
+}
+
+div.ra-input-all_communities > div > div > div {
+  width: inherit;
+}
+
 /* determine size of chips */
 .tags > a {
   width: initial;
@@ -28,4 +40,10 @@ form.simple-form > div > div > span > div {
 table th,
 table td {
   padding: 0 6px !important;
+}
+
+ul[role="listbox"],
+.scrollbar {
+  max-height: 250px;
+  overflow: scroll;
 }
