@@ -44,7 +44,7 @@ const SectionsFilter = props => (
 );
 
 export const SectionsList = ({ ...props }) => (
-  <List {...props} filters={<SectionsFilter />} perPage={10}>
+  <List {...props} filters={<SectionsFilter />} perPage={50}>
     <Datagrid>
       <ReferenceField
         label="resources.section_cn.fields.name"

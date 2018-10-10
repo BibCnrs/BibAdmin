@@ -91,7 +91,7 @@ const JanusFilter = props => (
 );
 
 export const JanusList = props => (
-  <List {...props} filters={<JanusFilter />} perPage={10}>
+  <List {...props} filters={<JanusFilter />} perPage={50}>
     <Datagrid>
       <ReferenceField
         label="resources.janusAccounts.fields.uid"

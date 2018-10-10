@@ -27,7 +27,7 @@ const DatabasesFilter = props => (
 );
 
 export const DatabasesList = ({ ...props }) => (
-  <List {...props} filters={<DatabasesFilter />} perPage={10}>
+  <List {...props} filters={<DatabasesFilter />} perPage={50}>
     <Datagrid>
       <ReferenceField
         label="resources.databases.fields.name_fr"
