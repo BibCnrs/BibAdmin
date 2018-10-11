@@ -214,26 +214,23 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         data: responses.map(response => response.json)
       }));
     }
-    /*if (params.data.image) {
-      convertFileToBase64(params.data.image).then(image => {
-        params.data.image = image;
-      });
-    }*/
+
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
     if (options.body && options.body.image) {
-      convertFileToBase64(options.body.image).then(image => {
+      return convertFileToBase64(options.body.image).then(image => {
         options.body.image = image;
         options.body = JSON.stringify(options.body);
-        return httpClient(url, options)
-          .then(response => convertHTTPResponse(response, type, resource, params))
-          .catch(error => console.error(error));
+        return httpClient(url, options).then(response =>
+          convertHTTPResponse(response, type, resource, params)
+        );
       });
+    } else {
+      if (options.body) {
+        options.body = JSON.stringify(options.body);
+      }
+      return httpClient(url, options).then(response =>
+        convertHTTPResponse(response, type, resource, params)
+      );
     }
-    if (options.body) {
-      options.body = JSON.stringify(options.body);
-    }
-    return httpClient(url, options).then(response =>
-      convertHTTPResponse(response, type, resource, params)
-    );
   };
 };

@@ -63,8 +63,14 @@ export const DatabasesEdit = ({ ...props }) => (
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
-      <FileInput source="image" label="Image" placeholder={<p>Glisser déposer l'image</p>} />
-      <ImageField source="image" title="title" />
+      <FileInput
+        source="image"
+        label="resources.databases.fields.image"
+        placeholder={<p>Glisser déposer l'image</p>}
+      >
+        <ImageField source="image" title="title_database" />
+      </FileInput>
+      <ImageField source="image" label="Image actuel" title="current_image" />
       <BooleanInput source="active" label="resources.databases.fields.active" />
     </SimpleForm>
   </Edit>
