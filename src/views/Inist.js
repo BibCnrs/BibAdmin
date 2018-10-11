@@ -17,7 +17,6 @@ import {
   BooleanField,
   TextInput,
   LongTextInput,
-  DateInput,
   BooleanInput,
   ReferenceInput,
   ReferenceArrayInput,
@@ -25,6 +24,7 @@ import {
   AutocompleteInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import { DateInput } from "react-admin-date-inputs";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -92,20 +92,24 @@ const InistFilter = props => (
     </ReferenceArrayInput>
 
     <DateInput
-      source="from_inist_account.subscription_date_before"
+      source="to_inist_account.subscription_date"
       label="resources.inistAccounts.fields.subscription_date_before"
+      options={{ format: "MM-dd-yyyy" }}
     />
     <DateInput
-      source="from_inist_account.subscription_date_after"
+      source="from_inist_account.subscription_date"
       label="resources.inistAccounts.fields.subscription_date_after"
+      options={{ format: "MM-dd-yyyy" }}
     />
     <DateInput
-      source="from_inist_account.expiration_date_before"
+      source="to_inist_account.expiration_date"
       label="resources.inistAccounts.fields.expiration_date_before"
+      options={{ format: "MM-dd-yyyy" }}
     />
     <DateInput
-      source="from_inist_account.expiration_date_date_after"
+      source="from_inist_account.expiration_date"
       label="resources.inistAccounts.fields.expiration_date_after"
+      options={{ format: "MM-dd-yyyy" }}
     />
 
     <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
@@ -199,18 +203,13 @@ export const InistList = ({ ...props }) => (
 
 const passwordValue = Math.random()
   .toString(36)
-  .slice(-6);
+  .slice(-6)
+  .toUpperCase();
 
-const GeneratePasswordButton = () => {
+const GeneratePasswordButton = ({ ...rest }) => {
   return (
     <span>
-      <TextInput
-        type="password"
-        id="passwordInput"
-        source="password"
-        label="resources.inistAccounts.fields.password"
-        defaultValue={passwordValue}
-      />
+      <TextInput type="password" id="passwordInput" defaultValue={passwordValue} {...rest} />
     </span>
   );
 };
@@ -307,7 +306,7 @@ export const InistCreate = ({ ...props }) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="username" label="resources.inistAccounts.fields.username" />
-      <GeneratePasswordButton />
+      <GeneratePasswordButton source="password" label="resources.inistAccounts.fields.password" />
       <TextInput source="name" label="resources.inistAccounts.fields.name" />
       <TextInput source="firstname" label="resources.inistAccounts.fields.firstname" />
       <TextInput type="email" source="mail" label="resources.inistAccounts.fields.mail" />
