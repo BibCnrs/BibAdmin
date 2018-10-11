@@ -62,19 +62,23 @@ const JanusFilter = props => (
     <DateInput
       source="to_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_before"
+      options={{ format: "MM-dd-yyyy" }}
     />
 
     <DateInput
       source="from_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_after"
+      options={{ format: "MM-dd-yyyy" }}
     />
     <DateInput
       source="to_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_before"
+      options={{ format: "MM-dd-yyyy" }}
     />
     <DateInput
       source="from_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_after"
+      options={{ format: "MM-dd-yyyy" }}
     />
 
     <BooleanInput source="janus_account.cnrs" label="resources.janusAccounts.fields.cnrs" />
@@ -85,14 +89,15 @@ const JanusFilter = props => (
 export const JanusList = props => (
   <List {...props} filters={<JanusFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField
+      {/*<ReferenceField
         label="resources.janusAccounts.fields.uid"
         source="id"
         reference="janusAccounts"
       >
         <TextField source="uid" />
-      </ReferenceField>
+      </ReferenceField>*/}
 
+      <TextField source="uid" />
       <EmailField source="mail" label="resources.janusAccounts.fields.mail" />
 
       <ReferenceField

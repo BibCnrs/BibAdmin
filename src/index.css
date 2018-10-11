@@ -23,12 +23,14 @@ form.simple-form > div > div > span > div {
   width: 90% !important;
 }
 
-div[role="combobox"] > div {
+div[role="combobox"] > div,
+div.picker > div {
   width: 100% !important;
 }
 
-div.ra-input-all_communities > div > div > div {
-  width: inherit;
+div.ra-input-all_communities > div > div > div,
+div.ra-input-all_communities > div > div > div > a {
+  width: initial;
 }
 
 /* determine size of chips */

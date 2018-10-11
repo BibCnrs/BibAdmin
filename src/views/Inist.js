@@ -65,7 +65,7 @@ const InistFilter = props => (
 
     <ReferenceInput
       label="resources.inistAccounts.fields.main_unit"
-      source="main_unit"
+      source="like_unit.code"
       reference="units"
       perPage={100}
       sort={{ field: "code", order: "ASC" }}
@@ -73,23 +73,23 @@ const InistFilter = props => (
       <AutocompleteInput optionText="code" />
     </ReferenceInput>
 
-    <ReferenceArrayInput
+    <ReferenceInput
       label="resources.inistAccounts.fields.units"
-      source="units"
+      source="units.id"
       reference="units"
       perPage={100}
     >
-      <SelectArrayInput optionText="code" />
-    </ReferenceArrayInput>
+      <AutocompleteInput optionText="code" />
+    </ReferenceInput>
 
-    <ReferenceArrayInput
+    <ReferenceInput
       label="resources.inistAccounts.fields.communities"
-      source="communities"
+      source="community.id"
       reference="communities"
       perPage={100}
     >
-      <SelectArrayInput optionText="name" />
-    </ReferenceArrayInput>
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <DateInput
       source="to_inist_account.subscription_date"
@@ -294,8 +294,13 @@ export const InistEdit = ({ ...props }) => (
       <DateInput
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
+        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput source="expiration_date" label="resources.inistAccounts.fields.expiration_date" />
+      <DateInput
+        source="expiration_date"
+        label="resources.inistAccounts.fields.expiration_date"
+        options={{ format: "MM-dd-yyyy" }}
+      />
       <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
       <LongTextInput source="comment" label="resources.inistAccounts.fields.comment" />
     </SimpleForm>
@@ -378,8 +383,13 @@ export const InistCreate = ({ ...props }) => (
       <DateInput
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
+        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput source="expiration_date" label="resources.inistAccounts.fields.expiration_date" />
+      <DateInput
+        source="expiration_date"
+        label="resources.inistAccounts.fields.expiration_date"
+        options={{ format: "MM-dd-yyyy" }}
+      />
       <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
       <LongTextInput source="comment" label="resources.inistAccounts.fields.comment" />
     </SimpleForm>
