@@ -22,6 +22,7 @@ import {
   SelectArrayInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import { DateInput } from "react-admin-date-inputs";
 
 const JanusFilter = props => (
   <Filter {...props}>
@@ -58,20 +59,20 @@ const JanusFilter = props => (
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
 
-    <DateField
+    <DateInput
       source="to_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_before"
     />
 
-    <DateField
+    <DateInput
       source="from_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_after"
     />
-    <DateField
+    <DateInput
       source="to_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_before"
     />
-    <DateField
+    <DateInput
       source="from_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_after"
     />
