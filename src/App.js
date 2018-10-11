@@ -9,33 +9,17 @@ import GroupIcon from "@material-ui/icons/Group";
 import InstituteIcon from "@material-ui/icons/AccountBalance";
 import FolderIcon from "@material-ui/icons/Folder";
 
-// import components
-import Dashboard from "./components/Dashboard";
-import { UsersList, UsersEdit, UsersCreate } from "./components/Users";
-import { InistList, InistEdit, InistCreate } from "./components/Inist";
-import { JanusList, JanusEdit } from "./components/Janus";
-import {
-  InstitutsList,
-  InstitutsEdit,
-  InstitutsCreate
-} from "./components/Instituts";
-import { UnitsList, UnitsEdit, UnitsCreate } from "./components/Units";
-import {
-  CommunitiesList,
-  CommunitiesEdit,
-  CommunitiesCreate
-} from "./components/Communities";
-import {
-  DatabasesList,
-  DatabasesEdit,
-  DatabasesCreate
-} from "./components/Databases";
-import {
-  SectionsList,
-  SectionsEdit,
-  SectionsCreate
-} from "./components/Sections";
-import { FavorisList, FavorisEdit, FavorisCreate } from "./components/Favoris";
+// import views
+import Dashboard from "./views/Dashboard";
+import { UsersList, UsersEdit, UsersCreate } from "./views/Users";
+import { InistList, InistEdit, InistCreate } from "./views/Inist";
+import { JanusList, JanusEdit } from "./views/Janus";
+import { InstitutsList, InstitutsEdit, InstitutsCreate } from "./views/Instituts";
+import { UnitsList, UnitsEdit, UnitsCreate } from "./views/Units";
+import { CommunitiesList, CommunitiesEdit, CommunitiesCreate } from "./views/Communities";
+import { DatabasesList, DatabasesEdit, DatabasesCreate } from "./views/Databases";
+import { SectionsList, SectionsEdit, SectionsCreate } from "./views/Sections";
+import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";
 
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
@@ -54,17 +38,11 @@ class App extends Component {
       if (!options.headers) {
         options.headers = new Headers({ Accept: "application/json" });
       }
-      options.headers.set(
-        "Authorization",
-        `Bearer ${localStorage.getItem("token")}`
-      );
+      options.headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`);
       return fetchUtils.fetchJson(url, options);
     };
 
-    const dataProvider = jsonServerProvider(
-      process.env.REACT_APP_BIBAPI_HOST,
-      httpClient
-    );
+    const dataProvider = jsonServerProvider(process.env.REACT_APP_BIBAPI_HOST, httpClient);
 
     this.setState({ dataProvider });
   }
@@ -103,12 +81,7 @@ class App extends Component {
           edit={InistEdit}
           icon={UserIcon}
         />
-        <Resource
-          name="janusAccounts"
-          list={JanusList}
-          edit={JanusEdit}
-          icon={UserIcon}
-        />
+        <Resource name="janusAccounts" list={JanusList} edit={JanusEdit} icon={UserIcon} />
         <Resource
           name="institutes"
           list={InstitutsList}

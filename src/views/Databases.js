@@ -4,7 +4,6 @@ import {
   Datagrid,
   Edit,
   EditButton,
-  DeleteButton,
   List,
   Filter,
   SimpleForm,
@@ -19,6 +18,7 @@ import {
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
+import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 
 const DatabasesFilter = props => (
   <Filter {...props}>
@@ -29,23 +29,15 @@ const DatabasesFilter = props => (
 export const DatabasesList = ({ ...props }) => (
   <List {...props} filters={<DatabasesFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField
-        label="resources.databases.fields.name_fr"
-        source="id"
-        reference="databases"
-      >
+      <ReferenceField label="resources.databases.fields.name_fr" source="id" reference="databases">
         <TextField source="name_fr" />
       </ReferenceField>
-      <ReferenceField
-        label="resources.databases.fields.name_en"
-        source="id"
-        reference="databases"
-      >
+      <ReferenceField label="resources.databases.fields.name_en" source="id" reference="databases">
         <TextField source="name_en" />
       </ReferenceField>
       <BooleanField source="active" label="resources.databases.fields.active" />
-      <EditButton label="" />
-      <DeleteButton label="" />
+      <EditButton />
+      <DeleteButtonWithConfirmation />
     </Datagrid>
   </List>
 );
@@ -61,14 +53,8 @@ export const DatabasesEdit = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <LongTextInput
-        source="text_fr"
-        label="resources.databases.fields.text_fr"
-      />
-      <LongTextInput
-        source="text_en"
-        label="resources.databases.fields.text_en"
-      />
+      <LongTextInput source="text_fr" label="resources.databases.fields.text_fr" />
+      <LongTextInput source="text_en" label="resources.databases.fields.text_en" />
       <ReferenceArrayInput
         label="resources.databases.fields.communities"
         source="communities"
@@ -77,11 +63,7 @@ export const DatabasesEdit = ({ ...props }) => (
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
-      <FileInput
-        source="image"
-        label="Image"
-        placeholder={<p>Glisser déposer l'image</p>}
-      />
+      <FileInput source="image" label="Image" placeholder={<p>Glisser déposer l'image</p>} />
       <ImageField source="image" title="title" />
       <BooleanInput source="active" label="resources.databases.fields.active" />
     </SimpleForm>
@@ -95,14 +77,8 @@ export const DatabasesCreate = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <LongTextInput
-        source="text_fr"
-        label="resources.databases.fields.text_fr"
-      />
-      <LongTextInput
-        source="text_en"
-        label="resources.databases.fields.text_en"
-      />
+      <LongTextInput source="text_fr" label="resources.databases.fields.text_fr" />
+      <LongTextInput source="text_en" label="resources.databases.fields.text_en" />
       <ReferenceArrayInput
         label="resources.databases.fields.communities"
         source="communities"

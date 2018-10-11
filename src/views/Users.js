@@ -4,7 +4,6 @@ import {
   Datagrid,
   Edit,
   EditButton,
-  DeleteButton,
   Filter,
   List,
   NumberField,
@@ -13,6 +12,7 @@ import {
   TextInput,
   LongTextInput
 } from "react-admin";
+import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 
 const UsersFilter = props => (
   <Filter {...props}>
@@ -26,7 +26,7 @@ export const UsersList = ({ ...props }) => (
       <NumberField type="number" source="id" />
       <TextField source="username" label="resources.adminUsers.fields.login" />
       <EditButton label="" />
-      <DeleteButton label="" />
+      <DeleteButtonWithConfirmation />
     </Datagrid>
   </List>
 );
