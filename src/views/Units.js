@@ -4,7 +4,6 @@ import {
   Datagrid,
   Edit,
   EditButton,
-  DeleteButton,
   List,
   Filter,
   SimpleForm,
@@ -23,6 +22,7 @@ import {
   SelectArrayInput,
   LongTextInput
 } from "react-admin";
+import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 
 const UnitsFilter = props => (
   <Filter {...props}>
@@ -68,21 +68,14 @@ const UnitsFilter = props => (
       </SelectArrayInput>
     </ReferenceArrayInput>
 
-    <BooleanInput
-      source="active"
-      label="resources.inistAccounts.fields.active"
-    />
+    <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
   </Filter>
 );
 
 export const UnitsList = ({ ...props }) => (
   <List {...props} filters={<UnitsFilter />} pperPage={10}>
     <Datagrid>
-      <ReferenceField
-        label="resources.units.fields.code"
-        source="id"
-        reference="units"
-      >
+      <ReferenceField label="resources.units.fields.code" source="id" reference="units">
         <TextField source="code" />
       </ReferenceField>
 
@@ -108,14 +101,8 @@ export const UnitsList = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <TextField
-        source="nb_inist_account"
-        label="resources.units.fields.nb_inist_account"
-      />
-      <TextField
-        source="nb_janus_account"
-        label="resources.units.fields.nb_janus_account"
-      />
+      <TextField source="nb_inist_account" label="resources.units.fields.nb_inist_account" />
+      <TextField source="nb_janus_account" label="resources.units.fields.nb_janus_account" />
 
       <ReferenceArrayField
         label="resources.units.fields.communities"
@@ -138,8 +125,8 @@ export const UnitsList = ({ ...props }) => (
       </ReferenceArrayField>
 
       <BooleanField source="active" label="resources.units.fields.active" />
-      <EditButton label="" />
-      <DeleteButton label="" />
+      <EditButton />
+      <DeleteButtonWithConfirmation />
     </Datagrid>
   </List>
 );
@@ -171,78 +158,42 @@ export const UnitsEdit = ({ ...props }) => (
     <SimpleForm>
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
-      <TextInput
-        source="implantation"
-        label="resources.units.fields.implantation"
-      />
+      <TextInput source="implantation" label="resources.units.fields.implantation" />
       <TextInput source="body" label="resources.units.fields.body" />
 
       <TextInput source="building" label="resources.units.fields.building" />
       <TextInput source="street" label="resources.units.fields.street" />
-      <TextInput
-        source="post_office_box"
-        label="resources.units.fields.post_office_box"
-      />
-      <TextInput
-        source="postal_code"
-        label="resources.units.fields.postal_code"
-      />
+      <TextInput source="post_office_box" label="resources.units.fields.post_office_box" />
+      <TextInput source="postal_code" label="resources.units.fields.postal_code" />
       <TextInput source="town" label="resources.units.fields.town" />
       <TextInput source="country" label="resources.units.fields.country" />
       <TextInput source="unit_dr" label="resources.units.fields.unit_dr" />
 
-      <NumberInput
-        source="nb_researcher_cnrs"
-        label="resources.units.fields.nb_researcher_cnrs"
-      />
+      <NumberInput source="nb_researcher_cnrs" label="resources.units.fields.nb_researcher_cnrs" />
       <NumberInput
         source="nb_researcher_nocnrs"
         label="resources.units.fields.nb_researcher_nocnrs"
       />
-      <NumberInput
-        source="nb_doctorant"
-        label="resources.units.fields.nb_doctorant"
-      />
-      <NumberInput
-        source="nb_post_doctorant"
-        label="resources.units.fields.nb_post_doctorant"
-      />
+      <NumberInput source="nb_doctorant" label="resources.units.fields.nb_doctorant" />
+      <NumberInput source="nb_post_doctorant" label="resources.units.fields.nb_post_doctorant" />
 
-      <TextInput
-        source="director_name"
-        label="resources.units.fields.director_name"
-      />
-      <TextInput
-        source="director_firstname"
-        label="resources.units.fields.director_firstname"
-      />
-      <TextInput
-        type="email"
-        source="director_mail"
-        label="resources.units.fields.director_mail"
-      />
+      <TextInput source="director_name" label="resources.units.fields.director_name" />
+      <TextInput source="director_firstname" label="resources.units.fields.director_firstname" />
+      <TextInput type="email" source="director_mail" label="resources.units.fields.director_mail" />
 
       <TextInput
         source="correspondant_documentaire"
         label="resources.units.fields.correspondant_documentaire"
       />
       <TextInput source="cd_phone" label="resources.units.fields.cd_phone" />
-      <TextInput
-        type="email"
-        source="cd_mail"
-        label="resources.units.fields.cd_mail"
-      />
+      <TextInput type="email" source="cd_mail" label="resources.units.fields.cd_mail" />
 
       <TextInput
         source="correspondant_documentaire"
         label="resources.units.fields.correspondant_informatique"
       />
       <TextInput source="ci_phone" label="resources.units.fields.ci_phone" />
-      <TextInput
-        type="email"
-        source="ci_mail"
-        label="resources.units.fields.ci_mail"
-      />
+      <TextInput type="email" source="ci_mail" label="resources.units.fields.ci_mail" />
 
       <ReferenceInput
         label="resources.units.fields.main_institute"
@@ -288,15 +239,9 @@ export const UnitsEdit = ({ ...props }) => (
         </SelectArrayInput>
       </ReferenceArrayInput>
 
-      <LongTextInput
-        source="comment"
-        label="resources.inistAccounts.fields.comment"
-      />
+      <LongTextInput source="comment" label="resources.inistAccounts.fields.comment" />
 
-      <BooleanInput
-        source="active"
-        label="resources.inistAccounts.fields.active"
-      />
+      <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
     </SimpleForm>
   </Edit>
 );
@@ -306,78 +251,42 @@ export const UnitsCreate = ({ ...props }) => (
     <SimpleForm redirect="list">
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
-      <TextInput
-        source="implantation"
-        label="resources.units.fields.implantation"
-      />
+      <TextInput source="implantation" label="resources.units.fields.implantation" />
       <TextInput source="body" label="resources.units.fields.body" />
 
       <TextInput source="building" label="resources.units.fields.building" />
       <TextInput source="street" label="resources.units.fields.street" />
-      <TextInput
-        source="post_office_box"
-        label="resources.units.fields.post_office_box"
-      />
-      <TextInput
-        source="postal_code"
-        label="resources.units.fields.postal_code"
-      />
+      <TextInput source="post_office_box" label="resources.units.fields.post_office_box" />
+      <TextInput source="postal_code" label="resources.units.fields.postal_code" />
       <TextInput source="town" label="resources.units.fields.town" />
       <TextInput source="country" label="resources.units.fields.country" />
       <TextInput source="unit_dr" label="resources.units.fields.unit_dr" />
 
-      <NumberInput
-        source="nb_researcher_cnrs"
-        label="resources.units.fields.nb_researcher_cnrs"
-      />
+      <NumberInput source="nb_researcher_cnrs" label="resources.units.fields.nb_researcher_cnrs" />
       <NumberInput
         source="nb_researcher_nocnrs"
         label="resources.units.fields.nb_researcher_nocnrs"
       />
-      <NumberInput
-        source="nb_doctorant"
-        label="resources.units.fields.nb_doctorant"
-      />
-      <NumberInput
-        source="nb_post_doctorant"
-        label="resources.units.fields.nb_post_doctorant"
-      />
+      <NumberInput source="nb_doctorant" label="resources.units.fields.nb_doctorant" />
+      <NumberInput source="nb_post_doctorant" label="resources.units.fields.nb_post_doctorant" />
 
-      <TextInput
-        source="director_name"
-        label="resources.units.fields.director_name"
-      />
-      <TextInput
-        source="director_firstname"
-        label="resources.units.fields.director_firstname"
-      />
-      <TextInput
-        type="email"
-        source="director_mail"
-        label="resources.units.fields.director_mail"
-      />
+      <TextInput source="director_name" label="resources.units.fields.director_name" />
+      <TextInput source="director_firstname" label="resources.units.fields.director_firstname" />
+      <TextInput type="email" source="director_mail" label="resources.units.fields.director_mail" />
 
       <TextInput
         source="correspondant_documentaire"
         label="resources.units.fields.correspondant_documentaire"
       />
       <TextInput source="cd_phone" label="resources.units.fields.cd_phone" />
-      <TextInput
-        type="email"
-        source="cd_mail"
-        label="resources.units.fields.cd_mail"
-      />
+      <TextInput type="email" source="cd_mail" label="resources.units.fields.cd_mail" />
 
       <TextInput
         source="correspondant_documentaire"
         label="resources.units.fields.correspondant_informatique"
       />
       <TextInput source="ci_phone" label="resources.units.fields.ci_phone" />
-      <TextInput
-        type="email"
-        source="ci_mail"
-        label="resources.units.fields.ci_mail"
-      />
+      <TextInput type="email" source="ci_mail" label="resources.units.fields.ci_mail" />
 
       <ReferenceInput
         label="resources.units.fields.main_institute"
@@ -398,14 +307,8 @@ export const UnitsCreate = ({ ...props }) => (
         </SelectArrayInput>
       </ReferenceArrayInput>
 
-      <TextField
-        source="nb_inist_account"
-        label="resources.units.fields.nb_inist_account"
-      />
-      <TextField
-        source="nb_janus_account"
-        label="resources.units.fields.nb_janus_account"
-      />
+      <TextField source="nb_inist_account" label="resources.units.fields.nb_inist_account" />
+      <TextField source="nb_janus_account" label="resources.units.fields.nb_janus_account" />
 
       <ReferenceArrayInput
         label="resources.units.fields.communities"
@@ -428,15 +331,9 @@ export const UnitsCreate = ({ ...props }) => (
         </SelectArrayInput>
       </ReferenceArrayInput>
 
-      <LongTextInput
-        source="comment"
-        label="resources.inistAccounts.fields.comment"
-      />
+      <LongTextInput source="comment" label="resources.inistAccounts.fields.comment" />
 
-      <BooleanInput
-        source="active"
-        label="resources.inistAccounts.fields.active"
-      />
+      <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
     </SimpleForm>
   </Create>
 );

@@ -4,7 +4,6 @@ import {
   Datagrid,
   Edit,
   EditButton,
-  DeleteButton,
   List,
   Filter,
   SimpleForm,
@@ -17,6 +16,7 @@ import {
   ReferenceArrayField,
   ChipField
 } from "react-admin";
+import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 
 const FavorisFilter = props => (
   <Filter {...props}>
@@ -38,11 +38,7 @@ const FavorisFilter = props => (
 export const FavorisList = ({ ...props }) => (
   <List {...props} filters={<FavorisFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField
-        label="resources.revues.fields.title"
-        source="id"
-        reference="revues"
-      >
+      <ReferenceField label="resources.revues.fields.title" source="id" reference="revues">
         <TextField source="title" />
       </ReferenceField>
 
@@ -56,8 +52,8 @@ export const FavorisList = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <EditButton label="" />
-      <DeleteButton label="" />
+      <EditButton />
+      <DeleteButtonWithConfirmation />
     </Datagrid>
   </List>
 );

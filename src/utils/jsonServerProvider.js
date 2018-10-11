@@ -225,14 +225,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         options.body.image = image;
         options.body = JSON.stringify(options.body);
         return httpClient(url, options)
-          .then(response =>
-            convertHTTPResponse(response, type, resource, params)
-          )
+          .then(response => convertHTTPResponse(response, type, resource, params))
           .catch(error => console.error(error));
       });
     }
     if (options.body) {
-      JSON.stringify(options.body);
+      options.body = JSON.stringify(options.body);
     }
     return httpClient(url, options).then(response =>
       convertHTTPResponse(response, type, resource, params)
