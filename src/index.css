@@ -43,9 +43,3 @@ table th,
 table td {
   padding: 0 6px !important;
 }
-
-ul[role="listbox"],
-.scrollbar {
-  max-height: 250px;
-  overflow: scroll;
-}
