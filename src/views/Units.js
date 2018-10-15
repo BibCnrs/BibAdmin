@@ -188,7 +188,7 @@ export const UnitsEdit = ({ ...props }) => (
       <TextInput type="email" source="cd_mail" label="resources.units.fields.cd_mail" />
 
       <TextInput
-        source="correspondant_documentaire"
+        source="correspondant_informatique"
         label="resources.units.fields.correspondant_informatique"
       />
       <TextInput source="ci_phone" label="resources.units.fields.ci_phone" />
@@ -281,7 +281,7 @@ export const UnitsCreate = ({ ...props }) => (
       <TextInput type="email" source="cd_mail" label="resources.units.fields.cd_mail" />
 
       <TextInput
-        source="correspondant_documentaire"
+        source="correspondant_informatique"
         label="resources.units.fields.correspondant_informatique"
       />
       <TextInput source="ci_phone" label="resources.units.fields.ci_phone" />
@@ -305,9 +305,6 @@ export const UnitsCreate = ({ ...props }) => (
           <ChipField source="name" />
         </SelectArrayInput>
       </ReferenceArrayInput>
-
-      <TextField source="nb_inist_account" label="resources.units.fields.nb_inist_account" />
-      <TextField source="nb_janus_account" label="resources.units.fields.nb_janus_account" />
 
       <ReferenceArrayInput
         label="resources.units.fields.communities"
