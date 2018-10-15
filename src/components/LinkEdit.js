@@ -1,7 +1,7 @@
 import React from "react";
 
 const LinkEdit = ({ record, basePath, source }) => {
-  const url = `${basePath}/${record.id}`;
+  const url = `#${basePath}/${record.id}`;
   return <a href={url}>{record[source]}</a>;
 };
 

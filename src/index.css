@@ -4,12 +4,12 @@ body {
   font-family: sans-serif;
 }
 
-td > a {
+a {
   text-decoration: none;
 }
 
-a:visited {
-  color: inherit;
+td > a:visited {
+  color: blue;
 }
 
 /* change size */
