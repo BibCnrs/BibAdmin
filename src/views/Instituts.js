@@ -7,16 +7,15 @@ import {
   List,
   Filter,
   SimpleForm,
-  TextField,
   ReferenceArrayField,
   SingleFieldList,
   ChipField,
   TextInput,
-  ReferenceField,
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 
 const InstitutsFilter = props => (
   <Filter {...props}>
@@ -37,11 +36,9 @@ const InstitutsFilter = props => (
 export const InstitutsList = ({ ...props }) => (
   <List {...props} filters={<InstitutsFilter />} perPage={10}>
     <Datagrid>
-      <TextField source="id" label="resources.institutes.fields.id" />
-      <ReferenceField label="resources.institutes.fields.code" source="id" reference="institutes">
-        <TextField source="code" />
-      </ReferenceField>
-      <TextField source="name" label="resources.institutes.fields.name" />
+      <LinkEdit source="id" label="resources.institutes.fields.id" />
+      <LinkEdit label="resources.institutes.fields.code" source="code" />
+      <LinkEdit source="name" label="resources.institutes.fields.name" />
       <ReferenceArrayField
         label="resources.institutes.fields.communities"
         reference="communities"

@@ -7,14 +7,13 @@ import {
   List,
   Filter,
   SimpleForm,
-  TextField,
   TextInput,
   LongTextInput,
-  ReferenceField,
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 
 const SectionsFilter = props => (
   <Filter {...props}>
@@ -43,14 +42,8 @@ const SectionsFilter = props => (
 export const SectionsList = ({ ...props }) => (
   <List {...props} filters={<SectionsFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField label="resources.section_cn.fields.name" source="id" reference="section_cn">
-        <TextField source="name" />
-      </ReferenceField>
-
-      <ReferenceField label="resources.section_cn.fields.name" source="id" reference="section_cn">
-        <TextField source="code" label="resources.section_cn.fields.code" />
-      </ReferenceField>
-
+      <LinkEdit label="resources.section_cn.fields.name" source="name" />
+      <LinkEdit label="resources.section_cn.fields.code" source="code" />
       <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>

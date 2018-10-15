@@ -12,7 +12,6 @@ import {
   SingleFieldList,
   ChipField,
   TextField,
-  EmailField,
   DateField,
   BooleanField,
   TextInput,
@@ -22,6 +21,7 @@ import {
   SelectArrayInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 import { DateInput } from "react-admin-date-inputs";
 
 const JanusFilter = props => (
@@ -89,16 +89,8 @@ const JanusFilter = props => (
 export const JanusList = props => (
   <List {...props} filters={<JanusFilter />} perPage={10}>
     <Datagrid>
-      {/*<ReferenceField
-        label="resources.janusAccounts.fields.uid"
-        source="id"
-        reference="janusAccounts"
-      >
-        <TextField source="uid" />
-      </ReferenceField>*/}
-
-      <TextField source="uid" />
-      <EmailField source="mail" label="resources.janusAccounts.fields.mail" />
+      <LinkEdit source="uid" label="resources.janusAccounts.fields.uid" />
+      <LinkEdit source="mail" label="resources.janusAccounts.fields.mail" />
 
       <ReferenceField
         label="resources.janusAccounts.fields.main_institute"

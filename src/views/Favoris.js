@@ -7,16 +7,15 @@ import {
   List,
   Filter,
   SimpleForm,
-  TextField,
   SingleFieldList,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  ReferenceField,
   ReferenceArrayField,
   ChipField
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 
 const FavorisFilter = props => (
   <Filter {...props}>
@@ -38,9 +37,7 @@ const FavorisFilter = props => (
 export const FavorisList = ({ ...props }) => (
   <List {...props} filters={<FavorisFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField label="resources.revues.fields.title" source="id" reference="revues">
-        <TextField source="title" />
-      </ReferenceField>
+      <LinkEdit source="title" label="resources.revues.fields.title" />
 
       <ReferenceArrayField
         label="resources.revues.fields.communities"

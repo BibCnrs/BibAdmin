@@ -7,18 +7,17 @@ import {
   List,
   Filter,
   SimpleForm,
-  TextField,
   BooleanField,
   TextInput,
   LongTextInput,
   BooleanInput,
   FileInput,
   ImageField,
-  ReferenceField,
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 
 const DatabasesFilter = props => (
   <Filter {...props}>
@@ -29,12 +28,8 @@ const DatabasesFilter = props => (
 export const DatabasesList = ({ ...props }) => (
   <List {...props} filters={<DatabasesFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField label="resources.databases.fields.name_fr" source="id" reference="databases">
-        <TextField source="name_fr" />
-      </ReferenceField>
-      <ReferenceField label="resources.databases.fields.name_en" source="id" reference="databases">
-        <TextField source="name_en" />
-      </ReferenceField>
+      <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />
+      <LinkEdit source="name_en" label="resources.databases.fields.name_en" />
       <BooleanField source="active" label="resources.databases.fields.active" />
       <EditButton />
       <DeleteButtonWithConfirmation />
