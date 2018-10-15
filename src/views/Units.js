@@ -23,6 +23,7 @@ import {
   LongTextInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 
 const UnitsFilter = props => (
   <Filter {...props}>
@@ -75,11 +76,9 @@ const UnitsFilter = props => (
 export const UnitsList = ({ ...props }) => (
   <List {...props} filters={<UnitsFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField label="resources.units.fields.code" source="id" reference="units">
-        <TextField source="code" />
-      </ReferenceField>
+      <LinkEdit source="code" label="resources.units.fields.code" />
 
-      <TextField source="name" label="resources.units.fields.name" />
+      <LinkEdit source="name" label="resources.units.fields.name" />
 
       <ReferenceField
         label="resources.units.fields.main_institute"
@@ -101,8 +100,8 @@ export const UnitsList = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <TextField source="nb_inist_account" label="resources.units.fields.nb_inist_account" />
-      <TextField source="nb_janus_account" label="resources.units.fields.nb_janus_account" />
+      <LinkEdit source="nb_inist_account" label="resources.units.fields.nb_inist_account" />
+      <LinkEdit source="nb_janus_account" label="resources.units.fields.nb_janus_account" />
 
       <ReferenceArrayField
         label="resources.units.fields.communities"

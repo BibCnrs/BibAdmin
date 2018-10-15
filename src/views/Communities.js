@@ -10,10 +10,10 @@ import {
   TextField,
   BooleanField,
   TextInput,
-  BooleanInput,
-  ReferenceField
+  BooleanInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 
 const CommunitiesFilter = props => (
   <Filter {...props}>
@@ -30,9 +30,7 @@ const CommunitiesFilter = props => (
 export const CommunitiesList = ({ ...props }) => (
   <List {...props} filters={<CommunitiesFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField label="resources.communities.fields.name" source="id" reference="communities">
-        <TextField source="name" />
-      </ReferenceField>
+      <LinkEdit source="name" label="resources.communities.fields.name" />
 
       <TextField source="gate" label="resources.communities.fields.gate" />
       <TextField source="user_id" label="resources.communities.fields.user_id" />

@@ -12,7 +12,6 @@ import {
   SingleFieldList,
   ChipField,
   TextField,
-  EmailField,
   DateField,
   BooleanField,
   TextInput,
@@ -24,6 +23,7 @@ import {
   AutocompleteInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import LinkEdit from "../components/LinkEdit";
 import { DateInput } from "react-admin-date-inputs";
 
 const InistFilter = props => (
@@ -119,25 +119,12 @@ const InistFilter = props => (
 export const InistList = ({ ...props }) => (
   <List {...props} filters={<InistFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField
-        label="resources.inistAccounts.fields.username"
-        source="id"
-        reference="inistAccounts"
-      >
-        <TextField source="username" />
-      </ReferenceField>
+      <LinkEdit source="username" label="resources.inistAccounts.fields.username" />
+      <LinkEdit source="password" label="resources.inistAccounts.fields.password" />
 
-      <ReferenceField
-        label="resources.inistAccounts.fields.password"
-        source="id"
-        reference="inistAccounts"
-      >
-        <TextField source="password" />
-      </ReferenceField>
-
-      <TextField source="name" label="resources.inistAccounts.fields.name" />
-      <TextField source="firstname" label="resources.inistAccounts.fields.firstname" />
-      <EmailField source="mail" label="resources.inistAccounts.fields.mail" />
+      <LinkEdit source="name" label="resources.inistAccounts.fields.name" />
+      <LinkEdit source="firstname" label="resources.inistAccounts.fields.firstname" />
+      <LinkEdit source="mail" label="resources.inistAccounts.fields.mail" />
 
       <ReferenceField
         label="resources.inistAccounts.fields.main_institute"
