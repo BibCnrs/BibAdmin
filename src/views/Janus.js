@@ -20,9 +20,10 @@ import {
   ReferenceArrayInput,
   SelectArrayInput
 } from "react-admin";
+import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import { DateInput } from "react-admin-date-inputs";
+import ListActions from "../components/ListActions";
 
 const JanusFilter = props => (
   <Filter {...props}>
@@ -154,7 +155,7 @@ const JanusTitle = ({ record }) => {
 };
 
 export const JanusEdit = ({ ...props }) => (
-  <Edit title={<JanusTitle />} {...props}>
+  <Edit title={<JanusTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
@@ -227,7 +228,7 @@ export const JanusEdit = ({ ...props }) => (
 );
 
 export const JanusCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
+  <Create {...props} redirect="list" actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />

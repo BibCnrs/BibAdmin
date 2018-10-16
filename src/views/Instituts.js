@@ -16,6 +16,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import ListActions from "../components/ListActions";
 
 const InstitutsFilter = props => (
   <Filter {...props}>
@@ -59,7 +60,7 @@ const InstitutsTitle = ({ record }) => {
 };
 
 export const InstitutsEdit = ({ ...props }) => (
-  <Edit title={<InstitutsTitle />} {...props}>
+  <Edit title={<InstitutsTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
@@ -77,7 +78,7 @@ export const InstitutsEdit = ({ ...props }) => (
 );
 
 export const InstitutsCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />

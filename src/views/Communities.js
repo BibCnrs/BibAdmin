@@ -14,6 +14,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import ListActions from "../components/ListActions";
 
 const CommunitiesFilter = props => (
   <Filter {...props}>
@@ -47,7 +48,7 @@ const CommunitiesTitle = ({ record }) => {
 };
 
 export const CommunitiesEdit = ({ ...props }) => (
-  <Edit title={<CommunitiesTitle />} {...props}>
+  <Edit title={<CommunitiesTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="name" label="resources.communities.fields.name" />
       <TextInput source="gate" label="resources.communities.fields.gate" />
@@ -60,7 +61,7 @@ export const CommunitiesEdit = ({ ...props }) => (
 );
 
 export const CommunitiesCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="name" label="resources.communities.fields.name" />
       <TextInput source="gate" label="resources.communities.fields.gate" />

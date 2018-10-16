@@ -6,13 +6,13 @@ import {
   EditButton,
   Filter,
   List,
-  NumberField,
   SimpleForm,
   TextField,
   TextInput,
   LongTextInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import ListActions from "../components/ListActions";
 
 const UsersFilter = props => (
   <Filter {...props}>
@@ -23,9 +23,8 @@ const UsersFilter = props => (
 export const UsersList = ({ ...props }) => (
   <List {...props} filters={<UsersFilter />} perPage={25}>
     <Datagrid>
-      <NumberField type="number" source="id" />
       <TextField source="username" label="resources.adminUsers.fields.login" />
-      <EditButton label="" />
+      <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>
   </List>
@@ -36,7 +35,7 @@ const UsersTitle = ({ record }) => {
 };
 
 export const UsersEdit = ({ ...props }) => (
-  <Edit title={<UsersTitle />} {...props}>
+  <Edit title={<UsersTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="username" />
       <TextInput type="password" source="password" />
@@ -46,7 +45,7 @@ export const UsersEdit = ({ ...props }) => (
 );
 
 export const UsersCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="username" />
       <TextInput type="password" source="password" />

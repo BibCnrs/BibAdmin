@@ -22,9 +22,10 @@ import {
   SelectArrayInput,
   AutocompleteInput
 } from "react-admin";
+import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import { DateInput } from "react-admin-date-inputs";
+import ListActions from "../components/ListActions";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -206,7 +207,7 @@ const InistTitle = ({ record }) => {
 };
 
 export const InistEdit = ({ ...props }) => (
-  <Edit title={<InistTitle />} {...props}>
+  <Edit title={<InistTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="username" label="resources.inistAccounts.fields.username" />
       <GeneratePasswordButton />
@@ -295,7 +296,7 @@ export const InistEdit = ({ ...props }) => (
 );
 
 export const InistCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="username" label="resources.inistAccounts.fields.username" />
       <GeneratePasswordButton source="password" label="resources.inistAccounts.fields.password" />
