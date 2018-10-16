@@ -14,6 +14,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import ListActions from "../components/ListActions";
 
 const SectionsFilter = props => (
   <Filter {...props}>
@@ -55,7 +56,7 @@ const SectionsTitle = ({ record }) => {
 };
 
 export const SectionsEdit = ({ ...props }) => (
-  <Edit title={<SectionsTitle />} {...props}>
+  <Edit title={<SectionsTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
@@ -80,7 +81,7 @@ export const SectionsEdit = ({ ...props }) => (
 );
 
 export const SectionsCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />

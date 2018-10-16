@@ -16,6 +16,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import ListActions from "../components/ListActions";
 
 const FavorisFilter = props => (
   <Filter {...props}>
@@ -60,7 +61,7 @@ const FavorisTitle = ({ record }) => {
 };
 
 export const FavorisEdit = ({ ...props }) => (
-  <Edit title={<FavorisTitle />} {...props}>
+  <Edit title={<FavorisTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />
@@ -79,7 +80,7 @@ export const FavorisEdit = ({ ...props }) => (
 );
 
 export const FavorisCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />

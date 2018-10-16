@@ -24,6 +24,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import ListActions from "../components/ListActions";
 
 const UnitsFilter = props => (
   <Filter {...props}>
@@ -153,7 +154,7 @@ UrlSearchJanus.defaultProps = {
 };
 
 export const UnitsEdit = ({ ...props }) => (
-  <Edit title={<UnitsTitle />} {...props}>
+  <Edit title={<UnitsTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
@@ -246,7 +247,7 @@ export const UnitsEdit = ({ ...props }) => (
 );
 
 export const UnitsCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
+  <Create {...props} redirect="list" actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
