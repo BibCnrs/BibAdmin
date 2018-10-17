@@ -56,7 +56,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             field = `inist_account.${field}`;
             break;
           case "janusAccounts":
-            field = `janus_account.${field}`;
+            if (field !== "primary_unit" && field !== "primary_institute") {
+              field = `janus_account.${field}`;
+            }
             break;
           case "institutes":
             field = `institute.${field}`;

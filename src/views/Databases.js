@@ -27,7 +27,12 @@ const DatabasesFilter = props => (
 );
 
 export const DatabasesList = ({ ...props }) => (
-  <List {...props} filters={<DatabasesFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<DatabasesFilter />}
+    sort={{ field: "name_fr", order: "ASC" }}
+    perPage={10}
+  >
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />
       <LinkEdit source="name_en" label="resources.databases.fields.name_en" />

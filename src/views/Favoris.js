@@ -12,6 +12,8 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   ReferenceArrayField,
+  ReferenceInput,
+  AutocompleteInput,
   ChipField
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -21,17 +23,15 @@ import ListActions from "../components/ListActions";
 const FavorisFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="title" label="resources.revues.fields.title" />
 
-    <ReferenceArrayInput
+    <ReferenceInput
       label="resources.revues.fields.communities"
+      source="community_id"
       reference="communities"
-      source="communities"
+      perPage={100}
     >
-      <SelectArrayInput>
-        <ChipField source="name" />
-      </SelectArrayInput>
-    </ReferenceArrayInput>
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
   </Filter>
 );
 
