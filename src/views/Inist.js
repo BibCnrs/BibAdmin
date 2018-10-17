@@ -50,7 +50,6 @@ const InistFilter = props => (
       source="main_institute"
       reference="institutes"
       perPage={100}
-      className="scollbar"
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -61,12 +60,12 @@ const InistFilter = props => (
       reference="institutes"
       perPage={100}
     >
-      <SelectArrayInput optionText="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceArrayInput>
 
     <ReferenceInput
       label="resources.inistAccounts.fields.main_unit"
-      source="like_unit.code"
+      source="main_unit.id"
       reference="units"
       perPage={100}
       sort={{ field: "code", order: "ASC" }}
@@ -197,7 +196,13 @@ const passwordValue = Math.random()
 const GeneratePasswordButton = ({ ...rest }) => {
   return (
     <span>
-      <TextInput type="password" id="passwordInput" defaultValue={passwordValue} {...rest} />
+      <TextInput
+        type="password"
+        id="passwordInput"
+        name="password"
+        defaultValue={passwordValue}
+        {...rest}
+      />
     </span>
   );
 };
@@ -226,7 +231,7 @@ export const InistEdit = ({ ...props }) => (
         sort={{ field: "name" }}
         perPage={100}
       >
-        <AutocompleteInput className="scrollbar" optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -246,7 +251,7 @@ export const InistEdit = ({ ...props }) => (
         sort={{ field: "code" }}
         perPage={100}
       >
-        <AutocompleteInput className="scrollbar" optionText="code" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -315,7 +320,7 @@ export const InistCreate = ({ ...props }) => (
         sort={{ field: "name" }}
         perPage={100}
       >
-        <AutocompleteInput className="scrollbar" optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -335,7 +340,7 @@ export const InistCreate = ({ ...props }) => (
         sort={{ field: "code" }}
         perPage={100}
       >
-        <AutocompleteInput className="scrollbar" optionText="code" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceArrayInput

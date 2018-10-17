@@ -19,7 +19,6 @@ import ListActions from "../components/ListActions";
 const CommunitiesFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="name" label="resources.communities.fields.name" />
     <TextInput source="gate" label="resources.communities.fields.gate" />
     <TextInput source="user_id" label="resources.communities.fields.user_id" />
     <TextInput source="password" label="resources.communities.fields.password" />

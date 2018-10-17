@@ -12,7 +12,9 @@ import {
   ChipField,
   TextInput,
   ReferenceArrayInput,
-  SelectArrayInput
+  SelectArrayInput,
+  ReferenceInput,
+  AutocompleteInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -24,13 +26,14 @@ const InstitutsFilter = props => (
     <TextInput source="id" label="resources.institutes.fields.id" />
     <TextInput source="like_institute.code" label="resources.institutes.fields.code" />
     <TextInput source="like_institute.name" label="resources.institutes.fields.name" />
-    <ReferenceArrayInput
+    <ReferenceInput
       label="resources.institutes.fields.communities"
+      source="community.id"
       reference="communities"
-      source="communities"
+      perPage={100}
     >
-      <SelectArrayInput source="name" />
-    </ReferenceArrayInput>
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
   </Filter>
 );
 
