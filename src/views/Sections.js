@@ -21,7 +21,10 @@ const SectionsFilter = props => (
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput source="name" label="resources.section_cn.fields.name" />
     <TextInput source="code" label="resources.section_cn.fields.code" />
-    <LongTextInput source="comment" label="resources.section_cn.fields.comment" />
+    <LongTextInput
+      source="comment"
+      label="resources.section_cn.fields.comment"
+    />
     <ReferenceArrayInput
       label="resources.section_cn.fields.primary_institutes"
       source="primary_institutes"
@@ -60,7 +63,10 @@ export const SectionsEdit = ({ ...props }) => (
     <SimpleForm>
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
-      <LongTextInput source="comment" label="resources.section_cn.fields.comment" />
+      <LongTextInput
+        source="comment"
+        label="resources.section_cn.fields.comment"
+      />
       <ReferenceArrayInput
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"
@@ -85,7 +91,10 @@ export const SectionsCreate = ({ ...props }) => (
     <SimpleForm redirect="list">
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
-      <LongTextInput source="comment" label="resources.section_cn.fields.comment" />
+      <LongTextInput
+        source="comment"
+        label="resources.section_cn.fields.comment"
+      />
       <ReferenceArrayInput
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"
