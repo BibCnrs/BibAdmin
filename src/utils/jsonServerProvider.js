@@ -48,43 +48,42 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         let { field, order } = params.sort;
         const filters = fetchUtils.flattenObject(params.filter);
 
+        const query = {
+          _page: page || 1,
+          _perPage: perPage || 10
+        };
+
         /**
          * permet d'effectuer un tri (améliorer l'api pour supprimer cette portion de code)
          */
-        switch (resource) {
-          case "inistAccounts":
-            field = `inist_account.${field}`;
-            break;
-          case "janusAccounts":
-            if (field !== "primary_unit" && field !== "primary_institute") {
-              field = `janus_account.${field}`;
-            }
-            break;
-          case "institutes":
-            field = `institute.${field}`;
-            break;
-          case "units":
-            field = `unit.${field}`;
-            break;
-          case "databases":
-            field = `database.${field}`;
-            break;
-          case "section_cn":
-            field = `section_cn.${field}`;
-            break;
-          case "revues":
-            field = `revue.${field}`;
-            break;
-          default:
-            break;
-        }
-
-        const query = {
-          _page: page,
-          _perPage: perPage
-        };
-
         if (field && field !== "id") {
+          switch (resource) {
+            case "inistAccounts":
+              field = `inist_account.${field}`;
+              break;
+            case "janusAccounts":
+              if (field !== "primary_unit" && field !== "primary_institute") {
+                field = `janus_account.${field}`;
+              }
+              break;
+            case "institutes":
+              field = `institute.${field}`;
+              break;
+            case "units":
+              field = `unit.${field}`;
+              break;
+            case "databases":
+              field = `database.${field}`;
+              break;
+            case "section_cn":
+              field = `section_cn.${field}`;
+              break;
+            case "revues":
+              field = `revue.${field}`;
+              break;
+            default:
+              break;
+          }
           query._sortField = field;
           query._sortDir = order || "ASC";
         }
