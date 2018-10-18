@@ -30,7 +30,10 @@ import ListActions from "../components/ListActions";
 const JanusFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="like_janus_account.uid" label="resources.janusAccounts.fields.uid" />
+    <TextInput
+      source="like_janus_account.uid"
+      label="resources.janusAccounts.fields.uid"
+    />
 
     <TextInput
       type="email"
@@ -101,8 +104,15 @@ const JanusFilter = props => (
       options={{ format: "MM-dd-yyyy" }}
     />
 
-    <BooleanInput source="janus_account.cnrs" label="resources.janusAccounts.fields.cnrs" />
-    <BooleanInput source="janus_account.active" label="resources.janusAccounts.fields.active" />
+    <BooleanInput
+      source="janus_account.cnrs"
+      label="resources.janusAccounts.fields.cnrs"
+    />
+    <BooleanInput
+      source="janus_account.active"
+      label="resources.janusAccounts.fields.active"
+      defaultValue="true"
+    />
   </Filter>
 );
 
@@ -160,9 +170,18 @@ export const JanusList = props => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <DateField source="last_connexion" label="resources.janusAccounts.fields.last_connexion" />
-      <DateField source="first_connexion" label="resources.janusAccounts.fields.first_connexion" />
-      <BooleanField source="active" label="resources.janusAccounts.fields.active" />
+      <DateField
+        source="last_connexion"
+        label="resources.janusAccounts.fields.last_connexion"
+      />
+      <DateField
+        source="first_connexion"
+        label="resources.janusAccounts.fields.first_connexion"
+      />
+      <BooleanField
+        source="active"
+        label="resources.janusAccounts.fields.active"
+      />
       <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>
@@ -181,9 +200,16 @@ export const JanusEdit = ({ ...props }) => (
 
       <TextInput source="name" label="resources.janusAccounts.fields.name" />
 
-      <TextInput source="firstname" label="resources.janusAccounts.fields.firstname" />
+      <TextInput
+        source="firstname"
+        label="resources.janusAccounts.fields.firstname"
+      />
 
-      <TextInput type="email" source="mail" label="resources.janusAccounts.fields.mail" />
+      <TextInput
+        type="email"
+        source="mail"
+        label="resources.janusAccounts.fields.mail"
+      />
 
       <ReferenceField
         label="resources.janusAccounts.fields.primary_institute"
@@ -238,10 +264,22 @@ export const JanusEdit = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <DateField source="last_connexion" label="resources.janusAccounts.fields.last_connexion" />
-      <DateField source="first_connexion" label="resources.janusAccounts.fields.first_connexion" />
-      <BooleanInput source="active" label="resources.janusAccounts.fields.active" />
-      <LongTextInput source="comment" label="resources.janusAccounts.fields.comment" />
+      <DateField
+        source="last_connexion"
+        label="resources.janusAccounts.fields.last_connexion"
+      />
+      <DateField
+        source="first_connexion"
+        label="resources.janusAccounts.fields.first_connexion"
+      />
+      <BooleanInput
+        source="active"
+        label="resources.janusAccounts.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.janusAccounts.fields.comment"
+      />
     </SimpleForm>
   </Edit>
 );
@@ -254,9 +292,16 @@ export const JanusCreate = ({ ...props }) => (
 
       <TextInput source="name" label="resources.janusAccounts.fields.name" />
 
-      <TextInput source="firstname" label="resources.janusAccounts.fields.firstname" />
+      <TextInput
+        source="firstname"
+        label="resources.janusAccounts.fields.firstname"
+      />
 
-      <TextInput type="email" source="mail" label="resources.janusAccounts.fields.mail" />
+      <TextInput
+        type="email"
+        source="mail"
+        label="resources.janusAccounts.fields.mail"
+      />
 
       <ReferenceField
         label="resources.janusAccounts.fields.primary_institute"
@@ -311,10 +356,22 @@ export const JanusCreate = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <DateField source="last_connexion" label="resources.janusAccounts.fields.last_connexion" />
-      <DateField source="first_connexion" label="resources.janusAccounts.fields.first_connexion" />
-      <BooleanInput source="active" label="resources.janusAccounts.fields.active" />
-      <LongTextInput source="comment" label="resources.janusAccounts.fields.comment" />
+      <DateField
+        source="last_connexion"
+        label="resources.janusAccounts.fields.last_connexion"
+      />
+      <DateField
+        source="first_connexion"
+        label="resources.janusAccounts.fields.first_connexion"
+      />
+      <BooleanInput
+        source="active"
+        label="resources.janusAccounts.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.janusAccounts.fields.comment"
+      />
     </SimpleForm>
   </Create>
 );

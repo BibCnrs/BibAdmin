@@ -36,7 +36,11 @@ export const DatabasesList = ({ ...props }) => (
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />
       <LinkEdit source="name_en" label="resources.databases.fields.name_en" />
-      <BooleanField source="active" label="resources.databases.fields.active" />
+      <BooleanField
+        source="active"
+        label="resources.databases.fields.active"
+        defaultValue="true"
+      />
       <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>
@@ -54,8 +58,14 @@ export const DatabasesEdit = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <LongTextInput source="text_fr" label="resources.databases.fields.text_fr" />
-      <LongTextInput source="text_en" label="resources.databases.fields.text_en" />
+      <LongTextInput
+        source="text_fr"
+        label="resources.databases.fields.text_fr"
+      />
+      <LongTextInput
+        source="text_en"
+        label="resources.databases.fields.text_en"
+      />
       <ReferenceArrayInput
         label="resources.databases.fields.communities"
         source="communities"
@@ -84,8 +94,14 @@ export const DatabasesCreate = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <LongTextInput source="text_fr" label="resources.databases.fields.text_fr" />
-      <LongTextInput source="text_en" label="resources.databases.fields.text_en" />
+      <LongTextInput
+        source="text_fr"
+        label="resources.databases.fields.text_fr"
+      />
+      <LongTextInput
+        source="text_en"
+        label="resources.databases.fields.text_en"
+      />
       <ReferenceArrayInput
         label="resources.databases.fields.communities"
         source="communities"

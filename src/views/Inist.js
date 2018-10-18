@@ -34,7 +34,10 @@ const InistFilter = props => (
       source="like_inist_account.username"
       label="resources.inistAccounts.fields.username"
     />
-    <TextInput source="like_inist_account.name" label="resources.inistAccounts.fields.name" />
+    <TextInput
+      source="like_inist_account.name"
+      label="resources.inistAccounts.fields.name"
+    />
     <TextInput
       source="like_inist_account.firstname"
       label="resources.inistAccounts.fields.firstname"
@@ -112,18 +115,31 @@ const InistFilter = props => (
       options={{ format: "MM-dd-yyyy" }}
     />
 
-    <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
+    <BooleanInput
+      source="active"
+      label="resources.inistAccounts.fields.active"
+      defaultValue="true"
+    />
   </Filter>
 );
 
 export const InistList = ({ ...props }) => (
   <List {...props} filters={<InistFilter />} perPage={10}>
     <Datagrid>
-      <LinkEdit source="username" label="resources.inistAccounts.fields.username" />
-      <LinkEdit source="password" label="resources.inistAccounts.fields.password" />
+      <LinkEdit
+        source="username"
+        label="resources.inistAccounts.fields.username"
+      />
+      <LinkEdit
+        source="password"
+        label="resources.inistAccounts.fields.password"
+      />
 
       <LinkEdit source="name" label="resources.inistAccounts.fields.name" />
-      <LinkEdit source="firstname" label="resources.inistAccounts.fields.firstname" />
+      <LinkEdit
+        source="firstname"
+        label="resources.inistAccounts.fields.firstname"
+      />
       <LinkEdit source="mail" label="resources.inistAccounts.fields.mail" />
 
       <ReferenceField
@@ -180,8 +196,14 @@ export const InistList = ({ ...props }) => (
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
       />
-      <DateField source="expiration_date" label="resources.inistAccounts.fields.expiration_date" />
-      <BooleanField source="active" label="resources.inistAccounts.fields.active" />
+      <DateField
+        source="expiration_date"
+        label="resources.inistAccounts.fields.expiration_date"
+      />
+      <BooleanField
+        source="active"
+        label="resources.inistAccounts.fields.active"
+      />
       <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>
@@ -214,11 +236,21 @@ const InistTitle = ({ record }) => {
 export const InistEdit = ({ ...props }) => (
   <Edit title={<InistTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
-      <TextInput source="username" label="resources.inistAccounts.fields.username" />
+      <TextInput
+        source="username"
+        label="resources.inistAccounts.fields.username"
+      />
       <GeneratePasswordButton />
       <TextInput source="name" label="resources.inistAccounts.fields.name" />
-      <TextInput source="firstname" label="resources.inistAccounts.fields.firstname" />
-      <TextInput type="email" source="mail" label="resources.inistAccounts.fields.mail" />
+      <TextInput
+        source="firstname"
+        label="resources.inistAccounts.fields.firstname"
+      />
+      <TextInput
+        type="email"
+        source="mail"
+        label="resources.inistAccounts.fields.mail"
+      />
 
       <TextInput source="phone" label="resources.inistAccounts.fields.phone" />
 
@@ -294,8 +326,14 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.expiration_date"
         options={{ format: "MM-dd-yyyy" }}
       />
-      <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
-      <LongTextInput source="comment" label="resources.inistAccounts.fields.comment" />
+      <BooleanInput
+        source="active"
+        label="resources.inistAccounts.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.inistAccounts.fields.comment"
+      />
     </SimpleForm>
   </Edit>
 );
@@ -303,11 +341,24 @@ export const InistEdit = ({ ...props }) => (
 export const InistCreate = ({ ...props }) => (
   <Create {...props} actions={<ListActions />}>
     <SimpleForm>
-      <TextInput source="username" label="resources.inistAccounts.fields.username" />
-      <GeneratePasswordButton source="password" label="resources.inistAccounts.fields.password" />
+      <TextInput
+        source="username"
+        label="resources.inistAccounts.fields.username"
+      />
+      <GeneratePasswordButton
+        source="password"
+        label="resources.inistAccounts.fields.password"
+      />
       <TextInput source="name" label="resources.inistAccounts.fields.name" />
-      <TextInput source="firstname" label="resources.inistAccounts.fields.firstname" />
-      <TextInput type="email" source="mail" label="resources.inistAccounts.fields.mail" />
+      <TextInput
+        source="firstname"
+        label="resources.inistAccounts.fields.firstname"
+      />
+      <TextInput
+        type="email"
+        source="mail"
+        label="resources.inistAccounts.fields.mail"
+      />
 
       <TextInput source="phone" label="resources.inistAccounts.fields.phone" />
 
@@ -383,8 +434,14 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.expiration_date"
         options={{ format: "MM-dd-yyyy" }}
       />
-      <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
-      <LongTextInput source="comment" label="resources.inistAccounts.fields.comment" />
+      <BooleanInput
+        source="active"
+        label="resources.inistAccounts.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.inistAccounts.fields.comment"
+      />
     </SimpleForm>
   </Create>
 );
