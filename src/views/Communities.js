@@ -15,6 +15,7 @@ import {
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const CommunitiesFilter = props => (
   <Filter {...props}>
@@ -31,7 +32,12 @@ const CommunitiesFilter = props => (
 );
 
 export const CommunitiesList = ({ ...props }) => (
-  <List {...props} filters={<CommunitiesFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<CommunitiesFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+  >
     <Datagrid>
       <LinkEdit source="name" label="resources.communities.fields.name" />
 

@@ -26,6 +26,7 @@ import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -124,7 +125,12 @@ const InistFilter = props => (
 );
 
 export const InistList = ({ ...props }) => (
-  <List {...props} filters={<InistFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<InistFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+  >
     <Datagrid>
       <LinkEdit
         source="username"
@@ -173,16 +179,6 @@ export const InistList = ({ ...props }) => (
       </ReferenceField>
 
       <ReferenceArrayField
-        label="resources.inistAccounts.fields.units"
-        reference="units"
-        source="units"
-      >
-        <SingleFieldList>
-          <ChipField source="code" />
-        </SingleFieldList>
-      </ReferenceArrayField>
-
-      <ReferenceArrayField
         label="resources.inistAccounts.fields.all_communities"
         reference="communities"
         source="all_communities"
@@ -219,7 +215,7 @@ const GeneratePasswordButton = ({ ...rest }) => {
   return (
     <span>
       <TextInput
-        type="password"
+        type="text"
         id="passwordInput"
         name="password"
         defaultValue={passwordValue}

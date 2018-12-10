@@ -31,15 +31,17 @@ run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_
 
 build-docker: ## args: <version> build bibcnrs/bibadmin:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:$(COMMAND_ARGS) .
+	docker build --no-cache -t vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibadmin:$(COMMAND_ARGS) .
 else
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:latest .
+	docker build --no-cache -t vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibadmin:latest .
 endif
 
 build-script: ## build javascript and css for production make sure env REACT_APP_BIBAPI_HOST and REACT_APP_BIBADMIN_HOST are set
 	docker-compose run --rm build
 
 build: build-script build-docker ## build javascript and css for production make sure env REACT_APP_BIBAPI_HOST and REACT_APP_BIBADMIN_HOST are set
+
+update: stop cleanup-docker install build
 
 npm: ## dockerized npm command example: make npm 'install some_dependency --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)

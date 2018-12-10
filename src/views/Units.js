@@ -26,6 +26,7 @@ import {
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const UrlSearchInist = ({ source, record = {} }) => {
   const url = `#/inistAccounts?filter={"main_unit.id":${record.id}}`;
@@ -100,7 +101,12 @@ const UnitsFilter = props => (
 );
 
 export const UnitsList = ({ ...props }) => (
-  <List {...props} filters={<UnitsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<UnitsFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+  >
     <Datagrid>
       <LinkEdit source="code" label="resources.units.fields.code" />
 

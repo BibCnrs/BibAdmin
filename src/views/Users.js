@@ -13,6 +13,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const UsersFilter = props => (
   <Filter {...props}>
@@ -21,7 +22,12 @@ const UsersFilter = props => (
 );
 
 export const UsersList = ({ ...props }) => (
-  <List {...props} filters={<UsersFilter />} perPage={25}>
+  <List
+    {...props}
+    filters={<UsersFilter />}
+    perPage={25}
+    pagination={<PostPagination />}
+  >
     <Datagrid>
       <TextField source="username" label="resources.adminUsers.fields.login" />
       <EditButton />
@@ -38,7 +44,7 @@ export const UsersEdit = ({ ...props }) => (
   <Edit title={<UsersTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="username" />
-      <TextInput type="password" source="password" />
+      <TextInput type="text" source="password" />
       <LongTextInput source="comment" />
     </SimpleForm>
   </Edit>
@@ -48,7 +54,7 @@ export const UsersCreate = ({ ...props }) => (
   <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="username" />
-      <TextInput type="password" source="password" />
+      <TextInput type="text" source="password" />
       <LongTextInput source="comment" />
     </SimpleForm>
   </Create>

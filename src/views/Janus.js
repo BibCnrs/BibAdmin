@@ -26,6 +26,7 @@ import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const JanusFilter = props => (
   <Filter {...props}>
@@ -46,7 +47,7 @@ const JanusFilter = props => (
       source="janus_account.primary_institute"
       reference="institutes"
     >
-      <AutocompleteInput optionText="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
     <ReferenceArrayInput
@@ -117,7 +118,13 @@ const JanusFilter = props => (
 );
 
 export const JanusList = props => (
-  <List {...props} filters={<JanusFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<JanusFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+    sort={{ field: "uid" }}
+  >
     <Datagrid>
       <LinkEdit source="uid" label="resources.janusAccounts.fields.uid" />
       <LinkEdit source="mail" label="resources.janusAccounts.fields.mail" />
@@ -149,16 +156,6 @@ export const JanusList = props => (
       >
         <TextField source="code" />
       </ReferenceField>
-
-      <ReferenceArrayField
-        label="resources.janusAccounts.fields.additional_units"
-        reference="units"
-        source="additional_units"
-      >
-        <SingleFieldList>
-          <ChipField source="code" />
-        </SingleFieldList>
-      </ReferenceArrayField>
 
       <ReferenceArrayField
         label="resources.janusAccounts.fields.all_communities"

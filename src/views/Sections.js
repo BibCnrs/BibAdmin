@@ -15,6 +15,7 @@ import {
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const SectionsFilter = props => (
   <Filter {...props}>
@@ -44,7 +45,12 @@ const SectionsFilter = props => (
 );
 
 export const SectionsList = ({ ...props }) => (
-  <List {...props} filters={<SectionsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<SectionsFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+  >
     <Datagrid>
       <LinkEdit label="resources.section_cn.fields.name" source="name" />
       <LinkEdit label="resources.section_cn.fields.code" source="code" />
