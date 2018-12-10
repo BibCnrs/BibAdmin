@@ -14,8 +14,11 @@ import {
   ReferenceArrayField,
   ReferenceInput,
   AutocompleteInput,
-  ChipField
+  ChipField,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
@@ -41,6 +44,14 @@ const FavorisFilter = props => (
   </Filter>
 );
 
+const exporter = async records => {
+  const data = records.map(record => renameKeys(record, "revues"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "revues");
+};
+
 export const FavorisList = ({ ...props }) => (
   <List
     {...props}
@@ -48,6 +59,7 @@ export const FavorisList = ({ ...props }) => (
     perPage={10}
     pagination={<PostPagination />}
     sort={{ field: "title" }}
+    exporter={exporter}
   >
     <Datagrid>
       <LinkEdit source="title" label="resources.revues.fields.title" />

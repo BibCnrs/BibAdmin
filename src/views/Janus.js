@@ -20,8 +20,11 @@ import {
   ReferenceInput,
   ReferenceArrayInput,
   AutocompleteInput,
-  SelectArrayInput
+  SelectArrayInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -117,6 +120,35 @@ const JanusFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listPrincipalUnit = await fetchRelatedRecords(
+    records,
+    "primary_unit",
+    "units"
+  );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "primary_institute",
+    "institutes"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    primary_unit:
+      listPrincipalUnit[record.primary_unit] &&
+      listPrincipalUnit[record.primary_unit].code,
+    primary_institute:
+      listPrincipalIt[record.primary_institute] &&
+      listPrincipalIt[record.primary_institute].name
+  }));
+  const data = dataWithRelation.map(record =>
+    renameKeys(record, "janusAccounts")
+  );
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "janusAccounts");
+};
+
 export const JanusList = props => (
   <List
     {...props}
@@ -124,6 +156,7 @@ export const JanusList = props => (
     perPage={10}
     pagination={<PostPagination />}
     sort={{ field: "uid" }}
+    exporter={exporter}
   >
     <Datagrid>
       <LinkEdit source="uid" label="resources.janusAccounts.fields.uid" />

@@ -10,8 +10,11 @@ import {
   TextField,
   BooleanField,
   TextInput,
-  BooleanInput
+  BooleanInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
@@ -31,12 +34,21 @@ const CommunitiesFilter = props => (
   </Filter>
 );
 
+const exporter = async records => {
+  const data = records.map(record => renameKeys(record, "communities"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "communities");
+};
+
 export const CommunitiesList = ({ ...props }) => (
   <List
     {...props}
     filters={<CommunitiesFilter />}
     perPage={10}
     pagination={<PostPagination />}
+    exporter={exporter}
   >
     <Datagrid>
       <LinkEdit source="name" label="resources.communities.fields.name" />

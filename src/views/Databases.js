@@ -14,8 +14,11 @@ import {
   FileInput,
   ImageField,
   ReferenceArrayInput,
-  SelectArrayInput
+  SelectArrayInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
@@ -27,6 +30,14 @@ const DatabasesFilter = props => (
   </Filter>
 );
 
+const exporter = async records => {
+  const data = records.map(record => renameKeys(record, "databases"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "databases");
+};
+
 export const DatabasesList = ({ ...props }) => (
   <List
     {...props}
@@ -34,6 +45,7 @@ export const DatabasesList = ({ ...props }) => (
     sort={{ field: "name_fr", order: "ASC" }}
     perPage={10}
     pagination={<PostPagination />}
+    exporter={exporter}
   >
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />

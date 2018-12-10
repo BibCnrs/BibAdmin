@@ -20,8 +20,11 @@ import {
   ReferenceInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  AutocompleteInput
+  AutocompleteInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -124,12 +127,42 @@ const InistFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listPrincipalUnit = await fetchRelatedRecords(
+    records,
+    "main_unit",
+    "units"
+  );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "main_institute",
+    "institutes"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    main_unit:
+      listPrincipalUnit[record.main_unit] &&
+      listPrincipalUnit[record.main_unit].code,
+    main_institute:
+      listPrincipalIt[record.main_institute] &&
+      listPrincipalIt[record.main_institute].name
+  }));
+  const data = dataWithRelation.map(record =>
+    renameKeys(record, "inistAccounts")
+  );
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "inistAccounts");
+};
+
 export const InistList = ({ ...props }) => (
   <List
     {...props}
     filters={<InistFilter />}
     perPage={10}
     pagination={<PostPagination />}
+    exporter={exporter}
   >
     <Datagrid>
       <LinkEdit

@@ -21,8 +21,11 @@ import {
   SelectInput,
   SelectArrayInput,
   LongTextInput,
-  AutocompleteInput
+  AutocompleteInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
@@ -100,12 +103,32 @@ const UnitsFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "main_institute",
+    "institutes"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    main_institute:
+      listPrincipalIt[record.main_institute] &&
+      listPrincipalIt[record.main_institute].name
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "units"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "units");
+};
+
 export const UnitsList = ({ ...props }) => (
   <List
     {...props}
     filters={<UnitsFilter />}
     perPage={10}
     pagination={<PostPagination />}
+    exporter={exporter}
   >
     <Datagrid>
       <LinkEdit source="code" label="resources.units.fields.code" />

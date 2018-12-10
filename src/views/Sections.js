@@ -10,8 +10,11 @@ import {
   TextInput,
   LongTextInput,
   ReferenceArrayInput,
-  SelectArrayInput
+  SelectArrayInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
@@ -44,12 +47,21 @@ const SectionsFilter = props => (
   </Filter>
 );
 
+const exporter = async records => {
+  const data = records.map(record => renameKeys(record, "section_cn"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "section_cn");
+};
+
 export const SectionsList = ({ ...props }) => (
   <List
     {...props}
     filters={<SectionsFilter />}
     perPage={10}
     pagination={<PostPagination />}
+    exporter={exporter}
   >
     <Datagrid>
       <LinkEdit label="resources.section_cn.fields.name" source="name" />
