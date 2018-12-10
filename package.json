@@ -7,14 +7,14 @@
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
     "ra-language-french": "^2.3.1",
-    "react": "^16.5.2",
-    "react-admin": "^2.4.0",
+    "react": "^16.6.3",
+    "react-admin": "^2.5.1",
     "react-admin-date-inputs": "^1.1.0",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.5"
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1"
   },
   "devDependencies": {
-    "prettier": "^1.14.3"
+    "prettier": "^1.15.3"
   },
   "scripts": {
     "start": "react-scripts start",
