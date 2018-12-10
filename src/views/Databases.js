@@ -19,6 +19,7 @@ import {
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const DatabasesFilter = props => (
   <Filter {...props}>
@@ -32,6 +33,7 @@ export const DatabasesList = ({ ...props }) => (
     filters={<DatabasesFilter />}
     sort={{ field: "name_fr", order: "ASC" }}
     perPage={10}
+    pagination={<PostPagination />}
   >
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />

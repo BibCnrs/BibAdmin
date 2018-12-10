@@ -19,10 +19,16 @@ import {
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
 
 const FavorisFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
+
+    <TextInput
+      label="resources.revues.fields.title"
+      source="like_revue.title"
+    />
 
     <ReferenceInput
       label="resources.revues.fields.communities"
@@ -36,7 +42,13 @@ const FavorisFilter = props => (
 );
 
 export const FavorisList = ({ ...props }) => (
-  <List {...props} filters={<FavorisFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<FavorisFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+    sort={{ field: "title" }}
+  >
     <Datagrid>
       <LinkEdit source="title" label="resources.revues.fields.title" />
 
