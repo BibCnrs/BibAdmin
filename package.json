@@ -2,7 +2,7 @@
   "name": "bibadmin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://bib-dev.inist.fr/admin/",
+  "homepage": ".",
   "dependencies": {
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
