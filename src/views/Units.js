@@ -109,11 +109,29 @@ const exporter = async (records, fetchRelatedRecords) => {
     "main_institute",
     "institutes"
   );
+  const listCommunities = await fetchRelatedRecords(
+    records,
+    "communities",
+    "communities"
+  );
+  const listInstitutes = await fetchRelatedRecords(
+    records,
+    "institutes",
+    "institutes"
+  );
+  const listSections = await fetchRelatedRecords(
+    records,
+    "sections_cn",
+    "section_cn"
+  );
   const dataWithRelation = records.map(record => ({
     ...record,
     main_institute:
       listPrincipalIt[record.main_institute] &&
-      listPrincipalIt[record.main_institute].name
+      listPrincipalIt[record.main_institute].name,
+    communities: record.communities.map(n => listCommunities[n].name),
+    institutes: record.institutes.map(n => listInstitutes[n].name),
+    sections_cn: record.sections_cn.map(n => listSections[n].name)
   }));
   const data = dataWithRelation.map(record => renameKeys(record, "units"));
   const csv = convertToCSV(data, {

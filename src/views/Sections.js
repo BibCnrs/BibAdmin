@@ -47,8 +47,28 @@ const SectionsFilter = props => (
   </Filter>
 );
 
-const exporter = async records => {
-  const data = records.map(record => renameKeys(record, "section_cn"));
+const exporter = async (records, fetchRelatedRecords) => {
+  console.log(records[0]);
+  const listPrincipalUnit = await fetchRelatedRecords(
+    records,
+    "primary_institutes",
+    "institutes"
+  );
+  const listSecondaryUnit = await fetchRelatedRecords(
+    records,
+    "secondary_institutes",
+    "institutes"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    primary_institutes: record.primary_institutes.map(
+      n => listPrincipalUnit[n].name
+    ),
+    secondary_institutes: record.secondary_institutes.map(
+      n => listSecondaryUnit[n].name
+    )
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "section_cn"));
   const csv = convertToCSV(data, {
     delimiter: ";"
   });

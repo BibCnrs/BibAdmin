@@ -47,8 +47,17 @@ const InstitutsFilter = props => (
   </Filter>
 );
 
-const exporter = async records => {
-  const data = records.map(record => renameKeys(record, "institutes"));
+const exporter = async (records, fetchRelatedRecords) => {
+  const listCommunities = await fetchRelatedRecords(
+    records,
+    "communities",
+    "communities"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    communities: record.communities.map(n => listCommunities[n].name)
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "institutes"));
   const csv = convertToCSV(data, {
     delimiter: ";"
   });
