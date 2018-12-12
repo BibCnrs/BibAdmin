@@ -10,6 +10,7 @@
     "react": "^16.6.3",
     "react-admin": "^2.5.1",
     "react-admin-date-inputs": "^1.1.0",
+    "react-autosuggest": "^9.4.2",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
   },

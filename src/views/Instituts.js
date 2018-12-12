@@ -14,7 +14,6 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   ReferenceInput,
-  AutocompleteInput,
   downloadCSV
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
@@ -22,6 +21,7 @@ import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 import { PostPagination } from "../utils/pagination";
 
 const InstitutsFilter = props => (
@@ -42,7 +42,7 @@ const InstitutsFilter = props => (
       reference="communities"
       perPage={100}
     >
-      <AutocompleteInput optionText="name" />
+      <AutoCompleteReferenceInput />
     </ReferenceInput>
   </Filter>
 );
