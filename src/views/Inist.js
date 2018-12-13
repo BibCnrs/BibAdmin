@@ -27,6 +27,7 @@ import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
 import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
@@ -259,25 +260,6 @@ export const InistList = ({ ...props }) => (
   </List>
 );
 
-const passwordValue = Math.random()
-  .toString(36)
-  .slice(-6)
-  .toUpperCase();
-
-const GeneratePasswordButton = ({ ...rest }) => {
-  return (
-    <span>
-      <TextInput
-        type="text"
-        id="passwordInput"
-        name="password"
-        defaultValue={passwordValue}
-        {...rest}
-      />
-    </span>
-  );
-};
-
 const InistTitle = ({ record }) => {
   return record.username;
 };
@@ -289,7 +271,10 @@ export const InistEdit = ({ ...props }) => (
         source="username"
         label="resources.inistAccounts.fields.username"
       />
-      <GeneratePasswordButton />
+      <TextInput
+        source="password"
+        label="resources.inistAccounts.fields.password"
+      />
       <TextInput source="name" label="resources.inistAccounts.fields.name" />
       <TextInput
         source="firstname"
@@ -394,7 +379,7 @@ export const InistCreate = ({ ...props }) => (
         source="username"
         label="resources.inistAccounts.fields.username"
       />
-      <GeneratePasswordButton
+      <RandomPasswordGenerator
         source="password"
         label="resources.inistAccounts.fields.password"
       />
