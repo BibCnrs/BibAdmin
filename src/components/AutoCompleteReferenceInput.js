@@ -1,5 +1,6 @@
 import React from "react";
 import Autosuggest from "react-autosuggest";
+import { Labeled } from "react-admin";
 import { escapeRegexCharacters } from "../utils/utils";
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -10,21 +11,9 @@ const getSuggestions = (value, choices = []) => {
   if (escapedValue.length <= 1) {
     return [];
   }
-
   const regex = new RegExp(`^${escapedValue}`, "i");
-
   return choices.filter(choice => regex.test(choice.name));
 };
-
-// render list
-function renderSuggestion(suggestion, { query }) {
-  const regex = new RegExp(`(${query})`, "i");
-  const name = {
-    __html: suggestion.name.replace(regex, "<b>$1</b>")
-  };
-
-  return <span dangerouslySetInnerHTML={name} />;
-}
 
 class AutoCompleteReferenceInput extends React.Component {
   constructor() {
@@ -32,7 +21,8 @@ class AutoCompleteReferenceInput extends React.Component {
     this.state = {
       value: "",
       suggestions: [],
-      source: null
+      source: null,
+      query: null
     };
   }
 
@@ -43,7 +33,6 @@ class AutoCompleteReferenceInput extends React.Component {
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
     const { choices, source } = this.props;
     const data = choices.map(n => ({ id: n.id, name: n.name }));
@@ -60,18 +49,42 @@ class AutoCompleteReferenceInput extends React.Component {
     });
   };
 
+  onSuggestionSelected = () => {
+    const { resource, source } = this.props;
+    const { query } = this.state;
+    document.location.href = `#/${resource}?filter={"${source}":"${query}"}`;
+  };
+
   // when user do selection
   getSuggestionValue = suggestion => {
-    const { resource, source } = this.props;
-    document.location.href = `#/${resource}?filter={"${source}": "${
-      suggestion.id
-    }"}`;
-    return suggestion.name;
+    const { optionText } = this.props;
+    this.setState({
+      query: suggestion.id
+    });
+    return suggestion[optionText];
   };
+
+  // for edit add default value
+  componentWillMount() {
+    const { choices, optionText = "code" } = this.props;
+    this.setState({
+      value: choices[0][optionText],
+      optionText
+    });
+  }
+
+  // render list
+  renderSuggestion(suggestion, { query }) {
+    const regex = new RegExp(`(${query})`, "i");
+    const name = {
+      __html: suggestion.code.replace(regex, "<b>$1</b>")
+    };
+    return <span dangerouslySetInnerHTML={name} />;
+  }
 
   render() {
     const { value, suggestions } = this.state;
-    //const { label } = this.props;
+    const { label } = this.props;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
@@ -81,15 +94,20 @@ class AutoCompleteReferenceInput extends React.Component {
     };
 
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-        highlightFirstSuggestion={true}
-      />
+      <div>
+        <Labeled label={label}>
+          <Autosuggest
+            suggestions={suggestions.slice(0, 10)}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            onSuggestionSelected={this.onSuggestionSelected}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={inputProps}
+            highlightFirstSuggestion={true}
+          />
+        </Labeled>
+      </div>
     );
   }
 }

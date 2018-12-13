@@ -31,6 +31,7 @@ import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -297,7 +298,7 @@ export const InistEdit = ({ ...props }) => (
         sort={{ field: "name" }}
         perPage={100}
       >
-        <AutocompleteInput optionText="name" />
+        <AutoCompleteReferenceInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -315,9 +316,9 @@ export const InistEdit = ({ ...props }) => (
         source="main_unit"
         reference="units"
         sort={{ field: "code" }}
-        perPage={100}
+        perPage={10000}
       >
-        <AutocompleteInput optionText="code" />
+        <AutoCompleteReferenceInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceArrayInput
