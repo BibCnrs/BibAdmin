@@ -1,28 +1,19 @@
 import React from "react";
 import Autosuggest from "react-autosuggest";
 import { Labeled } from "react-admin";
-import { escapeRegexCharacters } from "../utils/utils";
+import axios from "axios";
 
-// Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = (value, choices = []) => {
-  const escapedValue = escapeRegexCharacters(value.trim());
-
-  // search only if length > 2
-  if (escapedValue.length <= 1) {
-    return [];
-  }
-  const regex = new RegExp(`^${escapedValue}`, "i");
-  return choices.filter(choice => regex.test(choice.name));
-};
+// not clean but not other means
+let optionTextForRenderSuggestion = null;
 
 class AutoCompleteReferenceInput extends React.Component {
   constructor() {
     super();
+
     this.state = {
       value: "",
       suggestions: [],
-      source: null,
-      query: null
+      isFilter: false
     };
   }
 
@@ -32,14 +23,37 @@ class AutoCompleteReferenceInput extends React.Component {
     });
   };
 
-  // Autosuggest will call this function every time you need to update suggestions.
-  onSuggestionsFetchRequested = ({ value }) => {
-    const { choices, source } = this.props;
-    const data = choices.map(n => ({ id: n.id, name: n.name }));
-    this.setState({
-      suggestions: getSuggestions(value, data),
-      source
+  // Autosuggest will call this function every time you need to update suggestions. (ajax query)
+  onSuggestionsFetchRequested = async ({ value }) => {
+    const { reference, field, optionText } = this.props;
+    optionTextForRenderSuggestion = optionText;
+    let filter = "";
+    if (field) {
+      filter = `{"like_${field}.${optionText}":"${value}"}`;
+    } else {
+      filter = `{"like_${optionText}":"${value}"}`;
+    }
+    const { data } = await axios({
+      url: `${
+        process.env.REACT_APP_BIBAPI_HOST
+      }/${reference}?_filters=${filter}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     });
+    this.setState({
+      suggestions: data
+    });
+  };
+
+  // filter when element is selected (ONLY for filter)
+  onSuggestionSelected = (event, { suggestion }) => {
+    const { resource, source, isFilter } = this.props;
+    if (isFilter === true) {
+      document.location.href = `#/${resource}?filter={"${source}":"${
+        suggestion.id
+      }"}`;
+    }
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
@@ -49,35 +63,22 @@ class AutoCompleteReferenceInput extends React.Component {
     });
   };
 
-  onSuggestionSelected = () => {
-    const { resource, source } = this.props;
-    const { query } = this.state;
-    document.location.href = `#/${resource}?filter={"${source}":"${query}"}`;
-  };
-
-  // when user do selection
+  // When suggestion is clicked, Autosuggest needs to populate the input
+  // based on the clicked suggestion. Teach Autosuggest how to calculate the
+  // input value for every given suggestion.
   getSuggestionValue = suggestion => {
     const { optionText } = this.props;
-    this.setState({
-      query: suggestion.id
-    });
     return suggestion[optionText];
   };
-
-  // for edit add default value
-  componentWillMount() {
-    const { choices, optionText = "code" } = this.props;
-    this.setState({
-      value: choices[0][optionText],
-      optionText
-    });
-  }
 
   // render list
   renderSuggestion(suggestion, { query }) {
     const regex = new RegExp(`(${query})`, "i");
     const name = {
-      __html: suggestion.code.replace(regex, "<b>$1</b>")
+      __html: suggestion[optionTextForRenderSuggestion].replace(
+        regex,
+        "<b>$1</b>"
+      )
     };
     return <span dangerouslySetInnerHTML={name} />;
   }
@@ -86,7 +87,6 @@ class AutoCompleteReferenceInput extends React.Component {
     const { value, suggestions } = this.state;
     const { label } = this.props;
 
-    // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: "Recherche...",
       value,
@@ -94,20 +94,18 @@ class AutoCompleteReferenceInput extends React.Component {
     };
 
     return (
-      <div>
-        <Labeled label={label}>
-          <Autosuggest
-            suggestions={suggestions.slice(0, 10)}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            onSuggestionSelected={this.onSuggestionSelected}
-            getSuggestionValue={this.getSuggestionValue}
-            renderSuggestion={this.renderSuggestion}
-            inputProps={inputProps}
-            highlightFirstSuggestion={true}
-          />
-        </Labeled>
-      </div>
+      <Labeled label={label}>
+        <Autosuggest
+          suggestions={suggestions.slice(0, 20)}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionSelected={this.onSuggestionSelected}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps}
+          highlightFirstSuggestion={true}
+        />
+      </Labeled>
     );
   }
 }

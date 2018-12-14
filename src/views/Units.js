@@ -30,6 +30,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const UrlSearchInist = ({ source, record = {} }) => {
   const url = `#/inistAccounts?filter={"main_unit.id":${record.id}}`;
@@ -66,14 +67,14 @@ const UnitsFilter = props => (
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.units.fields.main_institute"
       source="unit.main_institute"
       reference="institutes"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="institute"
+      optionText="name"
+      isFilter={true}
+    />
 
     <ReferenceArrayInput
       label="resources.units.fields.institutes"
@@ -285,13 +286,13 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.ci_mail"
       />
 
-      <ReferenceInput
+      <AutoCompleteReferenceInput
         label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
-      >
-        <SelectInput source="name" />
-      </ReferenceInput>
+        field="institute"
+        optionText="name"
+      />
 
       <ReferenceArrayInput
         label="resources.units.fields.institutes"

@@ -109,3 +109,8 @@ table td {
   color: #ee0000;
   font-weight: bold;
 }
+
+.jss16,
+.MuiCard-root-16 {
+  overflow: visible !important;
+}

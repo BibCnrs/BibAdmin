@@ -103,6 +103,7 @@ export const FavorisEdit = ({ ...props }) => (
         label="resources.revues.fields.communities"
         reference="communities"
         source="communities"
+        perPage={100}
       >
         <SelectArrayInput>
           <ChipField source="name" />
@@ -122,6 +123,7 @@ export const FavorisCreate = ({ ...props }) => (
         label="resources.revues.fields.communities"
         reference="communities"
         source="communities"
+        perPage={100}
       >
         <SelectArrayInput>
           <ChipField source="name" />

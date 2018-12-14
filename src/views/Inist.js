@@ -54,14 +54,14 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.mail"
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.main_institute"
       source="main_institute"
       reference="institutes"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="institute"
+      optionText="name"
+      isFilter={true}
+    />
 
     <ReferenceArrayInput
       label="resources.inistAccounts.fields.institutes"
@@ -72,15 +72,14 @@ const InistFilter = props => (
       <AutocompleteInput optionText="name" />
     </ReferenceArrayInput>
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.main_unit"
       source="main_unit.id"
       reference="units"
-      perPage={100}
-      sort={{ field: "code", order: "ASC" }}
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="unit"
+      optionText="code"
+      isFilter={true}
+    />
 
     <ReferenceInput
       label="resources.inistAccounts.fields.units"
@@ -291,15 +290,13 @@ export const InistEdit = ({ ...props }) => (
 
       <TextInput source="dr" label="resources.inistAccounts.fields.dr" />
 
-      <ReferenceInput
+      <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        sort={{ field: "name" }}
-        perPage={100}
-      >
-        <AutoCompleteReferenceInput optionText="name" />
-      </ReferenceInput>
+        field="institute"
+        optionText="name"
+      />
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.institutes"
@@ -311,15 +308,13 @@ export const InistEdit = ({ ...props }) => (
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
 
-      <ReferenceInput
+      <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
-        sort={{ field: "code" }}
-        perPage={10000}
-      >
-        <AutoCompleteReferenceInput optionText="code" />
-      </ReferenceInput>
+        field="unit"
+        optionText="code"
+      />
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.units"
@@ -399,35 +394,30 @@ export const InistCreate = ({ ...props }) => (
 
       <TextInput source="dr" label="resources.inistAccounts.fields.dr" />
 
-      <ReferenceInput
+      <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        sort={{ field: "name" }}
-        perPage={100}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+        field="institute"
+        optionText="name"
+      />
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.institutes"
         source="institutes"
         reference="institutes"
-        sort={{ field: "name" }}
         perPage={100}
       >
-        <SelectArrayInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceArrayInput>
 
-      <ReferenceInput
+      <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
-        sort={{ field: "code" }}
-        perPage={100}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
+        field="unit"
+        optionText="code"
+      />
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.units"

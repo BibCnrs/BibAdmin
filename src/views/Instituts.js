@@ -13,7 +13,6 @@ import {
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  ReferenceInput,
   downloadCSV
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
@@ -36,14 +35,13 @@ const InstitutsFilter = props => (
       source="like_institute.name"
       label="resources.institutes.fields.name"
     />
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.institutes.fields.communities"
       source="community.id"
       reference="communities"
-      perPage={100}
-    >
-      <AutoCompleteReferenceInput />
-    </ReferenceInput>
+      optionText="name"
+      isFilter={true}
+    />
   </Filter>
 );
 

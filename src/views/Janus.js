@@ -30,6 +30,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const JanusFilter = props => (
   <Filter {...props}>
@@ -45,13 +46,14 @@ const JanusFilter = props => (
       label="resources.janusAccounts.fields.mail"
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.janusAccounts.fields.primary_institute"
-      source="janus_account.primary_institute"
+      source="institutes.id"
       reference="institutes"
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="institute"
+      optionText="name"
+      isFilter={true}
+    />
 
     <ReferenceArrayInput
       label="resources.janusAccounts.fields.additional_institutes"
@@ -61,13 +63,14 @@ const JanusFilter = props => (
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.janusAccounts.fields.primary_unit"
-      source="janus_account.primary_unit"
+      source="units.id"
       reference="units"
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="unit"
+      optionText="code"
+      isFilter={true}
+    />
 
     <ReferenceArrayInput
       label="resources.janusAccounts.fields.additional_units"

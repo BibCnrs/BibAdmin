@@ -10,6 +10,3 @@ export const renameKeys = (obj, pageName) => {
   });
   return Object.assign({}, ...keyValues);
 };
-
-export const escapeRegexCharacters = str =>
-  str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

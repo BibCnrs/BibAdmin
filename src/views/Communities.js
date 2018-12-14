@@ -29,7 +29,10 @@ const CommunitiesFilter = props => (
       source="password"
       label="resources.communities.fields.password"
     />
-    <TextInput source="profile" label="resources.communities.fields.profile" />
+    <TextInput
+      source="like_profile"
+      label="resources.communities.fields.profile"
+    />
     <BooleanInput source="ebsco" label="resources.communities.fields.ebsco" />
   </Filter>
 );
