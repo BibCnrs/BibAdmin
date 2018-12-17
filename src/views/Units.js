@@ -163,6 +163,10 @@ export const UnitsList = ({ ...props }) => (
       >
         <TextField source="name" />
       </ReferenceField>
+      <TextField
+        label="resources.units.fields.main_institute"
+        source="institute_code"
+      />
 
       <ReferenceArrayField
         label="resources.units.fields.institutes"
