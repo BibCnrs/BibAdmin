@@ -71,6 +71,23 @@ class AutoCompleteReferenceInput extends React.Component {
     return suggestion[optionText];
   };
 
+  async componentWillMount() {
+    const { optionText, record, source, reference } = this.props;
+    if (record[source]) {
+      const { data } = await axios({
+        url: `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${
+          record[source]
+        }`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      this.setState({
+        value: data[optionText]
+      });
+    }
+  }
+
   // render list
   renderSuggestion(suggestion, { query }) {
     const regex = new RegExp(`(${query})`, "i");
