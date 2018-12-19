@@ -33,24 +33,26 @@ class AutoCompleteReferenceInput extends React.Component {
     } else {
       filter = `{"like_${optionText}":"${value}"}`;
     }
-    const { data } = await axios({
-      url: `${
-        process.env.REACT_APP_BIBAPI_HOST
-      }/${reference}?_filters=${filter}`,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    });
-    this.setState({
-      suggestions: data
-    });
+    if (value.length > 1) {
+      const { data } = await axios({
+        url: `${
+          process.env.REACT_APP_BIBAPI_HOST
+        }/${reference}?_filters=${filter}`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      this.setState({
+        suggestions: data
+      });
+    }
   };
 
   // filter when element is selected (ONLY for filter)
   onSuggestionSelected = (event, { suggestion }) => {
-    const { resource, source, isFilter } = this.props;
+    const { resource, element, isFilter } = this.props;
     if (isFilter === true) {
-      document.location.href = `#/${resource}?filter={"${source}":"${
+      document.location.href = `#/${resource}?filter={"${element}":"${
         suggestion.id
       }"}`;
     }
@@ -72,11 +74,11 @@ class AutoCompleteReferenceInput extends React.Component {
   };
 
   async componentWillMount() {
-    const { optionText, record, source, reference } = this.props;
-    if (record[source]) {
+    const { optionText, record, element, reference } = this.props;
+    if (record[element]) {
       const { data } = await axios({
         url: `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${
-          record[source]
+          record[element]
         }`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -113,6 +115,7 @@ class AutoCompleteReferenceInput extends React.Component {
     return (
       <Labeled label={label}>
         <Autosuggest
+          id={label}
           suggestions={suggestions.slice(0, 20)}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionSelected={this.onSuggestionSelected}

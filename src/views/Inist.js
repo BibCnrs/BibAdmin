@@ -56,6 +56,7 @@ const InistFilter = props => (
 
     <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.main_institute"
+      element="main_institute"
       source="main_institute"
       reference="institutes"
       field="institute"
@@ -63,41 +64,44 @@ const InistFilter = props => (
       isFilter={true}
     />
 
-    <ReferenceArrayInput
+    <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.institutes"
+      element="institutes"
       source="institutes"
       reference="institutes"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceArrayInput>
+      field="institute"
+      optionText="name"
+      isFilter={true}
+    />
 
     <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.main_unit"
-      source="main_unit.id"
+      element="main_unit"
+      source="main_unit"
       reference="units"
       field="unit"
       optionText="code"
       isFilter={true}
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.units"
-      source="units.id"
+      element="units"
+      source="units"
       reference="units"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="unit"
+      optionText="code"
+      isFilter={true}
+    />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.communities"
-      source="community.id"
+      element="community.id"
+      source="communities"
       reference="communities"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      optionText="name"
+      isFilter={true}
+    />
 
     <DateInput
       source="to_inist_account.subscription_date"
@@ -370,7 +374,7 @@ export const InistEdit = ({ ...props }) => (
 
 export const InistCreate = ({ ...props }) => (
   <Create {...props} actions={<ListActions />}>
-    <SimpleForm>
+    <SimpleForm redirect="list">
       <TextInput
         source="username"
         label="resources.inistAccounts.fields.username"
