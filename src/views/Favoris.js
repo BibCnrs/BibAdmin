@@ -15,7 +15,8 @@ import {
   ReferenceInput,
   AutocompleteInput,
   ChipField,
-  downloadCSV
+  downloadCSV,
+  ExportButton
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
@@ -23,6 +24,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const FavorisFilter = props => (
   <Filter {...props}>
@@ -33,14 +35,14 @@ const FavorisFilter = props => (
       source="like_revue.title"
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.revues.fields.communities"
+      element="community_id"
       source="community_id"
       reference="communities"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      optionText="name"
+      isFilter={true}
+    />
   </Filter>
 );
 
@@ -59,6 +61,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     delimiter: ";"
   });
   downloadCSV(csv, "revues");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 export const FavorisList = ({ ...props }) => (

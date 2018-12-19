@@ -21,7 +21,8 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   AutocompleteInput,
-  downloadCSV
+  downloadCSV,
+  ExportButton
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
@@ -181,6 +182,11 @@ const exporter = async (records, fetchRelatedRecords) => {
   downloadCSV(csv, "inistAccounts");
 };
 
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
 export const InistList = ({ ...props }) => (
   <List
     {...props}
@@ -296,6 +302,7 @@ export const InistEdit = ({ ...props }) => (
 
       <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_institute"
+        element="main_institute"
         source="main_institute"
         reference="institutes"
         field="institute"
@@ -304,6 +311,7 @@ export const InistEdit = ({ ...props }) => (
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.institutes"
+        element="institutes"
         source="institutes"
         reference="institutes"
         sort={{ field: "name" }}
@@ -314,6 +322,7 @@ export const InistEdit = ({ ...props }) => (
 
       <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_unit"
+        element="main_unit"
         source="main_unit"
         reference="units"
         field="unit"
@@ -322,6 +331,7 @@ export const InistEdit = ({ ...props }) => (
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.units"
+        element="units"
         source="units"
         reference="units"
         sort={{ field: "code" }}
@@ -400,6 +410,7 @@ export const InistCreate = ({ ...props }) => (
 
       <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_institute"
+        element="main_institute"
         source="main_institute"
         reference="institutes"
         field="institute"
@@ -408,15 +419,18 @@ export const InistCreate = ({ ...props }) => (
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.institutes"
+        element="institutes"
         source="institutes"
         reference="institutes"
+        sort={{ field: "name" }}
         perPage={100}
       >
-        <AutocompleteInput optionText="name" />
+        <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
 
       <AutoCompleteReferenceInput
         label="resources.inistAccounts.fields.main_unit"
+        element="main_unit"
         source="main_unit"
         reference="units"
         field="unit"
@@ -425,6 +439,7 @@ export const InistCreate = ({ ...props }) => (
 
       <ReferenceArrayInput
         label="resources.inistAccounts.fields.units"
+        element="units"
         source="units"
         reference="units"
         sort={{ field: "code" }}
@@ -441,17 +456,6 @@ export const InistCreate = ({ ...props }) => (
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
-
-      <ReferenceArrayField
-        label="resources.inistAccounts.fields.all_communities"
-        source="all_communities"
-        reference="communities"
-        perPage={100}
-      >
-        <SingleFieldList>
-          <ChipField source="name" />
-        </SingleFieldList>
-      </ReferenceArrayField>
 
       <DateInput
         source="subscription_date"

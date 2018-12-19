@@ -15,7 +15,8 @@ import {
   ImageField,
   ReferenceArrayInput,
   SelectArrayInput,
-  downloadCSV
+  downloadCSV,
+  ExportButton
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
@@ -45,6 +46,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     delimiter: ";"
   });
   downloadCSV(csv, "databases");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 export const DatabasesList = ({ ...props }) => (

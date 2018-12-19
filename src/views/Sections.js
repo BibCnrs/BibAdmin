@@ -11,7 +11,8 @@ import {
   LongTextInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  downloadCSV
+  downloadCSV,
+  ExportButton
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
@@ -73,6 +74,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     delimiter: ";"
   });
   downloadCSV(csv, "section_cn");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 export const SectionsList = ({ ...props }) => (

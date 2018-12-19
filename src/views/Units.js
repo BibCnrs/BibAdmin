@@ -16,13 +16,13 @@ import {
   TextInput,
   NumberInput,
   BooleanInput,
-  ReferenceInput,
   ReferenceArrayInput,
   SelectInput,
   SelectArrayInput,
   LongTextInput,
   AutocompleteInput,
-  downloadCSV
+  downloadCSV,
+  ExportButton
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
@@ -58,43 +58,45 @@ const UnitsFilter = props => (
     <TextInput source="like_unit.code" label="resources.units.fields.code" />
     <TextInput source="like_unit.name" label="resources.units.fields.name" />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.units.fields.communities"
-      source="community.id"
+      element="community.id"
+      source="community"
       reference="communities"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="community"
+      optionText="name"
+      isFilter={true}
+    />
 
     <AutoCompleteReferenceInput
       label="resources.units.fields.main_institute"
-      source="unit.main_institute"
+      element="unit.main_institute"
+      source="main_institute"
       reference="institutes"
       field="institute"
       optionText="name"
       isFilter={true}
     />
 
-    <ReferenceArrayInput
+    <AutoCompleteReferenceInput
       label="resources.units.fields.institutes"
-      source="institute.id"
+      element="institute.id"
+      source="institutes"
       reference="institutes"
-    >
-      <SelectArrayInput>
-        <ChipField source="name" />
-      </SelectArrayInput>
-    </ReferenceArrayInput>
+      field="institute"
+      optionText="name"
+      isFilter={true}
+    />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.units.fields.section_cn"
-      source="section_cn.id"
+      element="section_cn.id"
+      source="section_cn"
       reference="section_cn"
-      perPage={50}
-      sort={{ field: "name" }}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="section_cn"
+      optionText="name"
+      isFilter={true}
+    />
 
     <BooleanInput
       source="unit.active"
@@ -104,7 +106,8 @@ const UnitsFilter = props => (
   </Filter>
 );
 
-const exporter = async (records, fetchRelatedRecords) => {
+const exporter = async (records, fetchRelatedRecords, ...rest) => {
+  console.log(rest);
   const listPrincipalIt = await fetchRelatedRecords(
     records,
     "main_institute",
@@ -139,6 +142,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     delimiter: ";"
   });
   downloadCSV(csv, "units");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 export const UnitsList = ({ ...props }) => (
@@ -427,13 +435,13 @@ export const UnitsCreate = ({ ...props }) => (
         label="resources.units.fields.ci_mail"
       />
 
-      <ReferenceInput
+      <AutoCompleteReferenceInput
         label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
-      >
-        <SelectInput source="name" />
-      </ReferenceInput>
+        field="institute"
+        optionText="name"
+      />
 
       <ReferenceArrayInput
         label="resources.units.fields.institutes"
