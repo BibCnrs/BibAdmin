@@ -7,6 +7,7 @@ import {
   List,
   Filter,
   SimpleForm,
+  ReferenceInput,
   ReferenceArrayField,
   SingleFieldList,
   ChipField,
@@ -22,6 +23,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
 import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
+import { AutoCompleteInput } from "../components/AutoCompleteInput";
 import { PostPagination } from "../utils/pagination";
 
 const InstitutsFilter = props => (
@@ -111,7 +113,14 @@ export const InstitutsEdit = ({ ...props }) => (
         source="communities"
         className="tags"
       >
-        <SelectArrayInput source="name" />
+        <AutoCompleteReferenceInput
+          label="resources.janusAccounts.fields.communities"
+          element="community.id"
+          source="communities"
+          reference="communities"
+          optionText="name"
+          isMulti={true}
+        />
       </ReferenceArrayInput>
     </SimpleForm>
   </Edit>

@@ -31,6 +31,7 @@ import LinkEdit from "../components/LinkEdit";
 import ListActions from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const UrlSearchInist = ({ source, record = {} }) => {
   const url = `#/inistAccounts?filter={"main_unit.id":${record.id}}`;
@@ -298,8 +299,9 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.ci_mail"
       />
 
-      <AutoCompleteReferenceInput
+      <AutoCompleteInput
         label="resources.units.fields.main_institute"
+        element="main_institute"
         source="main_institute"
         reference="institutes"
         field="institute"

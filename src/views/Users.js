@@ -44,7 +44,7 @@ export const UsersEdit = ({ ...props }) => (
   <Edit title={<UsersTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="username" />
-      <TextInput type="text" source="password" />
+      <TextInput source="password" />
       <LongTextInput source="comment" />
     </SimpleForm>
   </Edit>
@@ -54,7 +54,7 @@ export const UsersCreate = ({ ...props }) => (
   <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="username" />
-      <TextInput type="text" source="password" />
+      <TextInput source="password" />
       <LongTextInput source="comment" />
     </SimpleForm>
   </Create>
