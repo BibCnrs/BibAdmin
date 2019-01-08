@@ -23,10 +23,13 @@ import { PostPagination } from "../utils/pagination";
 const CommunitiesFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="gate" label="resources.communities.fields.gate" />
-    <TextInput source="user_id" label="resources.communities.fields.user_id" />
+    <TextInput source="like_gate" label="resources.communities.fields.gate" />
     <TextInput
-      source="password"
+      source="like_user_id"
+      label="resources.communities.fields.user_id"
+    />
+    <TextInput
+      source="like_password"
       label="resources.communities.fields.password"
     />
     <TextInput

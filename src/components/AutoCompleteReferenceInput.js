@@ -6,6 +6,17 @@ import axios from "axios";
 // not clean but not other means
 let optionTextForRenderSuggestion = null;
 
+// get data on api
+const fetchApi = async url => {
+  const { data } = await axios({
+    url,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
+  return data;
+};
+
 class AutoCompleteReferenceInput extends React.Component {
   constructor() {
     super();
@@ -34,14 +45,9 @@ class AutoCompleteReferenceInput extends React.Component {
       filter = `{"like_${optionText}":"${value}"}`;
     }
     if (value.length > 1) {
-      const { data } = await axios({
-        url: `${
-          process.env.REACT_APP_BIBAPI_HOST
-        }/${reference}?_filters=${filter}`,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      });
+      const data = await fetchApi(
+        `${process.env.REACT_APP_BIBAPI_HOST}/${reference}?_filters=${filter}`
+      );
       this.setState({
         suggestions: data
       });
@@ -75,15 +81,19 @@ class AutoCompleteReferenceInput extends React.Component {
 
   async componentWillMount() {
     const { optionText, record, element, reference } = this.props;
-    if (record[element]) {
-      const { data } = await axios({
-        url: `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${
-          record[element]
-        }`,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+    if (record && record[element]) {
+      const data = await fetchApi(
+        `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${record[element]}`
+      );
+      this.setState({
+        value: data[optionText]
       });
+    } else if (window.location.hash && window.location.hash.includes(element)) {
+      let filter = decodeURI(window.location.hash).split(/({.*})/)[1];
+      filter = JSON.parse(filter.replace("%3A", ":"));
+      const data = await fetchApi(
+        `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${filter[element]}`
+      );
       this.setState({
         value: data[optionText]
       });

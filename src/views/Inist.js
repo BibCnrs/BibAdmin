@@ -67,7 +67,7 @@ const InistFilter = props => (
 
     <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.institutes"
-      element="institutes"
+      element="institutes.id"
       source="institutes"
       reference="institutes"
       field="institute"
@@ -87,7 +87,7 @@ const InistFilter = props => (
 
     <AutoCompleteReferenceInput
       label="resources.inistAccounts.fields.units"
-      element="units"
+      element="units.id"
       source="units"
       reference="units"
       field="unit"
