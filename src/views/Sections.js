@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -12,13 +12,15 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   downloadCSV,
-  ExportButton
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 
 const SectionsFilter = props => (
@@ -84,6 +86,12 @@ ExportButton.defaultProps = {
   maxResults: 100000
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const SectionsList = ({ ...props }) => (
   <List
     {...props}
@@ -91,6 +99,7 @@ export const SectionsList = ({ ...props }) => (
     perPage={10}
     pagination={<PostPagination />}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit label="resources.section_cn.fields.name" source="name" />
@@ -105,9 +114,15 @@ const SectionsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const SectionsEdit = ({ ...props }) => (
-  <Edit title={<SectionsTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<SectionsTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
       <LongTextInput

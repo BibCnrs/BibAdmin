@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -15,13 +15,15 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   downloadCSV,
-  ExportButton
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
 import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 import { AutoCompleteInput } from "../components/AutoCompleteInput";
 import { PostPagination } from "../utils/pagination";
@@ -70,6 +72,12 @@ ExportButton.defaultProps = {
   maxResults: 100000
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const InstitutsList = ({ ...props }) => (
   <List
     {...props}
@@ -77,6 +85,7 @@ export const InstitutsList = ({ ...props }) => (
     perPage={10}
     pagination={<PostPagination />}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit source="id" label="resources.institutes.fields.id" />
@@ -101,9 +110,15 @@ const InstitutsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const InstitutsEdit = ({ ...props }) => (
-  <Edit title={<InstitutsTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<InstitutsTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />

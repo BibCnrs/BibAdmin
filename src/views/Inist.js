@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -22,7 +22,9 @@ import {
   SelectArrayInput,
   AutocompleteInput,
   downloadCSV,
-  ExportButton
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
@@ -30,7 +32,7 @@ import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
@@ -187,6 +189,12 @@ ExportButton.defaultProps = {
   maxResults: 100000
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const InistList = ({ ...props }) => (
   <List
     {...props}
@@ -194,6 +202,7 @@ export const InistList = ({ ...props }) => (
     perPage={10}
     pagination={<PostPagination />}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit
@@ -274,9 +283,15 @@ const InistTitle = ({ record }) => {
   return record.username;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const InistEdit = ({ ...props }) => (
-  <Edit title={<InistTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<InistTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="username"
         label="resources.inistAccounts.fields.username"

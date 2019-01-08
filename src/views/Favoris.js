@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -16,13 +16,15 @@ import {
   AutocompleteInput,
   ChipField,
   downloadCSV,
-  ExportButton
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
@@ -68,6 +70,12 @@ ExportButton.defaultProps = {
   maxResults: 100000
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const FavorisList = ({ ...props }) => (
   <List
     {...props}
@@ -76,6 +84,7 @@ export const FavorisList = ({ ...props }) => (
     pagination={<PostPagination />}
     sort={{ field: "title" }}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit source="title" label="resources.revues.fields.title" />
@@ -100,9 +109,15 @@ const FavorisTitle = ({ record }) => {
   return record.title;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const FavorisEdit = ({ ...props }) => (
-  <Edit title={<FavorisTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<FavorisTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />
 

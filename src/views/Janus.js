@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -22,14 +22,16 @@ import {
   AutocompleteInput,
   SelectArrayInput,
   downloadCSV,
-  ExportButton
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
 import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
@@ -195,6 +197,12 @@ ExportButton.defaultProps = {
   maxResults: 100000
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const JanusList = props => (
   <List
     {...props}
@@ -202,6 +210,7 @@ export const JanusList = props => (
     perPage={10}
     pagination={<PostPagination />}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit source="uid" label="resources.janusAccounts.fields.uid" />
@@ -267,9 +276,15 @@ const JanusTitle = ({ record }) => {
   return record.uid;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const JanusEdit = ({ ...props }) => (
-  <Edit title={<JanusTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<JanusTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
 

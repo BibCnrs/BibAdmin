@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -9,10 +9,12 @@ import {
   SimpleForm,
   TextField,
   TextInput,
-  LongTextInput
+  LongTextInput,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 
 const UsersFilter = props => (
@@ -21,12 +23,19 @@ const UsersFilter = props => (
   </Filter>
 );
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const UsersList = ({ ...props }) => (
   <List
     {...props}
     filters={<UsersFilter />}
     perPage={25}
     pagination={<PostPagination />}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <TextField source="username" label="resources.adminUsers.fields.login" />
@@ -40,9 +49,15 @@ const UsersTitle = ({ record }) => {
   return record.username;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const UsersEdit = ({ ...props }) => (
-  <Edit title={<UsersTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<UsersTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="username" />
       <TextInput source="password" />
       <LongTextInput source="comment" />
