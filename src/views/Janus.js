@@ -134,58 +134,7 @@ const JanusFilter = props => (
 );
 
 const exporter = async (records, fetchRelatedRecords) => {
-  const listPrincipalUnit = await fetchRelatedRecords(
-    records,
-    "primary_unit",
-    "units"
-  );
-  const listAdditionalUnit = await fetchRelatedRecords(
-    records,
-    "additional_units",
-    "units"
-  );
-  const listAllCommunities = await fetchRelatedRecords(
-    records,
-    "all_communities",
-    "communities"
-  );
-  const listCommunities = await fetchRelatedRecords(
-    records,
-    "communities",
-    "communities"
-  );
-  const listPrincipalIt = await fetchRelatedRecords(
-    records,
-    "primary_institute",
-    "institutes"
-  );
-  const listAdditionalIt = await fetchRelatedRecords(
-    records,
-    "additional_institutes",
-    "institutes"
-  );
-  const dataWithRelation = records.map(record => ({
-    ...record,
-    primary_unit:
-      listPrincipalUnit[record.primary_unit] &&
-      listPrincipalUnit[record.primary_unit].code,
-    primary_institute:
-      listPrincipalIt[record.primary_institute] &&
-      listPrincipalIt[record.primary_institute].name,
-    all_communities: record.all_communities.map(
-      n => listAllCommunities[n].name
-    ),
-    communities: record.communities.map(n => listCommunities[n].name),
-    additional_units: record.additional_units.map(
-      n => listAdditionalUnit[n].name
-    ),
-    additional_institutes: record.additional_institutes.map(
-      n => listAdditionalIt[n].name
-    )
-  }));
-  const data = dataWithRelation.map(record =>
-    renameKeys(record, "janusAccounts")
-  );
+  const data = records.map(record => renameKeys(record, "janusAccounts"));
   const csv = convertToCSV(data, {
     delimiter: ";"
   });

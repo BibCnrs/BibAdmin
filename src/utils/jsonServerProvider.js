@@ -36,15 +36,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
    * @returns {Object} { url, options } The HTTP request parameters
    */
   const convertDataRequestToHTTP = (type, resource, params) => {
-  
     let url = "";
     const options = {};
     switch (type) {
       case GET_LIST: {
-        // il faut définir l'objet pour lequel le filtre va être appliqué
-        /*const baseFilter = resource
-          .replace(/(.*)([A-Z])(.*)/g, "$1_$2$3")
-          .toLowerCase();*/
         const { page, perPage } = params.pagination;
         let { field, order } = params.sort;
         const filters = fetchUtils.flattenObject(params.filter);

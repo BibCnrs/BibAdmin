@@ -136,48 +136,7 @@ const InistFilter = props => (
 );
 
 const exporter = async (records, fetchRelatedRecords) => {
-  const listPrincipalUnit = await fetchRelatedRecords(
-    records,
-    "main_unit",
-    "units"
-  );
-  const listAllCommunities = await fetchRelatedRecords(
-    records,
-    "all_communities",
-    "communities"
-  );
-  const listCommunities = await fetchRelatedRecords(
-    records,
-    "communities",
-    "communities"
-  );
-  const listMainCommunities = await fetchRelatedRecords(
-    records,
-    "main_unit_communities",
-    "communities"
-  );
-  const listPrincipalIt = await fetchRelatedRecords(
-    records,
-    "main_institute",
-    "institutes"
-  );
-  const dataWithRelation = records.map(record => ({
-    ...record,
-    main_unit:
-      listPrincipalUnit[record.main_unit] &&
-      listPrincipalUnit[record.main_unit].code,
-    main_institute:
-      listPrincipalIt[record.main_institute] &&
-      listPrincipalIt[record.main_institute].name,
-    all_communities: record.communities.map(n => listAllCommunities[n].name),
-    communities: record.communities.map(n => listCommunities[n].name),
-    main_unit_communities: record.communities.map(
-      n => listMainCommunities[n].name
-    )
-  }));
-  const data = dataWithRelation.map(record =>
-    renameKeys(record, "inistAccounts")
-  );
+  const data = records.map(record => renameKeys(record, "inistAccounts"));
   const csv = convertToCSV(data, {
     delimiter: ";"
   });
