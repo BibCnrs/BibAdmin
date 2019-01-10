@@ -213,21 +213,70 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     }
 
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
-    if (options.body && options.body.image) {
-      return convertFileToBase64(options.body.image).then(image => {
-        options.body.image = image;
-        options.body = JSON.stringify(options.body);
-        return httpClient(url, options).then(response =>
-          convertHTTPResponse(response, type, resource, params)
-        );
-      });
-    } else {
-      if (options.body) {
-        options.body = JSON.stringify(options.body);
-      }
-      return httpClient(url, options).then(response =>
-        convertHTTPResponse(response, type, resource, params)
+    if (options.body) {
+      const main_institute = sessionStorage.getItem("main_institute");
+      const primary_institute = sessionStorage.getItem("primary_institute");
+      const secondary_institutes = sessionStorage.getItem(
+        "secondary_institutes"
       );
+      const institutes = sessionStorage.getItem("institutes");
+      const main_unit = sessionStorage.getItem("main_unit");
+      const primary_unit = sessionStorage.getItem("primary_unit");
+      const secondary_units = sessionStorage.getItem("secondary_units");
+      const units = sessionStorage.getItem("units");
+      const communities = sessionStorage.getItem("communities");
+      const sections_cn = sessionStorage.getItem("sections_cn");
+      if (main_institute) {
+        options.body.main_institute = main_institute;
+        sessionStorage.removeItem("main_institute");
+      }
+      if (primary_institute) {
+        options.body.primary_institute = primary_institute;
+        sessionStorage.removeItem("primary_institute");
+      }
+      if (secondary_institutes) {
+        options.body.secondary_institutes = secondary_institutes.split(",");
+        sessionStorage.removeItem("secondary_institutes");
+      }
+      if (institutes) {
+        options.body.institutes = institutes.split(",");
+        sessionStorage.removeItem("institutes");
+      }
+      if (main_unit) {
+        options.body.main_unit = main_unit;
+        sessionStorage.removeItem("main_unit");
+      }
+      if (primary_unit) {
+        options.body.primary_unit = primary_unit;
+        sessionStorage.removeItem("primary_unit");
+      }
+      if (secondary_units) {
+        options.body.secondary_units = secondary_units.split(",");
+        sessionStorage.removeItem("secondary_units");
+      }
+      if (units) {
+        options.body.units = units.split(",");
+        sessionStorage.removeItem("units");
+      }
+      if (communities) {
+        options.body.communities = communities.split(",");
+        sessionStorage.removeItem("communities");
+      }
+      console.log(options.body);
+      if (sections_cn) {
+        options.body.sections_cn = sections_cn.split(",");
+        sessionStorage.removeItem("sections_cn");
+      }
+      sessionStorage.clear();
+      if (options.body.image) {
+        return convertFileToBase64(options.body.image).then(image => {
+          options.body.image = image;
+        });
+      }
+      options.body = JSON.stringify(options.body);
     }
+    return httpClient(url, options).then(response =>
+      convertHTTPResponse(response, type, resource, params)
+    );
   };
 };

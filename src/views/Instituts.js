@@ -7,13 +7,10 @@ import {
   List,
   Filter,
   SimpleForm,
-  ReferenceInput,
   ReferenceArrayField,
   SingleFieldList,
   ChipField,
   TextInput,
-  ReferenceArrayInput,
-  SelectArrayInput,
   downloadCSV,
   ExportButton,
   SaveButton,
@@ -24,8 +21,7 @@ import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
-import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
-import { AutoCompleteInput } from "../components/AutoCompleteInput";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 import { PostPagination } from "../utils/pagination";
 
 const InstitutsFilter = props => (
@@ -40,12 +36,11 @@ const InstitutsFilter = props => (
       source="like_institute.name"
       label="resources.institutes.fields.name"
     />
-    <AutoCompleteReferenceInput
+    <AutoCompleteInput
       label="resources.institutes.fields.communities"
-      source="community.id"
+      source="communities"
       reference="communities"
-      optionText="name"
-      isFilter={true}
+      filter="community.id"
     />
   </Filter>
 );
@@ -122,21 +117,12 @@ export const InstitutsEdit = ({ ...props }) => (
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.institutes.fields.communities"
-        reference="communities"
         source="communities"
-        className="tags"
-      >
-        <AutoCompleteReferenceInput
-          label="resources.janusAccounts.fields.communities"
-          element="community.id"
-          source="communities"
-          reference="communities"
-          optionText="name"
-          isMulti={true}
-        />
-      </ReferenceArrayInput>
+        reference="communities"
+        isMulti={true}
+      />
     </SimpleForm>
   </Edit>
 );
@@ -147,14 +133,12 @@ export const InstitutsCreate = ({ ...props }) => (
       <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.institutes.fields.communities"
-        reference="communities"
         source="communities"
-        className="tags"
-      >
-        <SelectArrayInput source="name" />
-      </ReferenceArrayInput>
+        reference="communities"
+        isMulti={true}
+      />
     </SimpleForm>
   </Create>
 );

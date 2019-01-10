@@ -13,8 +13,6 @@ import {
   BooleanInput,
   FileInput,
   ImageField,
-  ReferenceArrayInput,
-  SelectArrayInput,
   downloadCSV,
   ExportButton,
   SaveButton,
@@ -26,6 +24,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const DatabasesFilter = props => (
   <Filter {...props}>
@@ -110,14 +109,12 @@ export const DatabasesEdit = ({ ...props }) => (
         source="text_en"
         label="resources.databases.fields.text_en"
       />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
         reference="communities"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        isMulti={true}
+      />
       <FileInput
         source="image"
         label="resources.databases.fields.image"
@@ -146,14 +143,12 @@ export const DatabasesCreate = ({ ...props }) => (
         source="text_en"
         label="resources.databases.fields.text_en"
       />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
         reference="communities"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        isMulti={true}
+      />
       <FileInput
         source="image"
         label="resources.databases.fields.image"

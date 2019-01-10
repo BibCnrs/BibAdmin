@@ -49,7 +49,7 @@ table td {
 }
 
 /* react auto-suggest */
-.react-autosuggest__container {
+/*.react-autosuggest__container {
   position: relative;
 }
 
@@ -113,4 +113,9 @@ table td {
 .jss16,
 .MuiCard-root-16 {
   overflow: visible !important;
+}
+*/
+
+.width-200 {
+  width: 200px;
 }

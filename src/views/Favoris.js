@@ -9,11 +9,7 @@ import {
   SimpleForm,
   SingleFieldList,
   TextInput,
-  ReferenceArrayInput,
-  SelectArrayInput,
   ReferenceArrayField,
-  ReferenceInput,
-  AutocompleteInput,
   ChipField,
   downloadCSV,
   ExportButton,
@@ -26,7 +22,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
-import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const FavorisFilter = props => (
   <Filter {...props}>
@@ -37,13 +33,11 @@ const FavorisFilter = props => (
       source="like_revue.title"
     />
 
-    <AutoCompleteReferenceInput
+    <AutoCompleteInput
       label="resources.revues.fields.communities"
-      element="community_id"
-      source="community_id"
+      source="communities"
       reference="communities"
-      optionText="name"
-      isFilter={true}
+      filter="community_id"
     />
   </Filter>
 );
@@ -121,16 +115,12 @@ export const FavorisEdit = ({ ...props }) => (
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.revues.fields.communities"
-        reference="communities"
         source="communities"
-        perPage={100}
-      >
-        <SelectArrayInput>
-          <ChipField source="name" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="communities"
+        isMulti={true}
+      />
     </SimpleForm>
   </Edit>
 );
@@ -141,16 +131,12 @@ export const FavorisCreate = ({ ...props }) => (
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.revues.fields.communities"
-        reference="communities"
         source="communities"
-        perPage={100}
-      >
-        <SelectArrayInput>
-          <ChipField source="name" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="communities"
+        isMulti={true}
+      />
     </SimpleForm>
   </Create>
 );

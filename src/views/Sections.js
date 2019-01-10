@@ -9,8 +9,6 @@ import {
   SimpleForm,
   TextInput,
   LongTextInput,
-  ReferenceArrayInput,
-  SelectArrayInput,
   downloadCSV,
   ExportButton,
   SaveButton,
@@ -22,6 +20,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const SectionsFilter = props => (
   <Filter {...props}>
@@ -35,21 +34,20 @@ const SectionsFilter = props => (
       source="comment"
       label="resources.section_cn.fields.comment"
     />
-    <ReferenceArrayInput
+    <AutoCompleteInput
       label="resources.section_cn.fields.primary_institutes"
       source="primary_institutes"
       reference="institutes"
-      className="tags"
-    >
-      <SelectArrayInput optionText="name" />
-    </ReferenceArrayInput>
-    <ReferenceArrayInput
+      field="institute"
+      filter="primary_institutes"
+    />
+    <AutoCompleteInput
       label="resources.section_cn.fields.secondary_institutes"
       source="secondary_institutes"
       reference="institutes"
-    >
-      <SelectArrayInput optionText="name" />
-    </ReferenceArrayInput>
+      field="institute"
+      filter="secondary_institutes.id"
+    />
   </Filter>
 );
 
@@ -129,21 +127,19 @@ export const SectionsEdit = ({ ...props }) => (
         source="comment"
         label="resources.section_cn.fields.comment"
       />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"
         reference="institutes"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
-      <ReferenceArrayInput
+        field="institute"
+      />
+      <AutoCompleteInput
         label="resources.section_cn.fields.secondary_institutes"
         source="secondary_institutes"
         reference="institutes"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        field="institute"
+        isMulti={true}
+      />
     </SimpleForm>
   </Edit>
 );
@@ -157,22 +153,19 @@ export const SectionsCreate = ({ ...props }) => (
         source="comment"
         label="resources.section_cn.fields.comment"
       />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"
         reference="institutes"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
-      <ReferenceArrayInput
+        field="institute"
+      />
+      <AutoCompleteInput
         label="resources.section_cn.fields.secondary_institutes"
         source="secondary_institutes"
         reference="institutes"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        field="institute"
+        isMulti={true}
+      />
     </SimpleForm>
   </Create>
 );
