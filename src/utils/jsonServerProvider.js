@@ -219,10 +219,14 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       const secondary_institutes = sessionStorage.getItem(
         "secondary_institutes"
       );
+      const additional_institutes = sessionStorage.getItem(
+        "additional_institutes"
+      );
       const institutes = sessionStorage.getItem("institutes");
       const main_unit = sessionStorage.getItem("main_unit");
       const primary_unit = sessionStorage.getItem("primary_unit");
       const secondary_units = sessionStorage.getItem("secondary_units");
+      const additional_units = sessionStorage.getItem("additional_units");
       const units = sessionStorage.getItem("units");
       const communities = sessionStorage.getItem("communities");
       const sections_cn = sessionStorage.getItem("sections_cn");
@@ -234,13 +238,17 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         options.body.primary_institute = primary_institute;
         sessionStorage.removeItem("primary_institute");
       }
+      if (institutes) {
+        options.body.institutes = institutes.split(",");
+        sessionStorage.removeItem("institutes");
+      }
       if (secondary_institutes) {
         options.body.secondary_institutes = secondary_institutes.split(",");
         sessionStorage.removeItem("secondary_institutes");
       }
-      if (institutes) {
-        options.body.institutes = institutes.split(",");
-        sessionStorage.removeItem("institutes");
+      if (additional_institutes) {
+        options.body.additional_institutes = additional_institutes.split(",");
+        sessionStorage.removeItem("additional_institutes");
       }
       if (main_unit) {
         options.body.main_unit = main_unit;
@@ -250,13 +258,17 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         options.body.primary_unit = primary_unit;
         sessionStorage.removeItem("primary_unit");
       }
+      if (units) {
+        options.body.units = units.split(",");
+        sessionStorage.removeItem("units");
+      }
       if (secondary_units) {
         options.body.secondary_units = secondary_units.split(",");
         sessionStorage.removeItem("secondary_units");
       }
-      if (units) {
-        options.body.units = units.split(",");
-        sessionStorage.removeItem("units");
+      if (additional_units) {
+        options.body.additional_units = additional_units.split(",");
+        sessionStorage.removeItem("additional_units");
       }
       if (communities) {
         options.body.communities = communities.split(",");

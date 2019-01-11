@@ -30,15 +30,19 @@ class AutoCompleteInput extends React.Component {
     } else {
       listValue = selectedOption.value;
       if (filter) {
-        const previousUrl = decodeURI(window.location.hash).split(/({.*})/)[1];
-        const query = JSON.parse(previousUrl.replace(/%3A/g, ":"));
-        const newUrl = Object.assign(
-          query,
-          JSON.parse(`{"${filter}":"${listValue}"}`)
-        );
-        document.location.href = `#/${resource}?filter=${JSON.stringify(
-          newUrl
-        )}`;
+        const previousFilter = decodeURI(window.location.hash).split(
+          /({.*})/
+        )[1];
+        const newFilter = `{"${filter}":"${listValue}"}`;
+        if (previousFilter) {
+          const query = JSON.parse(previousFilter.replace(/%3A/g, ":"));
+          const newUrl = Object.assign(query, JSON.parse(newFilter));
+          document.location.href = `#/${resource}?filter=${JSON.stringify(
+            newUrl
+          )}`;
+        } else {
+          document.location.href = `#/${resource}?filter=${newFilter}`;
+        }
       }
     }
     if (record) {

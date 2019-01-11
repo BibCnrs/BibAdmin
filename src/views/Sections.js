@@ -39,14 +39,14 @@ const SectionsFilter = props => (
       source="primary_institutes"
       reference="institutes"
       field="institute"
-      filter="primary_institutes"
+      filter="primary_institute.institute_id"
     />
     <AutoCompleteInput
       label="resources.section_cn.fields.secondary_institutes"
       source="secondary_institutes"
       reference="institutes"
       field="institute"
-      filter="secondary_institutes.id"
+      filter="secondary_institute.institute_id"
     />
   </Filter>
 );
