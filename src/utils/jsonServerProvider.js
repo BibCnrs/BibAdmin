@@ -285,6 +285,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           options.body.image = image;
         });
       }
+      console.log(options.body);
       options.body = JSON.stringify(options.body);
     }
     return httpClient(url, options).then(response =>

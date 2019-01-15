@@ -310,9 +310,6 @@ export const JanusEdit = ({ ...props }) => (
 export const JanusCreate = ({ ...props }) => (
   <Create {...props} redirect="list" actions={<ListActions />}>
     <SimpleForm redirect="list">
-      <TextField source="uid" label="resources.janusAccounts.fields.uid" />
-      <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
-
       <TextInput source="name" label="resources.janusAccounts.fields.name" />
 
       <TextInput
@@ -364,17 +361,6 @@ export const JanusCreate = ({ ...props }) => (
         reference="communities"
         isMulti={true}
       />
-
-      <ReferenceArrayField
-        label="resources.janusAccounts.fields.all_communities"
-        reference="communities"
-        source="all_communities"
-        className="tags"
-      >
-        <SingleFieldList>
-          <ChipField source="name" />
-        </SingleFieldList>
-      </ReferenceArrayField>
 
       <BooleanInput
         source="active"
