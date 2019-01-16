@@ -24,7 +24,7 @@ import {
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
-import { DateInput } from "react-admin-date-inputs";
+import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
@@ -58,7 +58,7 @@ const JanusFilter = props => (
       source="additional_institutes"
       reference="institutes"
       field="institute"
-      filter="janus_account.additional_institutes"
+      filter="janus_account_institute.additional_institutes"
     />
 
     <AutoCompleteInput
@@ -86,26 +86,22 @@ const JanusFilter = props => (
       filter="community.id"
     />
 
-    <DateInput
+    <FrenchDateInput
       source="to_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
 
-    <DateInput
+    <FrenchDateInput
       source="from_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="to_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="from_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
 
     <BooleanInput
@@ -113,7 +109,7 @@ const JanusFilter = props => (
       label="resources.janusAccounts.fields.cnrs"
     />
     <BooleanInput
-      source="janus_account"
+      source="janus_account.active"
       label="resources.janusAccounts.fields.active"
       defaultValue
     />

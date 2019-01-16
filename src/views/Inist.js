@@ -24,12 +24,12 @@ import {
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
-import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
+import { FrenchDateInput } from "../components/FrenchDateInput";
 import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const InistFilter = props => (
@@ -94,25 +94,21 @@ const InistFilter = props => (
       filter="community.id"
     />
 
-    <DateInput
+    <FrenchDateInput
       source="to_inist_account.subscription_date"
       label="resources.inistAccounts.fields.subscription_date_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="from_inist_account.subscription_date"
       label="resources.inistAccounts.fields.subscription_date_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="to_inist_account.expiration_date"
       label="resources.inistAccounts.fields.expiration_date_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="from_inist_account.expiration_date"
       label="resources.inistAccounts.fields.expiration_date_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
 
     <BooleanInput
@@ -312,15 +308,13 @@ export const InistEdit = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <DateInput
+      <FrenchDateInput
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="expiration_date"
         label="resources.inistAccounts.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
       <BooleanInput
         source="active"
@@ -399,15 +393,13 @@ export const InistCreate = ({ ...props }) => (
         isMulti={true}
       />
 
-      <DateInput
+      <FrenchDateInput
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="expiration_date"
         label="resources.inistAccounts.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
       <BooleanInput
         source="active"

@@ -274,7 +274,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         options.body.communities = communities.split(",");
         sessionStorage.removeItem("communities");
       }
-      console.log(options.body);
       if (sections_cn) {
         options.body.sections_cn = sections_cn.split(",");
         sessionStorage.removeItem("sections_cn");
@@ -283,9 +282,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       if (options.body.image) {
         return convertFileToBase64(options.body.image).then(image => {
           options.body.image = image;
+          options.body = JSON.stringify(options.body);
+          return httpClient(url, options).then(response =>
+            convertHTTPResponse(response, type, resource, params)
+          );
         });
       }
-      console.log(options.body);
       options.body = JSON.stringify(options.body);
     }
     return httpClient(url, options).then(response =>

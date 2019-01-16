@@ -25,25 +25,29 @@ class AutoCompleteInput extends React.Component {
   handleChange = selectedOption => {
     const { record, resource, source, isMulti, filter } = this.props;
     let listValue = "";
-    if (isMulti) {
-      listValue = selectedOption.map(n => n.value);
-    } else {
-      listValue = selectedOption.value;
-      if (filter) {
-        const previousFilter = decodeURI(window.location.hash).split(
-          /({.*})/
-        )[1];
-        const newFilter = `{"${filter}":"${listValue}"}`;
-        if (previousFilter) {
-          const query = JSON.parse(previousFilter.replace(/%3A/g, ":"));
-          const newUrl = Object.assign(query, JSON.parse(newFilter));
-          document.location.href = `#/${resource}?filter=${JSON.stringify(
-            newUrl
-          )}`;
-        } else {
-          document.location.href = `#/${resource}?filter=${newFilter}`;
+    if (selectedOption) {
+      if (isMulti) {
+        listValue = selectedOption.map(n => n.value);
+      } else {
+        listValue = selectedOption.value;
+        if (filter) {
+          const previousFilter = decodeURI(window.location.hash).split(
+            /({.*})/
+          )[1];
+          const newFilter = `{"${filter}":"${listValue}"}`;
+          if (previousFilter) {
+            const query = JSON.parse(previousFilter.replace(/%3A/g, ":"));
+            const newUrl = Object.assign(query, JSON.parse(newFilter));
+            document.location.href = `#/${resource}?filter=${JSON.stringify(
+              newUrl
+            )}`;
+          } else {
+            document.location.href = `#/${resource}?filter=${newFilter}`;
+          }
         }
       }
+    } else {
+      this.componentWillUnmount();
     }
     if (record) {
       sessionStorage.setItem(source, listValue);
@@ -156,6 +160,7 @@ class AutoCompleteInput extends React.Component {
           loadOptions={this.promiseOptions}
           isMulti={isMulti}
           className={filter ? "width-200" : ""}
+          isClearable={true}
         />
       </Labeled>
     );
