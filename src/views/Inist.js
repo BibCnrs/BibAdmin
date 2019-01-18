@@ -197,7 +197,7 @@ export const InistList = ({ ...props }) => (
       <ReferenceArrayField
         label="resources.inistAccounts.fields.all_communities"
         reference="communities"
-        source="all_communities"
+        source="communities"
       >
         <SingleFieldList>
           <ChipField source="name" />
@@ -299,7 +299,7 @@ export const InistEdit = ({ ...props }) => (
 
       <ReferenceArrayField
         label="resources.inistAccounts.fields.all_communities"
-        source="all_communities"
+        source="communities"
         reference="communities"
         perPage={100}
       >

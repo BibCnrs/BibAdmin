@@ -232,51 +232,55 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       const sections_cn = sessionStorage.getItem("sections_cn");
       if (main_institute) {
         options.body.main_institute = main_institute;
-        sessionStorage.removeItem("main_institute");
       }
       if (primary_institute) {
         options.body.primary_institute = primary_institute;
-        sessionStorage.removeItem("primary_institute");
       }
       if (institutes) {
         options.body.institutes = institutes.split(",");
-        sessionStorage.removeItem("institutes");
+      } else {
+        options.body.institutes = [];
       }
       if (secondary_institutes) {
         options.body.secondary_institutes = secondary_institutes.split(",");
-        sessionStorage.removeItem("secondary_institutes");
+      } else {
+        options.body.secondary_institutes = [];
       }
       if (additional_institutes) {
         options.body.additional_institutes = additional_institutes.split(",");
-        sessionStorage.removeItem("additional_institutes");
+      } else {
+        options.body.additional_institutes = [];
       }
       if (main_unit) {
         options.body.main_unit = main_unit;
-        sessionStorage.removeItem("main_unit");
       }
       if (primary_unit) {
         options.body.primary_unit = primary_unit;
-        sessionStorage.removeItem("primary_unit");
       }
       if (units) {
         options.body.units = units.split(",");
-        sessionStorage.removeItem("units");
+      } else {
+        options.body.units = [];
       }
       if (secondary_units) {
         options.body.secondary_units = secondary_units.split(",");
-        sessionStorage.removeItem("secondary_units");
+      } else {
+        options.body.secondary_units = [];
       }
       if (additional_units) {
         options.body.additional_units = additional_units.split(",");
-        sessionStorage.removeItem("additional_units");
+      } else {
+        options.body.additional_units = [];
       }
       if (communities) {
         options.body.communities = communities.split(",");
-        sessionStorage.removeItem("communities");
+      } else {
+        options.body.communities = [];
       }
       if (sections_cn) {
         options.body.sections_cn = sections_cn.split(",");
-        sessionStorage.removeItem("sections_cn");
+      } else {
+        options.body.sections_cn = [];
       }
       sessionStorage.clear();
       if (options.body.image) {
