@@ -300,12 +300,14 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
+        field="institute"
       />
 
       <AutoCompleteInput
         label="resources.units.fields.institutes"
         source="institutes"
         reference="institutes"
+        field="institute"
         isMulti={true}
       />
 
