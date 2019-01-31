@@ -40,10 +40,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     const options = {};
     switch (type) {
       case GET_LIST: {
-        // il faut définir l'objet pour lequel le filtre va être appliqué
-        /*const baseFilter = resource
-          .replace(/(.*)([A-Z])(.*)/g, "$1_$2$3")
-          .toLowerCase();*/
         const { page, perPage } = params.pagination;
         let { field, order } = params.sort;
         const filters = fetchUtils.flattenObject(params.filter);
@@ -217,21 +213,89 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     }
 
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
-    if (options.body && options.body.image) {
-      return convertFileToBase64(options.body.image).then(image => {
-        options.body.image = image;
-        options.body = JSON.stringify(options.body);
-        return httpClient(url, options).then(response =>
-          convertHTTPResponse(response, type, resource, params)
-        );
-      });
-    } else {
-      if (options.body) {
-        options.body = JSON.stringify(options.body);
-      }
-      return httpClient(url, options).then(response =>
-        convertHTTPResponse(response, type, resource, params)
+    if (options.body) {
+      const main_institute = sessionStorage.getItem("main_institute");
+      const primary_institute = sessionStorage.getItem("primary_institute");
+      const secondary_institutes = sessionStorage.getItem(
+        "secondary_institutes"
       );
+      const additional_institutes = sessionStorage.getItem(
+        "additional_institutes"
+      );
+      const institutes = sessionStorage.getItem("institutes");
+      const main_unit = sessionStorage.getItem("main_unit");
+      const primary_unit = sessionStorage.getItem("primary_unit");
+      const secondary_units = sessionStorage.getItem("secondary_units");
+      const additional_units = sessionStorage.getItem("additional_units");
+      const units = sessionStorage.getItem("units");
+      const communities = sessionStorage.getItem("communities");
+      const sections_cn = sessionStorage.getItem("sections_cn");
+      if (main_institute) {
+        options.body.main_institute = main_institute;
+      }
+      if (primary_institute) {
+        options.body.primary_institute = primary_institute;
+      }
+      if (institutes) {
+        options.body.institutes = institutes.split(",");
+      } else {
+        options.body.institutes = [];
+      }
+      if (secondary_institutes) {
+        options.body.secondary_institutes = secondary_institutes.split(",");
+      } else {
+        options.body.secondary_institutes = [];
+      }
+      if (additional_institutes) {
+        options.body.additional_institutes = additional_institutes.split(",");
+      } else {
+        options.body.additional_institutes = [];
+      }
+      if (main_unit) {
+        options.body.main_unit = main_unit;
+      }
+      if (primary_unit) {
+        options.body.primary_unit = primary_unit;
+      }
+      if (units) {
+        options.body.units = units.split(",");
+      } else {
+        options.body.units = [];
+      }
+      if (secondary_units) {
+        options.body.secondary_units = secondary_units.split(",");
+      } else {
+        options.body.secondary_units = [];
+      }
+      if (additional_units) {
+        options.body.additional_units = additional_units.split(",");
+      } else {
+        options.body.additional_units = [];
+      }
+      if (communities) {
+        options.body.communities = communities.split(",");
+      } else {
+        options.body.communities = [];
+      }
+      if (sections_cn) {
+        options.body.sections_cn = sections_cn.split(",");
+      } else {
+        options.body.sections_cn = [];
+      }
+      sessionStorage.clear();
+      if (options.body.image) {
+        return convertFileToBase64(options.body.image).then(image => {
+          options.body.image = image;
+          options.body = JSON.stringify(options.body);
+          return httpClient(url, options).then(response =>
+            convertHTTPResponse(response, type, resource, params)
+          );
+        });
+      }
+      options.body = JSON.stringify(options.body);
     }
+    return httpClient(url, options).then(response =>
+      convertHTTPResponse(response, type, resource, params)
+    );
   };
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -13,17 +13,51 @@ import {
   BooleanInput,
   FileInput,
   ImageField,
-  ReferenceArrayInput,
-  SelectArrayInput
+  downloadCSV,
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const DatabasesFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
   </Filter>
+);
+
+const exporter = async (records, fetchRelatedRecords) => {
+  const listCommunities = await fetchRelatedRecords(
+    records,
+    "communities",
+    "communities"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    communities: record.communities.map(n => listCommunities[n].name)
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "databases"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "databases");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
 );
 
 export const DatabasesList = ({ ...props }) => (
@@ -32,6 +66,9 @@ export const DatabasesList = ({ ...props }) => (
     filters={<DatabasesFilter />}
     sort={{ field: "name_fr", order: "ASC" }}
     perPage={10}
+    pagination={<PostPagination />}
+    exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />
@@ -51,9 +88,15 @@ const DatabasesTitle = ({ record }) => {
   return record.name_fr;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const DatabasesEdit = ({ ...props }) => (
-  <Edit title={<DatabasesTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<DatabasesTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
@@ -66,14 +109,12 @@ export const DatabasesEdit = ({ ...props }) => (
         source="text_en"
         label="resources.databases.fields.text_en"
       />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
         reference="communities"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        isMulti={true}
+      />
       <FileInput
         source="image"
         label="resources.databases.fields.image"
@@ -102,14 +143,12 @@ export const DatabasesCreate = ({ ...props }) => (
         source="text_en"
         label="resources.databases.fields.text_en"
       />
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
         reference="communities"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        isMulti={true}
+      />
       <FileInput
         source="image"
         label="resources.databases.fields.image"

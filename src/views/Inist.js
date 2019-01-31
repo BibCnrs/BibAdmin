@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -17,15 +17,20 @@ import {
   TextInput,
   LongTextInput,
   BooleanInput,
-  ReferenceInput,
-  ReferenceArrayInput,
-  SelectArrayInput,
-  AutocompleteInput
+  downloadCSV,
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
-import { DateInput } from "react-admin-date-inputs";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
+import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
+import { FrenchDateInput } from "../components/FrenchDateInput";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -48,71 +53,62 @@ const InistFilter = props => (
       label="resources.inistAccounts.fields.mail"
     />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.inistAccounts.fields.main_institute"
       source="main_institute"
       reference="institutes"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="institute"
+      filter="main_institute"
+    />
 
-    <ReferenceArrayInput
+    <AutoCompleteInput
       label="resources.inistAccounts.fields.institutes"
       source="institutes"
       reference="institutes"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceArrayInput>
+      field="institute"
+      filter="institutes.id"
+    />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.inistAccounts.fields.main_unit"
-      source="main_unit.id"
+      source="main_unit"
       reference="units"
-      perPage={100}
-      sort={{ field: "code", order: "ASC" }}
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="unit"
+      filter="main_unit"
+      optionText="code"
+    />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.inistAccounts.fields.units"
-      source="units.id"
+      source="units"
       reference="units"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="unit"
+      filter="units.id"
+      optionText="code"
+    />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.inistAccounts.fields.communities"
-      source="community.id"
+      source="communities"
       reference="communities"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      filter="community.id"
+    />
 
-    <DateInput
+    <FrenchDateInput
       source="to_inist_account.subscription_date"
       label="resources.inistAccounts.fields.subscription_date_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="from_inist_account.subscription_date"
       label="resources.inistAccounts.fields.subscription_date_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="to_inist_account.expiration_date"
       label="resources.inistAccounts.fields.expiration_date_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="from_inist_account.expiration_date"
       label="resources.inistAccounts.fields.expiration_date_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
 
     <BooleanInput
@@ -123,8 +119,34 @@ const InistFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const data = records.map(record => renameKeys(record, "inistAccounts"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "inistAccounts");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const InistList = ({ ...props }) => (
-  <List {...props} filters={<InistFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<InistFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+    exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
+  >
     <Datagrid>
       <LinkEdit
         source="username"
@@ -173,19 +195,9 @@ export const InistList = ({ ...props }) => (
       </ReferenceField>
 
       <ReferenceArrayField
-        label="resources.inistAccounts.fields.units"
-        reference="units"
-        source="units"
-      >
-        <SingleFieldList>
-          <ChipField source="code" />
-        </SingleFieldList>
-      </ReferenceArrayField>
-
-      <ReferenceArrayField
         label="resources.inistAccounts.fields.all_communities"
         reference="communities"
-        source="all_communities"
+        source="communities"
       >
         <SingleFieldList>
           <ChipField source="name" />
@@ -210,142 +222,24 @@ export const InistList = ({ ...props }) => (
   </List>
 );
 
-const passwordValue = Math.random()
-  .toString(36)
-  .slice(-6)
-  .toUpperCase();
-
-const GeneratePasswordButton = ({ ...rest }) => {
-  return (
-    <span>
-      <TextInput
-        type="password"
-        id="passwordInput"
-        name="password"
-        defaultValue={passwordValue}
-        {...rest}
-      />
-    </span>
-  );
-};
-
 const InistTitle = ({ record }) => {
   return record.username;
 };
 
-export const InistEdit = ({ ...props }) => (
-  <Edit title={<InistTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
-      <TextInput
-        source="username"
-        label="resources.inistAccounts.fields.username"
-      />
-      <GeneratePasswordButton />
-      <TextInput source="name" label="resources.inistAccounts.fields.name" />
-      <TextInput
-        source="firstname"
-        label="resources.inistAccounts.fields.firstname"
-      />
-      <TextInput
-        type="email"
-        source="mail"
-        label="resources.inistAccounts.fields.mail"
-      />
-
-      <TextInput source="phone" label="resources.inistAccounts.fields.phone" />
-
-      <TextInput source="dr" label="resources.inistAccounts.fields.dr" />
-
-      <ReferenceInput
-        label="resources.inistAccounts.fields.main_institute"
-        source="main_institute"
-        reference="institutes"
-        sort={{ field: "name" }}
-        perPage={100}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
-
-      <ReferenceArrayInput
-        label="resources.inistAccounts.fields.institutes"
-        source="institutes"
-        reference="institutes"
-        sort={{ field: "name" }}
-        perPage={100}
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
-
-      <ReferenceInput
-        label="resources.inistAccounts.fields.main_unit"
-        source="main_unit"
-        reference="units"
-        sort={{ field: "code" }}
-        perPage={100}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
-
-      <ReferenceArrayInput
-        label="resources.inistAccounts.fields.units"
-        source="units"
-        reference="units"
-        sort={{ field: "code" }}
-        perPage={100}
-      >
-        <SelectArrayInput optionText="code" />
-      </ReferenceArrayInput>
-
-      <ReferenceArrayInput
-        label="resources.inistAccounts.fields.communities"
-        source="communities"
-        reference="communities"
-        perPage={100}
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
-
-      <ReferenceArrayField
-        label="resources.inistAccounts.fields.all_communities"
-        source="all_communities"
-        reference="communities"
-        perPage={100}
-      >
-        <SingleFieldList>
-          <ChipField source="name" />
-        </SingleFieldList>
-      </ReferenceArrayField>
-
-      <DateInput
-        source="subscription_date"
-        label="resources.inistAccounts.fields.subscription_date"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-      <DateInput
-        source="expiration_date"
-        label="resources.inistAccounts.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-      <BooleanInput
-        source="active"
-        label="resources.inistAccounts.fields.active"
-      />
-      <LongTextInput
-        source="comment"
-        label="resources.inistAccounts.fields.comment"
-      />
-    </SimpleForm>
-  </Edit>
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
 );
 
-export const InistCreate = ({ ...props }) => (
-  <Create {...props} actions={<ListActions />}>
-    <SimpleForm>
+export const InistEdit = ({ ...props }) => (
+  <Edit title={<InistTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="username"
         label="resources.inistAccounts.fields.username"
       />
-      <GeneratePasswordButton
+      <TextInput
         source="password"
         label="resources.inistAccounts.fields.password"
       />
@@ -364,58 +258,48 @@ export const InistCreate = ({ ...props }) => (
 
       <TextInput source="dr" label="resources.inistAccounts.fields.dr" />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        sort={{ field: "name" }}
-        perPage={100}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+        field="institute"
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.inistAccounts.fields.institutes"
         source="institutes"
         reference="institutes"
-        sort={{ field: "name" }}
-        perPage={100}
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        field="institute"
+        isMulti={true}
+      />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
-        sort={{ field: "code" }}
-        perPage={100}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
+        field="unit"
+        optionText="code"
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.inistAccounts.fields.units"
         source="units"
         reference="units"
-        sort={{ field: "code" }}
-        perPage={100}
-      >
-        <SelectArrayInput optionText="code" />
-      </ReferenceArrayInput>
+        field="unit"
+        optionText="code"
+        isMulti={true}
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.inistAccounts.fields.communities"
         source="communities"
         reference="communities"
-        perPage={100}
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        isMulti={true}
+      />
 
       <ReferenceArrayField
         label="resources.inistAccounts.fields.all_communities"
-        source="all_communities"
+        source="communities"
         reference="communities"
         perPage={100}
       >
@@ -424,15 +308,98 @@ export const InistCreate = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <DateInput
+      <FrenchDateInput
         source="subscription_date"
         label="resources.inistAccounts.fields.subscription_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="expiration_date"
         label="resources.inistAccounts.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
+      />
+      <BooleanInput
+        source="active"
+        label="resources.inistAccounts.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.inistAccounts.fields.comment"
+      />
+    </SimpleForm>
+  </Edit>
+);
+
+export const InistCreate = ({ ...props }) => (
+  <Create {...props} actions={<ListActions />}>
+    <SimpleForm redirect="list">
+      <TextInput
+        source="username"
+        label="resources.inistAccounts.fields.username"
+      />
+      <RandomPasswordGenerator
+        source="password"
+        label="resources.inistAccounts.fields.password"
+      />
+      <TextInput source="name" label="resources.inistAccounts.fields.name" />
+      <TextInput
+        source="firstname"
+        label="resources.inistAccounts.fields.firstname"
+      />
+      <TextInput
+        type="email"
+        source="mail"
+        label="resources.inistAccounts.fields.mail"
+      />
+
+      <TextInput source="phone" label="resources.inistAccounts.fields.phone" />
+
+      <TextInput source="dr" label="resources.inistAccounts.fields.dr" />
+
+      <AutoCompleteInput
+        label="resources.inistAccounts.fields.main_institute"
+        source="main_institute"
+        reference="institutes"
+        field="institute"
+      />
+
+      <AutoCompleteInput
+        label="resources.inistAccounts.fields.institutes"
+        source="institutes"
+        reference="institutes"
+        field="institute"
+        isMulti={true}
+      />
+
+      <AutoCompleteInput
+        label="resources.inistAccounts.fields.main_unit"
+        source="main_unit"
+        reference="units"
+        field="unit"
+        optionText="code"
+      />
+
+      <AutoCompleteInput
+        label="resources.inistAccounts.fields.units"
+        source="units"
+        reference="units"
+        field="unit"
+        optionText="code"
+        isMulti={true}
+      />
+
+      <AutoCompleteInput
+        label="resources.inistAccounts.fields.communities"
+        source="communities"
+        reference="communities"
+        isMulti={true}
+      />
+
+      <FrenchDateInput
+        source="subscription_date"
+        label="resources.inistAccounts.fields.subscription_date"
+      />
+      <FrenchDateInput
+        source="expiration_date"
+        label="resources.inistAccounts.fields.expiration_date"
       />
       <BooleanInput
         source="active"

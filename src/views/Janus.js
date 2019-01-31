@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -17,15 +17,19 @@ import {
   TextInput,
   BooleanInput,
   LongTextInput,
-  ReferenceInput,
-  ReferenceArrayInput,
-  AutocompleteInput,
-  SelectArrayInput
+  downloadCSV,
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
-import { DateInput } from "react-admin-date-inputs";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
+import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const JanusFilter = props => (
   <Filter {...props}>
@@ -41,67 +45,63 @@ const JanusFilter = props => (
       label="resources.janusAccounts.fields.mail"
     />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.janusAccounts.fields.primary_institute"
-      source="janus_account.primary_institute"
+      source="primary_institute"
       reference="institutes"
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="institute"
+      filter="janus_account.primary_institute"
+    />
 
-    <ReferenceArrayInput
+    <AutoCompleteInput
       label="resources.janusAccounts.fields.additional_institutes"
       source="additional_institutes"
       reference="institutes"
-    >
-      <SelectArrayInput optionText="name" />
-    </ReferenceArrayInput>
+      field="institute"
+      filter="janus_account_institute.additional_institutes"
+    />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.janusAccounts.fields.primary_unit"
-      source="janus_account.primary_unit"
+      source="primary_unit"
       reference="units"
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="unit"
+      filter="janus_account.primary_unit"
+      optionText="code"
+    />
 
-    <ReferenceArrayInput
+    <AutoCompleteInput
       label="resources.janusAccounts.fields.additional_units"
       source="additional_units"
       reference="units"
-    >
-      <SelectArrayInput optionText="code" />
-    </ReferenceArrayInput>
+      field="unit"
+      filter="janus_account.additional_units"
+      optionText="code"
+    />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.janusAccounts.fields.communities"
-      source="community.id"
+      source="communities"
       reference="communities"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      filter="community.id"
+    />
 
-    <DateInput
+    <FrenchDateInput
       source="to_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
 
-    <DateInput
+    <FrenchDateInput
       source="from_janus_account.last_connexion"
       label="resources.janusAccounts.fields.last_connexion_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="to_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_before"
-      options={{ format: "MM-dd-yyyy" }}
     />
-    <DateInput
+    <FrenchDateInput
       source="from_janus_account.first_connexion"
       label="resources.janusAccounts.fields.first_connexion_after"
-      options={{ format: "MM-dd-yyyy" }}
     />
 
     <BooleanInput
@@ -111,13 +111,39 @@ const JanusFilter = props => (
     <BooleanInput
       source="janus_account.active"
       label="resources.janusAccounts.fields.active"
-      defaultValue={true}
+      defaultValue
     />
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const data = records.map(record => renameKeys(record, "janusAccounts"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "janusAccounts");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const JanusList = props => (
-  <List {...props} filters={<JanusFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<JanusFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+    exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
+  >
     <Datagrid>
       <LinkEdit source="uid" label="resources.janusAccounts.fields.uid" />
       <LinkEdit source="mail" label="resources.janusAccounts.fields.mail" />
@@ -151,16 +177,6 @@ export const JanusList = props => (
       </ReferenceField>
 
       <ReferenceArrayField
-        label="resources.janusAccounts.fields.additional_units"
-        reference="units"
-        source="additional_units"
-      >
-        <SingleFieldList>
-          <ChipField source="code" />
-        </SingleFieldList>
-      </ReferenceArrayField>
-
-      <ReferenceArrayField
         label="resources.janusAccounts.fields.all_communities"
         reference="communities"
         source="all_communities"
@@ -192,9 +208,15 @@ const JanusTitle = ({ record }) => {
   return record.uid;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const JanusEdit = ({ ...props }) => (
-  <Edit title={<JanusTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<JanusTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
 
@@ -211,47 +233,44 @@ export const JanusEdit = ({ ...props }) => (
         label="resources.janusAccounts.fields.mail"
       />
 
-      <ReferenceField
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.primary_institute"
         source="primary_institute"
         reference="institutes"
-        linkType="show"
-      >
-        <TextField source="name" />
-      </ReferenceField>
+        field="institute"
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.additional_institutes"
-        reference="institutes"
         source="additional_institutes"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        reference="institutes"
+        field="institute"
+        isMulti={true}
+      />
 
-      <ReferenceField
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.primary_unit"
         source="primary_unit"
         reference="units"
-        linkType="show"
-      >
-        <TextField source="code" />
-      </ReferenceField>
+        field="unit"
+        optionText="code"
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.additional_units"
-        reference="units"
         source="additional_units"
-      >
-        <SelectArrayInput optionText="code" />
-      </ReferenceArrayInput>
+        reference="units"
+        field="unit"
+        optionText="code"
+        isMulti={true}
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.communities"
-        reference="communities"
         source="communities"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        reference="communities"
+        isMulti={true}
+      />
 
       <ReferenceArrayField
         label="resources.janusAccounts.fields.all_communities"
@@ -287,9 +306,6 @@ export const JanusEdit = ({ ...props }) => (
 export const JanusCreate = ({ ...props }) => (
   <Create {...props} redirect="list" actions={<ListActions />}>
     <SimpleForm redirect="list">
-      <TextField source="uid" label="resources.janusAccounts.fields.uid" />
-      <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
-
       <TextInput source="name" label="resources.janusAccounts.fields.name" />
 
       <TextInput
@@ -303,67 +319,45 @@ export const JanusCreate = ({ ...props }) => (
         label="resources.janusAccounts.fields.mail"
       />
 
-      <ReferenceField
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.primary_institute"
         source="primary_institute"
         reference="institutes"
-        linkType="show"
-      >
-        <TextField source="name" />
-      </ReferenceField>
+        field="institute"
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.additional_institutes"
-        reference="institutes"
         source="additional_institutes"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+        reference="institutes"
+        field="institute"
+        isMulti={true}
+      />
 
-      <ReferenceField
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.primary_unit"
         source="primary_unit"
         reference="units"
-        linkType="show"
-      >
-        <TextField source="code" />
-      </ReferenceField>
+        field="unit"
+        optionText="code"
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.additional_units"
-        reference="units"
         source="additional_units"
-      >
-        <SelectArrayInput optionText="code" />
-      </ReferenceArrayInput>
+        reference="units"
+        field="unit"
+        optionText="code"
+        isMulti={true}
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.janusAccounts.fields.communities"
-        reference="communities"
         source="communities"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
-
-      <ReferenceArrayField
-        label="resources.janusAccounts.fields.all_communities"
         reference="communities"
-        source="all_communities"
-      >
-        <SingleFieldList>
-          <ChipField source="name" />
-        </SingleFieldList>
-      </ReferenceArrayField>
+        isMulti={true}
+      />
 
-      <DateField
-        source="last_connexion"
-        label="resources.janusAccounts.fields.last_connexion"
-      />
-      <DateField
-        source="first_connexion"
-        label="resources.janusAccounts.fields.first_connexion"
-      />
       <BooleanInput
         source="active"
         label="resources.janusAccounts.fields.active"

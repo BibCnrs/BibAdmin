@@ -41,6 +41,8 @@ build-script: ## build javascript and css for production make sure env REACT_APP
 
 build: build-script build-docker ## build javascript and css for production make sure env REACT_APP_BIBAPI_HOST and REACT_APP_BIBADMIN_HOST are set
 
+update: stop cleanup-docker install build
+
 npm: ## dockerized npm command example: make npm 'install some_dependency --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
 

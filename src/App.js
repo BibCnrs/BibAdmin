@@ -13,11 +13,23 @@ import FolderIcon from "@material-ui/icons/Folder";
 import Dashboard from "./views/Dashboard";
 import { UsersList, UsersEdit, UsersCreate } from "./views/Users";
 import { InistList, InistEdit, InistCreate } from "./views/Inist";
-import { JanusList, JanusEdit } from "./views/Janus";
-import { InstitutsList, InstitutsEdit, InstitutsCreate } from "./views/Instituts";
+import { JanusList, JanusEdit, JanusCreate } from "./views/Janus";
+import {
+  InstitutsList,
+  InstitutsEdit,
+  InstitutsCreate
+} from "./views/Instituts";
 import { UnitsList, UnitsEdit, UnitsCreate } from "./views/Units";
-import { CommunitiesList, CommunitiesEdit, CommunitiesCreate } from "./views/Communities";
-import { DatabasesList, DatabasesEdit, DatabasesCreate } from "./views/Databases";
+import {
+  CommunitiesList,
+  CommunitiesEdit,
+  CommunitiesCreate
+} from "./views/Communities";
+import {
+  DatabasesList,
+  DatabasesEdit,
+  DatabasesCreate
+} from "./views/Databases";
 import { SectionsList, SectionsEdit, SectionsCreate } from "./views/Sections";
 import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";
 
@@ -38,11 +50,17 @@ class App extends Component {
       if (!options.headers) {
         options.headers = new Headers({ Accept: "application/json" });
       }
-      options.headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`);
+      options.headers.set(
+        "Authorization",
+        `Bearer ${localStorage.getItem("token")}`
+      );
       return fetchUtils.fetchJson(url, options);
     };
 
-    const dataProvider = jsonServerProvider(process.env.REACT_APP_BIBAPI_HOST, httpClient);
+    const dataProvider = jsonServerProvider(
+      process.env.REACT_APP_BIBAPI_HOST,
+      httpClient
+    );
 
     this.setState({ dataProvider });
   }
@@ -81,7 +99,13 @@ class App extends Component {
           edit={InistEdit}
           icon={UserIcon}
         />
-        <Resource name="janusAccounts" list={JanusList} edit={JanusEdit} icon={UserIcon} />
+        <Resource
+          name="janusAccounts"
+          list={JanusList}
+          create={JanusCreate}
+          edit={JanusEdit}
+          icon={UserIcon}
+        />
         <Resource
           name="institutes"
           list={InstitutsList}

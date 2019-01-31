@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -16,19 +16,22 @@ import {
   TextInput,
   NumberInput,
   BooleanInput,
-  ReferenceInput,
-  ReferenceArrayInput,
-  SelectInput,
-  SelectArrayInput,
   LongTextInput,
-  AutocompleteInput
+  downloadCSV,
+  ExportButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListActions, ListEditActions } from "../components/ListActions";
+import { PostPagination } from "../utils/pagination";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const UrlSearchInist = ({ source, record = {} }) => {
-  const url = `#/inistAccounts?filter={"main_unit.id":${record.id}}`;
+  const url = `#/inistAccounts?filter={"main_unit":${record.id}}`;
   return <a href={url}>{record.nb_inist_account}</a>;
 };
 
@@ -53,43 +56,37 @@ const UnitsFilter = props => (
     <TextInput source="like_unit.code" label="resources.units.fields.code" />
     <TextInput source="like_unit.name" label="resources.units.fields.name" />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.units.fields.communities"
-      source="community.id"
+      source="community"
       reference="communities"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="community"
+      filter="community.id"
+    />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.units.fields.main_institute"
-      source="unit.main_institute"
+      source="main_institute"
       reference="institutes"
-      perPage={100}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="institute"
+      filter="unit.main_institute"
+    />
 
-    <ReferenceArrayInput
+    <AutoCompleteInput
       label="resources.units.fields.institutes"
-      source="institute.id"
+      source="institutes"
       reference="institutes"
-    >
-      <SelectArrayInput>
-        <ChipField source="name" />
-      </SelectArrayInput>
-    </ReferenceArrayInput>
+      field="institute"
+      filter="institute.id"
+    />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.units.fields.section_cn"
-      source="section_cn.id"
+      source="section_cn"
       reference="section_cn"
-      perPage={50}
-      sort={{ field: "name" }}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="section_cn"
+      filter="section_cn.id"
+    />
 
     <BooleanInput
       source="unit.active"
@@ -99,8 +96,63 @@ const UnitsFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords, ...rest) => {
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "main_institute",
+    "institutes"
+  );
+  const listCommunities = await fetchRelatedRecords(
+    records,
+    "communities",
+    "communities"
+  );
+  const listInstitutes = await fetchRelatedRecords(
+    records,
+    "institutes",
+    "institutes"
+  );
+  const listSections = await fetchRelatedRecords(
+    records,
+    "sections_cn",
+    "section_cn"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    main_institute:
+      listPrincipalIt[record.main_institute] &&
+      listPrincipalIt[record.main_institute].name,
+    communities: record.communities.map(n => listCommunities[n].name),
+    institutes: record.institutes.map(n => listInstitutes[n].name),
+    sections_cn: record.sections_cn.map(n => listSections[n].name)
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "units"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "units");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const UnitsList = ({ ...props }) => (
-  <List {...props} filters={<UnitsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<UnitsFilter />}
+    perPage={10}
+    pagination={<PostPagination />}
+    exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
+  >
     <Datagrid>
       <LinkEdit source="code" label="resources.units.fields.code" />
 
@@ -160,9 +212,15 @@ const UnitsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const UnitsEdit = ({ ...props }) => (
-  <Edit title={<UnitsTitle />} {...props} actions={<ListActions />}>
-    <SimpleForm>
+  <Edit title={<UnitsTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
       <TextInput
@@ -238,51 +296,37 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.ci_mail"
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
-      >
-        <SelectInput source="name" />
-      </ReferenceInput>
+        field="institute"
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.units.fields.institutes"
-        reference="institutes"
         source="institutes"
-        className="tags"
-      >
-        <SelectArrayInput>
-          <ChipField source="name" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="institutes"
+        field="institute"
+        isMulti={true}
+      />
 
       <UrlSearchInist label="Nombre de compte Inist" />
       <UrlSearchJanus label="Nombre de compte Janus" />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.units.fields.communities"
-        reference="communities"
         source="communities"
-        className="tags"
-      >
-        <SelectArrayInput>
-          <ChipField source="name" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="communities"
+        isMulti={true}
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.units.fields.section_cn"
-        reference="section_cn"
         source="sections_cn"
-        className="tags"
-        perPage={50}
-        sort={{ field: "name" }}
-      >
-        <SelectArrayInput>
-          <ChipField source="code" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="section_cn"
+        isMulti={true}
+      />
 
       <LongTextInput
         source="comment"
@@ -375,48 +419,32 @@ export const UnitsCreate = ({ ...props }) => (
         label="resources.units.fields.ci_mail"
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
-      >
-        <SelectInput source="name" />
-      </ReferenceInput>
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.units.fields.institutes"
-        reference="institutes"
         source="institutes"
-        className="tags"
-      >
-        <SelectArrayInput>
-          <ChipField source="name" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="institutes"
+        isMulti={true}
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.units.fields.communities"
-        reference="communities"
         source="communities"
-        className="tags"
-      >
-        <SelectArrayInput>
-          <ChipField source="name" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="communities"
+        isMulti={true}
+      />
 
-      <ReferenceArrayInput
+      <AutoCompleteInput
         label="resources.units.fields.section_cn"
-        reference="section_cn"
         source="sections_cn"
-        className="tags"
-        perPage={50}
-        sort={{ field: "name" }}
-      >
-        <SelectArrayInput>
-          <ChipField source="code" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
+        reference="section_cn"
+        isMulti={true}
+      />
 
       <LongTextInput
         source="comment"
