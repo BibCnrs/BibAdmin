@@ -23,7 +23,7 @@ class AutoCompleteInput extends React.Component {
 
   // change value in temp database after each change
   handleChange = selectedOption => {
-    const { record, resource, source, isMulti, filter } = this.props;
+    const { resource, source, isMulti, filter } = this.props;
     let listValue = "";
     if (selectedOption) {
       if (isMulti) {

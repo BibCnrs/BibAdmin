@@ -52,7 +52,6 @@ const SectionsFilter = props => (
 );
 
 const exporter = async (records, fetchRelatedRecords) => {
-  console.log(records[0]);
   const listPrincipalUnit = await fetchRelatedRecords(
     records,
     "primary_institutes",

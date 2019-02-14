@@ -216,6 +216,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     if (options.body) {
       const main_institute = sessionStorage.getItem("main_institute");
       const primary_institute = sessionStorage.getItem("primary_institute");
+      const primary_institutes = sessionStorage.getItem("primary_institutes");
       const secondary_institutes = sessionStorage.getItem(
         "secondary_institutes"
       );
@@ -235,6 +236,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       }
       if (primary_institute) {
         options.body.primary_institute = primary_institute;
+      }
+      if (primary_institutes) {
+        options.body.primary_institutes = primary_institutes;
       }
       if (institutes) {
         options.body.institutes = institutes.split(",");
