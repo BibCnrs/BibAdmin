@@ -111,7 +111,6 @@ const JanusFilter = props => (
     <BooleanInput
       source="janus_account.active"
       label="resources.janusAccounts.fields.active"
-      defaultValue
     />
   </Filter>
 );

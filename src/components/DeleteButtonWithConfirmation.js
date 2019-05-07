@@ -51,10 +51,20 @@ class DeleteButtonWithConfirmation extends Component {
       record,
       basePath,
       redirect,
-      undoable
+      undoable,
+      selectedIds
     } = this.props;
+    console.log(this.props);
     if (undoable) {
-      startUndoable(crudDelete(resource, record.id, record, basePath, redirect));
+      if (record && record.id) {
+        startUndoable(
+          crudDelete(resource, record.id, record, basePath, redirect)
+        );
+      } else if (selectedIds) {
+        selectedIds.forEach(id => {
+          startUndoable(crudDelete(resource, id, record, basePath, redirect));
+        });
+      }
     } else {
       dispatchCrudDelete(resource, record.id, record, basePath, redirect);
     }
@@ -68,7 +78,11 @@ class DeleteButtonWithConfirmation extends Component {
         <Button
           onClick={this.handleClick}
           label={label}
-          className={classnames("ra-delete-button", classes.deleteButton, className)}
+          className={classnames(
+            "ra-delete-button",
+            classes.deleteButton,
+            className
+          )}
           key="button"
         >
           <ActionDelete />
@@ -79,7 +93,9 @@ class DeleteButtonWithConfirmation extends Component {
           onClose={this.handleCloseClick}
           aria-label="Are you sure?"
         >
-          <DialogTitle>Voulez vous vraiment effectuer cette suppression ?</DialogTitle>
+          <DialogTitle>
+            Voulez vous vraiment effectuer cette suppression ?
+          </DialogTitle>
           <DialogContent>
             <div>Votre action pourra être annulée dans les 3 secondes.</div>
           </DialogContent>
@@ -87,7 +103,11 @@ class DeleteButtonWithConfirmation extends Component {
             <Button
               onClick={this.handleDelete}
               label={label}
-              className={classnames("ra-delete-button", classes.deleteButton, className)}
+              className={classnames(
+                "ra-delete-button",
+                classes.deleteButton,
+                className
+              )}
               key="button"
             >
               <ActionDelete />
@@ -109,7 +129,11 @@ DeleteButtonWithConfirmation.propTypes = {
   dispatchCrudDelete: PropTypes.func.isRequired,
   label: PropTypes.string,
   record: PropTypes.object,
-  redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.func]),
+  redirect: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.func
+  ]),
   resource: PropTypes.string.isRequired,
   startUndoable: PropTypes.func,
   translate: PropTypes.func,
