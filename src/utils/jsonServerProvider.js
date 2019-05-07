@@ -286,6 +286,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       } else {
         options.body.sections_cn = [];
       }
+      if (options.body.expiration_date) {
+        options.body.expiration_date.setHours(6);
+      }
+      if (options.body.subscription_date) {
+        options.body.subscription_date.setHours(6);
+      }
       sessionStorage.clear();
       if (options.body.image) {
         return convertFileToBase64(options.body.image).then(image => {
