@@ -233,12 +233,18 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       const sections_cn = sessionStorage.getItem("sections_cn");
       if (main_institute) {
         options.body.main_institute = main_institute;
+      } else {
+        options.body.main_institute = null;
       }
       if (primary_institute) {
         options.body.primary_institute = primary_institute;
+      } else {
+        options.body.primary_institute = null;
       }
       if (primary_institutes) {
         options.body.primary_institutes = primary_institutes;
+      } else {
+        options.body.primary_institutes = null;
       }
       if (institutes) {
         options.body.institutes = institutes.split(",");
@@ -257,9 +263,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       }
       if (main_unit) {
         options.body.main_unit = main_unit;
+      } else {
+        options.body.main_unit = null;
       }
       if (primary_unit) {
         options.body.primary_unit = primary_unit;
+      } else {
+        options.body.primary_unit = null;
       }
       if (units) {
         options.body.units = units.split(",");
@@ -287,11 +297,16 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         options.body.sections_cn = [];
       }
       if (options.body.expiration_date) {
-        options.body.expiration_date.setHours(6);
+        const expirationDate = new Date(options.body.expiration_date);
+        expirationDate.setHours(expirationDate.getHours() + 6);
+        options.body.expiration_date = expirationDate;
       }
       if (options.body.subscription_date) {
-        options.body.subscription_date.setHours(6);
+        const subscriptionDate = new Date(options.body.subscription_date);
+        subscriptionDate.setHours(subscriptionDate.getHours() + 6);
+        options.body.subscription_date = subscriptionDate;
       }
+      console.log(options.body);
       sessionStorage.clear();
       if (options.body.image) {
         return convertFileToBase64(options.body.image).then(image => {

@@ -46,10 +46,11 @@ class AutoCompleteInput extends React.Component {
           }
         }
       }
-      sessionStorage.setItem(source, listValue);
     } else {
       this.componentWillUnmount();
     }
+
+    sessionStorage.setItem(source, listValue);
 
     this.setState({
       selectedOption,
