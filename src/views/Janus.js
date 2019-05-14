@@ -58,7 +58,7 @@ const JanusFilter = props => (
       source="additional_institutes"
       reference="institutes"
       field="institute"
-      filter="janus_account_institute.additional_institutes"
+      filter="institutes.id"
     />
 
     <AutoCompleteInput
@@ -75,7 +75,7 @@ const JanusFilter = props => (
       source="additional_units"
       reference="units"
       field="unit"
-      filter="janus_account.additional_units"
+      filter="units.id"
       optionText="code"
     />
 
