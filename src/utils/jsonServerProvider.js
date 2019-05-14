@@ -1,4 +1,5 @@
 import { stringify } from "query-string";
+import loadImage from "blueimp-load-image";
 import {
   fetchUtils,
   GET_LIST,
@@ -136,15 +137,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     return { url, options };
   };
 
-  const convertFileToBase64 = file =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file.rawFile);
-
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-    });
-
   /**
    * @param {Object} response HTTP response from fetch()
    * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
@@ -185,7 +177,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
    * @param {Object} payload Request parameters. Depends on the request type
    * @returns {Promise} the Promise for a data response
    */
-  return (type, resource, params) => {
+  return async (type, resource, params) => {
     // json-server doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
     if (type === UPDATE_MANY) {
       return Promise.all(
@@ -306,16 +298,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         subscriptionDate.setHours(subscriptionDate.getHours() + 6);
         options.body.subscription_date = subscriptionDate;
       }
-      console.log(options.body);
       sessionStorage.clear();
       if (options.body.image) {
-        return convertFileToBase64(options.body.image).then(image => {
-          options.body.image = image;
-          options.body = JSON.stringify(options.body);
-          return httpClient(url, options).then(response =>
-            convertHTTPResponse(response, type, resource, params)
-          );
-        });
+        const image = await readImageAsDataUrl(options.body.image.rawFile);
+        options.body.image = image;
       }
       options.body = JSON.stringify(options.body);
     }
@@ -323,4 +309,27 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       convertHTTPResponse(response, type, resource, params)
     );
   };
+};
+
+const readImageAsDataUrl = file => {
+  if (!file) {
+    return Promise.resolve(null);
+  }
+
+  return new Promise((resolve, reject) => {
+    loadImage(
+      file,
+      canvas => {
+        if (canvas.type === "error") {
+          reject(canvas.error);
+        }
+        try {
+          resolve(canvas.toDataURL(file.type));
+        } catch (error) {
+          reject(error);
+        }
+      },
+      { maxWidth: 200, maxHeight: 40, orientation: true, canvas: true } // Options
+    );
+  });
 };
