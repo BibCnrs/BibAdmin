@@ -299,7 +299,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         options.body.subscription_date = subscriptionDate;
       }
       sessionStorage.clear();
-      if (options.body.image) {
+      if (
+        options.body.image &&
+        !String(options.body.image).includes("base64")
+      ) {
         const image = await readImageAsDataUrl(options.body.image.rawFile);
         options.body.image = image;
       }
