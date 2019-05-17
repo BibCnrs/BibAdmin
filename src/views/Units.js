@@ -91,7 +91,6 @@ const UnitsFilter = props => (
     <BooleanInput
       source="unit.active"
       label="resources.inistAccounts.fields.active"
-      defaultValue={true}
     />
   </Filter>
 );

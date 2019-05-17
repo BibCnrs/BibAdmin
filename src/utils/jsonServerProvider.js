@@ -1,4 +1,5 @@
 import { stringify } from "query-string";
+import loadImage from "blueimp-load-image";
 import {
   fetchUtils,
   GET_LIST,
@@ -136,15 +137,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     return { url, options };
   };
 
-  const convertFileToBase64 = file =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file.rawFile);
-
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-    });
-
   /**
    * @param {Object} response HTTP response from fetch()
    * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
@@ -185,7 +177,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
    * @param {Object} payload Request parameters. Depends on the request type
    * @returns {Promise} the Promise for a data response
    */
-  return (type, resource, params) => {
+  return async (type, resource, params) => {
     // json-server doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
     if (type === UPDATE_MANY) {
       return Promise.all(
@@ -233,12 +225,18 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       const sections_cn = sessionStorage.getItem("sections_cn");
       if (main_institute) {
         options.body.main_institute = main_institute;
+      } else {
+        options.body.main_institute = null;
       }
       if (primary_institute) {
         options.body.primary_institute = primary_institute;
+      } else {
+        options.body.primary_institute = null;
       }
       if (primary_institutes) {
         options.body.primary_institutes = primary_institutes;
+      } else {
+        options.body.primary_institutes = null;
       }
       if (institutes) {
         options.body.institutes = institutes.split(",");
@@ -257,9 +255,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       }
       if (main_unit) {
         options.body.main_unit = main_unit;
+      } else {
+        options.body.main_unit = null;
       }
       if (primary_unit) {
         options.body.primary_unit = primary_unit;
+      } else {
+        options.body.primary_unit = null;
       }
       if (units) {
         options.body.units = units.split(",");
@@ -286,15 +288,23 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       } else {
         options.body.sections_cn = [];
       }
+      if (options.body.expiration_date) {
+        const expirationDate = new Date(options.body.expiration_date);
+        expirationDate.setHours(expirationDate.getHours() + 6);
+        options.body.expiration_date = expirationDate;
+      }
+      if (options.body.subscription_date) {
+        const subscriptionDate = new Date(options.body.subscription_date);
+        subscriptionDate.setHours(subscriptionDate.getHours() + 6);
+        options.body.subscription_date = subscriptionDate;
+      }
       sessionStorage.clear();
-      if (options.body.image) {
-        return convertFileToBase64(options.body.image).then(image => {
-          options.body.image = image;
-          options.body = JSON.stringify(options.body);
-          return httpClient(url, options).then(response =>
-            convertHTTPResponse(response, type, resource, params)
-          );
-        });
+      if (
+        options.body.image &&
+        !String(options.body.image).includes("base64")
+      ) {
+        const image = await readImageAsDataUrl(options.body.image.rawFile);
+        options.body.image = image;
       }
       options.body = JSON.stringify(options.body);
     }
@@ -302,4 +312,27 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       convertHTTPResponse(response, type, resource, params)
     );
   };
+};
+
+const readImageAsDataUrl = file => {
+  if (!file) {
+    return Promise.resolve(null);
+  }
+
+  return new Promise((resolve, reject) => {
+    loadImage(
+      file,
+      canvas => {
+        if (canvas.type === "error") {
+          reject(canvas.error);
+        }
+        try {
+          resolve(canvas.toDataURL(file.type));
+        } catch (error) {
+          reject(error);
+        }
+      },
+      { maxWidth: 200, maxHeight: 40, orientation: true, canvas: true } // Options
+    );
+  });
 };

@@ -8,12 +8,6 @@ export const FrenchDateInput = ({ source, label }) => {
     <DateInput
       source={source}
       label={label}
-      parse={v => {
-        if (v) {
-          v.setHours(4);
-          return v;
-        }
-      }}
       providerOptions={{
         utils: DateFnsUtils,
         locale: frLocale

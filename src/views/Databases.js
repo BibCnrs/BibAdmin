@@ -122,7 +122,7 @@ export const DatabasesEdit = ({ ...props }) => (
       >
         <ImageField source="image" title="title_database" />
       </FileInput>
-      <ImageField source="image" label="Image actuel" title="current_image" />
+      <ImageField source="image" label="Image actuelle" title="current_image" />
       <BooleanInput source="active" label="resources.databases.fields.active" />
     </SimpleForm>
   </Edit>
