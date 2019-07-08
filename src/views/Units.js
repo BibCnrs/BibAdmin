@@ -324,6 +324,7 @@ export const UnitsEdit = ({ ...props }) => (
         label="resources.units.fields.section_cn"
         source="sections_cn"
         reference="section_cn"
+        field="section_cn"
         isMulti={true}
       />
 
