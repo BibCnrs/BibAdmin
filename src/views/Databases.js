@@ -9,7 +9,6 @@ import {
   SimpleForm,
   BooleanField,
   TextInput,
-  LongTextInput,
   BooleanInput,
   FileInput,
   ImageField,
@@ -73,10 +72,10 @@ export const DatabasesList = ({ ...props }) => (
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />
       <LinkEdit source="name_en" label="resources.databases.fields.name_en" />
+      <BooleanField source="active" label="resources.databases.fields.active" />
       <BooleanField
-        source="active"
-        label="resources.databases.fields.active"
-        defaultValue={true}
+        source="oa"
+        label="resources.databases.fields.open_access"
       />
       <EditButton />
       <DeleteButtonWithConfirmation />
@@ -101,14 +100,8 @@ export const DatabasesEdit = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <LongTextInput
-        source="text_fr"
-        label="resources.databases.fields.text_fr"
-      />
-      <LongTextInput
-        source="text_en"
-        label="resources.databases.fields.text_en"
-      />
+      <TextInput source="text_fr" label="resources.databases.fields.text_fr" />
+      <TextInput source="text_en" label="resources.databases.fields.text_en" />
       <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
@@ -118,12 +111,16 @@ export const DatabasesEdit = ({ ...props }) => (
       <FileInput
         source="image"
         label="resources.databases.fields.image"
-        placeholder={<p>Glisser déposer l'image</p>}
+        placeholder={<p>Glisser déposer l&apos;image</p>}
       >
         <ImageField source="image" title="title_database" />
       </FileInput>
       <ImageField source="image" label="Image actuelle" title="current_image" />
       <BooleanInput source="active" label="resources.databases.fields.active" />
+      <BooleanInput
+        source="oa"
+        label="resources.databases.fields.open_access"
+      />
     </SimpleForm>
   </Edit>
 );
@@ -135,14 +132,8 @@ export const DatabasesCreate = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <LongTextInput
-        source="text_fr"
-        label="resources.databases.fields.text_fr"
-      />
-      <LongTextInput
-        source="text_en"
-        label="resources.databases.fields.text_en"
-      />
+      <TextInput source="text_fr" label="resources.databases.fields.text_fr" />
+      <TextInput source="text_en" label="resources.databases.fields.text_en" />
       <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
@@ -152,11 +143,15 @@ export const DatabasesCreate = ({ ...props }) => (
       <FileInput
         source="image"
         label="resources.databases.fields.image"
-        placeholder={<p>Glisser déposer l'image</p>}
+        placeholder={<p>Glisser déposer l&apos;image</p>}
       >
         <ImageField source="image" title="title_database" />
       </FileInput>
       <BooleanInput source="active" label="resources.databases.fields.active" />
+      <BooleanInput
+        source="oa"
+        label="resources.databases.fields.open_access"
+      />
     </SimpleForm>
   </Create>
 );

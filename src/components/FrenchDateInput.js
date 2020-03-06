@@ -1,6 +1,6 @@
 import React from "react";
 import { DateInput } from "react-admin-date-inputs";
-import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
+import DateFnsUtils from "@date-io/date-fns";
 import frLocale from "date-fns/locale/fr";
 
 export const FrenchDateInput = ({ source, label }) => {

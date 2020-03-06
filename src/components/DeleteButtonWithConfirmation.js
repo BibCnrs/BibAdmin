@@ -146,10 +146,7 @@ DeleteButtonWithConfirmation.defaultProps = {
 };
 
 export default compose(
-  connect(
-    null,
-    { startUndoable, dispatchCrudDelete: crudDelete }
-  ),
+  connect(null, { startUndoable, dispatchCrudDelete: crudDelete }),
   translate,
   withStyles(styles)
 )(DeleteButtonWithConfirmation);

@@ -143,7 +143,8 @@ export default {
         text_en: "Description (en)",
         image: "Image",
         communities: "Communautés",
-        active: "Active"
+        active: "Active",
+        open_access: "Open source"
       }
     },
     section_cn: {

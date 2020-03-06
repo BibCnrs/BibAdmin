@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AsyncSelect from "react-select/lib/Async";
+import AsyncSelect from "react-select/async";
 import { Labeled } from "react-admin";
 import axios from "axios";
 
@@ -83,7 +83,7 @@ class AutoCompleteInput extends React.Component {
   };
 
   // for edit add previous value in autocomplete
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     const { record, source, reference, filter, optionText } = this.props;
     const url = decodeURI(window.location.hash).split(/({.*})/)[1];
     if (record && record[source]) {
@@ -91,7 +91,7 @@ class AutoCompleteInput extends React.Component {
       if (!Array.isArray(record[source])) {
         previousValue = [previousValue];
       }
-      if (previousValue.length > 0) {
+      if (previousValue && previousValue.length > 0) {
         sessionStorage.setItem(source, previousValue.join(","));
       }
       const listData = await Promise.all(
@@ -159,7 +159,8 @@ class AutoCompleteInput extends React.Component {
           onChange={this.handleChange}
           loadOptions={this.promiseOptions}
           isMulti={isMulti}
-          className={filter ? "width-200" : ""}
+          className={`autocomplete ${filter ? "width-200" : ""}`}
+          classNamePrefix="list-autocomplete"
           isClearable={true}
         />
       </Labeled>

@@ -16,7 +16,6 @@ import {
   TextInput,
   NumberInput,
   BooleanInput,
-  LongTextInput,
   downloadCSV,
   ExportButton,
   SaveButton,
@@ -40,9 +39,7 @@ UrlSearchInist.defaultProps = {
 };
 
 const UrlSearchJanus = ({ source, record = {} }) => {
-  const url = `#/janusAccounts?filter={"janus_account.primary_unit":${
-    record.id
-  }}`;
+  const url = `#/janusAccounts?filter={"janus_account.primary_unit":${record.id}}`;
   return <a href={url}>{record.nb_janus_account}</a>;
 };
 
@@ -161,7 +158,7 @@ export const UnitsList = ({ ...props }) => (
         label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        linkType="show"
+        link="show"
         allowEmpty={true}
       >
         <TextField source="name" />
@@ -328,7 +325,7 @@ export const UnitsEdit = ({ ...props }) => (
         isMulti={true}
       />
 
-      <LongTextInput
+      <TextInput
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />
@@ -446,7 +443,7 @@ export const UnitsCreate = ({ ...props }) => (
         isMulti={true}
       />
 
-      <LongTextInput
+      <TextInput
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />
