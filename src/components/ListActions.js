@@ -1,5 +1,5 @@
 import React from "react";
-import { TopToolbar, ListButton } from "react-admin";
+import { TopToolbar, ListButton, CloneButton } from "react-admin";
 import DeleteButtonWithConfirmation from "./DeleteButtonWithConfirmation";
 
 export const ListEditActions = ({ basePath, data, resource }) => (
@@ -9,6 +9,7 @@ export const ListEditActions = ({ basePath, data, resource }) => (
       record={data}
       resource={resource}
     />
+    <CloneButton basePath={basePath} record={data} />
     <ListButton basePath={basePath} record={data} />
   </TopToolbar>
 );
