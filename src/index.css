@@ -12,13 +12,14 @@ td > a:visited {
   color: #3752c1;
 }
 
-/* change size */
+/* change size sidebar font */
 a[role="menuitem"] {
   font-size: 15px;
 }
 
-a[role="menuitem"] span {
-  padding-right: 0.5em;
+/* icon sidebar */
+a[role="menuitem"] div {
+  min-width: 30px !important;
 }
 
 /* determine size of input in form */
@@ -51,4 +52,8 @@ table td {
 
 .width-200 {
   width: 200px;
+}
+
+.autocomplete div:last-child {
+  position: relative;
 }

@@ -36,7 +36,9 @@ class AutoCompleteInput extends React.Component {
           )[1];
           const newFilter = `{"${filter}":"${listValue}"}`;
           if (previousFilter) {
-            const query = JSON.parse(previousFilter.replace(/%3A/g, ":"));
+            const query = JSON.parse(
+              previousFilter.replace(/%3A/g, ":").replace(/&.*/, "")
+            );
             const newUrl = Object.assign(query, JSON.parse(newFilter));
             document.location.href = `#/${resource}?filter=${JSON.stringify(
               newUrl
@@ -109,7 +111,8 @@ class AutoCompleteInput extends React.Component {
         this.setState({ selectedOption });
       }
     } else if (url) {
-      const query = JSON.parse(url.replace(/%3A/g, ":"));
+      console.log(url);
+      const query = JSON.parse(url.replace(/%3A/g, ":").replace(/&.*/, ""));
       const value = filter ? url[filter] : Object.values(query);
       if (value) {
         const data = await fetchApi(
@@ -142,6 +145,11 @@ class AutoCompleteInput extends React.Component {
         /&?(filter=&|filter=%7B%7D&)/,
         ""
       );
+      window.location.hash = window.location.hash.replace(
+        "displayedFilters=&",
+        ""
+      );
+      console.log(window.location.hash);
     }
   }
 
@@ -169,6 +177,7 @@ class AutoCompleteInput extends React.Component {
 }
 
 AutoCompleteInput.propTypes = {
+  record: PropTypes.any,
   label: PropTypes.string,
   source: PropTypes.string,
   resource: PropTypes.string,
