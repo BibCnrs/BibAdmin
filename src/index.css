@@ -12,19 +12,21 @@ td > a:visited {
   color: #3752c1;
 }
 
-/* change size */
+/* change size sidebar font */
 a[role="menuitem"] {
   font-size: 15px;
 }
 
-a[role="menuitem"] span {
-  padding-right: 0.5em;
+/* icon sidebar */
+a[role="menuitem"] div {
+  min-width: 30px !important;
 }
 
 /* determine size of input in form */
 form.simple-form > div > div > div,
 form.simple-form > div > div > span > div {
   width: 90% !important;
+  z-index: 0 !important;
 }
 
 div[role="combobox"] > div,
@@ -45,77 +47,13 @@ div.ra-input-all_communities > div > div > div > a {
 /* reduce margin size */
 table th,
 table td {
-  padding: 0 6px !important;
+  padding: 6px 6px !important;
 }
-
-/* react auto-suggest */
-/*.react-autosuggest__container {
-  position: relative;
-}
-
-.react-autosuggest__input {
-  width: 240px;
-  height: 16px;
-  padding: 10px 20px;
-  font-family: Helvetica, sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-}
-
-.react-autosuggest__input--focused {
-  outline: none;
-}
-
-.react-autosuggest__input--open {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.react-autosuggest__suggestions-container {
-  display: none;
-}
-
-.react-autosuggest__suggestions-container--open {
-  display: block;
-  position: absolute;
-  width: 280px;
-  border: 1px solid #aaa;
-  background-color: #fff;
-  font-family: Helvetica, sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  z-index: 2;
-}
-
-.react-autosuggest__suggestions-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-.react-autosuggest__suggestion {
-  cursor: pointer;
-  padding: 10px 20px;
-}
-
-.react-autosuggest__suggestion--highlighted {
-  background-color: #ddd;
-}
-.react-autosuggest__suggestion b {
-  color: #ee0000;
-  font-weight: bold;
-}
-
-.jss16,
-.MuiCard-root-16 {
-  overflow: visible !important;
-}
-*/
 
 .width-200 {
   width: 200px;
+}
+
+.autocomplete div:last-child {
+  position: relative;
 }

@@ -9,7 +9,6 @@ import {
   SimpleForm,
   TextField,
   TextInput,
-  LongTextInput,
   SaveButton,
   Toolbar
 } from "react-admin";
@@ -60,7 +59,7 @@ export const UsersEdit = ({ ...props }) => (
     <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="username" />
       <TextInput source="password" />
-      <LongTextInput source="comment" />
+      <TextInput source="comment" />
     </SimpleForm>
   </Edit>
 );
@@ -70,7 +69,7 @@ export const UsersCreate = ({ ...props }) => (
     <SimpleForm redirect="list">
       <TextInput source="username" />
       <TextInput source="password" />
-      <LongTextInput source="comment" />
+      <TextInput source="comment" />
     </SimpleForm>
   </Create>
 );

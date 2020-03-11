@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AsyncSelect from "react-select/lib/Async";
+import AsyncSelect from "react-select/async";
 import { Labeled } from "react-admin";
 import axios from "axios";
 
@@ -36,7 +36,9 @@ class AutoCompleteInput extends React.Component {
           )[1];
           const newFilter = `{"${filter}":"${listValue}"}`;
           if (previousFilter) {
-            const query = JSON.parse(previousFilter.replace(/%3A/g, ":"));
+            const query = JSON.parse(
+              previousFilter.replace(/%3A/g, ":").replace(/&.*/, "")
+            );
             const newUrl = Object.assign(query, JSON.parse(newFilter));
             document.location.href = `#/${resource}?filter=${JSON.stringify(
               newUrl
@@ -83,7 +85,7 @@ class AutoCompleteInput extends React.Component {
   };
 
   // for edit add previous value in autocomplete
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     const { record, source, reference, filter, optionText } = this.props;
     const url = decodeURI(window.location.hash).split(/({.*})/)[1];
     if (record && record[source]) {
@@ -91,7 +93,7 @@ class AutoCompleteInput extends React.Component {
       if (!Array.isArray(record[source])) {
         previousValue = [previousValue];
       }
-      if (previousValue.length > 0) {
+      if (previousValue && previousValue.length > 0) {
         sessionStorage.setItem(source, previousValue.join(","));
       }
       const listData = await Promise.all(
@@ -109,7 +111,8 @@ class AutoCompleteInput extends React.Component {
         this.setState({ selectedOption });
       }
     } else if (url) {
-      const query = JSON.parse(url.replace(/%3A/g, ":"));
+      console.log(url);
+      const query = JSON.parse(url.replace(/%3A/g, ":").replace(/&.*/, ""));
       const value = filter ? url[filter] : Object.values(query);
       if (value) {
         const data = await fetchApi(
@@ -142,6 +145,11 @@ class AutoCompleteInput extends React.Component {
         /&?(filter=&|filter=%7B%7D&)/,
         ""
       );
+      window.location.hash = window.location.hash.replace(
+        "displayedFilters=&",
+        ""
+      );
+      console.log(window.location.hash);
     }
   }
 
@@ -159,7 +167,8 @@ class AutoCompleteInput extends React.Component {
           onChange={this.handleChange}
           loadOptions={this.promiseOptions}
           isMulti={isMulti}
-          className={filter ? "width-200" : ""}
+          className={`autocomplete ${filter ? "width-200" : ""}`}
+          classNamePrefix="list-autocomplete"
           isClearable={true}
         />
       </Labeled>
@@ -168,6 +177,7 @@ class AutoCompleteInput extends React.Component {
 }
 
 AutoCompleteInput.propTypes = {
+  record: PropTypes.any,
   label: PropTypes.string,
   source: PropTypes.string,
   resource: PropTypes.string,

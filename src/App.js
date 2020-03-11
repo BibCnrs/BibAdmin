@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Admin, Resource, fetchUtils } from "react-admin";
+import polyglotI18nProvider from "ra-i18n-polyglot";
 import jsonServerProvider from "./utils/jsonServerProvider";
 
 // import icon
@@ -10,7 +11,7 @@ import InstituteIcon from "@material-ui/icons/AccountBalance";
 import FolderIcon from "@material-ui/icons/Folder";
 
 // import views
-import Dashboard from "./views/Dashboard";
+import { Dashboard } from "./views/Dashboard";
 import { UsersList, UsersEdit, UsersCreate } from "./views/Users";
 import { InistList, InistEdit, InistCreate } from "./views/Inist";
 import { JanusList, JanusEdit, JanusCreate } from "./views/Janus";
@@ -36,16 +37,14 @@ import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
 
-const i18nProvider = locale => {
-  return langFr;
-};
+const i18nProvider = polyglotI18nProvider(() => langFr, "fr");
 
 class App extends Component {
   state = {
     dataProvider: null
   };
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     const httpClient = (url, options = {}) => {
       if (!options.headers) {
         options.headers = new Headers({ Accept: "application/json" });

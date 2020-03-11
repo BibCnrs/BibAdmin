@@ -1,22 +1,23 @@
 import React from "react";
-import { CardActions, ListButton } from "react-admin";
+import { TopToolbar, ListButton, CloneButton } from "react-admin";
 import DeleteButtonWithConfirmation from "./DeleteButtonWithConfirmation";
 
 export const ListEditActions = ({ basePath, data, resource }) => (
-  <CardActions>
+  <TopToolbar>
     <DeleteButtonWithConfirmation
       basePath={basePath}
       record={data}
       resource={resource}
     />
+    <CloneButton basePath={basePath} record={data} />
     <ListButton basePath={basePath} record={data} />
-  </CardActions>
+  </TopToolbar>
 );
 
 export const ListActions = ({ basePath, data, resource }) => (
-  <CardActions>
+  <TopToolbar>
     <ListButton basePath={basePath} record={data} />
-  </CardActions>
+  </TopToolbar>
 );
 
 export default ListActions;

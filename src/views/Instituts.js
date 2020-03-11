@@ -114,7 +114,6 @@ const PostEditToolbar = props => (
 export const InstitutsEdit = ({ ...props }) => (
   <Edit title={<InstitutsTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm toolbar={<PostEditToolbar />}>
-      <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
       <AutoCompleteInput
@@ -130,7 +129,6 @@ export const InstitutsEdit = ({ ...props }) => (
 export const InstitutsCreate = ({ ...props }) => (
   <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="id" label="resources.institutes.fields.id" />
       <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
       <AutoCompleteInput

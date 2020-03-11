@@ -54,7 +54,6 @@ class DeleteButtonWithConfirmation extends Component {
       undoable,
       selectedIds
     } = this.props;
-    console.log(this.props);
     if (undoable) {
       if (record && record.id) {
         startUndoable(
@@ -129,6 +128,7 @@ DeleteButtonWithConfirmation.propTypes = {
   dispatchCrudDelete: PropTypes.func.isRequired,
   label: PropTypes.string,
   record: PropTypes.object,
+  selectedIds: PropTypes.arrayOf(PropTypes.string),
   redirect: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
@@ -146,10 +146,7 @@ DeleteButtonWithConfirmation.defaultProps = {
 };
 
 export default compose(
-  connect(
-    null,
-    { startUndoable, dispatchCrudDelete: crudDelete }
-  ),
+  connect(null, { startUndoable, dispatchCrudDelete: crudDelete }),
   translate,
   withStyles(styles)
 )(DeleteButtonWithConfirmation);

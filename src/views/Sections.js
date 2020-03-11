@@ -8,7 +8,6 @@ import {
   Filter,
   SimpleForm,
   TextInput,
-  LongTextInput,
   downloadCSV,
   ExportButton,
   SaveButton,
@@ -30,10 +29,7 @@ const SectionsFilter = props => (
       label="resources.section_cn.fields.name"
     />
     <TextInput source="code" label="resources.section_cn.fields.code" />
-    <LongTextInput
-      source="comment"
-      label="resources.section_cn.fields.comment"
-    />
+    <TextInput source="comment" label="resources.section_cn.fields.comment" />
     <AutoCompleteInput
       label="resources.section_cn.fields.primary_institutes"
       source="primary_institutes"
@@ -122,10 +118,7 @@ export const SectionsEdit = ({ ...props }) => (
     <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
-      <LongTextInput
-        source="comment"
-        label="resources.section_cn.fields.comment"
-      />
+      <TextInput source="comment" label="resources.section_cn.fields.comment" />
       <AutoCompleteInput
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"
@@ -148,10 +141,7 @@ export const SectionsCreate = ({ ...props }) => (
     <SimpleForm redirect="list">
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
-      <LongTextInput
-        source="comment"
-        label="resources.section_cn.fields.comment"
-      />
+      <TextInput source="comment" label="resources.section_cn.fields.comment" />
       <AutoCompleteInput
         label="resources.section_cn.fields.primary_institutes"
         source="primary_institutes"

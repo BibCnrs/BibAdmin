@@ -15,7 +15,6 @@ import {
   DateField,
   BooleanField,
   TextInput,
-  LongTextInput,
   BooleanInput,
   downloadCSV,
   ExportButton,
@@ -119,7 +118,7 @@ const InistFilter = props => (
   </Filter>
 );
 
-const exporter = async (records, fetchRelatedRecords) => {
+const exporter = async records => {
   const data = records.map(record => renameKeys(record, "inistAccounts"));
   const csv = convertToCSV(data, {
     delimiter: ";"
@@ -168,7 +167,7 @@ export const InistList = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
-        linkType="show"
+        link="show"
         allowEmpty={true}
       >
         <TextField source="name" />
@@ -188,7 +187,7 @@ export const InistList = ({ ...props }) => (
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
-        linkType="show"
+        link="show"
         allowEmpty={true}
       >
         <TextField source="code" />
@@ -320,7 +319,7 @@ export const InistEdit = ({ ...props }) => (
         source="active"
         label="resources.inistAccounts.fields.active"
       />
-      <LongTextInput
+      <TextInput
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />
@@ -405,7 +404,7 @@ export const InistCreate = ({ ...props }) => (
         source="active"
         label="resources.inistAccounts.fields.active"
       />
-      <LongTextInput
+      <TextInput
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />

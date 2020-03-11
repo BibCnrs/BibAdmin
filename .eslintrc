@@ -1,7 +1,33 @@
 {
-  "extends": "react-app",
-  "plugins": ["prettier"],
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": ["import", "react"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true,
+        "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": 2,
+    "react/prop-types": 1,
+    "no-unused-vars": 1
   }
 }

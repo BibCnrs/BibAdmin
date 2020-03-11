@@ -16,7 +16,6 @@ import {
   BooleanField,
   TextInput,
   BooleanInput,
-  LongTextInput,
   downloadCSV,
   ExportButton,
   SaveButton,
@@ -151,7 +150,7 @@ export const JanusList = props => (
         label="resources.janusAccounts.fields.primary_institute"
         source="primary_institute"
         reference="institutes"
-        linkType="show"
+        link="show"
       >
         <TextField source="name" />
       </ReferenceField>
@@ -170,7 +169,7 @@ export const JanusList = props => (
         label="resources.janusAccounts.fields.primary_unit"
         source="primary_unit"
         reference="units"
-        linkType="show"
+        link="show"
       >
         <TextField source="code" />
       </ReferenceField>
@@ -294,7 +293,7 @@ export const JanusEdit = ({ ...props }) => (
         source="active"
         label="resources.janusAccounts.fields.active"
       />
-      <LongTextInput
+      <TextInput
         source="comment"
         label="resources.janusAccounts.fields.comment"
       />
@@ -361,7 +360,7 @@ export const JanusCreate = ({ ...props }) => (
         source="active"
         label="resources.janusAccounts.fields.active"
       />
-      <LongTextInput
+      <TextInput
         source="comment"
         label="resources.janusAccounts.fields.comment"
       />
