@@ -21,6 +21,9 @@ bump: ## create currentCommit file
 npm-install: ## ## install npm dependencies
 	docker-compose run --rm npm install
 
+npm-ci: ## ## install npm dependencies
+	docker-compose run --rm npm ci --unsafe-perm
+
 install: npm-install bump ## install npm dependencies and bump currentCommit file
 
 run-dev: ## run BibAdmin for development
