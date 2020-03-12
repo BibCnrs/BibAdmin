@@ -19,10 +19,7 @@ bump: ## create currentCommit file
 	git rev-parse HEAD > .currentCommit
 
 npm-install: ## ## install npm dependencies
-	docker-compose run --rm npm install
-
-npm-ci: ## ## install npm dependencies
-	docker-compose run --rm npm ci --unsafe-perm
+	docker-compose run --rm npm ci
 
 install: npm-install bump ## install npm dependencies and bump currentCommit file
 
