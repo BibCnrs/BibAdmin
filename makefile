@@ -18,10 +18,7 @@ endif
 bump: ## create currentCommit file
 	git rev-parse HEAD > .currentCommit
 
-npm-install: ## ## install npm dependencies
-	docker-compose run --rm npm install
-
-npm-ci: ## ## install npm dependencies
+npm-install: ## ## install npm dependencies (--unsafe-perm allows to install github packages via docker)
 	docker-compose run --rm npm ci --unsafe-perm
 
 install: npm-install bump ## install npm dependencies and bump currentCommit file
