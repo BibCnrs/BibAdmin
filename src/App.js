@@ -56,10 +56,12 @@ class App extends Component {
       return fetchUtils.fetchJson(url, options);
     };
 
-    const dataProvider = jsonServerProvider(
-      process.env.REACT_APP_BIBAPI_HOST,
-      httpClient
+    const apiUrl = process.env.REACT_APP_BIBAPI_HOST.replace(
+      /([a-z])([/]{2})/,
+      "$1/"
     );
+
+    const dataProvider = jsonServerProvider(apiUrl, httpClient);
 
     this.setState({ dataProvider });
   }
