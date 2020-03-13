@@ -6,6 +6,7 @@ import axios from "axios";
 
 // get data on api
 const fetchApi = async url => {
+  url = url.replace(/([a-z])([/]{2})/, "$1/");
   const { data } = await axios({
     url,
     headers: {
@@ -111,7 +112,6 @@ class AutoCompleteInput extends React.Component {
         this.setState({ selectedOption });
       }
     } else if (url) {
-      console.log(url);
       const query = JSON.parse(url.replace(/%3A/g, ":").replace(/&.*/, ""));
       const value = filter ? url[filter] : Object.values(query);
       if (value) {
@@ -149,7 +149,6 @@ class AutoCompleteInput extends React.Component {
         "displayedFilters=&",
         ""
       );
-      console.log(window.location.hash);
     }
   }
 

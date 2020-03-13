@@ -4,7 +4,12 @@ export default (type, params) => {
   // called when the user attempts to log in
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
-    return fetch(`${process.env.REACT_APP_BIBAPI_HOST}/login`, {
+    const apiLoginUrl = `${process.env.REACT_APP_BIBAPI_HOST}/login`.replace(
+      /([a-z])([/]{2})/,
+      "$1/"
+    );
+    console.log("apiLoginUrl", apiLoginUrl);
+    return fetch(apiLoginUrl, {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: {

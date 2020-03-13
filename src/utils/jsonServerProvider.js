@@ -30,6 +30,9 @@ import {
  * DELETE       => DELETE http://my.api.url/posts/123
  */
 export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
+  // remove duplicate slash /
+  apiUrl = apiUrl.replace(/([a-z])([/]{2})/, "$1/");
+
   /**
    * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
    * @param {String} resource Name of the resource to fetch, e.g. 'posts'
@@ -180,10 +183,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     if (type === UPDATE_MANY) {
       return Promise.all(
         params.ids.map(id =>
-          httpClient(`${apiUrl}/${resource}/${id}`, {
-            method: "PATCH",
-            body: JSON.stringify(params.data)
-          })
+          httpClient(
+            `${apiUrl}/${resource}/${id}`.replace(/([a-z])([/]{2})/, "$1/"),
+            {
+              method: "PATCH",
+              body: JSON.stringify(params.data)
+            }
+          )
         )
       ).then(responses => ({
         data: responses.map(response => response.json)
@@ -193,9 +199,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     if (type === DELETE_MANY) {
       return Promise.all(
         params.ids.map(id =>
-          httpClient(`${apiUrl}/${resource}/${id}`, {
-            method: "DELETE"
-          })
+          httpClient(
+            `${apiUrl}/${resource}/${id}`.replace(/([a-z])([/]{2})/, "$1/"),
+            {
+              method: "DELETE"
+            }
+          )
         )
       ).then(responses => ({
         data: responses.map(response => response.json)
@@ -306,9 +315,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       }
       options.body = JSON.stringify(options.body);
     }
-    return httpClient(url, options).then(response =>
-      convertHTTPResponse(response, type, resource, params)
-    );
+    return httpClient(
+      url.replace(/([a-z])([/]{2})/, "$1/"),
+      options
+    ).then(response => convertHTTPResponse(response, type, resource, params));
   };
 };
 
