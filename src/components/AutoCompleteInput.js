@@ -24,41 +24,24 @@ class AutoCompleteInput extends React.Component {
 
   // change value in temp database after each change
   handleChange = selectedOption => {
-    const { resource, source, isMulti, filter } = this.props;
-    let listValue = "";
+    const { source, filter, isMulti, parent } = this.props;
+    let searchValue = "";
     if (selectedOption) {
       if (isMulti) {
-        listValue = selectedOption.map(n => n.value);
+        searchValue = selectedOption.map(n => n.value);
       } else {
-        listValue = selectedOption.value;
-        if (filter) {
-          const previousFilter = decodeURI(window.location.hash).split(
-            /({.*})/
-          )[1];
-          const newFilter = `{"${filter}":"${listValue}"}`;
-          if (previousFilter) {
-            const query = JSON.parse(
-              previousFilter.replace(/%3A/g, ":").replace(/&.*/, "")
-            );
-            const newUrl = Object.assign(query, JSON.parse(newFilter));
-            document.location.href = `#/${resource}?filter=${JSON.stringify(
-              newUrl
-            )}`;
-          } else {
-            document.location.href = `#/${resource}?filter=${newFilter}`;
-          }
-        }
+        searchValue = selectedOption.value;
       }
-    } else {
-      this.componentWillUnmount();
+      parent.setFilters({
+        [filter]: searchValue
+      });
+      parent.displayedFilters[source] = true;
+      sessionStorage.setItem(source, searchValue);
+      this.setState({
+        selectedOption,
+        listValue: searchValue.toString()
+      });
     }
-
-    sessionStorage.setItem(source, listValue);
-
-    this.setState({
-      selectedOption,
-      listValue: listValue.toString()
-    });
   };
 
   // Autosuggest will call this function every time you need to update suggestions. (async query)
@@ -85,71 +68,13 @@ class AutoCompleteInput extends React.Component {
     }
   };
 
-  // for edit add previous value in autocomplete
-  async UNSAFE_componentWillMount() {
-    const { record, source, reference, filter, optionText } = this.props;
-    const url = decodeURI(window.location.hash).split(/({.*})/)[1];
-    if (record && record[source]) {
-      let previousValue = record[source];
-      if (!Array.isArray(record[source])) {
-        previousValue = [previousValue];
-      }
-      if (previousValue && previousValue.length > 0) {
-        sessionStorage.setItem(source, previousValue.join(","));
-      }
-      const listData = await Promise.all(
-        previousValue.map(element => {
-          return fetchApi(
-            `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${element}`
-          );
-        })
-      );
-      const selectedOption = listData.map(n => ({
-        value: n.id,
-        label: n[optionText]
-      }));
-      if (selectedOption) {
-        this.setState({ selectedOption });
-      }
-    } else if (url) {
-      const query = JSON.parse(url.replace(/%3A/g, ":").replace(/&.*/, ""));
-      const value = filter ? url[filter] : Object.values(query);
-      if (value) {
-        const data = await fetchApi(
-          `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${Object.values(
-            query
-          )}`
-        );
-        if (data) {
-          this.setState({
-            selectedOption: {
-              value: data.id,
-              label: data[optionText]
-            }
-          });
-        }
-      }
-    }
-  }
-
   // remove applied filter when remove component
   componentWillUnmount() {
-    const { filter } = this.props;
-    if (filter) {
-      const fragment = decodeURI(window.location.hash).split(/({.*})/)[1];
-      window.location.hash = decodeURI(window.location.hash).replace(
-        fragment,
-        ""
-      );
-      window.location.hash = window.location.hash.replace(
-        /&?(filter=&|filter=%7B%7D&)/,
-        ""
-      );
-      window.location.hash = window.location.hash.replace(
-        "displayedFilters=&",
-        ""
-      );
-    }
+    const { source, parent } = this.props;
+    parent.setFilters({
+      [source]: ""
+    });
+    delete parent.displayedFilters[source];
   }
 
   // reder autocomplete with parameters
@@ -184,7 +109,8 @@ AutoCompleteInput.propTypes = {
   field: PropTypes.string,
   isMulti: PropTypes.bool,
   filter: PropTypes.string,
-  optionText: PropTypes.string
+  optionText: PropTypes.string,
+  parent: PropTypes.any
 };
 
 AutoCompleteInput.defaultProps = {

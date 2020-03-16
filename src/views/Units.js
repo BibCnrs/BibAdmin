@@ -21,6 +21,7 @@ import {
   SaveButton,
   Toolbar
 } from "react-admin";
+import PropTypes from "prop-types";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -29,22 +30,24 @@ import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 import AutoCompleteInput from "../components/AutoCompleteInput";
 
-const UrlSearchInist = ({ source, record = {} }) => {
+const UrlSearchInist = ({ record = {} }) => {
   const url = `#/inistAccounts?filter={"main_unit":${record.id}}`;
   return <a href={url}>{record.nb_inist_account}</a>;
 };
 
 UrlSearchInist.defaultProps = {
-  addLabel: true
+  addLabel: true,
+  record: PropTypes.object
 };
 
-const UrlSearchJanus = ({ source, record = {} }) => {
+const UrlSearchJanus = ({ record = {} }) => {
   const url = `#/janusAccounts?filter={"janus_account.primary_unit":${record.id}}`;
   return <a href={url}>{record.nb_janus_account}</a>;
 };
 
 UrlSearchJanus.defaultProps = {
-  addLabel: true
+  addLabel: true,
+  record: PropTypes.object
 };
 
 const UnitsFilter = props => (
@@ -59,6 +62,7 @@ const UnitsFilter = props => (
       reference="communities"
       field="community"
       filter="community.id"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -67,6 +71,7 @@ const UnitsFilter = props => (
       reference="institutes"
       field="institute"
       filter="unit.main_institute"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -75,6 +80,7 @@ const UnitsFilter = props => (
       reference="institutes"
       field="institute"
       filter="institute.id"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -83,6 +89,7 @@ const UnitsFilter = props => (
       reference="section_cn"
       field="section_cn"
       filter="section_cn.id"
+      parent={props}
     />
 
     <BooleanInput
@@ -92,7 +99,7 @@ const UnitsFilter = props => (
   </Filter>
 );
 
-const exporter = async (records, fetchRelatedRecords, ...rest) => {
+const exporter = async (records, fetchRelatedRecords) => {
   const listPrincipalIt = await fetchRelatedRecords(
     records,
     "main_institute",

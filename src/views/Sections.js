@@ -36,6 +36,7 @@ const SectionsFilter = props => (
       reference="institutes"
       field="institute"
       filter="primary_institute.institute_id"
+      parent={props}
     />
     <AutoCompleteInput
       label="resources.section_cn.fields.secondary_institutes"
@@ -43,6 +44,7 @@ const SectionsFilter = props => (
       reference="institutes"
       field="institute"
       filter="secondary_institute.institute_id"
+      parent={props}
     />
   </Filter>
 );

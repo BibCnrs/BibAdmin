@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { DateInput } from "react-admin-date-inputs";
 import DateFnsUtils from "@date-io/date-fns";
 import frLocale from "date-fns/locale/fr";
@@ -18,4 +19,9 @@ export const FrenchDateInput = ({ source, label }) => {
       }}
     />
   );
+};
+
+FrenchDateInput.propTypes = {
+  source: PropTypes.string,
+  label: PropTypes.string
 };

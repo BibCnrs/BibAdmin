@@ -38,6 +38,7 @@ const FavorisFilter = props => (
       source="communities"
       reference="communities"
       filter="community_id"
+      parent={props}
     />
   </Filter>
 );

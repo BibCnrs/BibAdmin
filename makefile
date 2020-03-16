@@ -18,7 +18,11 @@ endif
 bump: ## create currentCommit file
 	git rev-parse HEAD > .currentCommit
 
-npm-install: ## ## install npm dependencies
+
+npm-install-dev: ## ## install npm dependencies (after change in package.json)
+	docker-compose run --rm npm install
+
+npm-install: ## ## install npm dependencies (respect package-lock.json)
 	docker-compose run --rm npm ci
 
 install: npm-install bump ## install npm dependencies and bump currentCommit file
