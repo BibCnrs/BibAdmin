@@ -58,6 +58,7 @@ const InistFilter = props => (
       reference="institutes"
       field="institute"
       filter="main_institute"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -66,6 +67,7 @@ const InistFilter = props => (
       reference="institutes"
       field="institute"
       filter="institutes.id"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -75,6 +77,7 @@ const InistFilter = props => (
       field="unit"
       filter="main_unit"
       optionText="code"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -84,6 +87,7 @@ const InistFilter = props => (
       field="unit"
       filter="units.id"
       optionText="code"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -91,6 +95,7 @@ const InistFilter = props => (
       source="communities"
       reference="communities"
       filter="community.id"
+      parent={props}
     />
 
     <FrenchDateInput

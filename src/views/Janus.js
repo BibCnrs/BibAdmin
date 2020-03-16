@@ -50,6 +50,7 @@ const JanusFilter = props => (
       reference="institutes"
       field="institute"
       filter="janus_account.primary_institute"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -58,6 +59,7 @@ const JanusFilter = props => (
       reference="institutes"
       field="institute"
       filter="institutes.id"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -67,6 +69,7 @@ const JanusFilter = props => (
       field="unit"
       filter="janus_account.primary_unit"
       optionText="code"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -76,6 +79,7 @@ const JanusFilter = props => (
       field="unit"
       filter="units.id"
       optionText="code"
+      parent={props}
     />
 
     <AutoCompleteInput
@@ -83,6 +87,7 @@ const JanusFilter = props => (
       source="communities"
       reference="communities"
       filter="community.id"
+      parent={props}
     />
 
     <FrenchDateInput
@@ -114,7 +119,7 @@ const JanusFilter = props => (
   </Filter>
 );
 
-const exporter = async (records, fetchRelatedRecords) => {
+const exporter = async records => {
   const data = records.map(record => renameKeys(record, "janusAccounts"));
   const csv = convertToCSV(data, {
     delimiter: ";"

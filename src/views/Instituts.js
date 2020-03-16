@@ -41,6 +41,7 @@ const InstitutsFilter = props => (
       source="communities"
       reference="communities"
       filter="community.id"
+      parent={props}
     />
   </Filter>
 );
