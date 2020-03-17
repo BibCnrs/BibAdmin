@@ -32,19 +32,21 @@ class AutoCompleteInput extends React.Component {
       } else {
         searchValue = selectedOption.value;
       }
+      // if filter
       if (parent && filter) {
         parent.setFilters({
           [filter]: searchValue
         });
         parent.displayedFilters[source] = true;
       } else {
+        // else if edit/create form
         sessionStorage.setItem(source, searchValue);
       }
-      this.setState({
-        selectedOption,
-        listValue: searchValue.toString()
-      });
     }
+    this.setState({
+      selectedOption,
+      listValue: searchValue.toString()
+    });
   };
 
   // Autosuggest will call this function every time you need to update suggestions. (async query)
