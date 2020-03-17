@@ -144,7 +144,9 @@ export default {
         image: "Image",
         communities: "Communautés",
         active: "Active",
-        open_access: "Open source"
+        open_access: "Open source",
+        useProxy: "proxifier l'url",
+        hasProxy: "url proxifié"
       }
     },
     section_cn: {
