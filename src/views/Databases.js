@@ -77,6 +77,10 @@ export const DatabasesList = ({ ...props }) => (
         source="oa"
         label="resources.databases.fields.open_access"
       />
+      <BooleanField
+        source="use_proxy"
+        label="resources.databases.fields.hasProxy"
+      />
       <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>
@@ -121,6 +125,10 @@ export const DatabasesEdit = ({ ...props }) => (
         source="oa"
         label="resources.databases.fields.open_access"
       />
+      <BooleanInput
+        source="use_proxy"
+        label="resources.databases.fields.useProxy"
+      />
     </SimpleForm>
   </Edit>
 );
@@ -151,6 +159,10 @@ export const DatabasesCreate = ({ ...props }) => (
       <BooleanInput
         source="oa"
         label="resources.databases.fields.open_access"
+      />
+      <BooleanInput
+        source="use_proxy"
+        label="resources.databases.fields.useProxy"
       />
     </SimpleForm>
   </Create>
