@@ -79,7 +79,7 @@ export const DatabasesList = ({ ...props }) => (
       />
       <BooleanField
         source="use_proxy"
-        label="resources.databases.fields.hasProxy"
+        label="resources.databases.fields.has_proxy"
       />
       <EditButton />
       <DeleteButtonWithConfirmation />
@@ -127,7 +127,7 @@ export const DatabasesEdit = ({ ...props }) => (
       />
       <BooleanInput
         source="use_proxy"
-        label="resources.databases.fields.useProxy"
+        label="resources.databases.fields.use_proxy"
       />
     </SimpleForm>
   </Edit>
@@ -155,14 +155,19 @@ export const DatabasesCreate = ({ ...props }) => (
       >
         <ImageField source="image" title="title_database" />
       </FileInput>
-      <BooleanInput source="active" label="resources.databases.fields.active" />
+      <BooleanInput
+        source="active"
+        label="resources.databases.fields.active"
+        defaultValue="true"
+      />
       <BooleanInput
         source="oa"
         label="resources.databases.fields.open_access"
       />
       <BooleanInput
         source="use_proxy"
-        label="resources.databases.fields.useProxy"
+        label="resources.databases.fields.use_proxy"
+        defaultValue="true"
       />
     </SimpleForm>
   </Create>
