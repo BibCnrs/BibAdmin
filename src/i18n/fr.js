@@ -145,8 +145,8 @@ export default {
         communities: "Communautés",
         active: "Active",
         open_access: "Open source",
-        useProxy: "proxifier l'url",
-        hasProxy: "url proxifié"
+        use_proxy: "proxifier l'url",
+        has_proxy: "url proxifié"
       }
     },
     section_cn: {
