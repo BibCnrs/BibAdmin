@@ -38,11 +38,9 @@ class AutoCompleteInput extends React.Component {
           [filter]: searchValue
         });
         parent.displayedFilters[source] = true;
-      } else {
-        // else if edit/create form
-        sessionStorage.setItem(source, searchValue);
       }
     }
+    sessionStorage.setItem(source, searchValue);
     this.setState({
       selectedOption,
       listValue: searchValue.toString()
