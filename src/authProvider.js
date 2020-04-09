@@ -8,7 +8,6 @@ export default (type, params) => {
       /([a-z])([/]{2})/,
       "$1/"
     );
-    console.log("apiLoginUrl", apiLoginUrl);
     return fetch(apiLoginUrl, {
       method: "POST",
       body: JSON.stringify({ username, password }),
