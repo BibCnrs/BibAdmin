@@ -47,6 +47,7 @@ export default {
         expiration_date: "Date d'expiration",
         expiration_date_before: "Date d'expiration avant",
         expiration_date_after: "Date d'expiration après",
+        last_connexion: "Dernière connexion",
         active: "active",
         comment: "Commentaire"
       }

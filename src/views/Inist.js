@@ -216,6 +216,10 @@ export const InistList = ({ ...props }) => (
         source="expiration_date"
         label="resources.inistAccounts.fields.expiration_date"
       />
+      <DateField
+        source="last_connexion"
+        label="resources.inistAccounts.fields.last_connexion"
+      />
       <BooleanField
         source="active"
         label="resources.inistAccounts.fields.active"
@@ -319,6 +323,10 @@ export const InistEdit = ({ ...props }) => (
       <FrenchDateInput
         source="expiration_date"
         label="resources.inistAccounts.fields.expiration_date"
+      />
+      <DateField
+        source="last_connexion"
+        label="resources.inistAccounts.fields.last_connexion"
       />
       <BooleanInput
         source="active"
