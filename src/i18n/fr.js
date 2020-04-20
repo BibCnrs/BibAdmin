@@ -48,6 +48,8 @@ export default {
         expiration_date_before: "Date d'expiration avant",
         expiration_date_after: "Date d'expiration après",
         last_connexion: "Dernière connexion",
+        last_connexion_before: "Dernière connexion avant",
+        last_connexion_after: "Dernière connexion après",
         active: "active",
         comment: "Commentaire"
       }
