@@ -114,7 +114,10 @@ const InistFilter = props => (
       source="from_inist_account.expiration_date"
       label="resources.inistAccounts.fields.expiration_date_after"
     />
-
+    <FrenchDateInput
+      source="last_connexion"
+      label="resources.inistAccounts.fields.last_connexion"
+    />
     <BooleanInput
       source="active"
       label="resources.inistAccounts.fields.active"
