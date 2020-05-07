@@ -333,6 +333,7 @@ export const UnitsEdit = ({ ...props }) => (
       />
 
       <TextInput
+        multiline
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />
@@ -451,6 +452,7 @@ export const UnitsCreate = ({ ...props }) => (
       />
 
       <TextInput
+        multiline
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />

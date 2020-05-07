@@ -104,8 +104,16 @@ export const DatabasesEdit = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <TextInput source="text_fr" label="resources.databases.fields.text_fr" />
-      <TextInput source="text_en" label="resources.databases.fields.text_en" />
+      <TextInput
+        multiline
+        source="text_fr"
+        label="resources.databases.fields.text_fr"
+      />
+      <TextInput
+        multiline
+        source="text_en"
+        label="resources.databases.fields.text_en"
+      />
       <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
@@ -140,8 +148,16 @@ export const DatabasesCreate = ({ ...props }) => (
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
       <TextInput source="url_fr" label="resources.databases.fields.url_fr" />
       <TextInput source="url_en" label="resources.databases.fields.url_en" />
-      <TextInput source="text_fr" label="resources.databases.fields.text_fr" />
-      <TextInput source="text_en" label="resources.databases.fields.text_en" />
+      <TextInput
+        multiline
+        source="text_fr"
+        label="resources.databases.fields.text_fr"
+      />
+      <TextInput
+        multiline
+        source="text_en"
+        label="resources.databases.fields.text_en"
+      />
       <AutoCompleteInput
         label="resources.databases.fields.communities"
         source="communities"
