@@ -340,6 +340,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.active"
       />
       <TextInput
+        multiline
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />
@@ -425,6 +426,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.active"
       />
       <TextInput
+        multiline
         source="comment"
         label="resources.inistAccounts.fields.comment"
       />

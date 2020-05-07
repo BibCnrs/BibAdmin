@@ -299,6 +299,7 @@ export const JanusEdit = ({ ...props }) => (
         label="resources.janusAccounts.fields.active"
       />
       <TextInput
+        multiline
         source="comment"
         label="resources.janusAccounts.fields.comment"
       />
@@ -366,6 +367,7 @@ export const JanusCreate = ({ ...props }) => (
         label="resources.janusAccounts.fields.active"
       />
       <TextInput
+        multiline
         source="comment"
         label="resources.janusAccounts.fields.comment"
       />
