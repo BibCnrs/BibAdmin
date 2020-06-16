@@ -39,6 +39,10 @@ UrlSearchInist.defaultProps = {
   addLabel: true
 };
 
+UrlSearchInist.propTypes = {
+  record: PropTypes.object
+};
+
 const UrlSearchJanus = ({ record = {} }) => {
   const url = `#/janusAccounts?filter={"janus_account.primary_unit":${record.id}}`;
   return <a href={url}>{record.nb_janus_account}</a>;
@@ -46,6 +50,10 @@ const UrlSearchJanus = ({ record = {} }) => {
 
 UrlSearchJanus.defaultProps = {
   addLabel: true
+};
+
+UrlSearchJanus.propTypes = {
+  record: PropTypes.object
 };
 
 const UnitsFilter = props => (
