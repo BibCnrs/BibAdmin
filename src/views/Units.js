@@ -36,8 +36,7 @@ const UrlSearchInist = ({ record = {} }) => {
 };
 
 UrlSearchInist.defaultProps = {
-  addLabel: true,
-  record: PropTypes.object
+  addLabel: true
 };
 
 const UrlSearchJanus = ({ record = {} }) => {
@@ -46,8 +45,7 @@ const UrlSearchJanus = ({ record = {} }) => {
 };
 
 UrlSearchJanus.defaultProps = {
-  addLabel: true,
-  record: PropTypes.object
+  addLabel: true
 };
 
 const UnitsFilter = props => (
