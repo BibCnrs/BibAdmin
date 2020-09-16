@@ -1,8 +1,15 @@
-server:
-  image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibadmin:${bibadmin_version}
-  environment:
-    NODE_ENV: production
-  working_dir: /public
-  restart: always
-  ports:
-    - 3010:8080
+version: "3.5"
+
+services:
+  bibadmin-srv:
+    image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibadmin:${bibadmin_version}
+    environment:
+      NODE_ENV: production
+    working_dir: /public
+    restart: always
+    networks:
+      - bibfrontend
+
+networks:
+  bibfrontend:
+    external: true
