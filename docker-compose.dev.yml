@@ -1,14 +1,20 @@
-devserver:
-  extends:
-    file: ./docker-compose.yml
-    service: node
-  environment:
-    NODE_ENV: development
-    REACT_APP_BIBADMIN_HOST: http://localhost:3011/public
-    REACT_APP_BIBAPI_HOST: http://localhost:3000/admin
-    PORT: 3011
-  volumes:
-    - ./public:/public
-  ports:
-    - 3011:3011
-  command: npm start
+version: "3.5"
+
+services:
+  devserver:
+    image: node:12.16.3
+    volumes:
+          - .:/app
+          - ./public:/public
+    working_dir: /app
+    environment:
+      NODE_ENV: development
+      REACT_APP_BIBADMIN_HOST: http://localhost:3011/public
+      REACT_APP_BIBAPI_HOST: http://localhost:3000/admin
+      PORT: 3011
+    ports:
+      - 3011:3011
+    command: npm start
+  
+      
+
