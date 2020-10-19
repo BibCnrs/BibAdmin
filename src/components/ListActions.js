@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { TopToolbar, ListButton, CloneButton } from "react-admin";
 import DeleteButtonWithConfirmation from "./DeleteButtonWithConfirmation";
 
@@ -14,10 +15,21 @@ export const ListEditActions = ({ basePath, data, resource }) => (
   </TopToolbar>
 );
 
-export const ListActions = ({ basePath, data, resource }) => (
+export const ListActions = ({ basePath, data }) => (
   <TopToolbar>
     <ListButton basePath={basePath} record={data} />
   </TopToolbar>
 );
+
+ListEditActions.propTypes = {
+  basePath: PropTypes.string,
+  data: PropTypes.object,
+  resource: PropTypes.string
+};
+
+ListActions.propTypes = {
+  basePath: PropTypes.string,
+  data: PropTypes.object
+};
 
 export default ListActions;

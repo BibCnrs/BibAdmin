@@ -11,15 +11,16 @@
     "papaparse": "^5.2.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.12.1",
-    "ra-i18n-polyglot": "^3.5.0",
-    "ra-language-french": "^3.5.0",
+    "ra-i18n-polyglot": "^3.9.4",
+    "ra-language-french": "^3.9.4",
     "react": "^16.13.1",
-    "react-admin": "^3.5.0",
+    "react-admin": "^3.9.4",
     "react-admin-date-inputs": "github:WiXSL/react-admin-date-inputs#mui-pickers-v3",
     "react-autosuggest": "^10.0.2",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.0",
-    "react-select": "^3.1.0"
+    "react-select": "^3.1.0",
+    "recompose": "0.30.0"
   },
   "devDependencies": {
     "babel-eslint": "10.0.3",
