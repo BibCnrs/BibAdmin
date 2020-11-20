@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   bibadmin-srv:
-    image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibadmin:${bibadmin_version}
+    image: vxnexus-registry.intra.inist.fr:8083/bibcnrs/bibadmin:${bibadmin_version}
     environment:
       NODE_ENV: production
     working_dir: /public
