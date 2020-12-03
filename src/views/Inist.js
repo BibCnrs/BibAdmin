@@ -19,11 +19,12 @@ import {
   downloadCSV,
   ExportButton,
   SaveButton,
-  Toolbar
+  Toolbar,
+  BulkDeleteWithConfirmButton,
+  DeleteWithConfirmButton
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
-import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
@@ -145,12 +146,13 @@ ExportButton.defaultProps = {
 
 const PostBulkActionButtons = props => (
   <Fragment>
-    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+    <BulkDeleteWithConfirmButton {...props} />
   </Fragment>
 );
 
 export const InistList = ({ ...props }) => (
   <List
+    undoable={false}
     {...props}
     filters={<InistFilter />}
     perPage={10}
@@ -232,7 +234,7 @@ export const InistList = ({ ...props }) => (
         label="resources.inistAccounts.fields.active"
       />
       <EditButton />
-      <DeleteButtonWithConfirmation />
+      <DeleteWithConfirmButton />
     </Datagrid>
   </List>
 );

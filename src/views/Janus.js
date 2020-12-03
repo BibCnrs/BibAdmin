@@ -19,12 +19,13 @@ import {
   downloadCSV,
   ExportButton,
   SaveButton,
-  Toolbar
+  Toolbar,
+  BulkDeleteWithConfirmButton,
+  DeleteWithConfirmButton
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
 import { FrenchDateInput } from "../components/FrenchDateInput";
-import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
@@ -134,7 +135,7 @@ ExportButton.defaultProps = {
 
 const PostBulkActionButtons = props => (
   <Fragment>
-    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+    <BulkDeleteWithConfirmButton {...props} />
   </Fragment>
 );
 
@@ -202,7 +203,7 @@ export const JanusList = props => (
         label="resources.janusAccounts.fields.active"
       />
       <EditButton />
-      <DeleteButtonWithConfirmation />
+      <DeleteWithConfirmButton />
     </Datagrid>
   </List>
 );
