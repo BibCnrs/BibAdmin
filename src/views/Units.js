@@ -19,12 +19,13 @@ import {
   downloadCSV,
   ExportButton,
   SaveButton,
-  Toolbar
+  Toolbar,
+  BulkDeleteWithConfirmButton,
+  DeleteWithConfirmButton
 } from "react-admin";
 import PropTypes from "prop-types";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { renameKeys } from "../utils/utils";
-import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
@@ -149,12 +150,13 @@ ExportButton.defaultProps = {
 
 const PostBulkActionButtons = props => (
   <Fragment>
-    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+    <BulkDeleteWithConfirmButton label="Supprimer" {...props} />
   </Fragment>
 );
 
 export const UnitsList = ({ ...props }) => (
   <List
+    undoable={false}
     {...props}
     filters={<UnitsFilter />}
     perPage={10}
@@ -212,7 +214,7 @@ export const UnitsList = ({ ...props }) => (
 
       <BooleanField source="active" label="resources.units.fields.active" />
       <EditButton />
-      <DeleteButtonWithConfirmation />
+      <DeleteWithConfirmButton />
     </Datagrid>
   </List>
 );

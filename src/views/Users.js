@@ -10,9 +10,10 @@ import {
   TextField,
   TextInput,
   SaveButton,
-  Toolbar
+  Toolbar,
+  BulkDeleteWithConfirmButton,
+  DeleteWithConfirmButton
 } from "react-admin";
-import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import { ListActions, ListEditActions } from "../components/ListActions";
 import { PostPagination } from "../utils/pagination";
 
@@ -24,12 +25,13 @@ const UsersFilter = props => (
 
 const PostBulkActionButtons = props => (
   <Fragment>
-    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+    <BulkDeleteWithConfirmButton {...props} />
   </Fragment>
 );
 
 export const UsersList = ({ ...props }) => (
   <List
+    undoable={false}
     {...props}
     filters={<UsersFilter />}
     perPage={25}
@@ -39,7 +41,7 @@ export const UsersList = ({ ...props }) => (
     <Datagrid>
       <TextField source="username" label="resources.adminUsers.fields.login" />
       <EditButton />
-      <DeleteButtonWithConfirmation />
+      <DeleteWithConfirmButton />
     </Datagrid>
   </List>
 );

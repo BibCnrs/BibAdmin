@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TopToolbar, ListButton, CloneButton } from "react-admin";
-import DeleteButtonWithConfirmation from "./DeleteButtonWithConfirmation";
+import {
+  TopToolbar,
+  ListButton,
+  CloneButton,
+  DeleteWithConfirmButton
+} from "react-admin";
 
 export const ListEditActions = ({ basePath, data, resource }) => (
   <TopToolbar>
-    <DeleteButtonWithConfirmation
+    <DeleteWithConfirmButton
       basePath={basePath}
       record={data}
       resource={resource}
