@@ -15,6 +15,11 @@ services:
     ports:
       - 3011:3011
     command: npm start
-  
+    networks:
+      - bibfrontend
+
+networks:
+  bibfrontend:
+    external: true
       
 
