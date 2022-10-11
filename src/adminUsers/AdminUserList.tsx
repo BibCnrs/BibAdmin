@@ -7,19 +7,25 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
-import CustomPagination from "../utils/CustomPagination";
+import CustomPagination from "../components/CustomPagination";
 
-const UsersFilter = [<TextInput label="Rechercher" source="match" alwaysOn />];
+const AdminUserFilter = [
+  <TextInput label="Rechercher" source="match" alwaysOn />,
+];
 
-const UsersBulkActionButtons = () => (
+const AdminUserBulkActionButtons = () => (
   <>
     <BulkDeleteWithConfirmButton mutationMode="pessimistic" />
   </>
 );
 
 const AdminUserList = () => (
-  <List filters={UsersFilter} perPage={25} pagination={<CustomPagination />}>
-    <Datagrid bulkActionButtons={<UsersBulkActionButtons />}>
+  <List
+    filters={AdminUserFilter}
+    perPage={25}
+    pagination={<CustomPagination />}
+  >
+    <Datagrid bulkActionButtons={<AdminUserBulkActionButtons />}>
       <TextField source="username" label="resources.adminUsers.fields.login" />
       <EditButton />
       <DeleteWithConfirmButton />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Admin, ListGuesser, Resource } from "react-admin";
+import { Admin, Resource } from "react-admin";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import Dashboard from "./dashboard/dashboard";
 import adminUsers from "./adminUsers";
