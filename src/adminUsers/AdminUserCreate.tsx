@@ -1,11 +1,11 @@
-import { Create, SimpleForm, TextInput } from "react-admin";
-import { ListActions } from "../components/ListActions";
+import { Create, required, SimpleForm, TextInput } from "react-admin";
+import { CreateActions } from "../components/Actions";
 
 const AdminUserCreate = () => (
-  <Create actions={<ListActions />} redirect="list">
+  <Create actions={<CreateActions />} redirect="list">
     <SimpleForm>
-      <TextInput source="username" />
-      <TextInput source="password" />
+      <TextInput source="username" validate={required()} />
+      <TextInput source="password" validate={required()} />
       <TextInput source="comment" fullWidth />
     </SimpleForm>
   </Create>

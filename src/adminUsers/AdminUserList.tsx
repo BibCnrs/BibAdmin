@@ -6,6 +6,7 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import { ListActions } from "../components/Actions";
 import BulkActionButtons from "../components/BulkActionButtons";
 import CustomPagination from "../components/CustomPagination";
 
@@ -18,6 +19,7 @@ const AdminUserList = () => (
     filters={AdminUserFilter}
     perPage={25}
     pagination={<CustomPagination />}
+    actions={<ListActions />}
   >
     <Datagrid bulkActionButtons={<BulkActionButtons />}>
       <TextField source="username" label="resources.adminUsers.fields.login" />

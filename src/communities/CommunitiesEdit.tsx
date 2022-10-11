@@ -1,12 +1,13 @@
 import {
   BooleanInput,
   Edit,
+  required,
   SimpleForm,
   TextInput,
   useRecordContext,
 } from "react-admin";
 import EditToolbar from "../components/EditToolbar";
-import { ListEditActions } from "../components/ListActions";
+import { EditActions } from "../components/Actions";
 
 const CommunitiesTitle = () => {
   const record = useRecordContext();
@@ -14,32 +15,37 @@ const CommunitiesTitle = () => {
 };
 
 const CommunitiesEdit = () => (
-  <Edit title={<CommunitiesTitle />} actions={<ListEditActions />}>
+  <Edit title={<CommunitiesTitle />} actions={<EditActions />}>
     <SimpleForm toolbar={<EditToolbar />}>
       <TextInput
         source="name"
         label="resources.communities.fields.name"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="gate"
         label="resources.communities.fields.gate"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="user_id"
         label="resources.communities.fields.user_id"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="password"
         label="resources.communities.fields.password"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="profile"
         label="resources.communities.fields.profile"
         fullWidth
+        validate={required()}
       />
       <BooleanInput source="ebsco" label="resources.communities.fields.ebsco" />
     </SimpleForm>

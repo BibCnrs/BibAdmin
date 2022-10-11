@@ -3,6 +3,7 @@ import { Admin, Resource } from "react-admin";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import Dashboard from "./dashboard/dashboard";
 import adminUsers from "./adminUsers";
+import institutes from "./institutes";
 import communities from "./communities";
 import dataProvider from "./dataProvider";
 import authProvider from "./authProvider";
@@ -22,6 +23,7 @@ const App = () => (
     requireAuth
   >
     <Resource name="adminUsers" {...adminUsers} />
+    <Resource name="institutes" {...institutes} />
     <Resource name="communities" {...communities} />
   </Admin>
 );

@@ -3,9 +3,12 @@ import {
   ListButton,
   CloneButton,
   DeleteWithConfirmButton,
+  FilterButton,
+  CreateButton,
+  ExportButton,
 } from "react-admin";
 
-export const ListEditActions = () => (
+export const EditActions = () => (
   <TopToolbar>
     <DeleteWithConfirmButton mutationMode="undoable" />
     <CloneButton />
@@ -13,8 +16,16 @@ export const ListEditActions = () => (
   </TopToolbar>
 );
 
-export const ListActions = () => (
+export const CreateActions = () => (
   <TopToolbar>
     <ListButton />
+  </TopToolbar>
+);
+
+export const ListActions = () => (
+  <TopToolbar>
+    <FilterButton />
+    <CreateButton />
+    <ExportButton maxResults={100000} />
   </TopToolbar>
 );

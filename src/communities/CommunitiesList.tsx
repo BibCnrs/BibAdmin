@@ -15,6 +15,7 @@ import CustomPagination from "../components/CustomPagination";
 import LinkEdit from "../components/LinkEdit";
 import { renameKeys } from "../utils/renameKeys";
 import jsonExport from "jsonexport/dist";
+import { ListActions } from "../components/Actions";
 
 const CommunitiesFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
@@ -48,6 +49,7 @@ const CommunitiesList = () => (
     pagination={<CustomPagination />}
     exporter={exporter}
     bulkActionButtons={<BulkActionButtons />}
+    actions={<ListActions />}
   >
     <Datagrid>
       <LinkEdit source="name" label="resources.communities.fields.name" />

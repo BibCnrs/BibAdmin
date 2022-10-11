@@ -1,33 +1,44 @@
-import { BooleanInput, Create, SimpleForm, TextInput } from "react-admin";
-import { ListActions } from "../components/ListActions";
+import {
+  BooleanInput,
+  Create,
+  required,
+  SimpleForm,
+  TextInput,
+} from "react-admin";
+import { CreateActions } from "../components/Actions";
 
 const CommunitiesCreate = () => (
-  <Create actions={<ListActions />} redirect="list">
+  <Create actions={<CreateActions />} redirect="list">
     <SimpleForm>
       <TextInput
         source="name"
         label="resources.communities.fields.name"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="gate"
         label="resources.communities.fields.gate"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="user_id"
         label="resources.communities.fields.user_id"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="password"
         label="resources.communities.fields.password"
         fullWidth
+        validate={required()}
       />
       <TextInput
         source="profile"
         label="resources.communities.fields.profile"
         fullWidth
+        validate={required()}
       />
       <BooleanInput source="ebsco" label="resources.communities.fields.ebsco" />
     </SimpleForm>
