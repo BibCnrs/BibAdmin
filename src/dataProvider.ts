@@ -1,6 +1,6 @@
 import { DataProvider, fetchUtils, Options } from "react-admin";
 import { stringify } from "query-string";
-import simpleRestProvider from "ra-data-simple-rest";
+import jsonServerProvider from "ra-data-json-server";
 
 const apiUrl = process.env.REACT_APP_BIBAPI_HOST || "";
 
@@ -20,7 +20,7 @@ const httpClient = (url: string, options: Options = {}) => {
   return fetchUtils.fetchJson(url, { ...options, headers: requestHeaders });
 };
 const dataProvider: DataProvider = {
-  ...simpleRestProvider(apiUrl, httpClient),
+  ...jsonServerProvider(apiUrl, httpClient),
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     let { field, order } = params.sort;
@@ -75,7 +75,10 @@ const dataProvider: DataProvider = {
 
     return httpClient(url).then(({ headers, json }) => ({
       data: json,
-      total: parseInt(headers.get("content-range") ?? "0", 10),
+      total: parseInt(
+        headers?.get("content-range")?.split("/")?.pop() ?? "0",
+        10
+      ),
     }));
   },
 };

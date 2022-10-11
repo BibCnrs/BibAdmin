@@ -2,7 +2,7 @@ import { BulkDeleteWithConfirmButton } from "react-admin";
 
 const BulkActionButtons = () => (
   <>
-    <BulkDeleteWithConfirmButton mutationMode="pessimistic" />
+    <BulkDeleteWithConfirmButton mutationMode="undoable" />
   </>
 );
 

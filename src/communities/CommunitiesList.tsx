@@ -3,14 +3,18 @@ import {
   BooleanInput,
   Datagrid,
   DeleteWithConfirmButton,
+  downloadCSV,
   EditButton,
   List,
+  RaRecord,
   TextField,
   TextInput,
 } from "react-admin";
 import BulkActionButtons from "../components/BulkActionButtons";
 import CustomPagination from "../components/CustomPagination";
 import LinkEdit from "../components/LinkEdit";
+import { renameKeys } from "../utils/renameKeys";
+import jsonExport from "jsonexport/dist";
 
 const CommunitiesFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
@@ -30,12 +34,19 @@ const CommunitiesFilter = [
   <BooleanInput source="ebsco" label="resources.communities.fields.ebsco" />,
 ];
 
+const exporter = async (records: RaRecord[]) => {
+  const data = records.map((record) => renameKeys(record, "communities"));
+  jsonExport(data, (err, csv) => {
+    downloadCSV(csv, "communities");
+  });
+};
+
 const CommunitiesList = () => (
   <List
     filters={CommunitiesFilter}
     perPage={10}
     pagination={<CustomPagination />}
-    // exporter={exporter}
+    exporter={exporter}
     bulkActionButtons={<BulkActionButtons />}
   >
     <Datagrid>

@@ -7,7 +7,7 @@ import {
 
 export const ListEditActions = () => (
   <TopToolbar>
-    <DeleteWithConfirmButton mutationMode="pessimistic" />
+    <DeleteWithConfirmButton mutationMode="undoable" />
     <CloneButton />
     <ListButton />
   </TopToolbar>
