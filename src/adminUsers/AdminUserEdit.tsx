@@ -1,11 +1,5 @@
-import {
-  Edit,
-  SaveButton,
-  SimpleForm,
-  TextInput,
-  Toolbar,
-  useRecordContext,
-} from "react-admin";
+import { Edit, SimpleForm, TextInput, useRecordContext } from "react-admin";
+import EditToolbar from "../components/EditToolbar";
 import { ListEditActions } from "../components/ListActions";
 
 const AdminUserTitle = () => {
@@ -13,15 +7,9 @@ const AdminUserTitle = () => {
   return record ? record.username : "";
 };
 
-const AdminUserEditToolbar = () => (
-  <Toolbar>
-    <SaveButton />
-  </Toolbar>
-);
-
 const AdminUserEdit = () => (
   <Edit title={<AdminUserTitle />} actions={<ListEditActions />}>
-    <SimpleForm toolbar={<AdminUserEditToolbar />} sanitizeEmptyValues>
+    <SimpleForm toolbar={<EditToolbar />} sanitizeEmptyValues>
       <TextInput source="username" />
       <TextInput source="password" />
       <TextInput source="comment" fullWidth />
