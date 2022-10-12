@@ -6,15 +6,23 @@ import {
   FilterButton,
   CreateButton,
   ExportButton,
+  useRecordContext,
 } from "react-admin";
 
-export const EditActions = () => (
-  <TopToolbar>
-    <DeleteWithConfirmButton mutationMode="undoable" />
-    <CloneButton />
-    <ListButton />
-  </TopToolbar>
-);
+export const EditActions = () => {
+  const record = useRecordContext();
+  return (
+    <TopToolbar>
+      {record && (
+        <>
+          <DeleteWithConfirmButton mutationMode="undoable" />
+          <CloneButton />
+        </>
+      )}
+      <ListButton />
+    </TopToolbar>
+  );
+};
 
 export const CreateActions = () => (
   <TopToolbar>

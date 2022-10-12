@@ -13,6 +13,7 @@ import CustomPagination from "../components/CustomPagination";
 import LinkEdit from "../components/LinkEdit";
 import { renameKeys } from "../utils/renameKeys";
 import jsonExport from "jsonexport/dist";
+import { ListActions } from "../components/Actions";
 
 const DatabasesFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
@@ -51,6 +52,7 @@ const DatabasesList = () => (
     pagination={<CustomPagination />}
     exporter={exporter}
     bulkActionButtons={<BulkActionButtons />}
+    actions={<ListActions />}
   >
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />

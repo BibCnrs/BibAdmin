@@ -5,10 +5,11 @@ import Dashboard from "./dashboard/dashboard";
 import adminUsers from "./adminUsers";
 import institutes from "./institutes";
 import communities from "./communities";
+import databases from "./databases";
+import sections from "./sections";
 import dataProvider from "./dataProvider";
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
-import databases from "./databases";
 
 const i18nProvider = polyglotI18nProvider(() => langFr, "fr", {
   allowMissing: true,
@@ -27,6 +28,7 @@ const App = () => (
     <Resource name="institutes" {...institutes} />
     <Resource name="communities" {...communities} />
     <Resource name="databases" {...databases} />
+    <Resource name="section_cn" {...sections} />
   </Admin>
 );
 

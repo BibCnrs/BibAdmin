@@ -19,26 +19,6 @@ const DatabasesTitle = () => {
   return record ? record.name_fr : "";
 };
 
-const ImagePreview = () => {
-  const record = useRecordContext();
-  if (!record) return null;
-
-  return (
-    <ImageField
-      record={{ src: record.src ? record.src : record }}
-      source="src"
-      title={record.title ? record.title : "current_image"}
-      sx={{
-        "& .RaImageField-image": {
-          width: "auto",
-          height: "auto",
-          maxWidth: "100%",
-        },
-      }}
-    />
-  );
-};
-
 const DatabasesEdit = () => (
   <Edit title={<DatabasesTitle />} actions={<EditActions />}>
     <SimpleForm toolbar={<EditToolbar />}>
