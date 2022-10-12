@@ -2,6 +2,7 @@ import {
   AutocompleteArrayInput,
   Edit,
   ReferenceArrayInput,
+  required,
   SimpleForm,
   TextInput,
   useRecordContext,
@@ -17,8 +18,16 @@ const InstitutesTitle = () => {
 const InstitutesEdit = () => (
   <Edit title={<InstitutesTitle />} actions={<EditActions />}>
     <SimpleForm toolbar={<EditToolbar />}>
-      <TextInput source="code" label="resources.institutes.fields.code" />
-      <TextInput source="name" label="resources.institutes.fields.name" />
+      <TextInput
+        source="code"
+        label="resources.institutes.fields.code"
+        validate={required()}
+      />
+      <TextInput
+        source="name"
+        label="resources.institutes.fields.name"
+        validate={required()}
+      />
       <ReferenceArrayInput
         label="resources.institutes.fields.communities"
         source="communities"

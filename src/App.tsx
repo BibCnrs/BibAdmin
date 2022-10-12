@@ -8,6 +8,7 @@ import communities from "./communities";
 import dataProvider from "./dataProvider";
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
+import databases from "./databases";
 
 const i18nProvider = polyglotI18nProvider(() => langFr, "fr", {
   allowMissing: true,
@@ -25,6 +26,7 @@ const App = () => (
     <Resource name="adminUsers" {...adminUsers} />
     <Resource name="institutes" {...institutes} />
     <Resource name="communities" {...communities} />
+    <Resource name="databases" {...databases} />
   </Admin>
 );
 

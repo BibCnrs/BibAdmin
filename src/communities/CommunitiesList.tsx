@@ -37,7 +37,7 @@ const CommunitiesFilter = [
 
 const exporter = async (records: RaRecord[]) => {
   const data = records.map((record) => renameKeys(record, "communities"));
-  jsonExport(data, (err, csv) => {
+  jsonExport(data, { rowDelimiter: ";" }, (err, csv) => {
     downloadCSV(csv, "communities");
   });
 };

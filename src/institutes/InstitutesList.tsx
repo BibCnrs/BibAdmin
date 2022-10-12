@@ -62,7 +62,7 @@ const exporter = async (
   const data = dataWithRelation.map((record) =>
     renameKeys(record, "institutes")
   );
-  jsonExport(data, (err, csv) => {
+  jsonExport(data, { rowDelimiter: ";" }, (err, csv) => {
     downloadCSV(csv, "institutes");
   });
 };

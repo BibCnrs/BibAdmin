@@ -1,4 +1,10 @@
-import { Edit, SimpleForm, TextInput, useRecordContext } from "react-admin";
+import {
+  Edit,
+  required,
+  SimpleForm,
+  TextInput,
+  useRecordContext,
+} from "react-admin";
 import EditToolbar from "../components/EditToolbar";
 import { EditActions } from "../components/Actions";
 
@@ -10,7 +16,7 @@ const AdminUserTitle = () => {
 const AdminUserEdit = () => (
   <Edit title={<AdminUserTitle />} actions={<EditActions />}>
     <SimpleForm toolbar={<EditToolbar />} sanitizeEmptyValues>
-      <TextInput source="username" />
+      <TextInput source="username" validate={required()} />
       <TextInput source="password" />
       <TextInput source="comment" fullWidth />
     </SimpleForm>
