@@ -12,6 +12,7 @@ import favoris from "./favoris";
 import dataProvider from "./dataProvider";
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
+import inist from "./inist";
 
 const i18nProvider = polyglotI18nProvider(() => langFr, "fr", {
   allowMissing: true,
@@ -27,6 +28,7 @@ const App = () => (
     requireAuth
   >
     <Resource name="adminUsers" {...adminUsers} />
+    <Resource name="inistAccounts" {...inist} />
     <Resource name="institutes" {...institutes} />
     <Resource name="units" {...units} />
     <Resource name="communities" {...communities} />
