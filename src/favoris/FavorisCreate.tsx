@@ -8,21 +8,24 @@ import {
 } from "react-admin";
 import { CreateActions } from "../components/Actions";
 
-const InstitutesCreate = () => (
+const FavorisCreate = () => (
   <Create actions={<CreateActions />} redirect="list">
     <SimpleForm>
       <TextInput
-        source="code"
-        label="resources.institutes.fields.code"
+        source="title"
+        label="resources.revues.fields.title"
         validate={required()}
+        fullWidth
       />
       <TextInput
-        source="name"
-        label="resources.institutes.fields.name"
+        source="url"
+        label="resources.revues.fields.url"
         validate={required()}
+        fullWidth
       />
+
       <ReferenceArrayInput
-        label="resources.institutes.fields.communities"
+        label="resources.revues.fields.communities"
         source="communities"
         reference="communities"
       >
@@ -35,4 +38,4 @@ const InstitutesCreate = () => (
   </Create>
 );
 
-export default InstitutesCreate;
+export default FavorisCreate;

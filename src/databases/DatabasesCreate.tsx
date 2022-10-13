@@ -2,7 +2,6 @@ import {
   AutocompleteArrayInput,
   BooleanInput,
   Create,
-  CreateActions,
   ImageField,
   ImageInput,
   ReferenceArrayInput,
@@ -10,6 +9,7 @@ import {
   SimpleForm,
   TextInput,
 } from "react-admin";
+import { CreateActions } from "../components/Actions";
 
 const DatabasesCreate = () => (
   <Create actions={<CreateActions />} redirect="list">

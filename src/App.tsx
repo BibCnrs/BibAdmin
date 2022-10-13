@@ -7,6 +7,7 @@ import institutes from "./institutes";
 import communities from "./communities";
 import databases from "./databases";
 import sections from "./sections";
+import favoris from "./favoris";
 import dataProvider from "./dataProvider";
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
@@ -29,6 +30,7 @@ const App = () => (
     <Resource name="communities" {...communities} />
     <Resource name="databases" {...databases} />
     <Resource name="section_cn" {...sections} />
+    <Resource name="revues" {...favoris} />
   </Admin>
 );
 

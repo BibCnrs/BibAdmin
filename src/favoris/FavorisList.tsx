@@ -12,33 +12,25 @@ import {
   SingleFieldList,
   TextInput,
 } from "react-admin";
-import jsonExport from "jsonexport/dist";
+import { ListActions } from "../components/Actions";
 import BulkActionButtons from "../components/BulkActionButtons";
 import CustomPagination from "../components/CustomPagination";
 import LinkEdit from "../components/LinkEdit";
 import { renameKeys } from "../utils/renameKeys";
-import { ListActions } from "../components/Actions";
+import jsonExport from "jsonexport/dist";
 
-const InstitutesFilter = [
+const FavorisFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
-  <TextInput source="id" label="resources.institutes.fields.id" />,
-  <TextInput
-    source="like_institute.code"
-    label="resources.institutes.fields.code"
-  />,
-  <TextInput
-    source="like_institute.name"
-    label="resources.institutes.fields.name"
-  />,
+  <TextInput label="resources.revues.fields.title" source="like_revue.title" />,
   <ReferenceInput
-    label="resources.institutes.fields.communities"
-    source="community.id"
+    label="resources.revues.fields.communities"
+    source="community_id"
     reference="communities"
   >
     <AutocompleteInput
       filterToQuery={(searchText) => ({ like_name: searchText })}
       optionText="name"
-      label="resources.institutes.fields.communities"
+      label="resources.revues.fields.communities"
     />
   </ReferenceInput>,
 ];
@@ -60,29 +52,27 @@ const exporter = async (
     ...record,
     communities: record.communities.map((n: number) => listCommunities[n].name),
   }));
-  const data = dataWithRelation.map((record) =>
-    renameKeys(record, "institutes")
-  );
+  const data = dataWithRelation.map((record) => renameKeys(record, "revues"));
   jsonExport(data, { rowDelimiter: ";" }, (err, csv) => {
-    downloadCSV(csv, "institutes");
+    downloadCSV(csv, "revues");
   });
 };
 
-const InstitutesList = () => (
+const FavorisList = () => (
   <List
-    filters={InstitutesFilter}
+    filters={FavorisFilter}
     perPage={10}
     pagination={<CustomPagination />}
+    sort={{ field: "title", order: "ASC" }}
     exporter={exporter}
     bulkActionButtons={<BulkActionButtons />}
     actions={<ListActions />}
   >
     <Datagrid>
-      <LinkEdit source="id" label="resources.institutes.fields.id" />
-      <LinkEdit label="resources.institutes.fields.code" source="code" />
-      <LinkEdit source="name" label="resources.institutes.fields.name" />
+      <LinkEdit source="title" label="resources.revues.fields.title" />
+
       <ReferenceArrayField
-        label="resources.institutes.fields.communities"
+        label="resources.revues.fields.communities"
         reference="communities"
         source="communities"
       >
@@ -90,10 +80,11 @@ const InstitutesList = () => (
           <ChipField source="name" />
         </SingleFieldList>
       </ReferenceArrayField>
+
       <EditButton />
       <DeleteWithConfirmButton />
     </Datagrid>
   </List>
 );
 
-export default InstitutesList;
+export default FavorisList;
