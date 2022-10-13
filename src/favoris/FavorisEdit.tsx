@@ -39,6 +39,7 @@ const FavorisEdit = () => (
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({ like_name: searchText })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
     </SimpleForm>

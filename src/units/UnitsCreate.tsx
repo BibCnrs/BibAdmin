@@ -143,6 +143,7 @@ const UnitsCreate = () => (
             "like_institute.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceInput>
       <ReferenceArrayInput
@@ -155,6 +156,7 @@ const UnitsCreate = () => (
             "like_institute.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
       <ReferenceArrayInput
@@ -167,6 +169,7 @@ const UnitsCreate = () => (
             like_name: searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
       <ReferenceArrayInput
@@ -179,35 +182,9 @@ const UnitsCreate = () => (
             "like_section_cn.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
-
-      {/* <AutoCompleteInput
-        label="resources.units.fields.main_institute"
-        source="main_institute"
-        reference="institutes"
-      />
-
-      <AutoCompleteInput
-        label="resources.units.fields.institutes"
-        source="institutes"
-        reference="institutes"
-        isMulti={true}
-      />
-
-      <AutoCompleteInput
-        label="resources.units.fields.communities"
-        source="communities"
-        reference="communities"
-        isMulti={true}
-      />
-
-      <AutoCompleteInput
-        label="resources.units.fields.section_cn"
-        source="sections_cn"
-        reference="section_cn"
-        isMulti={true}
-      /> */}
 
       <TextInput
         multiline

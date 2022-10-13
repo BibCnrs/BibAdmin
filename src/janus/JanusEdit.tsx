@@ -1,44 +1,33 @@
 import {
   AutocompleteArrayInput,
   AutocompleteInput,
+  BooleanField,
   BooleanInput,
   ChipField,
   DateField,
-  DateInput,
   Edit,
   Labeled,
   ReferenceArrayField,
   ReferenceArrayInput,
   ReferenceInput,
-  required,
   SimpleForm,
   SingleFieldList,
+  TextField,
   TextInput,
   useRecordContext,
 } from "react-admin";
 import { EditActions } from "../components/Actions";
 import EditToolbar from "../components/EditToolbar";
 
-const convertEmptyDateInputToNull = (data: any) => {
-  if (data.subscription_date === "") {
-    data.subscription_date = null;
-  }
-  if (data.expiration_date === "") {
-    data.expiration_date = null;
-  }
-  return data;
-};
-
-const InistTitle = () => {
+const JanusTitle = () => {
   const record = useRecordContext();
-  return record ? record.username : "";
+  return record ? record.uid : "";
 };
 
-const InistEdit = () => (
+const JanusEdit = () => (
   <Edit
-    title={<InistTitle />}
+    title={<JanusTitle />}
     actions={<EditActions />}
-    transform={convertEmptyDateInputToNull}
     sx={{
       "& .RaLabeled-label + *": {
         marginBottom: "1.5rem",
@@ -46,50 +35,38 @@ const InistEdit = () => (
     }}
   >
     <SimpleForm toolbar={<EditToolbar />}>
-      <TextInput
-        source="username"
-        label="resources.inistAccounts.fields.username"
-        validate={required()}
-        fullWidth
-      />
-      <TextInput
-        source="password"
-        label="resources.inistAccounts.fields.password"
-        validate={required()}
-        fullWidth
-      />
+      <Labeled>
+        <TextField source="uid" label="resources.janusAccounts.fields.uid" />
+      </Labeled>
+      <Labeled>
+        <BooleanField
+          source="cnrs"
+          label="resources.janusAccounts.fields.cnrs"
+        />
+      </Labeled>
+
       <TextInput
         source="name"
-        label="resources.inistAccounts.fields.name"
+        label="resources.janusAccounts.fields.name"
         fullWidth
       />
+
       <TextInput
         source="firstname"
-        label="resources.inistAccounts.fields.firstname"
+        label="resources.janusAccounts.fields.firstname"
         fullWidth
       />
+
       <TextInput
         type="email"
         source="mail"
-        label="resources.inistAccounts.fields.mail"
-        fullWidth
-      />
-
-      <TextInput
-        source="phone"
-        label="resources.inistAccounts.fields.phone"
-        fullWidth
-      />
-
-      <TextInput
-        source="dr"
-        label="resources.inistAccounts.fields.dr"
+        label="resources.janusAccounts.fields.mail"
         fullWidth
       />
 
       <ReferenceInput
-        label="resources.inistAccounts.fields.main_institute"
-        source="main_institute"
+        label="resources.janusAccounts.fields.primary_institute"
+        source="primary_institute"
         reference="institutes"
       >
         <AutocompleteInput
@@ -102,8 +79,8 @@ const InistEdit = () => (
       </ReferenceInput>
 
       <ReferenceArrayInput
-        label="resources.inistAccounts.fields.institutes"
-        source="institutes"
+        label="resources.janusAccounts.fields.additional_institutes"
+        source="additional_institutes"
         reference="institutes"
       >
         <AutocompleteArrayInput
@@ -116,8 +93,8 @@ const InistEdit = () => (
       </ReferenceArrayInput>
 
       <ReferenceInput
-        label="resources.inistAccounts.fields.main_unit"
-        source="main_unit"
+        label="resources.janusAccounts.fields.primary_unit"
+        source="primary_unit"
         reference="units"
       >
         <AutocompleteInput
@@ -130,8 +107,8 @@ const InistEdit = () => (
       </ReferenceInput>
 
       <ReferenceArrayInput
-        label="resources.inistAccounts.fields.units"
-        source="units"
+        label="resources.janusAccounts.fields.additional_units"
+        source="additional_units"
         reference="units"
       >
         <AutocompleteArrayInput
@@ -144,7 +121,7 @@ const InistEdit = () => (
       </ReferenceArrayInput>
 
       <ReferenceArrayInput
-        label="resources.units.fields.communities"
+        label="resources.janusAccounts.fields.communities"
         source="communities"
         reference="communities"
       >
@@ -156,46 +133,42 @@ const InistEdit = () => (
           fullWidth
         />
       </ReferenceArrayInput>
-
       <Labeled>
         <ReferenceArrayField
-          label="resources.inistAccounts.fields.all_communities"
-          source="communities"
+          label="resources.janusAccounts.fields.all_communities"
           reference="communities"
-          perPage={100}
+          source="all_communities"
+          className="tags"
         >
           <SingleFieldList>
             <ChipField source="name" />
           </SingleFieldList>
         </ReferenceArrayField>
       </Labeled>
-
-      <DateInput
-        source="subscription_date"
-        label="resources.inistAccounts.fields.subscription_date"
-      />
-      <DateInput
-        source="expiration_date"
-        label="resources.inistAccounts.fields.expiration_date"
-      />
       <Labeled>
         <DateField
           source="last_connexion"
-          label="resources.inistAccounts.fields.last_connexion"
+          label="resources.janusAccounts.fields.last_connexion"
+        />
+      </Labeled>
+      <Labeled>
+        <DateField
+          source="first_connexion"
+          label="resources.janusAccounts.fields.first_connexion"
         />
       </Labeled>
       <BooleanInput
         source="active"
-        label="resources.inistAccounts.fields.active"
+        label="resources.janusAccounts.fields.active"
       />
       <TextInput
         multiline
         source="comment"
-        label="resources.inistAccounts.fields.comment"
+        label="resources.janusAccounts.fields.comment"
         fullWidth
       />
     </SimpleForm>
   </Edit>
 );
 
-export default InistEdit;
+export default JanusEdit;

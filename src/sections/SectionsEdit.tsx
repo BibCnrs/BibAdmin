@@ -66,6 +66,7 @@ const SectionsEdit = () => (
           })}
           optionText="name"
           format={fromArrayToInt}
+          fullWidth
         />
       </ReferenceInput>
       <ReferenceArrayInput
@@ -78,6 +79,7 @@ const SectionsEdit = () => (
             "like_institute.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
     </SimpleForm>

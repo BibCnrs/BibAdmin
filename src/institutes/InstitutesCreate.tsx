@@ -29,6 +29,7 @@ const InstitutesCreate = () => (
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({ like_name: searchText })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
     </SimpleForm>

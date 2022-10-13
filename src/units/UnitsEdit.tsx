@@ -42,6 +42,11 @@ const UnitsEdit = () => (
     title={<UnitsTitle />}
     actions={<EditActions />}
     transform={convertEmptyNumberInputToNull}
+    sx={{
+      "& .RaLabeled-label + *": {
+        marginBottom: "1.5rem",
+      },
+    }}
   >
     <SimpleForm toolbar={<EditToolbar />}>
       <TextInput
@@ -171,6 +176,7 @@ const UnitsEdit = () => (
             "like_institute.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceInput>
       <ReferenceArrayInput
@@ -183,6 +189,7 @@ const UnitsEdit = () => (
             "like_institute.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
 
@@ -202,6 +209,7 @@ const UnitsEdit = () => (
             like_name: searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
       <ReferenceArrayInput
@@ -214,6 +222,7 @@ const UnitsEdit = () => (
             "like_section_cn.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
 

@@ -40,6 +40,7 @@ const SectionsCreate = () => (
             "like_institute.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceInput>
       <ReferenceArrayInput
@@ -52,6 +53,7 @@ const SectionsCreate = () => (
             "like_institute.name": searchText,
           })}
           optionText="name"
+          fullWidth
         />
       </ReferenceArrayInput>
     </SimpleForm>

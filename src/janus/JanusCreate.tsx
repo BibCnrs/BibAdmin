@@ -3,63 +3,38 @@ import {
   AutocompleteInput,
   BooleanInput,
   Create,
-  DateInput,
   ReferenceArrayInput,
   ReferenceInput,
-  required,
   SimpleForm,
   TextInput,
 } from "react-admin";
 import { CreateActions } from "../components/Actions";
-import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 
-const InistCreate = () => (
-  <Create actions={<CreateActions />} redirect="list">
+const JanusCreate = () => (
+  <Create redirect="list" actions={<CreateActions />}>
     <SimpleForm>
       <TextInput
-        source="username"
-        label="resources.inistAccounts.fields.username"
-        validate={required()}
-        fullWidth
-      />
-      <RandomPasswordGenerator
-        source="password"
-        label="resources.inistAccounts.fields.password"
-        validate={required()}
-        fullWidth
-      />
-      <TextInput
         source="name"
-        label="resources.inistAccounts.fields.name"
+        label="resources.janusAccounts.fields.name"
         fullWidth
       />
+
       <TextInput
         source="firstname"
-        label="resources.inistAccounts.fields.firstname"
+        label="resources.janusAccounts.fields.firstname"
         fullWidth
       />
+
       <TextInput
         type="email"
         source="mail"
-        label="resources.inistAccounts.fields.mail"
-        fullWidth
-      />
-
-      <TextInput
-        source="phone"
-        label="resources.inistAccounts.fields.phone"
-        fullWidth
-      />
-
-      <TextInput
-        source="dr"
-        label="resources.inistAccounts.fields.dr"
+        label="resources.janusAccounts.fields.mail"
         fullWidth
       />
 
       <ReferenceInput
-        label="resources.inistAccounts.fields.main_institute"
-        source="main_institute"
+        label="resources.janusAccounts.fields.primary_institute"
+        source="primary_institute"
         reference="institutes"
       >
         <AutocompleteInput
@@ -72,8 +47,8 @@ const InistCreate = () => (
       </ReferenceInput>
 
       <ReferenceArrayInput
-        label="resources.inistAccounts.fields.institutes"
-        source="institutes"
+        label="resources.janusAccounts.fields.additional_institutes"
+        source="additional_institutes"
         reference="institutes"
       >
         <AutocompleteArrayInput
@@ -86,8 +61,8 @@ const InistCreate = () => (
       </ReferenceArrayInput>
 
       <ReferenceInput
-        label="resources.inistAccounts.fields.main_unit"
-        source="main_unit"
+        label="resources.janusAccounts.fields.primary_unit"
+        source="primary_unit"
         reference="units"
       >
         <AutocompleteInput
@@ -100,8 +75,8 @@ const InistCreate = () => (
       </ReferenceInput>
 
       <ReferenceArrayInput
-        label="resources.inistAccounts.fields.units"
-        source="units"
+        label="resources.janusAccounts.fields.additional_units"
+        source="additional_units"
         reference="units"
       >
         <AutocompleteArrayInput
@@ -114,7 +89,7 @@ const InistCreate = () => (
       </ReferenceArrayInput>
 
       <ReferenceArrayInput
-        label="resources.units.fields.communities"
+        label="resources.janusAccounts.fields.communities"
         source="communities"
         reference="communities"
       >
@@ -127,26 +102,19 @@ const InistCreate = () => (
         />
       </ReferenceArrayInput>
 
-      <DateInput
-        source="subscription_date"
-        label="resources.inistAccounts.fields.subscription_date"
-      />
-      <DateInput
-        source="expiration_date"
-        label="resources.inistAccounts.fields.expiration_date"
-      />
       <BooleanInput
         source="active"
-        label="resources.inistAccounts.fields.active"
+        label="resources.janusAccounts.fields.active"
+        defaultValue={true}
       />
       <TextInput
         multiline
         source="comment"
-        label="resources.inistAccounts.fields.comment"
+        label="resources.janusAccounts.fields.comment"
         fullWidth
       />
     </SimpleForm>
   </Create>
 );
 
-export default InistCreate;
+export default JanusCreate;
