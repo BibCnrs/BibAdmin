@@ -4,6 +4,7 @@ import polyglotI18nProvider from "ra-i18n-polyglot";
 import Dashboard from "./dashboard/dashboard";
 import adminUsers from "./adminUsers";
 import institutes from "./institutes";
+import units from "./units";
 import communities from "./communities";
 import databases from "./databases";
 import sections from "./sections";
@@ -27,6 +28,7 @@ const App = () => (
   >
     <Resource name="adminUsers" {...adminUsers} />
     <Resource name="institutes" {...institutes} />
+    <Resource name="units" {...units} />
     <Resource name="communities" {...communities} />
     <Resource name="databases" {...databases} />
     <Resource name="section_cn" {...sections} />
