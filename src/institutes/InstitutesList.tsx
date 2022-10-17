@@ -23,20 +23,20 @@ const InstitutesFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
   <TextInput source="id" label="resources.institutes.fields.id" />,
   <TextInput
-    source="like_institute.code"
+    source="code"
     label="resources.institutes.fields.code"
   />,
   <TextInput
-    source="like_institute.name"
+    source="name"
     label="resources.institutes.fields.name"
   />,
   <ReferenceInput
     label="resources.institutes.fields.communities"
-    source="community.id"
+    source="institute_community.community_id"
     reference="communities"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ like_name: searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.institutes.fields.communities"
     />
@@ -85,6 +85,7 @@ const InstitutesList = () => (
         label="resources.institutes.fields.communities"
         reference="communities"
         source="communities"
+        sortable={false}
       >
         <SingleFieldList>
           <ChipField source="name" />

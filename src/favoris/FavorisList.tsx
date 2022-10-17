@@ -75,6 +75,7 @@ const FavorisList = () => (
         label="resources.revues.fields.communities"
         reference="communities"
         source="communities"
+        sortable={false}
       >
         <SingleFieldList>
           <ChipField source="name" />
