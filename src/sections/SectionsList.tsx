@@ -30,7 +30,7 @@ const SectionsFilter = [
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.section_cn.fields.primary_institutes"
     />
@@ -41,7 +41,7 @@ const SectionsFilter = [
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.section_cn.fields.secondary_institutes"
     />

@@ -62,7 +62,7 @@ const SectionsEdit = () => (
       >
         <AutocompleteInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           format={fromArrayToInt}
@@ -76,7 +76,7 @@ const SectionsEdit = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth

@@ -37,7 +37,7 @@ const FavorisEdit = () => (
         reference="communities"
       >
         <AutocompleteArrayInput
-          filterToQuery={(searchText) => ({ like_name: searchText })}
+          filterToQuery={(searchText) => ({ name: searchText })}
           optionText="name"
           fullWidth
         />

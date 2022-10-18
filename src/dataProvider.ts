@@ -61,41 +61,8 @@ const dataProvider: DataProvider = {
       _perPage: perPage || 10,
     };
 
-    /**
-     * permet d'effectuer un tri
-     * TODO: améliorer l'api pour supprimer cette portion de code
-     */
-    // if (field && field !== "id") {
-    //   switch (resource) {
-    //     case "inistAccounts":
-    //       field = `inist_account.${field}`;
-    //       break;
-    //     case "janusAccounts":
-    //       if (field !== "primary_unit" && field !== "primary_institute") {
-    //         field = `janus_account.${field}`;
-    //       }
-    //       break;
-    //     case "institutes":
-    //       field = `institute.${field}`;
-    //       break;
-    //     case "units":
-    //       field = `unit.${field}`;
-    //       break;
-    //     case "databases":
-    //       field = `${field}`;
-    //       break;
-    //     case "section_cn":
-    //       field = `section_cn.${field}`;
-    //       break;
-    //     case "revues":
-    //       field = `revue.${field}`;
-    //       break;
-    //     default:
-    //       break;
-    //   }
-      query._sortField = field;
-      query._sortDir = order.toLocaleLowerCase() || "asc";
-    //}
+    query._sortField = field;
+    query._sortDir = order.toLocaleLowerCase() || "asc";
 
     if (Object.keys(filters).length > 0) {
       query._filters = JSON.stringify(filters);

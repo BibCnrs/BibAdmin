@@ -50,18 +50,18 @@ const InistFilter = [
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "main_institute": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.inistAccounts.fields.main_institute"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.inistAccounts.fields.institutes"
-    source="institutes.id"
+    source="inist_account_institute.institute_id"
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "main_institute": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.inistAccounts.fields.institutes"
     />
@@ -72,18 +72,18 @@ const InistFilter = [
     reference="units"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "main_unit": searchText })}
+      filterToQuery={(searchText) => ({ code: searchText })}
       optionText="code"
       label="resources.inistAccounts.fields.main_unit"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.inistAccounts.fields.units"
-    source="units.id"
+    source="inist_account_unit.unit_id"
     reference="units"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_unit.code": searchText })}
+      filterToQuery={(searchText) => ({ code: searchText })}
       optionText="code"
       label="resources.inistAccounts.fields.units"
     />
@@ -94,7 +94,7 @@ const InistFilter = [
     reference="communities"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "inist_account_community.community_id": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.inistAccounts.fields.communities"
     />

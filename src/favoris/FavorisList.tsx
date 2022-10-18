@@ -21,14 +21,14 @@ import jsonExport from "jsonexport/dist";
 
 const FavorisFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
-  <TextInput label="resources.revues.fields.title" source="like_revue.title" />,
+  <TextInput label="resources.revues.fields.title" source="title" />,
   <ReferenceInput
     label="resources.revues.fields.communities"
     source="community_id"
     reference="communities"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ like_name: searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.revues.fields.communities"
     />

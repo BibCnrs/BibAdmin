@@ -41,7 +41,7 @@ const JanusFilter = [
         reference="institutes"
     >
         <AutocompleteInput
-            filterToQuery={(searchText) => ({ primary_institute: searchText })}
+            filterToQuery={(searchText) => ({ name: searchText })}
             optionText="name"
             label="resources.janusAccounts.fields.primary_institute"
         />
@@ -52,19 +52,19 @@ const JanusFilter = [
         reference="units"
     >
         <AutocompleteInput
-            filterToQuery={(searchText) => ({ primary_unit: searchText })}
+            filterToQuery={(searchText) => ({ code: searchText })}
             optionText="code"
             label="resources.janusAccounts.fields.primary_unit"
         />
     </ReferenceInput>,
     <ReferenceInput
         label="resources.janusAccounts.fields.additional_units"
-        source="units.id"
+        source="janus_account_unit.unit_id"
         reference="units"
     >
         <AutocompleteInput
             filterToQuery={(searchText) => ({
-                'janus_account_unit.unit_id': searchText,
+                code: searchText,
             })}
             optionText="code"
             label="resources.janusAccounts.fields.additional_units"
@@ -72,12 +72,12 @@ const JanusFilter = [
     </ReferenceInput>,
     <ReferenceInput
         label="resources.janusAccounts.fields.communities"
-        source="community.id"
+        source="janus_account_community.community_id"
         reference="communities"
     >
         <AutocompleteInput
             filterToQuery={(searchText) => ({
-                'janus_account_community.community_id': searchText,
+                name: searchText,
             })}
             optionText="name"
             label="resources.janusAccounts.fields.communities"

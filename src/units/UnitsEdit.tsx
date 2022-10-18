@@ -173,7 +173,7 @@ const UnitsEdit = () => (
       >
         <AutocompleteInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth
@@ -186,7 +186,7 @@ const UnitsEdit = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth
@@ -206,7 +206,7 @@ const UnitsEdit = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            like_name: searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth
@@ -219,7 +219,7 @@ const UnitsEdit = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            "like_section_cn.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth
