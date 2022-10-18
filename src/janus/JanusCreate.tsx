@@ -39,7 +39,7 @@ const JanusCreate = () => (
       >
         <AutocompleteInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth
@@ -53,7 +53,7 @@ const JanusCreate = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth
@@ -67,7 +67,7 @@ const JanusCreate = () => (
       >
         <AutocompleteInput
           filterToQuery={(searchText) => ({
-            "like_unit.code": searchText,
+            code: searchText,
           })}
           optionText="code"
           fullWidth
@@ -81,7 +81,7 @@ const JanusCreate = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            "like_unit.code": searchText,
+            code: searchText,
           })}
           optionText="code"
           fullWidth
@@ -95,7 +95,7 @@ const JanusCreate = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            like_name: searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth

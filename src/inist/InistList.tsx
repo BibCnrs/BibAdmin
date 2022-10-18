@@ -28,20 +28,20 @@ import { ListActions } from "../components/Actions";
 const InistFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
   <TextInput
-    source="like_inist_account.username"
+    source="username"
     label="resources.inistAccounts.fields.username"
   />,
   <TextInput
-    source="like_inist_account.name"
+    source="name"
     label="resources.inistAccounts.fields.name"
   />,
   <TextInput
-    source="like_inist_account.firstname"
+    source="firstname"
     label="resources.inistAccounts.fields.firstname"
   />,
   <TextInput
     type="email"
-    source="like_inist_account.mail"
+    source="mail"
     label="resources.inistAccounts.fields.mail"
   />,
   <ReferenceInput
@@ -50,18 +50,18 @@ const InistFilter = [
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.inistAccounts.fields.main_institute"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.inistAccounts.fields.institutes"
-    source="institutes.id"
+    source="inist_account_institute.institute_id"
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.inistAccounts.fields.institutes"
     />
@@ -72,55 +72,55 @@ const InistFilter = [
     reference="units"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_unit.code": searchText })}
+      filterToQuery={(searchText) => ({ code: searchText })}
       optionText="code"
       label="resources.inistAccounts.fields.main_unit"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.inistAccounts.fields.units"
-    source="units.id"
+    source="inist_account_unit.unit_id"
     reference="units"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_unit.code": searchText })}
+      filterToQuery={(searchText) => ({ code: searchText })}
       optionText="code"
       label="resources.inistAccounts.fields.units"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.inistAccounts.fields.communities"
-    source="community.id"
+    source="inist_account_community.community_id"
     reference="communities"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ like_name: searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.inistAccounts.fields.communities"
     />
   </ReferenceInput>,
   <DateInput
-    source="to_inist_account.subscription_date"
+    source="subscription_date_lte"
     label="resources.inistAccounts.fields.subscription_date_before"
   />,
   <DateInput
-    source="from_inist_account.subscription_date"
+    source="subscription_date_gte"
     label="resources.inistAccounts.fields.subscription_date_after"
   />,
   <DateInput
-    source="to_inist_account.expiration_date"
+    source="expiration_date_lte"
     label="resources.inistAccounts.fields.expiration_date_before"
   />,
   <DateInput
-    source="from_inist_account.expiration_date"
+    source="expiration_date_gte"
     label="resources.inistAccounts.fields.expiration_date_after"
   />,
   <DateInput
-    source="to_inist_account.last_connexion"
+    source="last_connexion_lte"
     label="resources.inistAccounts.fields.last_connexion_before"
   />,
   <DateInput
-    source="from_inist_account.last_connexion"
+    source="last_connexion_gte"
     label="resources.inistAccounts.fields.last_connexion_after"
   />,
   <BooleanInput

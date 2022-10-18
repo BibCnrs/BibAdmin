@@ -19,29 +19,29 @@ import { ListActions } from "../components/Actions";
 const SectionsFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
   <TextInput
-    source="like_section_cn.name"
+    source="section_cn.name"
     label="resources.section_cn.fields.name"
   />,
   <TextInput source="code" label="resources.section_cn.fields.code" />,
   <TextInput source="comment" label="resources.section_cn.fields.comment" />,
   <ReferenceInput
     label="resources.section_cn.fields.primary_institutes"
-    source="primary_institute.institute_id"
+    source="section_cn_primary_institute.institute_id"
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.section_cn.fields.primary_institutes"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.section_cn.fields.secondary_institutes"
-    source="secondary_institute.institute_id"
+    source="section_cn_secondary_institute.institute_id"
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.section_cn.fields.secondary_institutes"
     />

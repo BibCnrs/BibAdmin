@@ -37,7 +37,7 @@ const SectionsCreate = () => (
       >
         <AutocompleteInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth
@@ -50,7 +50,7 @@ const SectionsCreate = () => (
       >
         <AutocompleteArrayInput
           filterToQuery={(searchText) => ({
-            "like_institute.name": searchText,
+            name: searchText,
           })}
           optionText="name"
           fullWidth

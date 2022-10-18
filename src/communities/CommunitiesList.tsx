@@ -19,17 +19,17 @@ import { ListActions } from "../components/Actions";
 
 const CommunitiesFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
-  <TextInput source="like_gate" label="resources.communities.fields.gate" />,
+  <TextInput source="gate" label="resources.communities.fields.gate" />,
   <TextInput
-    source="like_user_id"
+    source="user_id"
     label="resources.communities.fields.user_id"
   />,
   <TextInput
-    source="like_password"
+    source="password"
     label="resources.communities.fields.password"
   />,
   <TextInput
-    source="like_profile"
+    source="profile"
     label="resources.communities.fields.profile"
   />,
   <BooleanInput source="ebsco" label="resources.communities.fields.ebsco" />,
