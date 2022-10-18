@@ -28,54 +28,54 @@ import jsonExport from "jsonexport/dist";
 
 const UnitsFilter = [
   <TextInput label="Rechercher" source="match" alwaysOn />,
-  <TextInput source="like_unit.code" label="resources.units.fields.code" />,
-  <TextInput source="like_unit.name" label="resources.units.fields.name" />,
+  <TextInput source="code" label="resources.units.fields.code" />,
+  <TextInput source="name" label="resources.units.fields.name" />,
   <ReferenceInput
     label="resources.units.fields.communities"
-    source="community.id"
+    source="unit_community.community_id"
     reference="communities"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ like_name: searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.units.fields.communities"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.units.fields.main_institute"
-    source="unit.main_institute"
+    source="main_institute"
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.units.fields.main_institute"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.units.fields.institutes"
-    source="institute.id"
+    source="unit_institute.institute_id"
     reference="institutes"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_institute.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.units.fields.institutes"
     />
   </ReferenceInput>,
   <ReferenceInput
     label="resources.units.fields.section_cn"
-    source="section_cn.id"
+    source="unit_section_cn.section_cn_id"
     reference="section_cn"
   >
     <AutocompleteInput
-      filterToQuery={(searchText) => ({ "like_section_cn.name": searchText })}
+      filterToQuery={(searchText) => ({ name: searchText })}
       optionText="name"
       label="resources.units.fields.section_cn"
     />
   </ReferenceInput>,
   <BooleanInput
-    source="unit.active"
+    source="active"
     label="resources.inistAccounts.fields.active"
   />,
 ];
