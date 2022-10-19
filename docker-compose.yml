@@ -20,8 +20,11 @@ services:
     working_dir: /app
     environment:
       NODE_ENV: production
-      REACT_APP_BIBADMIN_HOST: ${REACT_APP_BIBADMIN_HOST}
-      REACT_APP_BIBAPI_HOST: ${REACT_APP_BIBAPI_HOST}
+    build:
+      context: .
+      args: 
+        - REACT_APP_BIBADMIN_HOST
+        - REACT_APP_BIBAPI_HOST
     command: npm run build --production
     networks:
       - bibfrontend
