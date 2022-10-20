@@ -1,6 +1,8 @@
 import {
     BooleanInput,
     Edit,
+    FileField,
+    FileInput,
     FormTab,
     required,
     TabbedForm,
@@ -15,7 +17,19 @@ const LicenseEdit = () => (
         <TabbedForm>
             <FormTab label="General">
                 <LicenseCommunities />
-                <BooleanInput label="Actif" source="enable" sx={{marginTop: 4}} />
+                <FileInput
+                    sx={{ marginTop: 4 }}
+                    source="pdf"
+                    label="PDF"
+                    accept="application/pdf"
+                >
+                    <FileField source="src" title="title" />
+                </FileInput>
+                <BooleanInput
+                    label="Actif"
+                    source="enable"
+                    sx={{ marginTop: 4 }}
+                />
             </FormTab>
 
             <FormTab label="Français">

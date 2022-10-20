@@ -179,6 +179,7 @@ const i18n = {
         name: "Nom",
         communities: "Communautés",
         content: "Contenu",
+        pdf: "Pdf",
       },
     },
     notification: {
