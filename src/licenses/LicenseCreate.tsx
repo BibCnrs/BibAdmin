@@ -1,6 +1,8 @@
 import {
     BooleanInput,
     Create,
+    FileField,
+    FileInput,
     FormTab,
     required,
     TabbedForm,
@@ -12,10 +14,17 @@ import { LicenseCommunities } from './LicenseCommunities';
 
 const LicenseCreate = () => (
     <Create actions={<CreateActions />} redirect="list">
-        
         <TabbedForm>
             <FormTab label="General">
                 <LicenseCommunities />
+                <FileInput
+                    sx={{ marginTop: 4 }}
+                    source="pdf"
+                    label="PDF"
+                    accept="application/pdf"
+                >
+                    <FileField source="src" title="title" />
+                </FileInput>
                 <BooleanInput
                     label="Actif"
                     source="enable"

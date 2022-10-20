@@ -93,7 +93,7 @@ const dataProvider: DataProvider = {
         }));
     },
     update: async (resource, params) => {
-        if (resource === 'licenses') {
+        if (resource === 'licenses' && params.data?.pdf?.src instanceof File) {
             const base64File = await convertFileToBase64(params.data.pdf);
             return jsonServerDataProvider.update(resource, {
                 ...params,
@@ -125,6 +125,17 @@ const dataProvider: DataProvider = {
         });
     },
     create: async (resource, params) => {
+        if (resource === 'licenses' && params.data?.pdf?.src instanceof File) {
+            const base64File = await convertFileToBase64(params.data.pdf);
+            return jsonServerDataProvider.create(resource, {
+                ...params,
+                data: {
+                    ...params.data,
+                    pdf: { src: base64File, title: params.data.pdf.title },
+                },
+            });
+        }
+
         if (
             !params.data.image ||
             (typeof params.data.image === 'string' &&

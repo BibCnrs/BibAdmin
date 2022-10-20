@@ -29,7 +29,6 @@ export const LicenseCommunities = () => {
         if (communityIndex !== -1) {
             const newSelectedCommunities = [...selectedCommunities];
             newSelectedCommunities.splice(communityIndex, 1);
-            console.log('newSelectedCommunities', newSelectedCommunities);
             setSelectedCommunities(newSelectedCommunities);
             setValue('license_community', newSelectedCommunities, {
                 shouldDirty: true,
@@ -43,7 +42,6 @@ export const LicenseCommunities = () => {
             { community_id: communityId },
         ];
         setSelectedCommunities(newSelectedCommunities);
-        console.log('newSelectedCommunities', newSelectedCommunities);
         setValue('license_community', newSelectedCommunities, {
             shouldDirty: true,
         });
