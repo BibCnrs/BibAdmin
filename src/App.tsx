@@ -11,6 +11,7 @@ import communities from "./communities";
 import databases from "./databases";
 import sections from "./sections";
 import favoris from "./favoris";
+import licenses from "./licenses";
 import dataProvider from "./dataProvider";
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
@@ -37,6 +38,7 @@ const App = () => (
     <Resource name="databases" {...databases} />
     <Resource name="section_cn" {...sections} />
     <Resource name="revues" {...favoris} />
+    <Resource name="licenses" {...licenses} />
   </Admin>
 );
 
