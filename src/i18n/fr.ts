@@ -172,6 +172,16 @@ const i18n = {
         url: "Url",
       },
     },
+    licenses: {
+      name: "Licences",
+      fields: {
+        id: "id",
+        name: "Nom",
+        communities: "Communautés",
+        content: "Contenu",
+        pdf: "Pdf",
+      },
+    },
     notification: {
       approved_success: "Commentaire approuvé",
       approved_error: "Erreur: Commentaire non approuvé",
