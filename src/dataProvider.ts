@@ -125,7 +125,7 @@ const dataProvider: DataProvider = {
         });
     },
     create: async (resource, params) => {
-        if (resource === 'licenses' && params.data?.pdf?.src instanceof File) {
+        if (resource === 'licenses' && params.data?.pdf?.src) {
             const base64File = await convertFileToBase64(params.data.pdf);
             return jsonServerDataProvider.create(resource, {
                 ...params,
