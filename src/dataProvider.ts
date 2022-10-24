@@ -93,7 +93,7 @@ const dataProvider: DataProvider = {
         }));
     },
     update: async (resource, params) => {
-        if (resource === 'licenses' && params.data?.pdf?.src instanceof File) {
+        if (resource === 'licenses' && !params.data?.pdf?.src.includes('data:application/pdf')) {
             const base64File = await convertFileToBase64(params.data.pdf);
             return jsonServerDataProvider.update(resource, {
                 ...params,
