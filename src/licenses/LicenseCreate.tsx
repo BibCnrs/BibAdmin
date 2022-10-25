@@ -69,6 +69,8 @@ const LicenseCreate = () => {
                     label="Actif"
                     source="enable"
                     sx={{ marginTop: 4 }}
+                    defaultValue={true}
+
                 />
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs

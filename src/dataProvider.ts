@@ -93,7 +93,11 @@ const dataProvider: DataProvider = {
         }));
     },
     update: async (resource, params) => {
-        if (resource === 'licenses' && !params.data?.pdf?.src.includes('data:application/pdf')) {
+        if (
+            resource === 'licenses' &&
+            params.data?.pdf?.src &&
+            !params.data?.pdf?.src.includes('data:application/pdf')
+        ) {
             const base64File = await convertFileToBase64(params.data.pdf);
             return jsonServerDataProvider.update(resource, {
                 ...params,
@@ -152,6 +156,15 @@ const dataProvider: DataProvider = {
             data: {
                 ...params.data,
                 image: base64Image,
+            },
+        });
+    },
+    setCommonLicense: (licenseId: number) => {
+        return fetch(`${apiUrl}/licenses/${licenseId}/common`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         });
     },
