@@ -148,7 +148,7 @@ export const UrlSearchJanus = (props: FieldProps) => {
       to={{
         pathname: "/janusAccounts",
         search: `filter=${JSON.stringify({
-          "janus_account.primary_unit": record.id,
+          "primary_unit": record.id,
         })}`,
       }}
     >
