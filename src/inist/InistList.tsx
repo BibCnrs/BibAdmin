@@ -167,6 +167,7 @@ const InistList = () => (
         label="resources.inistAccounts.fields.main_institute"
         source="main_institute"
         reference="institutes"
+        sortBy="institute.name"
       >
         <TextField source="name" />
       </ReferenceField>
@@ -185,6 +186,7 @@ const InistList = () => (
         label="resources.inistAccounts.fields.main_unit"
         source="main_unit"
         reference="units"
+        sortBy="unit.code"
       >
         <TextField source="code" />
       </ReferenceField>

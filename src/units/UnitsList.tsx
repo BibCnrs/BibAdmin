@@ -175,6 +175,7 @@ const UnitsList = () => (
         label="resources.units.fields.main_institute"
         source="main_institute"
         reference="institutes"
+        sortBy="institute.name"
       >
         <TextField source="name" />
       </ReferenceField>
