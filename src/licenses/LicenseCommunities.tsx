@@ -52,7 +52,7 @@ export const LicenseCommunities = () => {
     }
 
     return (
-        <Labeled label="Statut relationnel">
+        <Labeled label="Communautés">
             <Stack direction="row" spacing={1}>
                 {communities.map((community) => (
                     <Chip
