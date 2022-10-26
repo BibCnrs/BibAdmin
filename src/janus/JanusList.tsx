@@ -135,7 +135,7 @@ const JanusList = () => (
                 label="resources.janusAccounts.fields.primary_institute"
                 source="primary_institute"
                 reference="institutes"
-                link="show"
+                sortBy="institute.name"
             >
                 <TextField source="name" />
             </ReferenceField>
@@ -154,7 +154,7 @@ const JanusList = () => (
                 label="resources.janusAccounts.fields.primary_unit"
                 source="primary_unit"
                 reference="units"
-                link="show"
+                sortBy="unit.code"
             >
                 <TextField source="code" />
             </ReferenceField>
