@@ -144,6 +144,7 @@ const JanusList = () => (
                 label="resources.janusAccounts.fields.additional_institutes"
                 reference="institutes"
                 source="additional_institutes"
+                sortable={false}
             >
                 <SingleFieldList>
                     <ChipField source="name" />
@@ -163,6 +164,7 @@ const JanusList = () => (
                 label="resources.janusAccounts.fields.all_communities"
                 reference="communities"
                 source="all_communities"
+                sortable={false}
             >
                 <SingleFieldList>
                     <ChipField source="name" />
