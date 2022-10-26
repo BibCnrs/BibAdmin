@@ -184,6 +184,7 @@ const UnitsList = () => (
         label="resources.units.fields.institutes"
         reference="institutes"
         source="institutes"
+        sortable={false}
       >
         <SingleFieldList>
           <ChipField source="name" />
@@ -197,6 +198,7 @@ const UnitsList = () => (
         label="resources.units.fields.communities"
         reference="communities"
         source="communities"
+        sortable={false}
       >
         <SingleFieldList>
           <ChipField source="name" />

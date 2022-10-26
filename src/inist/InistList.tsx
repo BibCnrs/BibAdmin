@@ -176,6 +176,7 @@ const InistList = () => (
         label="resources.inistAccounts.fields.institutes"
         reference="institutes"
         source="institutes"
+        sortable={false}
       >
         <SingleFieldList>
           <ChipField source="name" />
@@ -195,6 +196,7 @@ const InistList = () => (
         label="resources.inistAccounts.fields.all_communities"
         reference="communities"
         source="communities"
+        sortable={false}
       >
         <SingleFieldList>
           <ChipField source="name" />
