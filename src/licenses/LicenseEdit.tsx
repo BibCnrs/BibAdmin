@@ -63,6 +63,8 @@ const LicenseEdit = () => {
                     source="pdf"
                     label="PDF"
                     accept="application/pdf"
+                    maxSize={26000000}
+                    helperText="Taille maximale 25 Mb"
                 >
                     <FileField source="src" title="title" />
                 </FileInput>
