@@ -89,7 +89,7 @@ const JanusFilter = [
     />,
 
     <DateInput
-        source="ast_connexion_gte"
+        source="last_connexion_gte"
         label="resources.janusAccounts.fields.last_connexion_after"
     />,
     <DateInput
