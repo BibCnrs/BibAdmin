@@ -66,7 +66,6 @@ const LicenseList = () => (
         bulkActionButtons={<BulkActionLicensesButtons />}
     >
         <Datagrid>
-            <LinkEdit source="id" label="resources.licenses.fields.id" />
             <LinkEdit source="name_fr" label="resources.licenses.fields.name" />
             <TextField
                 source="pdf.title"
