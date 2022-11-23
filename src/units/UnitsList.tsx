@@ -209,6 +209,7 @@ const UnitsList = () => (
         label="resources.units.fields.section_cn"
         reference="section_cn"
         source="sections_cn"
+        sortable={false}
       >
         <SingleFieldList>
           <ChipField source="code" />
