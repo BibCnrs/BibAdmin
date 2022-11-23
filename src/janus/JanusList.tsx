@@ -9,6 +9,8 @@ import {
     DeleteWithConfirmButton,
     downloadCSV,
     EditButton,
+    ExportButton,
+    FilterButton,
     List,
     RaRecord,
     ReferenceArrayField,
@@ -17,12 +19,12 @@ import {
     SingleFieldList,
     TextField,
     TextInput,
+    TopToolbar,
 } from 'react-admin';
 import { renameKeys } from '../utils/renameKeys';
 import jsonExport from 'jsonexport/dist';
 import CustomPagination from '../components/CustomPagination';
 import BulkActionButtons from '../components/BulkActionButtons';
-import { ListActions } from '../components/Actions';
 import LinkEdit from '../components/LinkEdit';
 
 const JanusFilter = [
@@ -114,6 +116,13 @@ const exporter = async (records: RaRecord[]) => {
         downloadCSV(csv, 'janusAccounts');
     });
 };
+
+const ListActions = (props: any) => (
+    <TopToolbar>
+        <FilterButton />
+        <ExportButton maxResults={100000} />
+    </TopToolbar>
+);
 
 const JanusList = () => (
     <List
