@@ -1,7 +1,7 @@
 import LicenseList from './LicenseList';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import LicenseCreate from './LicenseCreate';
 import LicenseEdit from './LicenseEdit';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const licenses = {
     create: LicenseCreate,

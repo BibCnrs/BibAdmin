@@ -1,7 +1,7 @@
 import { RichTextInput } from 'ra-input-rich-text';
 import { Box, Tab, Tabs } from '@mui/material';
 import { required, TextInput } from 'react-admin';
-import { useState } from 'react';
+import { useState, SyntheticEvent } from 'react';
 import { useFormState } from 'react-hook-form';
 
 const TabPanel = (props: any) => {
@@ -41,8 +41,8 @@ const TabPanel = (props: any) => {
 export const LicenseTab = () => {
     const [valueTab, setValueTab] = useState(0);
     const { errors } = useFormState();
-    
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+
+    const handleChange = (event: SyntheticEvent, newValue: number) => {
         setValueTab(newValue);
     };
 

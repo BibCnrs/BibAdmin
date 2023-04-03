@@ -67,7 +67,7 @@ const dataProvider: DataProvider = {
     ...jsonServerDataProvider,
     getList: (resource, params) => {
         const { page, perPage } = params.pagination;
-        let { field, order } = params.sort;
+        const { field, order } = params.sort;
         const filters = fetchUtils.flattenObject(params.filter);
 
         const query: any = {

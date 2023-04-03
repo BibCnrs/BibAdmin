@@ -1,53 +1,57 @@
 {
-  "name": "bibadmin",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": ".",
-  "dependencies": {
-    "@mui/lab": "^5.0.0-alpha.104",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/blueimp-load-image": "^5.16.0",
-    "@types/jest": "^27.5.2",
-    "@types/jsonexport": "^3.0.2",
-    "@types/node": "^16.11.64",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "blueimp-load-image": "^5.16.0",
-    "ra-data-json-server": "^4.4.1",
-    "ra-i18n-polyglot": "^4.4.1",
-    "ra-input-rich-text": "^4.4.3",
-    "ra-language-french": "^4.4.1",
-    "react": "^18.2.0",
-    "react-admin": "^4.4.1",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.8.4",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "bibadmin",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": ".",
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint": "eslint \"{src,apps,libs,test}/**/*.{tsx,ts}\" --fix",
+        "lint:test": "eslint \"{src,apps,libs,test}/**/*.{tsx,ts}\""
+    },
+    "dependencies": {
+        "@mui/lab": "^5.0.0-alpha.124",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/blueimp-load-image": "^5.16.0",
+        "@types/jest": "^27.5.2",
+        "@types/jsonexport": "^3.0.2",
+        "@types/node": "^16.18.23",
+        "@types/react": "^18.0.31",
+        "@types/react-dom": "^18.0.11",
+        "blueimp-load-image": "^5.16.0",
+        "ra-data-json-server": "^4.9.0",
+        "ra-i18n-polyglot": "^4.9.0",
+        "ra-input-rich-text": "^4.9.0",
+        "ra-language-french": "^4.9.0",
+        "react": "^18.2.0",
+        "react-admin": "^4.9.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "typescript": "^4.8.4",
+        "web-vitals": "^2.1.4"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.56.0",
+        "@typescript-eslint/parser": "^5.56.0",
+        "eslint": "^8.36.0",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-prettier": "^4.2.1"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

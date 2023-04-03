@@ -1,7 +1,7 @@
-import { Pagination } from "react-admin";
+import { Pagination } from 'react-admin';
 
 const CustomPagination = () => (
-  <Pagination rowsPerPageOptions={[5, 10, 25, 50]} />
+    <Pagination rowsPerPageOptions={[5, 10, 25, 50]} />
 );
 
 export default CustomPagination;

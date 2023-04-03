@@ -1,3 +1,5 @@
+import { LicenseCommunities } from './LicenseCommunities';
+import { EditActions } from '../components/Actions';
 import {
     BooleanInput,
     Edit,
@@ -7,11 +9,9 @@ import {
     SimpleForm,
     TextInput,
 } from 'react-admin';
-import { EditActions } from '../components/Actions';
 import { RichTextInput } from 'ra-input-rich-text';
-import { LicenseCommunities } from './LicenseCommunities';
 import { Box, Tab, Tabs } from '@mui/material';
-import { useState } from 'react';
+import { useState, SyntheticEvent } from 'react';
 
 const TabPanel = (props: any) => {
     const { children, valueTab, index, ...other } = props;
@@ -50,7 +50,7 @@ const TabPanel = (props: any) => {
 const LicenseEdit = () => {
     const [valueTab, setValueTab] = useState(0);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (event: SyntheticEvent, newValue: number) => {
         setValueTab(newValue);
     };
 

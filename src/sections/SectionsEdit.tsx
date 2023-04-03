@@ -1,3 +1,5 @@
+import { EditActions } from '../components/Actions';
+import EditToolbar from '../components/EditToolbar';
 import {
     AutocompleteArrayInput,
     AutocompleteInput,
@@ -10,8 +12,6 @@ import {
     useNotify,
     useRecordContext,
 } from 'react-admin';
-import { EditActions } from '../components/Actions';
-import EditToolbar from '../components/EditToolbar';
 
 const SectionsTitle = () => {
     const record = useRecordContext();

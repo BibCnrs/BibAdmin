@@ -1,9 +1,9 @@
-import { TextInput, TextInputProps } from "react-admin";
+import { TextInput, TextInputProps } from 'react-admin';
 
 const RandomPasswordGenerator = (props: TextInputProps) => {
-  const password = Math.random().toString(36).slice(-6).toUpperCase();
+    const password = Math.random().toString(36).slice(-6).toUpperCase();
 
-  return <TextInput defaultValue={password} {...props} />;
+    return <TextInput defaultValue={password} {...props} />;
 };
 
 export default RandomPasswordGenerator;

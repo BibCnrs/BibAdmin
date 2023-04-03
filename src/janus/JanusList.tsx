@@ -1,3 +1,8 @@
+import { renameKeys } from '../utils/renameKeys';
+import CustomPagination from '../components/CustomPagination';
+import BulkActionButtons from '../components/BulkActionButtons';
+import LinkEdit from '../components/LinkEdit';
+import jsonExport from 'jsonexport/dist';
 import {
     AutocompleteInput,
     BooleanField,
@@ -21,11 +26,6 @@ import {
     TextInput,
     TopToolbar,
 } from 'react-admin';
-import { renameKeys } from '../utils/renameKeys';
-import jsonExport from 'jsonexport/dist';
-import CustomPagination from '../components/CustomPagination';
-import BulkActionButtons from '../components/BulkActionButtons';
-import LinkEdit from '../components/LinkEdit';
 
 const JanusFilter = [
     <TextInput label="Rechercher" source="match" alwaysOn />,
@@ -117,7 +117,7 @@ const exporter = async (records: RaRecord[]) => {
     });
 };
 
-const ListActions = (props: any) => (
+const ListActions = () => (
     <TopToolbar>
         <FilterButton />
         <ExportButton maxResults={100000} />

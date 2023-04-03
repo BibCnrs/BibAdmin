@@ -1,3 +1,6 @@
+import { LicenseCommunities } from './LicenseCommunities';
+import { LicenseTab } from './LicenseTab';
+import { CreateActions } from '../components/Actions';
 import {
     BooleanInput,
     Create,
@@ -5,10 +8,6 @@ import {
     FileInput,
     SimpleForm,
 } from 'react-admin';
-import { CreateActions } from '../components/Actions';
-
-import { LicenseCommunities } from './LicenseCommunities';
-import { LicenseTab } from './LicenseTab';
 
 const validateLicenseCreation = (values: any) => {
     const errors: any = {};

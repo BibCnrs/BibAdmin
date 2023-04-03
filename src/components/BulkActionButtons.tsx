@@ -1,9 +1,9 @@
-import { BulkDeleteWithConfirmButton } from "react-admin";
+import { BulkDeleteWithConfirmButton } from 'react-admin';
 
 const BulkActionButtons = () => (
-  <>
-    <BulkDeleteWithConfirmButton mutationMode="undoable" />
-  </>
+    <>
+        <BulkDeleteWithConfirmButton mutationMode="undoable" />
+    </>
 );
 
 export default BulkActionButtons;

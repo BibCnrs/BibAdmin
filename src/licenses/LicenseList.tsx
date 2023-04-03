@@ -1,3 +1,5 @@
+import CustomPagination from '../components/CustomPagination';
+import LinkEdit from '../components/LinkEdit';
 import {
     ArrayField,
     BooleanField,
@@ -15,8 +17,6 @@ import {
     useNotify,
     useRefresh,
 } from 'react-admin';
-import CustomPagination from '../components/CustomPagination';
-import LinkEdit from '../components/LinkEdit';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 import { Box, Button, Tooltip } from '@mui/material';
 import { useMutation } from 'react-query';
@@ -30,7 +30,7 @@ const BulkActionLicensesButtons = () => {
         ['setCommonLicense', selectedIds[0]],
         () => dataProvider.setCommonLicense(selectedIds[0]),
         {
-            onSuccess: (data) => {
+            onSuccess: () => {
                 refresh();
                 notify('License commune mise à jour', { type: 'success' });
             },

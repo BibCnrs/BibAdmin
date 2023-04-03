@@ -1,3 +1,4 @@
+import { CreateActions } from '../components/Actions';
 import {
     AutocompleteArrayInput,
     AutocompleteInput,
@@ -9,14 +10,16 @@ import {
     TextInput,
     useNotify,
 } from 'react-admin';
-import { CreateActions } from '../components/Actions';
 
 const SectionsCreate = () => {
     const notify = useNotify();
 
     const onError = (error: any) => {
         if (error.body.error.includes('constraint failed')) {
-            notify(`Impossible de créer une section car le code est déjà utilisé`, {type: 'warning'});
+            notify(
+                `Impossible de créer une section car le code est déjà utilisé`,
+                { type: 'warning' },
+            );
         }
     };
 
