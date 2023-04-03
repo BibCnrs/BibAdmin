@@ -1,5 +1,8 @@
 import { LicenseCommunities } from './LicenseCommunities';
-import { LicenseTab } from './LicenseTab';
+import {
+    MultilingualContentTab,
+    validateMultilingualContentCreation,
+} from '../components/MultilingualContentTab';
 import { CreateActions } from '../components/Actions';
 import {
     BooleanInput,
@@ -9,31 +12,10 @@ import {
     SimpleForm,
 } from 'react-admin';
 
-const validateLicenseCreation = (values: any) => {
-    const errors: any = {};
-    if (!values.content_en) {
-        errors.content_en = 'ra.validation.required';
-    }
-
-    if (!values.name_en) {
-        errors.name_en = 'ra.validation.required';
-    }
-
-    if (!values.content_fr) {
-        errors.content_fr = 'ra.validation.required';
-    }
-
-    if (!values.name_fr) {
-        errors.name_fr = 'ra.validation.required';
-    }
-
-    return errors;
-};
-
 const LicenseCreate = () => {
     return (
         <Create actions={<CreateActions />} redirect="list">
-            <SimpleForm validate={validateLicenseCreation}>
+            <SimpleForm validate={validateMultilingualContentCreation}>
                 <LicenseCommunities />
                 <FileInput
                     sx={{ marginTop: 4 }}
@@ -51,7 +33,7 @@ const LicenseCreate = () => {
                     sx={{ marginTop: 4 }}
                     defaultValue={true}
                 />
-                <LicenseTab />
+                <MultilingualContentTab />
             </SimpleForm>
         </Create>
     );

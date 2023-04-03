@@ -1,4 +1,4 @@
-import TabPanel from '../components/TabPanel';
+import TabPanel from './TabPanel';
 import { RichTextInput } from 'ra-input-rich-text';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -7,7 +7,28 @@ import { required, TextInput } from 'react-admin';
 import { useState, SyntheticEvent } from 'react';
 import { useFormState } from 'react-hook-form';
 
-export const LicenseTab = () => {
+export const validateMultilingualContentCreation = (values: any) => {
+    const errors: any = {};
+    if (!values.content_en) {
+        errors.content_en = 'ra.validation.required';
+    }
+
+    if (!values.name_en) {
+        errors.name_en = 'ra.validation.required';
+    }
+
+    if (!values.content_fr) {
+        errors.content_fr = 'ra.validation.required';
+    }
+
+    if (!values.name_fr) {
+        errors.name_fr = 'ra.validation.required';
+    }
+
+    return errors;
+};
+
+export const MultilingualContentTab = () => {
     const [valueTab, setValueTab] = useState(0);
     const { errors } = useFormState();
 
@@ -42,24 +63,24 @@ export const LicenseTab = () => {
             <TabPanel valueTab={valueTab} index={0}>
                 <TextInput
                     source="name_fr"
-                    label="resources.licenses.fields.name"
+                    label="resources.cms.content.fields.name"
                     validate={required()}
                 />
                 <RichTextInput
                     source="content_fr"
-                    label="resources.licenses.fields.content"
+                    label="resources.cms.content.fields.content"
                     validate={required()}
                 />
             </TabPanel>
             <TabPanel valueTab={valueTab} index={1}>
                 <TextInput
                     source="name_en"
-                    label="resources.licenses.fields.name"
+                    label="resources.cms.content.fields.name"
                     validate={required()}
                 />
                 <RichTextInput
                     source="content_en"
-                    label="resources.licenses.fields.content"
+                    label="resources.cms.content.fields.content"
                     validate={required()}
                 />
             </TabPanel>

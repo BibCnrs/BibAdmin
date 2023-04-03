@@ -182,6 +182,20 @@ const i18n = {
                 pdf: 'Pdf',
             },
         },
+        cms: {
+            content: {
+                fields: {
+                    name: 'Nom',
+                    content: 'Contenu',
+                },
+            },
+            legal: {
+                name: 'Mentions légales',
+                fields: {
+                    name: 'Nom',
+                },
+            },
+        },
         notification: {
             approved_success: 'Commentaire approuvé',
             approved_error: 'Erreur: Commentaire non approuvé',
