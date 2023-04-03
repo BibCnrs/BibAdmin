@@ -3,7 +3,7 @@ import { stringify } from 'query-string';
 import jsonServerProvider from 'ra-data-json-server';
 import loadImage from 'blueimp-load-image';
 
-const apiUrl = process.env.REACT_APP_BIBAPI_HOST || '';
+const apiUrl = import.meta.env.VITE_REACT_APP_BIBAPI_HOST || '';
 
 const httpClient = (url: string, options: Options = {}) => {
     const requestHeaders = (options.headers ||
