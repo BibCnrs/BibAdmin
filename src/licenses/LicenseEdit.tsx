@@ -10,7 +10,9 @@ import {
     TextInput,
 } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
-import { Box, Tab, Tabs } from '@mui/material';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import { useState, SyntheticEvent } from 'react';
 
 const TabPanel = (props: any) => {

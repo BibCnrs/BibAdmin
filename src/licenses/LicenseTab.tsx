@@ -1,42 +1,11 @@
+import TabPanel from '../components/TabPanel';
 import { RichTextInput } from 'ra-input-rich-text';
-import { Box, Tab, Tabs } from '@mui/material';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import { required, TextInput } from 'react-admin';
 import { useState, SyntheticEvent } from 'react';
 import { useFormState } from 'react-hook-form';
-
-const TabPanel = (props: any) => {
-    const { children, valueTab, index, ...other } = props;
-
-    return (
-        <Box
-            role="tabpanel"
-            hidden={valueTab !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                width: '100%',
-
-                '& .ra-input-content_fr, & .ra-input-content_en': {
-                    minHeight: '400px',
-                },
-                '& .RaRichTextInputToolbar-root': {
-                    minHeight: '40px',
-                },
-                '& .RaRichTextInput-editorContent': {
-                    minHeight: '100px',
-                    '.ProseMirror': {
-                        minHeight: '400px',
-                    },
-                },
-            }}
-            {...other}
-        >
-            {valueTab === index && children}
-        </Box>
-    );
-};
 
 export const LicenseTab = () => {
     const [valueTab, setValueTab] = useState(0);

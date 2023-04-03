@@ -18,7 +18,9 @@ import {
     useRefresh,
 } from 'react-admin';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
-import { Box, Button, Tooltip } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import { useMutation } from 'react-query';
 
 const BulkActionLicensesButtons = () => {
