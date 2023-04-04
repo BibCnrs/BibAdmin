@@ -2,7 +2,7 @@ import { EditActions } from '../../components/Actions';
 import { MultilingualContentTab } from '../../components/MultilingualContentTab';
 import { BooleanInput, Edit, SimpleForm } from 'react-admin';
 
-const LegalEdit = () => {
+const PagesEdit = () => {
     return (
         <Edit actions={<EditActions />} redirect="list">
             <SimpleForm>
@@ -17,4 +17,4 @@ const LegalEdit = () => {
     );
 };
 
-export default LegalEdit;
+export default PagesEdit;

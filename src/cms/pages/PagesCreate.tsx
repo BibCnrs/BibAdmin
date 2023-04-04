@@ -3,12 +3,14 @@ import {
     MultilingualContentTab,
     validateMultilingualContentCreation,
 } from '../../components/MultilingualContentTab';
+import CMSPages from '../CMSPages';
 import { BooleanInput, Create, SimpleForm } from 'react-admin';
 
-const LegalList = () => {
+const PagesCreate = () => {
     return (
         <Create actions={<CreateActions />} redirect="list">
             <SimpleForm validate={validateMultilingualContentCreation}>
+                <CMSPages />
                 <BooleanInput
                     label="Actif"
                     source="enable"
@@ -21,4 +23,4 @@ const LegalList = () => {
     );
 };
 
-export default LegalList;
+export default PagesCreate;

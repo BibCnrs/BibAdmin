@@ -9,7 +9,7 @@ import {
     List,
 } from 'react-admin';
 
-const LegalList = () => (
+const PagesList = () => (
     <List
         perPage={10}
         pagination={<CustomPagination />}
@@ -18,7 +18,7 @@ const LegalList = () => (
         <Datagrid>
             <LinkEdit
                 source="name_fr"
-                label="resources.cms.legal.fields.name"
+                label="resources.cms.pages.fields.name"
             />
             <BooleanField label="Actif" source="enable" />
             <EditButton />
@@ -27,4 +27,4 @@ const LegalList = () => (
     </List>
 );
 
-export default LegalList;
+export default PagesList;

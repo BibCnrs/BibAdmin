@@ -189,11 +189,11 @@ const i18n = {
                     content: 'Contenu',
                 },
             },
-            legal: {
-                name: 'Mentions légales',
-                fields: {
-                    name: 'Nom',
-                },
+        },
+        pages: {
+            name: 'Gestions de contenue',
+            fields: {
+                name: 'Nom',
             },
         },
         notification: {

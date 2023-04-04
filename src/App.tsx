@@ -12,7 +12,7 @@ import licenses from './licenses';
 import dataProvider from './dataProvider';
 import authProvider from './authProvider';
 import langFr from './i18n/fr';
-import Legal from './cms/legal';
+import Pages from './cms/pages';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import { Admin, Resource } from 'react-admin';
 import React from 'react';
@@ -40,7 +40,7 @@ const App = () => (
         <Resource name="section_cn" {...sections} />
         <Resource name="revues" {...favoris} />
         <Resource name="licenses" {...licenses} />
-        <Resource name="cms.legal" {...Legal} />
+        <Resource name="pages" {...Pages} />
     </Admin>
 );
 
