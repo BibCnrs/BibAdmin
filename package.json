@@ -28,6 +28,7 @@
         "@types/blueimp-load-image": "^5.16.0",
         "@types/jest": "^27.5.2",
         "@types/jsonexport": "^3.0.2",
+        "@types/lodash": "^4.14.192",
         "@types/node": "^16.18.23",
         "@types/react": "^18.0.31",
         "@types/react-dom": "^18.0.11",

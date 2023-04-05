@@ -190,8 +190,8 @@ const i18n = {
                 },
             },
         },
-        pages: {
-            name: 'Gestions de contenue',
+        faqAlerts: {
+            name: 'Faq, Alertes...',
             fields: {
                 name: 'Nom',
             },
