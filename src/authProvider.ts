@@ -1,6 +1,6 @@
 import { AuthProvider } from 'react-admin';
 
-const apiUrl = import.meta.env.VITE_BIBAPI_HOST;
+const apiUrl = import.meta.env.VITE_BIBAPI_HOST + '/admin';
 
 const authProvider: AuthProvider = {
     // called when the user attempts to log in
