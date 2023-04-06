@@ -9,9 +9,7 @@ services:
     working_dir: /app
     environment:
       NODE_ENV: development
-      REACT_APP_BIBADMIN_HOST: http://localhost:3011/public
-      REACT_APP_BIBAPI_HOST: http://localhost:3000/admin
-      VITE_REACT_APP_BIBAPI_HOST: http://localhost:3000/admin
+      VITE_BIBAPI_HOST: ${BIBAPI_HOST}
       PORT: 3011
     ports:
       - "3011:3011"
