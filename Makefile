@@ -30,6 +30,9 @@ install: npm-install bump ## install npm dependencies and bump currentCommit fil
 run-dev: ## run BibAdmin for development
 	docker compose -f docker-compose.dev.yml up --force-recreate
 
+run-preview: ## run BibAdmin for development
+	docker compose -f docker-compose.preview.yml up --force-recreate
+
 run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
 	 docker compose -f docker-compose.prod.yml up -d --force-recreate
 

@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  preview-server:
+    image: node:18
+    volumes:
+          - .:/app
+          - ./public:/public
+    working_dir: /app
+    environment:
+      NODE_ENV: production
+      VITE_BIBAPI_HOST: ${BIBAPI_HOST}
+      PORT: 3012
+    ports:
+      - "3012:3012"
+    command: npm run preview
+    networks:
+      - bibfrontend
+
+networks:
+  bibfrontend:
+    external: true
+      
+

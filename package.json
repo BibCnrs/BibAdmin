@@ -6,6 +6,7 @@
     "scripts": {
         "start": "vite --host",
         "build": "tsc && vite build",
+        "preview": "npm run build && vite preview --host",
         "lint": "eslint \"{src,apps,libs,test}/**/*.{tsx,ts}\" --fix",
         "lint:test": "eslint \"{src,apps,libs,test}/**/*.{tsx,ts}\""
     },
