@@ -47,21 +47,21 @@ const convertImageToBase64 = (file: File) => {
     });
 };
 
-/**
- * Convert a `File` object returned by the upload input into a base 64 string.
- * That's not the most optimized way to store images in production, but it's
- * enough to illustrate the idea of data provider decoration.
- */
-const convertFileToBase64 = (file: any) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-
-        reader.readAsDataURL(file.rawFile);
-    });
-
 const jsonServerDataProvider = jsonServerProvider(apiUrl, httpClient);
+
+const uploadFile = async (name: string, file: File) => {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('file', file);
+
+    return await fetch(`${apiUrl}/medias`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    }).then((response) => response.json());
+};
 
 const dataProvider: DataProvider = {
     ...jsonServerDataProvider,
@@ -98,12 +98,15 @@ const dataProvider: DataProvider = {
             params.data?.pdf?.src &&
             !params.data?.pdf?.src.includes('data:application/pdf')
         ) {
-            const base64File = await convertFileToBase64(params.data.pdf);
+            const file = await uploadFile(
+                params.data.pdf.title,
+                params.data.pdf.rawFile,
+            );
             return jsonServerDataProvider.update(resource, {
                 ...params,
                 data: {
                     ...params.data,
-                    pdf: { src: base64File, title: params.data.pdf.title },
+                    pdf: { src: file.url, title: file.name },
                 },
             });
         }
@@ -130,14 +133,25 @@ const dataProvider: DataProvider = {
     },
     create: async (resource, params) => {
         if (resource === 'licenses' && params.data?.pdf?.src) {
-            const base64File = await convertFileToBase64(params.data.pdf);
+            const file = await uploadFile(
+                params.data.pdf.title,
+                params.data.pdf.rawFile,
+            );
             return jsonServerDataProvider.create(resource, {
                 ...params,
                 data: {
                     ...params.data,
-                    pdf: { src: base64File, title: params.data.pdf.title },
+                    pdf: { src: file.url, title: file.name },
                 },
             });
+        }
+
+        if (resource === 'medias') {
+            const file = await uploadFile(
+                params.data.name,
+                params.data.file.rawFile,
+            );
+            return { data: { ...file } };
         }
 
         if (

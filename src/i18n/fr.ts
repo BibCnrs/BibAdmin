@@ -196,6 +196,14 @@ const i18n = {
                 name: 'Nom',
             },
         },
+        medias: {
+            name: 'Média, fichier...',
+            fields: {
+                name: 'Nom',
+                fileName: 'Nom du fichier',
+                url: 'Lien',
+            },
+        },
         notification: {
             approved_success: 'Commentaire approuvé',
             approved_error: 'Erreur: Commentaire non approuvé',
