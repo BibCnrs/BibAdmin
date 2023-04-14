@@ -8,6 +8,7 @@ export const pages = [
     { id: 'home', name: 'Alerte' },
     { id: 'faq', name: 'FAQ' },
     { id: 'legal', name: 'Mentions légales' },
+    { id: 'about', name: 'A propos' },
 ];
 
 const FaqAlertsHeader = () => {
