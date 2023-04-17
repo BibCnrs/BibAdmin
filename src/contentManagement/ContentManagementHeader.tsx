@@ -11,7 +11,7 @@ export const pages = [
     { id: 'about', name: 'A propos' },
 ];
 
-const FaqAlertsHeader = () => {
+const ContentManagementHeader = () => {
     const record = useRecordContext();
     const { setValue } = useFormContext();
     const [selectedPage, setSelectedPage] = useState(record?.page || '');
@@ -43,4 +43,4 @@ const FaqAlertsHeader = () => {
     );
 };
 
-export default FaqAlertsHeader;
+export default ContentManagementHeader;

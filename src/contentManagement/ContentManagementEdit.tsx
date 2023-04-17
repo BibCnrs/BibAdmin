@@ -1,4 +1,4 @@
-import FaqAlertsHeader from './FaqAlertsHeader';
+import ContentManagementHeader from './ContentManagementHeader';
 import { EditActions } from '../components/Actions';
 import { MultilingualContentTab } from '../components/MultilingualContentTab';
 import {
@@ -16,11 +16,11 @@ const divStyle: CSSProperties = {
     width: '100%',
 };
 
-export default function FaqAlertsEdit() {
+export default function ContentManagementEdit() {
     return (
         <Edit actions={<EditActions />} redirect="list">
             <SimpleForm>
-                <FaqAlertsHeader />
+                <ContentManagementHeader />
                 <div style={divStyle}>
                     <BooleanInput
                         label="Actif"

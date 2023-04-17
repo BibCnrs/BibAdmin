@@ -63,24 +63,24 @@ export const MultilingualContentTab = () => {
             <TabPanel valueTab={valueTab} index={0}>
                 <TextInput
                     source="name_fr"
-                    label="resources.cms.content.fields.name"
+                    label="resources.contentManagement.fields.name"
                     validate={required()}
                 />
                 <RichTextInput
                     source="content_fr"
-                    label="resources.cms.content.fields.content"
+                    label="resources.contentManagement.fields.content"
                     validate={required()}
                 />
             </TabPanel>
             <TabPanel valueTab={valueTab} index={1}>
                 <TextInput
                     source="name_en"
-                    label="resources.cms.content.fields.name"
+                    label="resources.contentManagement.fields.name"
                     validate={required()}
                 />
                 <RichTextInput
                     source="content_en"
-                    label="resources.cms.content.fields.content"
+                    label="resources.contentManagement.fields.content"
                     validate={required()}
                 />
             </TabPanel>

@@ -12,7 +12,7 @@ import licenses from './licenses';
 import dataProvider from './dataProvider';
 import authProvider from './authProvider';
 import langFr from './i18n/fr';
-import faqAlerts from './faqAlerts';
+import contentManagement from './contentManagement';
 import medias from './medias';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import { Admin, Resource } from 'react-admin';
@@ -41,7 +41,7 @@ const App = () => (
         <Resource name="section_cn" {...sections} />
         <Resource name="revues" {...favoris} />
         <Resource name="licenses" {...licenses} />
-        <Resource name="faqAlerts" {...faqAlerts} />
+        <Resource name="contentManagement" {...contentManagement} />
         <Resource name="medias" {...medias} />
     </Admin>
 );

@@ -1,4 +1,4 @@
-import FaqAlertsHeader from './FaqAlertsHeader';
+import ContentManagementHeader from './ContentManagementHeader';
 import { CreateActions } from '../components/Actions';
 import {
     MultilingualContentTab,
@@ -19,11 +19,11 @@ const divStyle: CSSProperties = {
     width: '100%',
 };
 
-export default function FaqAlertsCreate() {
+export default function ContentManagementCreate() {
     return (
         <Create actions={<CreateActions />} redirect="list">
             <SimpleForm validate={validateMultilingualContentCreation}>
-                <FaqAlertsHeader />
+                <ContentManagementHeader />
                 <div style={divStyle}>
                     <BooleanInput
                         label="Actif"

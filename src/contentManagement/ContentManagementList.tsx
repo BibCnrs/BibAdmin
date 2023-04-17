@@ -1,4 +1,4 @@
-import { pages } from './FaqAlertsHeader';
+import { pages } from './ContentManagementHeader';
 import CustomPagination from '../components/CustomPagination';
 import BulkActionButtons from '../components/BulkActionButtons';
 import LinkEdit from '../components/LinkEdit';
@@ -20,7 +20,7 @@ function InternalChip() {
     return <Chip label={find(pages, { id: record?.page })?.name} />;
 }
 
-export default function FaqAlertsList() {
+export default function ContentManagementList() {
     return (
         <List
             perPage={10}

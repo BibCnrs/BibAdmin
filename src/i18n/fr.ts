@@ -182,18 +182,11 @@ const i18n = {
                 pdf: 'Pdf',
             },
         },
-        cms: {
-            content: {
-                fields: {
-                    name: 'Nom',
-                    content: 'Contenu',
-                },
-            },
-        },
-        faqAlerts: {
-            name: 'Faq, Alertes...',
+        contentManagement: {
+            name: 'Gestion de contenu',
             fields: {
                 name: 'Nom',
+                content: 'Contenu',
             },
         },
         medias: {
