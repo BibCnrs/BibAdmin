@@ -1,33 +1,28 @@
 import { LicenseCommunities } from './LicenseCommunities';
 import { EditActions } from '../components/Actions';
 import { MultilingualContentTab } from '../components/MultilingualContentTab';
-import {
-    BooleanInput,
-    Edit,
-    FileField,
-    FileInput,
-    SimpleForm,
-} from 'react-admin';
+import { BooleanInput, Edit, SimpleForm, TextInput } from 'react-admin';
 
 const LicenseEdit = () => {
     return (
         <Edit actions={<EditActions />} redirect="list">
             <SimpleForm>
                 <LicenseCommunities />
-                <FileInput
-                    sx={{ marginTop: 4 }}
-                    source="pdf"
-                    label="PDF"
-                    accept="application/pdf"
-                    maxSize={26000000}
-                    helperText="Taille maximale 25 Mb"
-                >
-                    <FileField source="src" title="title" />
-                </FileInput>
+                <TextInput
+                    sx={{ marginTop: 4, width: '100%' }}
+                    name="pdf.title"
+                    source="pdf.title"
+                />
+                <TextInput
+                    sx={{ width: '100%' }}
+                    name="pdf.src"
+                    source="pdf.src"
+                />
                 <BooleanInput
                     label="Actif"
                     source="enable"
-                    sx={{ marginTop: 4 }}
+                    name="enable"
+                    options={undefined}
                 />
                 <MultilingualContentTab />
             </SimpleForm>

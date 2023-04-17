@@ -94,24 +94,6 @@ const dataProvider: DataProvider = {
     },
     update: async (resource, params) => {
         if (
-            resource === 'licenses' &&
-            params.data?.pdf?.src &&
-            !params.data?.pdf?.src.includes('data:application/pdf')
-        ) {
-            const file = await uploadFile(
-                params.data.pdf.title,
-                params.data.pdf.rawFile,
-            );
-            return jsonServerDataProvider.update(resource, {
-                ...params,
-                data: {
-                    ...params.data,
-                    pdf: { src: file.url, title: file.name },
-                },
-            });
-        }
-
-        if (
             !params.data.image ||
             (typeof params.data.image === 'string' &&
                 params.data.image.includes('base64'))
