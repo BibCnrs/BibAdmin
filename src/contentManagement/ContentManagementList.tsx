@@ -11,6 +11,7 @@ import {
     WrapperField,
     useRecordContext,
     DateField,
+    TextField,
 } from 'react-admin';
 import find from 'lodash/find';
 import Chip from '@mui/material/Chip';
@@ -30,12 +31,13 @@ export default function ContentManagementList() {
             <Datagrid>
                 <LinkEdit
                     source="name_fr"
-                    label="resources.faqAlerts.fields.name"
+                    label="resources.contentManagement.fields.name"
                 />
                 <BooleanField label="Actif" source="enable" />
                 <WrapperField label="Page">
                     <InternalChip />
                 </WrapperField>
+                <TextField source="page" label="Page (nom technique)" />
                 <DateField source="from" label="Date début" />
                 <DateField source="to" label="Date fin" />
                 <EditButton />
