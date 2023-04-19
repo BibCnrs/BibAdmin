@@ -14,6 +14,7 @@ import authProvider from './authProvider';
 import langFr from './i18n/fr';
 import contentManagement from './contentManagement';
 import medias from './medias';
+import resources from './resources';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import { Admin, Resource } from 'react-admin';
 import React from 'react';
@@ -42,6 +43,7 @@ const App = () => (
         <Resource name="revues" {...favoris} />
         <Resource name="licenses" {...licenses} />
         <Resource name="contentManagement" {...contentManagement} />
+        <Resource name="resources" {...resources} />
         <Resource name="medias" {...medias} />
     </Admin>
 );
