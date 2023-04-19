@@ -9,23 +9,26 @@ const ContentManagementHeader = () => {
     const { setValue } = useFormContext();
     const { data: communities } = useGetList('communities');
     const [selectedCommunity, setSelectedCommunity] = useState(
-        record?.community || '',
+        record?.community || 'other',
     );
-    useEffect(() => setSelectedCommunity(record?.community || ''), [record]);
+    useEffect(
+        () => setSelectedCommunity(record?.community || 'other'),
+        [record],
+    );
 
-    const handleClick = (communityId: string) => {
-        if (!communityId) {
+    const handleClick = (communityName: string) => {
+        if (!communityName) {
             return;
         }
-        if (communityId === selectedCommunity) {
-            setSelectedCommunity('');
-            setValue('community', '', {
+        if (communityName === selectedCommunity) {
+            setSelectedCommunity('other');
+            setValue('community', 'other', {
                 shouldDirty: true,
             });
             return;
         }
-        setSelectedCommunity(communityId);
-        setValue('community', communityId, {
+        setSelectedCommunity(communityName);
+        setValue('community', communityName, {
             shouldDirty: true,
         });
     };
@@ -39,11 +42,11 @@ const ContentManagementHeader = () => {
             <Stack direction="row" spacing={1}>
                 {communities.map((community) => (
                     <Chip
-                        key={community.id}
+                        key={community.name}
                         label={community.name}
-                        onClick={() => handleClick(community.id)}
+                        onClick={() => handleClick(community.name)}
                         color={
-                            selectedCommunity === community.id
+                            selectedCommunity === community.name
                                 ? 'primary'
                                 : 'default'
                         }

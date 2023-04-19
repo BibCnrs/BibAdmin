@@ -2,23 +2,19 @@ import CustomPagination from '../components/CustomPagination';
 import BulkActionButtons from '../components/BulkActionButtons';
 import LinkEdit from '../components/LinkEdit';
 import Chip from '@mui/material/Chip';
-import find from 'lodash/find';
 import {
     BooleanField,
     Datagrid,
     DeleteWithConfirmButton,
     EditButton,
     List,
-    useGetList,
     useRecordContext,
     WrapperField,
 } from 'react-admin';
 
 function InternalChip() {
     const record = useRecordContext();
-    const { data: communities } = useGetList('communities');
-    const community = find(communities, { id: record?.community })?.name;
-    return <Chip label={community ? community : 'Autre'} />;
+    return <Chip label={record?.community} />;
 }
 
 const ResourcesList = () => {
