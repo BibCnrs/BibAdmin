@@ -24,21 +24,19 @@ export default function TestsNewsEdit() {
         <Edit actions={<EditActions />} redirect="list">
             <SimpleForm>
                 <TestsNewsHeader />
-                <ArrayInput name="urls" source="urls">
+                <ArrayInput source="urls">
                     <SimpleFormIterator inline>
                         <TextInput
                             label="Lien ressource"
                             source="url"
-                            name="url"
                             sx={{ margin: 'auto' }}
                             helperText={false}
                         />
                         <BooleanInput
                             label="Proxyfier"
                             source="proxy"
-                            name="proxy"
                             sx={{ margin: 'auto' }}
-                            options={{}}
+                            helperText={false}
                         />
                     </SimpleFormIterator>
                 </ArrayInput>
