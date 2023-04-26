@@ -27,7 +27,7 @@ const ResourcesList = () => {
             <Datagrid>
                 <LinkEdit
                     source="name_fr"
-                    label="resources.ressource.fields.name"
+                    label="resources.resource.fields.name"
                 />
                 <BooleanField label="Actif" source="enable" />
                 <WrapperField label="Communautés (Couleur de)">

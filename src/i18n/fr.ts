@@ -189,6 +189,15 @@ const i18n = {
                 content: 'Contenu',
             },
         },
+        news: {
+            name: 'Tests, Acualiés...',
+        },
+        resource: {
+            name: 'Ressources',
+            fields: {
+                name: 'Nom',
+            },
+        },
         medias: {
             name: 'Média, fichier...',
             fields: {

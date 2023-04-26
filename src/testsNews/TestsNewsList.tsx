@@ -13,16 +13,30 @@ import {
     DateField,
     TextField,
     SingleFieldList,
-    ChipField,
     ArrayField,
 } from 'react-admin';
 import find from 'lodash/find';
 import Chip from '@mui/material/Chip';
 
-function InternalChip() {
+const InternalChip = () => {
     const record = useRecordContext();
     return <Chip label={find(pages, { id: record?.page })?.name} />;
-}
+};
+
+const DomainsField = () => {
+    const record = useRecordContext();
+    if (record?.domains) {
+        const domains = record.domains as string[];
+        return (
+            <>
+                {domains.map((domain) => (
+                    <Chip label={domain} />
+                ))}
+            </>
+        );
+    }
+    return <Chip label="Common" />;
+};
 
 export default function TestsNewsList() {
     return (
@@ -37,9 +51,12 @@ export default function TestsNewsList() {
                 <WrapperField label="Page">
                     <InternalChip />
                 </WrapperField>
-                <ArrayField source="domains" label="Domains" sortable={false}>
+                <WrapperField label="Domains">
+                    <DomainsField />
+                </WrapperField>
+                <ArrayField source="tags">
                     <SingleFieldList>
-                        <ChipField emptyText="-" />
+                        <DomainsField />
                     </SingleFieldList>
                 </ArrayField>
                 <TextField source="page" label="Page (nom technique)" />
