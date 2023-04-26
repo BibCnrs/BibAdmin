@@ -25,7 +25,7 @@ const InternalChip = () => {
 
 const DomainsField = () => {
     const record = useRecordContext();
-    if (record?.domains) {
+    if (record?.domains && record.domains.length !== 0) {
         const domains = record.domains as string[];
         return (
             <>
