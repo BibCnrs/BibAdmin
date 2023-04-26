@@ -32,6 +32,12 @@ export default function TestsNewsEdit() {
                             sx={{ margin: 'auto' }}
                             helperText={false}
                         />
+                        <TextInput
+                            label="Nom de la ressource"
+                            source="name"
+                            sx={{ margin: 'auto' }}
+                            helperText={false}
+                        />
                         <BooleanInput
                             label="Proxyfier"
                             source="proxy"

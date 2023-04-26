@@ -30,8 +30,14 @@ export default function TestsNewsCreate() {
                 <ArrayInput source="urls" sx={{ margin: 'auto' }}>
                     <SimpleFormIterator inline>
                         <TextInput
-                            label="Lien ressource"
+                            label="Lien de la ressource"
                             source="url"
+                            sx={{ margin: 'auto' }}
+                            helperText={false}
+                        />
+                        <TextInput
+                            label="Nom de la ressource"
+                            source="name"
                             sx={{ margin: 'auto' }}
                             helperText={false}
                         />
