@@ -58,7 +58,7 @@ endif
 build-script-v4:
 	docker compose -f docker-compose.v4.yml run --rm build
 
-build-v4: build-script-v4 build-docker-v4
+build-v4: npm-install build-script-v4 build-docker-v4
 
 update: stop cleanup-docker install build
 
