@@ -48,6 +48,18 @@ build-script: ## build javascript and css for production make sure env REACT_APP
 
 build: build-script build-docker ## build javascript and css for production make sure env REACT_APP_BIBAPI_HOST and REACT_APP_BIBADMIN_HOST are set
 
+build-docker-v4:
+ifdef COMMAND_ARGS
+	docker build --no-cache -t vxnexus-registry.intra.inist.fr:8083/bibcnrs/admin:$(COMMAND_ARGS) .
+else
+	docker build --no-cache -t vxnexus-registry.intra.inist.fr:8083/bibcnrs/admin:latest .
+endif
+
+build-script-v4:
+	docker compose -f docker-compose.v4.yml run --rm build
+
+build-v4: build-script-v4 build-docker-v4
+
 update: stop cleanup-docker install build
 
 npm: ## dockerized npm command example: make npm 'install some_dependency --save'
