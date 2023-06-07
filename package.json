@@ -4,7 +4,7 @@
     "private": true,
     "homepage": ".",
     "scripts": {
-        "start": "vite --host",
+        "dev": "vite --host",
         "build": "tsc && vite build",
         "preview": "npm run build && vite preview --host",
         "lint": "eslint \"{src,apps,libs,test}/**/*.{tsx,ts}\" --fix",

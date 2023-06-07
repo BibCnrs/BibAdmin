@@ -3,9 +3,14 @@ import react from '@vitejs/plugin-react';
 import eslint from 'vite-plugin-eslint';
 
 const regex = /(.*node_modules\/)([^\/]+)(.*)/;
+
+const linter = process.env.VITE_ENV === 'prod' ? [] : [eslint()];
 export default defineConfig({
-    plugins: [react(), eslint()],
+    plugins: [react(), ...linter],
     base: '/admin/',
+    css: {
+        devSourcemap: process.env.VITE_SOURCE_MAP === 'true',
+    },
     server: {
         port: (process.env as any).PORT,
     },
@@ -13,6 +18,7 @@ export default defineConfig({
         port: (process.env as any).PORT,
     },
     build: {
+        sourcemap: process.env.VITE_SOURCE_MAP === 'true',
         rollupOptions: {
             output: {
                 manualChunks: (id, meta) => {
@@ -23,9 +29,9 @@ export default defineConfig({
                 },
             },
         },
-        outDir: 'build',
         minify: 'terser',
         terserOptions: {
+            sourceMap: process.env.VITE_SOURCE_MAP === 'true',
             ecma: 2018,
             compress: {
                 ecma: 2018,

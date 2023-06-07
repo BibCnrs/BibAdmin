@@ -1,31 +1,19 @@
 version: "3.5"
 
 services:
-  npm:
-    image: node:18
-    volumes:
-      - .:/app
-    working_dir: /app
-    environment:
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
-      no_proxy: "localhost,127.0.0.1,"
-    entrypoint: ["npm"]
+  bibcnrs-admin:
+    container_name: bibcnrs-admin
+    image: vxnexus-registry.intra.inist.fr:8083/bibcnrs/admin:${BIBADMIN_VERSION}
+    build:
+      context: .
+      args:
+        BIBAPI_HOST: ${BIBAPI_HOST}
+        SOURCE_MAP: ${SOURCE_MAP}
+    ports:
+      - "8081:8081"
     networks:
-      - bibfrontend
-  build:
-    image: node:18
-    volumes:
-      - .:/app
-    working_dir: /app
-    environment:
-      NODE_ENV: production
-      VITE_BIBAPI_HOST: ${BIBAPI_HOST}
+      bib-frontend-network:
 
-    command: npm run build --production
-    networks:
-      - bibfrontend
-      
 networks:
-  bibfrontend:
+  bib-frontend-network:
     external: true

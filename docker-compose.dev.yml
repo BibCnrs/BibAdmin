@@ -1,24 +1,54 @@
 version: "3.5"
 
 services:
-  devserver:
-    image: node:18
-    volumes:
-          - .:/app
-          - ./public:/public
-    working_dir: /app
+  bibcnrs-admin-dev-server:
+    image: node:18-alpine
     environment:
       NODE_ENV: development
-      VITE_BIBAPI_HOST: ${BIBAPI_HOST}
+      VITE_ENV: development
+      VITE_BIBAPI_HOST: http://localhost:3000
+      VITE_SOURCE_MAP: true
       PORT: 3011
     ports:
       - "3011:3011"
-    command: npm start
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: npm run dev
     networks:
-      - bibfrontend
+      bib-frontend-network:
+
+  bibcnrs-admin-preview-server:
+    image: node:18-alpine
+    environment:
+      NODE_ENV: development
+      VITE_ENV: development
+      VITE_BIBAPI_HOST: http://localhost:3000
+      VITE_SOURCE_MAP: true
+      PORT: 3011
+    ports:
+      - "3011:3011"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: npm run preview
+    networks:
+      bib-frontend-network:
+
+  bibcnrs-admin-dev-npm:
+    image: node:18-alpine
+    environment:
+      http_proxy: ${http_proxy}
+      https_proxy: ${https_proxy}
+      no_proxy: "localhost,127.0.0.1,"
+    volumes:
+      - .:/app
+    working_dir: /app
+    entrypoint: [ "npm" ]
+    networks:
+      bib-frontend-network:
 
 networks:
-  bibfrontend:
-    external: true
-      
-
+  bib-frontend-network:
+    driver: bridge
+    name: bib-frontend-network
