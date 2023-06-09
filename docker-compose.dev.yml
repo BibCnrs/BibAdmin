@@ -16,7 +16,7 @@ services:
     working_dir: /app
     command: npm run dev
     networks:
-      bib-frontend-network:
+      - bib-frontend-network
 
   bibcnrs-admin-preview-server:
     image: node:18-alpine
@@ -33,7 +33,7 @@ services:
     working_dir: /app
     command: npm run preview
     networks:
-      bib-frontend-network:
+      - bib-frontend-network
 
   bibcnrs-admin-dev-npm:
     image: node:18-alpine
@@ -46,7 +46,7 @@ services:
     working_dir: /app
     entrypoint: [ "npm" ]
     networks:
-      bib-frontend-network:
+      - bib-frontend-network
 
 networks:
   bib-frontend-network:
