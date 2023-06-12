@@ -39,11 +39,7 @@ run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_
 	 docker compose -f docker-compose.yml up -d --force-recreate
 
 build:
-ifdef COMMAND_ARGS
-	docker build --no-cache -t vxnexus-registry.intra.inist.fr:8083/bibcnrs/admin:$(COMMAND_ARGS) .
-else
-	docker build --no-cache -t vxnexus-registry.intra.inist.fr:8083/bibcnrs/admin:latest .
-endif
+	docker compose -f docker-compose.yml build
 
 update: stop cleanup-docker install build
 
