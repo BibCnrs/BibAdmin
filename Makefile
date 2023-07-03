@@ -30,7 +30,7 @@ npm-install: ## ## install npm dependencies (respect package-lock.json)
 install: npm-install bump ## install npm dependencies and bump currentCommit file
 
 run-dev: ## run BibAdmin for development
-	docker compose -f docker-compose.dev.yml run --rm bibcnrs-admin-dev-server
+	docker compose -f docker-compose.dev.yml up bibcnrs-admin-dev-server
 
 run-preview: ## run BibAdmin for development
 	docker compose -f docker-compose.dev.yml run --rm bibcnrs-admin-preview-server
