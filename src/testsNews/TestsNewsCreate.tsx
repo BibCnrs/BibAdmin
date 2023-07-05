@@ -1,9 +1,6 @@
 import TestsNewsHeader from './TestsNewsHeader';
 import { CreateActions } from '../components/Actions';
-import {
-    MultilingualContentTab,
-    validateMultilingualContentCreation,
-} from '../components/MultilingualContentTab';
+import { MultilingualContentTab } from '../components/MultilingualContentTab';
 import {
     BooleanInput,
     Create,
@@ -22,10 +19,45 @@ const divStyle: CSSProperties = {
     width: '100%',
 };
 
+const validate = (values: any) => {
+    const errors: any = {};
+    if (!values.content_en) {
+        errors.content_en = 'ra.validation.required';
+    }
+
+    if (!values.name_en) {
+        errors.name_en = 'ra.validation.required';
+    }
+
+    if (!values.content_fr) {
+        errors.content_fr = 'ra.validation.required';
+    }
+
+    if (!values.name_fr) {
+        errors.name_fr = 'ra.validation.required';
+    }
+
+    if (!values.page) {
+        errors.page = 'ra.validation.required';
+    }
+
+    if (values.page === 'tests') {
+        if (!values.to) {
+            errors.to = 'ra.validation.required';
+        }
+    }
+
+    if (!values.domains || values.domains.length < 1) {
+        errors.domains = 'ra.validation.required';
+    }
+
+    return errors;
+};
+
 export default function TestsNewsCreate() {
     return (
         <Create actions={<CreateActions />} redirect="list">
-            <SimpleForm validate={validateMultilingualContentCreation}>
+            <SimpleForm validate={validate}>
                 <TestsNewsHeader />
                 <ArrayInput source="urls" sx={{ margin: 'auto' }}>
                     <SimpleFormIterator inline>

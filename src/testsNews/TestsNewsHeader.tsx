@@ -37,6 +37,9 @@ const TestsNewsHeader = () => {
             return;
         }
         if (selectedDomains.includes(communityName)) {
+            if (selectedDomains.length <= 1) {
+                return;
+            }
             const domains = selectedDomains.filter(
                 (value) => value !== communityName,
             );
