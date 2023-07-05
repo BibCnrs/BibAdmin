@@ -11,7 +11,8 @@ import {
     WrapperField,
     useRecordContext,
     DateField,
-    TextField,
+    TextInput,
+    SelectInput,
 } from 'react-admin';
 import find from 'lodash/find';
 import Chip from '@mui/material/Chip';
@@ -21,9 +22,15 @@ function InternalChip() {
     return <Chip label={find(pages, { id: record?.page })?.name} />;
 }
 
+const ContentManagementFilter = [
+    <TextInput label="Rechercher" source="name_fr" alwaysOn />,
+    <SelectInput source="page" choices={pages} />,
+];
+
 export default function ContentManagementList() {
     return (
         <List
+            filters={ContentManagementFilter}
             perPage={10}
             pagination={<CustomPagination />}
             bulkActionButtons={<BulkActionButtons />}
@@ -37,9 +44,8 @@ export default function ContentManagementList() {
                 <WrapperField label="Page">
                     <InternalChip />
                 </WrapperField>
-                <TextField source="page" label="Page (nom technique)" />
                 <DateField source="from" label="Date début" />
-                <DateField source="to" label="Date fin" />
+                <DateField source="to" emptyText="-" label="Date fin" />
                 <EditButton />
                 <DeleteWithConfirmButton />
             </Datagrid>

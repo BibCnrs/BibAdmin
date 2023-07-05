@@ -2,6 +2,7 @@ import CustomPagination from '../components/CustomPagination';
 import LinkEdit from '../components/LinkEdit';
 import {
     ArrayField,
+    AutocompleteInput,
     BooleanField,
     BulkDeleteWithConfirmButton,
     ChipField,
@@ -10,8 +11,10 @@ import {
     EditButton,
     FunctionField,
     List,
+    ReferenceInput,
     SingleFieldList,
     TextField,
+    TextInput,
     useDataProvider,
     useListContext,
     useNotify,
@@ -61,10 +64,26 @@ const BulkActionLicensesButtons = () => {
     );
 };
 
+const LicenseFilter = [
+    <TextInput label="Rechercher" source="name_fr" alwaysOn />,
+    <ReferenceInput
+        label="resources.revues.fields.communities"
+        source="license_community.community_id"
+        reference="communities"
+    >
+        <AutocompleteInput
+            filterToQuery={(searchText) => ({ name: searchText })}
+            optionText="name"
+            label="resources.revues.fields.communities"
+        />
+    </ReferenceInput>,
+];
+
 const LicenseList = () => (
     <List
         perPage={10}
         pagination={<CustomPagination />}
+        filters={LicenseFilter}
         bulkActionButtons={<BulkActionLicensesButtons />}
     >
         <Datagrid>
@@ -73,6 +92,7 @@ const LicenseList = () => (
                 source="pdf.title"
                 label="resources.licenses.fields.pdf"
                 emptyText="-"
+                sortable={false}
             />
             <ArrayField
                 source="license_community"

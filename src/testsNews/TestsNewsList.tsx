@@ -11,9 +11,8 @@ import {
     WrapperField,
     useRecordContext,
     DateField,
-    TextField,
-    SingleFieldList,
-    ArrayField,
+    TextInput,
+    SelectInput,
 } from 'react-admin';
 import find from 'lodash/find';
 import Chip from '@mui/material/Chip';
@@ -38,9 +37,25 @@ const DomainsField = () => {
     return <Chip label="Common" />;
 };
 
+const TestsNewsFilter = [
+    <TextInput label="Rechercher" source="name_fr" alwaysOn />,
+    <SelectInput source="page" choices={pages} />,
+    // <ReferenceInput
+    //     label="resources.revues.fields.communities"
+    //     source="domain"
+    //     reference="communities"
+    // >
+    //     <AutocompleteInput
+    //         filterToQuery={(searchText) => ({ name: searchText })}
+    //         optionText="name"
+    //         label="resources.revues.fields.communities"
+    //     />
+    // </ReferenceInput>,
+];
 export default function TestsNewsList() {
     return (
         <List
+            filters={TestsNewsFilter}
             perPage={10}
             pagination={<CustomPagination />}
             bulkActionButtons={<BulkActionButtons />}
@@ -54,14 +69,8 @@ export default function TestsNewsList() {
                 <WrapperField label="Domains">
                     <DomainsField />
                 </WrapperField>
-                <ArrayField source="tags">
-                    <SingleFieldList>
-                        <DomainsField />
-                    </SingleFieldList>
-                </ArrayField>
-                <TextField source="page" label="Page (nom technique)" />
                 <DateField source="from" label="Date début" />
-                <DateField source="to" label="Date fin" />
+                <DateField source="to" emptyText="-" label="Date fin" />
                 <EditButton />
                 <DeleteWithConfirmButton />
             </Datagrid>

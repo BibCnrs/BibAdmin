@@ -17,14 +17,6 @@ export default defineConfig({
     preview: {
         port: (process.env as any).PORT,
     },
-    optimizeDeps: {
-        esbuildOptions: {
-            // Node.js global to browser globalThis
-            define: {
-                global: 'globalThis',
-            },
-        },
-    },
     build: {
         sourcemap: process.env.VITE_SOURCE_MAP === 'true',
         rollupOptions: {

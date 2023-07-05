@@ -5,12 +5,19 @@ import {
     DeleteWithConfirmButton,
     List,
     TextField,
+    TextInput,
     UrlField,
 } from 'react-admin';
+
+const MediasFilter = [
+    <TextInput label="Rechercher" source="name" alwaysOn />,
+    <TextInput source="file_name" />,
+];
 
 export default function MediasList() {
     return (
         <List
+            filters={MediasFilter}
             perPage={10}
             pagination={<CustomPagination />}
             bulkActionButtons={<BulkActionButtons />}
