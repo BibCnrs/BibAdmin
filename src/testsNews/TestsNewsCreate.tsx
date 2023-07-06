@@ -19,7 +19,7 @@ const divStyle: CSSProperties = {
     width: '100%',
 };
 
-const validate = (values: any) => {
+export const validate = (values: any) => {
     const errors: any = {};
     if (!values.content_en) {
         errors.content_en = 'ra.validation.required';

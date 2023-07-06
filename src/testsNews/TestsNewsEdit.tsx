@@ -1,4 +1,5 @@
 import TestsNewsHeader from './TestsNewsHeader';
+import { validate } from './TestsNewsCreate';
 import { EditActions } from '../components/Actions';
 import { MultilingualContentTab } from '../components/MultilingualContentTab';
 import {
@@ -22,7 +23,7 @@ const divStyle: CSSProperties = {
 export default function TestsNewsEdit() {
     return (
         <Edit actions={<EditActions />} redirect="list">
-            <SimpleForm>
+            <SimpleForm validate={validate}>
                 <TestsNewsHeader />
                 <ArrayInput source="urls">
                     <SimpleFormIterator inline>
