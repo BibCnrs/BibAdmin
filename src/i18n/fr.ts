@@ -190,7 +190,7 @@ const i18n = {
             },
         },
         news: {
-            name: 'Tests, Acualiés...',
+            name: 'Tests, Actualités...',
         },
         resource: {
             name: 'Ressources',

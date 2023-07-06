@@ -12,7 +12,6 @@ const ResourcesEdit = () => {
                     label="Actif"
                     source="enable"
                     name="enable"
-                    options={undefined}
                     defaultValue={true}
                 />
                 <TextInput

@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 
 export const pages = [
-    { id: 'news', name: 'Acualités' },
+    { id: 'news', name: 'Actualités' },
     { id: 'tests', name: 'Tests' },
 ];
 
