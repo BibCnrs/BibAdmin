@@ -198,6 +198,9 @@ const i18n = {
                 name: 'Nom',
             },
         },
+        resources: {
+            name: 'Ressources',
+        },
         medias: {
             name: 'Média, fichier...',
             fields: {
