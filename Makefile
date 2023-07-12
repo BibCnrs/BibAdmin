@@ -29,7 +29,12 @@ npm-install: ## ## install npm dependencies (respect package-lock.json)
 
 install: npm-install bump ## install npm dependencies and bump currentCommit file
 
-run-dev: ## run BibAdmin for development
+cleanup-dev-docker: ## remove all bibcnrs-admin docker image
+	test -z "$$(docker ps -a | grep bibcnrs-dev-admin)" || \
+            docker rm --force $$(docker ps -a | grep bibcnrs-dev-admin | awk '{ print $$1 }')
+
+run-dev: ## run project in development mode
+	make cleanup-dev-docker
 	docker compose -f docker-compose.dev.yml up bibcnrs-admin-dev-server
 
 run-preview: ## run BibAdmin for development
