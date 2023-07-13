@@ -35,7 +35,7 @@ cleanup-dev-docker: ## remove all bibcnrs-admin docker image
 
 run-dev: ## run project in development mode
 	make cleanup-dev-docker
-	docker compose -f docker-compose.dev.yml up bibcnrs-admin-dev-server
+	docker compose -f docker-compose.dev.yml up bibcnrs-dev-admin
 
 run-preview: ## run BibAdmin for development
 	docker compose -f docker-compose.dev.yml run --rm bibcnrs-admin-preview-server
